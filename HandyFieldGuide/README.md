@@ -10,6 +10,8 @@ Location, Month, and Zone sit in a **bottom toolbar** so the bird list keeps the
 2. **Month** — picker that defaults to the device’s current calendar month. Imported eBird lists use that month’s frequencies for “likely” birds.
 3. **Zone** — multi-select ground / low / mid / canopy / sky. Birds matching **any** selected zone appear. **Any** clears the filter. Long zone descriptions stay behind a small **i** button.
 
+Above the bird list, the active **location name** is shown with a **Map** control (opens Apple Maps using the best place query available — curated `placeTitle` / district + region, or a known eBird hotspot name for sample L-codes) and a small **i** that reveals the long coverage prose in a sheet, matching the Zone info pattern.
+
 **Sky** is for birds typically seen overhead (flying, soaring, or hawking), separate from canopy perches.
 
 Likelihood on rows and detail uses plain wording only (**Near-certain**, **Likely**, **Possible**, and related phrases). The UI does not show “Tier 3” style labels.
