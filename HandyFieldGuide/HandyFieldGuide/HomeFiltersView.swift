@@ -6,11 +6,12 @@ struct HomeFiltersView: View {
     var guide: GuideFile
     var place: ResolvedPlace
     var onAddLocation: () -> Void
+    var onManageLocations: () -> Void
 
     @State private var showingZoneInfo = false
 
-    private var locationOptions: [LocationOption] {
-        var options: [LocationOption] = [
+    private var curatedLocationOptions: [LocationOption] {
+        [
             .init(id: "monteverde", title: "Children's Eternal Rainforest", query: "Monteverde"),
             .init(id: "san-gerardo", title: "San Gerardo", query: "San Gerardo"),
             .init(id: "bajo", title: "Bajo del Tigre", query: "Bajo del Tigre"),
@@ -18,10 +19,16 @@ struct HomeFiltersView: View {
             .init(id: "bayside", title: "Bayside", query: "Bayside"),
             .init(id: "dandenong", title: "Dandenong Ranges", query: "Dandenong Ranges"),
         ]
-        for imported in model.imports.locations {
-            options.append(.init(id: imported.id, title: imported.name, query: imported.name))
+    }
+
+    private var importedLocationOptions: [LocationOption] {
+        model.imports.locations.map {
+            .init(id: $0.id, title: $0.name, query: $0.name)
         }
-        return options
+    }
+
+    private var locationOptions: [LocationOption] {
+        curatedLocationOptions + importedLocationOptions
     }
 
     private var selectedLocationTitle: String {
@@ -37,8 +44,17 @@ struct HomeFiltersView: View {
     }
 
     private var selectedZoneTitle: String {
-        if model.stratum == "all" { return "Any" }
-        return guide.strata.first(where: { $0.id == model.stratum })?.label ?? "Any"
+        let selected = guide.strata.filter { model.selectedStrata.contains($0.id) }
+        switch selected.count {
+        case 0:
+            return "Any"
+        case 1:
+            return selected[0].label
+        case 2:
+            return "\(selected[0].label) + \(selected[1].label)"
+        default:
+            return "\(selected.count) zones"
+        }
     }
 
     var body: some View {
@@ -106,11 +122,25 @@ struct HomeFiltersView: View {
     private var locationControl: some View {
         Menu {
             Picker("Location", selection: locationSelection) {
-                ForEach(locationOptions) { option in
-                    Text(option.title).tag(option.query)
+                Section("Curated") {
+                    ForEach(curatedLocationOptions) { option in
+                        Text(option.title).tag(option.query)
+                    }
+                }
+                if !importedLocationOptions.isEmpty {
+                    Section("Saved imports") {
+                        ForEach(importedLocationOptions) { option in
+                            Text(option.title).tag(option.query)
+                        }
+                    }
                 }
             }
             Divider()
+            Button {
+                onManageLocations()
+            } label: {
+                Label("Manage locations", systemImage: "pencil")
+            }
             Button {
                 onAddLocation()
             } label: {
@@ -119,7 +149,7 @@ struct HomeFiltersView: View {
         } label: {
             filterColumn(title: "Location", value: selectedLocationTitle)
         }
-        .accessibilityHint("Choose a place or import an eBird barchart")
+        .accessibilityHint("Choose a place, manage saved imports, or import an eBird barchart")
     }
 
     private var monthControl: some View {
@@ -155,16 +185,31 @@ struct HomeFiltersView: View {
     private var zoneControl: some View {
         HStack(spacing: 0) {
             Menu {
-                Picker("Zone", selection: $model.stratum) {
-                    Text("Any").tag("all")
-                    ForEach(guide.strata) { item in
-                        Text(item.label).tag(item.id)
+                Button {
+                    model.clearStrata()
+                } label: {
+                    if model.selectedStrata.isEmpty {
+                        Label("Any", systemImage: "checkmark")
+                    } else {
+                        Text("Any")
+                    }
+                }
+                ForEach(guide.strata) { item in
+                    Button {
+                        model.toggleStratum(item.id)
+                    } label: {
+                        if model.selectedStrata.contains(item.id) {
+                            Label(item.label, systemImage: "checkmark")
+                        } else {
+                            Text(item.label)
+                        }
                     }
                 }
             } label: {
                 filterColumn(title: "Zone", value: selectedZoneTitle)
             }
-            .accessibilityHint("Filter by height band, including Sky")
+            .menuActionDismissBehavior(.disabled)
+            .accessibilityHint("Select one or more height bands, including Sky. Any clears the filter.")
 
             Button {
                 showingZoneInfo = true

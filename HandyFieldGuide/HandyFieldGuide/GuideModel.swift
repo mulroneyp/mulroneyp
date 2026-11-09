@@ -1,3 +1,4 @@
+import Combine
 import Foundation
 
 @MainActor
@@ -8,7 +9,8 @@ final class GuideModel: ObservableObject {
         didSet { UserDefaults.standard.set(locationQuery, forKey: Self.storageKey) }
     }
     @Published var searchText = ""
-    @Published var stratum = "all"
+    /// Selected height bands. Empty means Any (no zone filter). Matching is OR across selections.
+    @Published var selectedStrata: Set<String> = []
     /// 0 = January … 11 = December. Defaults to the device’s current month.
     @Published var selectedMonthIndex: Int
     @Published var hideNearZero = true
@@ -17,6 +19,7 @@ final class GuideModel: ObservableObject {
 
     let imports = ImportedLocationStore()
     private(set) var catalog: SpeciesCatalog?
+    private var importsCancellable: AnyCancellable?
 
     static let storageKey = "handy.locationQuery"
     static let monthKey = "handy.selectedMonthIndex"
@@ -39,6 +42,9 @@ final class GuideModel: ObservableObject {
             catalog = SpeciesCatalog(guide: guide, supplemental: SpeciesCatalog.loadSupplemental())
         } catch {
             loadError = "The species list could not be read from the app."
+        }
+        importsCancellable = imports.objectWillChange.sink { [weak self] _ in
+            self?.objectWillChange.send()
         }
     }
 
@@ -95,6 +101,22 @@ final class GuideModel: ObservableObject {
         guide?.strata.first { $0.id == id }
     }
 
+    var isFilteringByZone: Bool {
+        !selectedStrata.isEmpty
+    }
+
+    func toggleStratum(_ id: String) {
+        if selectedStrata.contains(id) {
+            selectedStrata.remove(id)
+        } else {
+            selectedStrata.insert(id)
+        }
+    }
+
+    func clearStrata() {
+        selectedStrata = []
+    }
+
     func groupLabel(_ id: String, coverage: Coverage) -> String {
         coverage.groups.first { $0.id == id }?.label ?? id
     }
@@ -110,7 +132,7 @@ final class GuideModel: ObservableObject {
     func filteredSpecies(in place: ResolvedPlace) -> [Species] {
         let words = LocationResolver.normalize(searchText).split(separator: " ").map(String.init)
         return place.coverage.species.filter { species in
-            if stratum != "all" && !species.strata.contains(stratum) {
+            if isFilteringByZone && !species.strata.contains(where: { selectedStrata.contains($0) }) {
                 return false
             }
             if place.imported != nil, hideNearZero,
@@ -161,5 +183,31 @@ final class GuideModel: ObservableObject {
         }
         let data = try Data(contentsOf: url)
         try importBarchart(data: data, sourceFileName: url.lastPathComponent, displayName: nil)
+    }
+
+    /// Renames a saved/imported location and keeps the active query in sync.
+    func renameImportedLocation(_ id: String, to newName: String) {
+        guard let previous = imports.locations.first(where: { $0.id == id }) else { return }
+        imports.rename(id, to: newName)
+        guard let updated = imports.locations.first(where: { $0.id == id }) else { return }
+        if LocationResolver.normalize(locationQuery) == LocationResolver.normalize(previous.name)
+            || imports.location(matchingQuery: locationQuery)?.id == id {
+            locationQuery = updated.name
+        }
+    }
+
+    /// Deletes a saved/imported location after confirmation in the UI.
+    /// Curated bundled presets are not stored here and cannot be removed.
+    func deleteImportedLocation(_ id: String) {
+        let record = imports.locations.first(where: { $0.id == id })
+        let wasActive = record.map { loc in
+            imports.location(matchingQuery: locationQuery)?.id == loc.id
+                || LocationResolver.normalize(locationQuery) == LocationResolver.normalize(loc.name)
+        } ?? false
+        imports.remove(id)
+        if wasActive {
+            locationQuery = ""
+            importMessage = nil
+        }
     }
 }

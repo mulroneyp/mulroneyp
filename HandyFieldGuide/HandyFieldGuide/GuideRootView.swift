@@ -3,6 +3,7 @@ import SwiftUI
 struct GuideRootView: View {
     @EnvironmentObject private var model: GuideModel
     @State private var showingAddLocation = false
+    @State private var showingManageLocations = false
     @State private var path = NavigationPath()
 
     var body: some View {
@@ -33,6 +34,9 @@ struct GuideRootView: View {
         .sheet(isPresented: $showingAddLocation) {
             LocationSheet(current: model.locationQuery, startInImportMode: true)
         }
+        .sheet(isPresented: $showingManageLocations) {
+            LocationSheet(current: model.locationQuery, startInImportMode: false)
+        }
         .onChange(of: model.locationQuery) { _, _ in
             path = NavigationPath()
         }
@@ -40,7 +44,7 @@ struct GuideRootView: View {
 
     private func list(guide: GuideFile, place: ResolvedPlace) -> some View {
         let birds = model.filteredSpecies(in: place)
-        let filtering = !model.searchText.trimmingCharacters(in: .whitespaces).isEmpty || model.stratum != "all"
+        let filtering = !model.searchText.trimmingCharacters(in: .whitespaces).isEmpty || model.isFilteringByZone
         return ScrollView {
             VStack(alignment: .leading, spacing: 14) {
                 Text(place.coverage.summary)
@@ -96,12 +100,12 @@ struct GuideRootView: View {
             .frame(maxWidth: .infinity)
         }
         .safeAreaInset(edge: .bottom, spacing: 0) {
-            HomeFiltersView(guide: guide, place: place) {
-                showingAddLocation = true
-            }
-            // Belt-and-suspenders with HomeFiltersView.fixedSize: inset must not
-            // claim a full-screen hit target over the ScrollView.
-            .fixedSize(horizontal: false, vertical: true)
+            HomeFiltersView(
+                guide: guide,
+                place: place,
+                onAddLocation: { showingAddLocation = true },
+                onManageLocations: { showingManageLocations = true }
+            )
         }
     }
 

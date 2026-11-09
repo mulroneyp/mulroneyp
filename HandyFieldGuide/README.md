@@ -6,9 +6,9 @@ An iPhone field guide. Open `HandyFieldGuide.xcodeproj` in Xcode, pick the Handy
 
 Location, Month, and Zone sit in a **bottom toolbar** so the bird list keeps the space above:
 
-1. **Location** — menu of curated places and any imported eBird areas, plus **Add eBird barchart**.
+1. **Location** — menu of curated places and any imported eBird areas, plus **Manage locations** (rename / delete saved imports) and **Add eBird barchart**. Curated bundled presets stay in the menu and are not deleted.
 2. **Month** — picker that defaults to the device’s current calendar month. Imported eBird lists use that month’s frequencies for “likely” birds.
-3. **Zone** — ground / low / mid / canopy / sky (or Any). Long zone descriptions stay behind a small **i** button.
+3. **Zone** — multi-select ground / low / mid / canopy / sky. Birds matching **any** selected zone appear. **Any** clears the filter. Long zone descriptions stay behind a small **i** button.
 
 **Sky** is for birds typically seen overhead (flying, soaring, or hawking), separate from canopy perches.
 
@@ -24,7 +24,7 @@ An empty or default location opens the Children's Eternal Rainforest checklist f
 
 ## eBird barchart import
 
-Use **Add new** (or **Add sample L436229**) to import an eBird Frequency / barchart `.txt` export (tab-separated text).
+Use **Add eBird barchart** (or **Add sample L436229**) to import an eBird Frequency / barchart `.txt` export (tab-separated text).
 
 - The app reads the eBird location id from the filename when present (for example `L436229`).
 - Each month aggregates the four week columns as a **mean**.
@@ -32,6 +32,7 @@ Use **Add new** (or **Add sample L436229**) to import an eBird Frequency / barch
 - Species with selected-month mean frequency below **0.5%** (`0.005`) are hidden by default as scarce / near-zero.
 - Photo and field-note enrichment for first run targets species with selected-month mean frequency at or above **5%** (`0.05`), plus the top 40 by that month, reusing `guide.json` when the common name matches and filling gaps from `ebird_supplemental.json` / Commons.
 - The sample file is bundled at `HandyFieldGuide/Resources/fixtures/ebird_L436229__2020_2026_1_12_barchart.txt` and copied into the app Documents folder (visible in Files → On My iPhone → Handy Field Guide) for re-import.
+- **Manage locations** renames or deletes saved imports (persisted in Documents). Deleting an active import returns to the default curated Monteverde list; curated presets themselves cannot be deleted.
 
 Verify parsing on a machine with Python:
 

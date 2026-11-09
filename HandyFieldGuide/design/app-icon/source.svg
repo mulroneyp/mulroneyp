@@ -1,48 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   Handy Field Guide — App Icon vector sketch
-  One character: bird looking through binoculars (not bird beside separate optics).
-  Matches composition of source-1024.png (authoritative raster).
-  Palette aligns with HandyFieldGuide/Theme.swift GuideColor.
+  One character: blue bird looking through black binoculars with landscape in the lenses.
+  Matches composition of source-1024.png (authoritative raster from Paul’s artwork).
   Export sizes: python3 scripts/generate_app_icon.py
 -->
-<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="Handy Field Guide app icon: bird looking through binoculars">
-  <rect width="1024" height="1024" fill="#1B3330"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="Handy Field Guide app icon: blue bird looking through binoculars at a landscape">
+  <rect width="1024" height="1024" fill="#FFFFFF"/>
 
-  <!-- Bird body (cream) -->
+  <!-- Soft ground shadow -->
+  <ellipse cx="520" cy="880" rx="220" ry="28" fill="#E8E8E8"/>
+
+  <!-- Bird body (profile, facing right) — ~10% margin -->
   <g>
-    <ellipse cx="520" cy="560" rx="230" ry="250" fill="#F3EEE4"/>
+    <!-- body -->
+    <ellipse cx="480" cy="560" rx="210" ry="240" fill="#4EC3F7"/>
     <!-- belly shade -->
-    <ellipse cx="540" cy="620" rx="150" ry="160" fill="#E8E0D4"/>
+    <ellipse cx="500" cy="620" rx="130" ry="150" fill="#7AD4FA"/>
     <!-- head -->
-    <circle cx="560" cy="340" r="150" fill="#F3EEE4"/>
+    <circle cx="560" cy="360" r="150" fill="#4EC3F7"/>
     <!-- crest tuft -->
-    <path d="M520 220 Q545 160 575 210 Q560 195 545 220 Z" fill="#F3EEE4"/>
-    <!-- beak peeking under bins -->
-    <polygon points="680,355 745,375 680,395" fill="#9A4630"/>
-    <!-- raised wing holding bins -->
-    <ellipse cx="380" cy="420" rx="90" ry="70" transform="rotate(-25 380 420)" fill="#E8E0D4"/>
-    <!-- tucked wing -->
-    <ellipse cx="420" cy="580" rx="110" ry="80" transform="rotate(-15 420 580)" fill="#D8CFC0"/>
+    <path d="M520 230 Q560 160 600 230 Q560 195 520 230 Z" fill="#4EC3F7"/>
     <!-- tail -->
-    <ellipse cx="300" cy="700" rx="80" ry="50" transform="rotate(30 300 700)" fill="#F3EEE4"/>
+    <ellipse cx="300" cy="620" rx="70" ry="45" transform="rotate(-35 300 620)" fill="#3AAFE8"/>
+    <!-- wing -->
+    <ellipse cx="420" cy="560" rx="90" ry="120" transform="rotate(-10 420 560)" fill="#3AAFE8"/>
+    <!-- beak under bins -->
+    <polygon points="680,370 730,385 680,400" fill="#F0A020"/>
+    <!-- feet -->
+    <ellipse cx="450" cy="840" rx="28" ry="14" fill="#F0A020"/>
+    <ellipse cx="560" cy="840" rx="28" ry="14" fill="#F0A020"/>
   </g>
 
-  <!-- Binoculars held to eyes -->
+  <!-- Binoculars with landscape in lenses -->
   <g>
     <!-- left tube -->
-    <rect x="470" y="250" width="120" height="160" rx="40" fill="#9A4630"/>
+    <rect x="500" y="280" width="110" height="150" rx="40" fill="#1A1A1A"/>
     <!-- right tube -->
-    <rect x="610" y="250" width="120" height="160" rx="40" fill="#9A4630"/>
+    <rect x="620" y="280" width="110" height="150" rx="40" fill="#1A1A1A"/>
     <!-- bridge -->
-    <rect x="560" y="300" width="80" height="50" rx="14" fill="#763424"/>
-    <!-- objective / eyepiece faces toward viewer -->
-    <circle cx="530" cy="310" r="48" fill="#121E1C"/>
-    <circle cx="670" cy="310" r="48" fill="#121E1C"/>
-    <circle cx="530" cy="310" r="38" fill="none" stroke="#2A3C38" stroke-width="6"/>
-    <circle cx="670" cy="310" r="38" fill="none" stroke="#2A3C38" stroke-width="6"/>
-    <!-- tiny glints -->
-    <circle cx="515" cy="295" r="8" fill="#3D4A42"/>
-    <circle cx="655" cy="295" r="8" fill="#3D4A42"/>
+    <rect x="580" y="320" width="70" height="50" rx="14" fill="#0D0D0D"/>
+
+    <!-- left lens: landscape -->
+    <clipPath id="lensL"><circle cx="555" cy="340" r="42"/></clipPath>
+    <circle cx="555" cy="340" r="42" fill="#87CEEB"/>
+    <g clip-path="url(#lensL)">
+      <rect x="513" y="340" width="84" height="50" fill="#5CB85C"/>
+      <ellipse cx="540" cy="355" rx="30" ry="18" fill="#4CA64C"/>
+      <ellipse cx="575" cy="360" rx="25" ry="14" fill="#6BC46B"/>
+    </g>
+    <circle cx="555" cy="340" r="42" fill="none" stroke="#2A2A2A" stroke-width="4"/>
+
+    <!-- right lens: landscape -->
+    <clipPath id="lensR"><circle cx="675" cy="340" r="42"/></clipPath>
+    <circle cx="675" cy="340" r="42" fill="#87CEEB"/>
+    <g clip-path="url(#lensR)">
+      <rect x="633" y="340" width="84" height="50" fill="#5CB85C"/>
+      <ellipse cx="660" cy="355" rx="30" ry="18" fill="#4CA64C"/>
+      <ellipse cx="695" cy="360" rx="25" ry="14" fill="#6BC46B"/>
+    </g>
+    <circle cx="675" cy="340" r="42" fill="none" stroke="#2A2A2A" stroke-width="4"/>
+
+    <!-- glints -->
+    <path d="M530 315 Q545 305 560 315" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+    <path d="M650 315 Q665 305 680 315" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
   </g>
 </svg>
