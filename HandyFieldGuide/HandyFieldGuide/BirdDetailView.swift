@@ -5,6 +5,8 @@ struct BirdDetailView: View {
     var species: Species
     var place: ResolvedPlace
 
+    @State private var attributionPhoto: Photo?
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
@@ -17,6 +19,7 @@ struct BirdDetailView: View {
                 Text(species.scientificName)
                     .font(.title3.italic())
                     .foregroundStyle(GuideColor.muted)
+                dimorphismBadge
                 if let frequency = model.frequency(for: species, in: place) {
                     Text("\(model.selectedMonthName) checklist rate \(frequencyPercent(frequency)) (mean of eBird week columns)")
                         .font(.subheadline)
@@ -62,35 +65,40 @@ struct BirdDetailView: View {
                 Text(species.stratumNote)
                     .fixedSize(horizontal: false, vertical: true)
 
-                sectionLabel(species.dimorphic ? "Male and female" : "Sexes")
-                Text(species.sexes)
+                sectionLabel("Time of day")
+                Text(ActiveTime.detailCaption(for: species))
                     .fixedSize(horizontal: false, vertical: true)
 
-                if species.dimorphic {
+                if !displayPhotos.isEmpty {
                     sectionLabel("Photos")
-                    Text("Male and female are shown separately when openly licensed photographs are available.")
-                        .font(.subheadline)
-                        .foregroundStyle(GuideColor.muted)
-                        .fixedSize(horizontal: false, vertical: true)
                 }
 
                 VStack(spacing: 14) {
                     ForEach(displayPhotos) { photo in
                         VStack(alignment: .leading, spacing: 0) {
-                            Text(photoDisplayTitle(photo))
-                                .font(.caption.weight(.semibold))
-                                .tracking(1.1)
-                                .foregroundStyle(GuideColor.green)
-                                .padding(.horizontal, 10)
-                                .padding(.top, 10)
-                            ZoomablePhoto(path: photo.src, alt: photo.alt, label: photoDisplayTitle(photo))
+                            HStack(alignment: .center, spacing: 8) {
+                                if showsPhotoRoleLabel(photo) {
+                                    Text(photoDisplayTitle(photo))
+                                        .font(.caption.weight(.semibold))
+                                        .tracking(1.1)
+                                        .foregroundStyle(GuideColor.green)
+                                }
+                                Spacer(minLength: 0)
+                                photoAttrBadge(for: photo)
+                            }
+                            .padding(.horizontal, 10)
+                            .padding(.top, 10)
+
+                            ZoomablePhoto(path: photo.src, alt: photo.alt, label: photoAccessibilityLabel(photo))
+
                             VStack(alignment: .leading, spacing: 4) {
-                                Text(photoDisplayTitle(photo))
-                                    .font(.system(.title3, design: .serif))
+                                if showsPhotoRoleLabel(photo) {
+                                    Text(photoDisplayTitle(photo))
+                                        .font(.system(.title3, design: .serif))
+                                }
                                 Text("Pinch or double-tap to zoom; drag to pan. Long-press for a full-screen view.")
                                     .font(.caption)
                                     .foregroundStyle(GuideColor.muted)
-                                credit(photo)
                             }
                             .padding(10)
                         }
@@ -107,11 +115,6 @@ struct BirdDetailView: View {
                         .font(.footnote)
                         .foregroundStyle(GuideColor.rust)
                 }
-
-                Text("Notes follow \(place.isOutside ? place.coverage.label : place.displayName). Habitat lines are a typical place to look, not a guarantee for a given day. Likelihood labels are estimates.")
-                    .font(.footnote)
-                    .foregroundStyle(GuideColor.muted)
-                    .padding(.top, 8)
             }
             .padding(20)
             .frame(maxWidth: 720, alignment: .leading)
@@ -120,6 +123,10 @@ struct BirdDetailView: View {
         .guideBackground()
         .navigationTitle(species.commonName)
         .navigationBarTitleDisplayMode(.inline)
+        .sheet(item: $attributionPhoto) { photo in
+            PhotoAttributionSheet(photo: photo)
+                .presentationDetents([.medium, .large])
+        }
     }
 
     private func stratum(_ id: String) -> StratumInfo? {
@@ -133,10 +140,48 @@ struct BirdDetailView: View {
         case "mid":
             return StratumInfo(id: id, label: "Mid", hint: "The middle of the forest, or a small tree")
         case "canopy":
-            return StratumInfo(id: id, label: "Canopy", hint: "Crowns of tall trees, and birds overhead")
+            return StratumInfo(id: id, label: "Canopy", hint: "Crowns of tall trees")
+        case "sky":
+            return StratumInfo(id: id, label: "Sky", hint: "Overhead — flying, soaring, or hawking in open air")
         default:
             return nil
         }
+    }
+
+    private var dimorphismBadge: some View {
+        Text(species.dimorphic ? "Sexually dimorphic" : "Not sexually dimorphic")
+            .font(.caption.weight(.semibold))
+            .tracking(0.6)
+            .foregroundStyle(GuideColor.green)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
+            .background(GuideColor.green.opacity(0.10))
+            .overlay {
+                RoundedRectangle(cornerRadius: 2)
+                    .stroke(GuideColor.green.opacity(0.35), lineWidth: 1)
+            }
+            .accessibilityLabel(species.dimorphic ? "Sexually dimorphic" : "Not sexually dimorphic")
+    }
+
+    private func photoAttrBadge(for photo: Photo) -> some View {
+        Button {
+            attributionPhoto = photo
+        } label: {
+            Text("Photo Attr")
+                .font(.caption2.weight(.semibold))
+                .tracking(0.5)
+                .foregroundStyle(GuideColor.green)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 5)
+                .background(GuideColor.green.opacity(0.10))
+                .overlay {
+                    RoundedRectangle(cornerRadius: 2)
+                        .stroke(GuideColor.green.opacity(0.35), lineWidth: 1)
+                }
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("Photo attribution")
+        .accessibilityHint("Shows photographer, licence, and source")
     }
 
     private func sectionLabel(_ title: String) -> some View {
@@ -164,15 +209,26 @@ struct BirdDetailView: View {
         return roles.contains("male") && roles.contains("female")
     }
 
+    /// Male/female role labels stay for dimorphic species. Other roles do not
+    /// repeat “sexes look alike” — the dimorphism badge already covers that.
+    private func showsPhotoRoleLabel(_ photo: Photo) -> Bool {
+        photo.role == "male" || photo.role == "female" || photo.role == "illustration"
+    }
+
     private func photoDisplayTitle(_ photo: Photo) -> String {
         switch photo.role {
         case "male": return "Male"
         case "female": return "Female"
-        case "either": return "Sexes look alike"
-        case "unsexed": return "Sex not labeled"
         case "illustration": return "Historical illustration"
-        default: return photo.label
+        default: return photo.label.isEmpty ? "Photo" : photo.label
         }
+    }
+
+    private func photoAccessibilityLabel(_ photo: Photo) -> String {
+        if showsPhotoRoleLabel(photo) {
+            return photoDisplayTitle(photo)
+        }
+        return photo.alt.isEmpty ? species.commonName : photo.alt
     }
 
     private func frequencyPercent(_ value: Double) -> String {
@@ -180,26 +236,50 @@ struct BirdDetailView: View {
         if value < 0.01 { return "<1%" }
         return "\(Int((value * 100).rounded()))%"
     }
+}
 
-    @ViewBuilder
-    private func credit(_ photo: Photo) -> some View {
-        VStack(alignment: .leading, spacing: 2) {
-            if let source = URL(string: photo.sourceUrl) {
-                HStack(spacing: 0) {
-                    Text("Photo: ")
-                    Link(photo.author, destination: source)
+private struct PhotoAttributionSheet: View {
+    var photo: Photo
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        NavigationStack {
+            List {
+                Section("Photographer") {
+                    if let source = URL(string: photo.sourceUrl), !photo.author.isEmpty {
+                        Link(photo.author, destination: source)
+                    } else if !photo.author.isEmpty {
+                        Text(photo.author)
+                    } else {
+                        Text("Photographer not listed")
+                            .foregroundStyle(GuideColor.muted)
+                    }
                 }
-            } else {
-                Text("Photo: \(photo.author)")
+                Section("Licence") {
+                    if let license = URL(string: photo.licenseUrl), !photo.license.isEmpty {
+                        Link(photo.license, destination: license)
+                    } else if !photo.license.isEmpty {
+                        Text(photo.license)
+                    } else {
+                        Text("Licence not listed")
+                            .foregroundStyle(GuideColor.muted)
+                    }
+                }
+                if let source = URL(string: photo.sourceUrl) {
+                    Section("Source") {
+                        Link(source.absoluteString, destination: source)
+                    }
+                }
             }
-            if let license = URL(string: photo.licenseUrl) {
-                Link(photo.license, destination: license)
-            } else if !photo.license.isEmpty {
-                Text(photo.license)
+            .guideBackground()
+            .navigationTitle("Photo attribution")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Done") { dismiss() }
+                }
             }
         }
-        .font(.caption)
-        .foregroundStyle(GuideColor.muted)
         .tint(GuideColor.rust)
     }
 }

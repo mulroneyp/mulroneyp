@@ -48,7 +48,8 @@ STRATA = [
     {"id": "ground", "label": "Ground", "hint": "On the ground, a lawn, mud, or the water"},
     {"id": "low", "label": "Low", "hint": "Shrubs, low branches, and the understory"},
     {"id": "mid", "label": "Mid", "hint": "The middle of the forest, or a small tree"},
-    {"id": "canopy", "label": "Canopy", "hint": "Crowns of tall trees, and birds overhead"},
+    {"id": "canopy", "label": "Canopy", "hint": "Crowns of tall trees"},
+    {"id": "sky", "label": "Sky", "hint": "Overhead — flying, soaring, or hawking in open air"},
 ]
 
 GROUPS = [
@@ -344,12 +345,15 @@ def stratum_note(species: dict) -> str:
     if name == "Costa Rican Pygmy-Owl":
         return "Often calls in the day from the mid-level. Small birds may mob it."
     if name in SOAR:
-        return "Usually overhead or on a high perch, not in the shrub layer. The canopy mark means the sky and the crown."
+        if "canopy" in species["strata"]:
+            return "Often overhead, and sometimes on a high perch in the canopy."
+        return "Usually overhead in open air, not in the shrub layer."
     labels = {
         "ground": "the ground",
         "low": "low branches and the understory",
         "mid": "the mid-level",
         "canopy": "the canopy",
+        "sky": "open air overhead",
     }
     parts = [labels[item] for item in species["strata"]]
     if len(parts) == 1:

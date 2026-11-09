@@ -17,6 +17,8 @@ struct StratumIcon: View {
                 low(&base, color)
             case "mid":
                 mid(&base, color)
+            case "sky":
+                sky(&base, color)
             default:
                 canopy(&base, color)
             }
@@ -74,6 +76,23 @@ struct StratumIcon: View {
         ground.addRect(CGRect(x: 6, y: 60, width: 52, height: 3))
         context.fill(ground, with: color)
         bird(&context, at: CGPoint(x: 38, y: 16), color: .color(GuideColor.paper), paper: true)
+    }
+
+    private func sky(_ context: inout GraphicsContext, _ color: GraphicsContext.Shading) {
+        var horizon = Path()
+        horizon.addRect(CGRect(x: 6, y: 54, width: 52, height: 2.4))
+        context.fill(horizon, with: color)
+        var wing = Path()
+        wing.move(to: CGPoint(x: 12, y: 28))
+        wing.addQuadCurve(to: CGPoint(x: 32, y: 22), control: CGPoint(x: 20, y: 14))
+        wing.addQuadCurve(to: CGPoint(x: 52, y: 28), control: CGPoint(x: 44, y: 14))
+        wing.addQuadCurve(to: CGPoint(x: 32, y: 26), control: CGPoint(x: 44, y: 20))
+        wing.addQuadCurve(to: CGPoint(x: 12, y: 28), control: CGPoint(x: 20, y: 20))
+        wing.closeSubpath()
+        context.fill(wing, with: color)
+        var body = Path()
+        body.addEllipse(in: CGRect(x: 28, y: 20, width: 8, height: 8))
+        context.fill(body, with: color)
     }
 
     private func bird(_ context: inout GraphicsContext, at center: CGPoint, color: GraphicsContext.Shading, paper: Bool) {

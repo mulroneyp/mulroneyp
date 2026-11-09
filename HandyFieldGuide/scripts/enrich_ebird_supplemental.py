@@ -46,7 +46,8 @@ PROGRESS = ROOT / "scripts" / ".ebird_supplemental_progress.json"
 # Rough height bands for Costa Rican garden / foothill birds when not curated.
 KEYWORD_STRATA = [
     (("duck", "teal", "heron", "egret", "guan", "curassow", "quail", "dove", "pigeon", "ground", "tinamou", "rail", "jacana", "sandpiper", "plover", "thrush", "sparrow", "seedeater", "grassquit", "ani", "pauraque", "wood-quail"), ["ground", "low"]),
-    (("hummingbird", "jacobin", "coquette", "plumeleteer", "goldentail", "sabrewing", "emerald", "woodstar", "hermit", "swift", "swallow", "kite", "hawk", "falcon", "caracara", "vulture", "toucan", "aracari", "oriole", "euphonia", "honeycreeper", "dacnis", "tanager", "chlorophonia"), ["canopy", "mid"]),
+    (("swift", "swallow", "martin", "kite", "hawk", "eagle", "falcon", "caracara", "vulture", "kestrel", "frigate", "tern"), ["sky"]),
+    (("hummingbird", "jacobin", "coquette", "plumeleteer", "goldentail", "sabrewing", "emerald", "woodstar", "hermit", "toucan", "aracari", "oriole", "euphonia", "honeycreeper", "dacnis", "tanager", "chlorophonia"), ["canopy", "mid"]),
     (("wren", "antbird", "antwren", "gnatwren", "manakin", "becard", "flycatcher", "pewee", "tyrannulet", "tody", "woodcreeper", "foliage", "xenops", "puffbird", "motmot", "trogon"), ["low", "mid"]),
 ]
 
@@ -143,6 +144,15 @@ def likely_dimorphic(common: str) -> bool:
     return any(hint in low for hint in DIMORPHIC_HINTS)
 
 
+def guess_active_times(common: str) -> list[str]:
+    low = common.lower()
+    if any(key in low for key in ("owl", "nightjar", "pauraque", "potoo", "frogmouth", "night-heron")):
+        return ["dusk", "night"]
+    if any(key in low for key in ("swift", "swallow", "martin", "vulture", "kite", "hawk", "eagle", "falcon", "kestrel")):
+        return ["morning", "midday", "afternoon"]
+    return ["morning", "afternoon"]
+
+
 def make_stub(common: str, scientific: str, photos: list[dict]) -> dict:
     strata = guess_strata(common)
     roles = {photo.get("role") for photo in photos}
@@ -162,6 +172,7 @@ def make_stub(common: str, scientific: str, photos: list[dict]) -> dict:
         "status": "imported",
         "group": guess_group(common),
         "strata": strata,
+        "activeTimes": guess_active_times(common),
         "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
         "habitat": (
             f"Seen on complete checklists for the imported eBird location. "

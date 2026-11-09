@@ -31,6 +31,7 @@ STRATA = [
     {"id": "low", "label": "Low", "hint": "Shrubs, reeds, fences, and low branches"},
     {"id": "mid", "label": "Mid", "hint": "Small trees and the open mid-storey"},
     {"id": "canopy", "label": "Canopy", "hint": "Crowns of tall trees"},
+    {"id": "sky", "label": "Sky", "hint": "Overhead — flying, soaring, or hawking in open air"},
 ]
 
 

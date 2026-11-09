@@ -45,6 +45,20 @@ def main() -> None:
             errors.append(f"  lengths {len(names)} {len(expected)}")
     if len(melbourne["species"]) < 70:
         errors.append(f"melbourne species {len(melbourne['species'])}")
+    stratum_ids = [item["id"] for item in GUIDE["strata"]]
+    if stratum_ids != ["ground", "low", "mid", "canopy", "sky"]:
+        errors.append(f"strata {stratum_ids}")
+    allowed_times = {"dawn", "morning", "midday", "afternoon", "dusk", "night"}
+    for coverage in GUIDE["coverages"]:
+        for species in coverage["species"]:
+            times = species.get("activeTimes")
+            if not isinstance(times, list) or not times:
+                errors.append(f"missing activeTimes {coverage['id']} {species['commonName']}")
+            elif any(item not in allowed_times for item in times):
+                errors.append(f"bad activeTimes {species['commonName']} {times}")
+            for band in species.get("strata", []):
+                if band not in stratum_ids:
+                    errors.append(f"unknown stratum {species['commonName']} {band}")
     if any(item["closestCoverageId"] == "san-jose" for item in GUIDE["outside"]):
         errors.append("outside still points at san-jose")
     if any("monteverde" in item["names"] for item in GUIDE["outside"]):

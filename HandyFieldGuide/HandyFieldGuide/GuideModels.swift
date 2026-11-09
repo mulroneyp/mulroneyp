@@ -60,6 +60,9 @@ struct Species: Decodable, Identifiable {
     var status: String
     var group: String
     var strata: [String]
+    /// Broad periods such as dawn / morning / midday / afternoon / dusk / night.
+    /// Empty when not curated (common for sparse eBird-only stubs).
+    var activeTimes: [String]
     var summary: String
     var habitat: String
     var sexes: String
