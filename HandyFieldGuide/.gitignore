@@ -1,0 +1,7 @@
+xcuserdata/
+*.xcuserstate
+DerivedData/
+.DS_Store
+scripts/photo_progress.json
+__pycache__/
+*.pyc
