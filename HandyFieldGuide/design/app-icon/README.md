@@ -1,6 +1,6 @@
 # App icon source
 
-One-character mark for **Handy Field Guide**: Paul’s blue bird **looking through** black binoculars (not a bird beside separate optics). Opaque black field; bird and optics stay high-contrast at notification / Settings sizes.
+One-character mark for **Handy Field Guide**: Paul’s blue bird looking through black binoculars whose lenses show a green landscape under a blue sky. Opaque white field; bird and optics stay high-contrast at notification / Settings sizes.
 
 ## Files
 
@@ -37,5 +37,5 @@ Options:
 ## Design notes
 
 - Single scene: bird using binoculars at its eyes so the mark reads as one character.
-- Bright blue bird on black; black binoculars with blue-tinted lenses stay clear at small sizes.
+- Bright blue bird on white; black binoculars with landscape reflections in the lenses.
 - No text, no purple gradients. Keep ~10% safe margin from the square edges for iOS continuous-corner masking.
