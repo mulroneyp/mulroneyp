@@ -1,3 +1,4 @@
+import Combine
 import Foundation
 
 @MainActor
@@ -17,6 +18,7 @@ final class GuideModel: ObservableObject {
 
     let imports = ImportedLocationStore()
     private(set) var catalog: SpeciesCatalog?
+    private var importsCancellable: AnyCancellable?
 
     static let storageKey = "handy.locationQuery"
     static let monthKey = "handy.selectedMonthIndex"
@@ -39,6 +41,9 @@ final class GuideModel: ObservableObject {
             catalog = SpeciesCatalog(guide: guide, supplemental: SpeciesCatalog.loadSupplemental())
         } catch {
             loadError = "The species list could not be read from the app."
+        }
+        importsCancellable = imports.objectWillChange.sink { [weak self] _ in
+            self?.objectWillChange.send()
         }
     }
 
@@ -161,5 +166,31 @@ final class GuideModel: ObservableObject {
         }
         let data = try Data(contentsOf: url)
         try importBarchart(data: data, sourceFileName: url.lastPathComponent, displayName: nil)
+    }
+
+    /// Renames a saved/imported location and keeps the active query in sync.
+    func renameImportedLocation(_ id: String, to newName: String) {
+        guard let previous = imports.locations.first(where: { $0.id == id }) else { return }
+        imports.rename(id, to: newName)
+        guard let updated = imports.locations.first(where: { $0.id == id }) else { return }
+        if LocationResolver.normalize(locationQuery) == LocationResolver.normalize(previous.name)
+            || imports.location(matchingQuery: locationQuery)?.id == id {
+            locationQuery = updated.name
+        }
+    }
+
+    /// Deletes a saved/imported location after confirmation in the UI.
+    /// Curated bundled presets are not stored here and cannot be removed.
+    func deleteImportedLocation(_ id: String) {
+        let record = imports.locations.first(where: { $0.id == id })
+        let wasActive = record.map { loc in
+            imports.location(matchingQuery: locationQuery)?.id == loc.id
+                || LocationResolver.normalize(locationQuery) == LocationResolver.normalize(loc.name)
+        } ?? false
+        imports.remove(id)
+        if wasActive {
+            locationQuery = ""
+            importMessage = nil
+        }
     }
 }

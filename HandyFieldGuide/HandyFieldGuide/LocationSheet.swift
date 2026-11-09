@@ -7,8 +7,9 @@ struct LocationSheet: View {
     @State private var draft: String
     @State private var showingImporter: Bool
     @State private var importError: String?
-    @State private var renamingId: String?
+    @State private var locationPendingRename: ImportedLocationRecord?
     @State private var renameText = ""
+    @State private var locationPendingDelete: ImportedLocationRecord?
 
     private let startInImportMode: Bool
 
@@ -24,15 +25,21 @@ struct LocationSheet: View {
                 VStack(alignment: .leading, spacing: 16) {
                     Text(startInImportMode
                          ? "Add a new area from an eBird Frequency / barchart `.txt` export (tab-separated, four week columns per month). The app names the place from the location id in the filename when it can (for example L436229)."
-                         : "Manage imported eBird areas, or type a curated place name. Use Add new on the home screen to import a barchart.")
+                         : "Rename or delete saved eBird imports here. Bundled curated presets (Monteverde, Melbourne, and the district shortcuts) stay in the Location menu and are not removed.")
                         .font(.subheadline)
                         .foregroundStyle(GuideColor.muted)
                         .fixedSize(horizontal: false, vertical: true)
 
-                    importSection
+                    if startInImportMode {
+                        importSection
+                    }
 
                     if !model.imports.locations.isEmpty {
                         importedSection
+                    } else if !startInImportMode {
+                        Text("No saved imports yet. Use Add eBird barchart on the Location menu to add one.")
+                            .font(.subheadline)
+                            .foregroundStyle(GuideColor.muted)
                     }
 
                     if !startInImportMode {
@@ -49,7 +56,7 @@ struct LocationSheet: View {
                 .padding(20)
             }
             .guideBackground()
-            .navigationTitle(startInImportMode ? "Add location" : "Locations")
+            .navigationTitle(startInImportMode ? "Add location" : "Manage locations")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -63,7 +70,38 @@ struct LocationSheet: View {
             ) { result in
                 handleImport(result)
             }
+            .sheet(item: $locationPendingRename) { location in
+                renameSheet(for: location)
+            }
+            .alert(
+                deleteAlertTitle,
+                isPresented: Binding(
+                    get: { locationPendingDelete != nil },
+                    set: { if !$0 { locationPendingDelete = nil } }
+                ),
+                presenting: locationPendingDelete
+            ) { location in
+                Button("Delete", role: .destructive) {
+                    model.deleteImportedLocation(location.id)
+                    if LocationResolver.normalize(draft) == LocationResolver.normalize(location.name) {
+                        draft = model.locationQuery
+                    }
+                    locationPendingDelete = nil
+                }
+                Button("Cancel", role: .cancel) {
+                    locationPendingDelete = nil
+                }
+            } message: { location in
+                Text("Remove “\(location.name)” from Handy Field Guide? This only deletes your saved import. Curated presets and the bundled sample file stay available to re-import.")
+            }
         }
+    }
+
+    private var deleteAlertTitle: String {
+        if let locationPendingDelete {
+            return "Delete \(locationPendingDelete.name)?"
+        }
+        return "Delete location?"
     }
 
     private var importSection: some View {
@@ -109,12 +147,13 @@ struct LocationSheet: View {
 
     private var importedSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("IMPORTED AREAS")
+            Text("SAVED IMPORTS")
                 .font(.caption.weight(.semibold))
                 .tracking(1.1)
                 .foregroundStyle(GuideColor.muted)
+
             ForEach(model.imports.locations) { location in
-                VStack(alignment: .leading, spacing: 6) {
+                VStack(alignment: .leading, spacing: 8) {
                     Button {
                         draft = location.name
                         model.locationQuery = location.name
@@ -137,34 +176,67 @@ struct LocationSheet: View {
                     }
                     .buttonStyle(.plain)
 
-                    if renamingId == location.id {
-                        HStack {
-                            TextField("Rename", text: $renameText)
-                                .textFieldStyle(.roundedBorder)
-                            Button("Save") {
-                                let previous = location.name
-                                model.imports.rename(location.id, to: renameText)
-                                if let updated = model.imports.locations.first(where: { $0.id == location.id }) {
-                                    if model.locationQuery == previous {
-                                        model.locationQuery = updated.name
-                                    }
-                                    draft = updated.name
-                                }
-                                renamingId = nil
-                            }
-                            .buttonStyle(GuideChipStyle(selected: true))
-                        }
-                    } else {
+                    HStack(spacing: 12) {
                         Button("Rename") {
-                            renamingId = location.id
                             renameText = location.name
+                            locationPendingRename = location
                         }
                         .font(.caption.weight(.semibold))
                         .foregroundStyle(GuideColor.green)
+
+                        Button("Delete", role: .destructive) {
+                            locationPendingDelete = location
+                        }
+                        .font(.caption.weight(.semibold))
                     }
+                    .padding(.horizontal, 4)
                 }
             }
         }
+    }
+
+    private func renameSheet(for location: ImportedLocationRecord) -> some View {
+        NavigationStack {
+            VStack(alignment: .leading, spacing: 16) {
+                Text("Choose a name for this saved area. The eBird location id stays the same.")
+                    .font(.subheadline)
+                    .foregroundStyle(GuideColor.muted)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                TextField("Location name", text: $renameText)
+                    .textFieldStyle(.roundedBorder)
+                    .textInputAutocapitalization(.words)
+                    .submitLabel(.done)
+                    .onSubmit { saveRename(location) }
+
+                Spacer()
+            }
+            .padding(20)
+            .guideBackground()
+            .navigationTitle("Rename location")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") { locationPendingRename = nil }
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Save") { saveRename(location) }
+                        .disabled(renameText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                }
+            }
+        }
+        .presentationDetents([.medium])
+    }
+
+    private func saveRename(_ location: ImportedLocationRecord) {
+        let previous = location.name
+        model.renameImportedLocation(location.id, to: renameText)
+        if let updated = model.imports.locations.first(where: { $0.id == location.id }) {
+            if LocationResolver.normalize(draft) == LocationResolver.normalize(previous) {
+                draft = updated.name
+            }
+        }
+        locationPendingRename = nil
     }
 
     private func apply() {

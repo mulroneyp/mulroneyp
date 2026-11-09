@@ -108,6 +108,7 @@ final class ImportedLocationStore: ObservableObject {
         return record
     }
 
+    /// Updates the display name for a saved import and writes `imported-locations.json`.
     func rename(_ id: String, to newName: String) {
         guard let index = locations.firstIndex(where: { $0.id == id }) else { return }
         let trimmed = newName.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -116,6 +117,8 @@ final class ImportedLocationStore: ObservableObject {
         persist()
     }
 
+    /// Removes a saved import from the store. Does not delete bundled curated coverages
+    /// or the sample barchart fixture in the app bundle / Documents.
     func remove(_ id: String) {
         locations.removeAll { $0.id == id }
         persist()

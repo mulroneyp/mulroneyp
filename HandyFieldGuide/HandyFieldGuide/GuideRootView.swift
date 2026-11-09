@@ -3,6 +3,7 @@ import SwiftUI
 struct GuideRootView: View {
     @EnvironmentObject private var model: GuideModel
     @State private var showingAddLocation = false
+    @State private var showingManageLocations = false
     @State private var path = NavigationPath()
 
     var body: some View {
@@ -32,6 +33,9 @@ struct GuideRootView: View {
         }
         .sheet(isPresented: $showingAddLocation) {
             LocationSheet(current: model.locationQuery, startInImportMode: true)
+        }
+        .sheet(isPresented: $showingManageLocations) {
+            LocationSheet(current: model.locationQuery, startInImportMode: false)
         }
         .onChange(of: model.locationQuery) { _, _ in
             path = NavigationPath()
@@ -96,9 +100,12 @@ struct GuideRootView: View {
             .frame(maxWidth: .infinity)
         }
         .safeAreaInset(edge: .bottom, spacing: 0) {
-            HomeFiltersView(guide: guide, place: place) {
-                showingAddLocation = true
-            }
+            HomeFiltersView(
+                guide: guide,
+                place: place,
+                onAddLocation: { showingAddLocation = true },
+                onManageLocations: { showingManageLocations = true }
+            )
         }
     }
 
