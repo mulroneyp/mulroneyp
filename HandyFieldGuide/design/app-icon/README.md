@@ -1,6 +1,6 @@
 # App icon source
 
-One-character mark for **Handy Field Guide**: a cream bird **looking through** rust binoculars (not a bird beside separate optics). Colors follow `GuideColor` in `HandyFieldGuide/Theme.swift` (forest green field, cream bird, rust optics).
+One-character mark for **Handy Field Guide**: Paul’s blue bird looking through black binoculars whose lenses show a green landscape under a blue sky. Opaque white field; bird and optics stay high-contrast at notification / Settings sizes.
 
 ## Files
 
@@ -37,5 +37,5 @@ Options:
 ## Design notes
 
 - Single scene: bird using binoculars at its eyes so the mark reads as one character.
-- Cream bird on deep green; rust binoculars with dark lenses stay clear at notification / Settings sizes.
+- Bright blue bird on white; black binoculars with landscape reflections in the lenses.
 - No text, no purple gradients. Keep ~10% safe margin from the square edges for iOS continuous-corner masking.
