@@ -1,0 +1,4548 @@
+{
+  "defaultCoverageId": "greater-melbourne",
+  "strata": [
+    {
+      "id": "ground",
+      "label": "Ground",
+      "hint": "Lawns, mud, shore, and the water surface"
+    },
+    {
+      "id": "low",
+      "label": "Low",
+      "hint": "Shrubs, reeds, fences, and low branches"
+    },
+    {
+      "id": "mid",
+      "label": "Mid",
+      "hint": "Small trees and the open mid-storey"
+    },
+    {
+      "id": "canopy",
+      "label": "Canopy",
+      "hint": "Crowns of tall trees"
+    }
+  ],
+  "coverages": [
+    {
+      "id": "greater-melbourne",
+      "label": "Greater Melbourne",
+      "placeTitle": "Greater Melbourne, Australia",
+      "country": "Australia",
+      "realm": "oceania",
+      "summary": "A starter set of residents and regular visitors in the parks, wetlands, bay, and suburbs. Not a full checklist.",
+      "sampleNote": null,
+      "aliases": [
+        "greater melbourne",
+        "melbourne",
+        "metro melbourne",
+        "melbourne victoria"
+      ],
+      "groups": [
+        {
+          "id": "water",
+          "label": "Water and wetlands"
+        },
+        {
+          "id": "coast",
+          "label": "Bay and coast"
+        },
+        {
+          "id": "open",
+          "label": "Grass and open ground"
+        },
+        {
+          "id": "park",
+          "label": "Parks, gardens, and streets"
+        },
+        {
+          "id": "woodland",
+          "label": "Creeks, woodland, and hills"
+        }
+      ],
+      "districts": [
+        {
+          "id": "all",
+          "label": "Greater Melbourne",
+          "aliases": [
+            "greater melbourne",
+            "melbourne",
+            "metro melbourne"
+          ],
+          "lead": "",
+          "groupOrder": [
+            "water",
+            "coast",
+            "open",
+            "park",
+            "woodland"
+          ],
+          "groupNotes": {}
+        },
+        {
+          "id": "bayside",
+          "label": "Bayside",
+          "aliases": [
+            "st kilda",
+            "saint kilda",
+            "elwood",
+            "albert park",
+            "middle park",
+            "south melbourne",
+            "port melbourne",
+            "williamstown",
+            "altona",
+            "brighton",
+            "hampton",
+            "sandringham",
+            "black rock",
+            "beaumaris",
+            "mentone",
+            "parkdale",
+            "mordialloc",
+            "aspendale",
+            "chelsea",
+            "edithvale",
+            "carrum",
+            "seaford",
+            "frankston",
+            "elsternwick",
+            "bayside"
+          ],
+          "lead": "On the Port Phillip side of Melbourne.",
+          "groupOrder": [
+            "coast",
+            "water",
+            "park",
+            "open",
+            "woodland"
+          ],
+          "groupNotes": {
+            "coast": "The beach, pier, and breakwater are the places to start.",
+            "water": "Look on the bigger lakes just inland of the beach, not on the open sand. Albert Park Lake is the usual one near St Kilda.",
+            "park": "Foreshore parks and street trees still hold the usual suburban birds.",
+            "open": "Ovals and the grass behind the foreshore.",
+            "woodland": "Not the local beach birds. They need larger treed parks, or a trip toward the creeks and the hills."
+          }
+        },
+        {
+          "id": "inner",
+          "label": "Inner Melbourne",
+          "aliases": [
+            "melbourne cbd",
+            "cbd",
+            "carlton",
+            "fitzroy",
+            "collingwood",
+            "richmond",
+            "east melbourne",
+            "parkville",
+            "north melbourne",
+            "west melbourne",
+            "docklands",
+            "southbank",
+            "south yarra",
+            "prahran",
+            "windsor",
+            "abbotsford",
+            "cremorne",
+            "inner melbourne",
+            "inner suburbs"
+          ],
+          "lead": "In the inner suburbs.",
+          "groupOrder": [
+            "park",
+            "water",
+            "open",
+            "woodland",
+            "coast"
+          ],
+          "groupNotes": {
+            "park": "Street trees, small parks, and the Royal Botanic Gardens.",
+            "water": "The Yarra, the botanic gardens lake, and Albert Park Lake are the water in reach of the inner suburbs.",
+            "open": "Ovals and the wide lawns of the botanic gardens and Royal Park.",
+            "woodland": "Thin in the inner grid. Yarra Bend, the treed edges of Royal Park, and the gardens are the better spots.",
+            "coast": "The bay is a short trip south, not the local street."
+          }
+        },
+        {
+          "id": "east",
+          "label": "Eastern suburbs",
+          "aliases": [
+            "hawthorn",
+            "camberwell",
+            "kew",
+            "balwyn",
+            "surrey hills",
+            "box hill",
+            "mont albert",
+            "burwood",
+            "glen iris",
+            "ashburton",
+            "mount waverley",
+            "glen waverley",
+            "ringwood",
+            "mitcham",
+            "nunawading",
+            "doncaster",
+            "bulleen",
+            "templestowe",
+            "blackburn",
+            "forest hill",
+            "vermont",
+            "eastern suburbs"
+          ],
+          "lead": "In the eastern suburbs.",
+          "groupOrder": [
+            "park",
+            "woodland",
+            "water",
+            "open",
+            "coast"
+          ],
+          "groupNotes": {
+            "park": "Gardens, nature strips, and the usual eastern parkland.",
+            "woodland": "Creek lines and the larger bush parks. The ranges are further east.",
+            "water": "Park lakes and retarding basins, such as Blackburn Lake, rather than the bay.",
+            "open": "Ovals, golf courses, and the grass around park lakes.",
+            "coast": "The bay is across town. These are not the local street birds."
+          }
+        },
+        {
+          "id": "north",
+          "label": "Northern suburbs",
+          "aliases": [
+            "brunswick",
+            "coburg",
+            "preston",
+            "northcote",
+            "thornbury",
+            "fairfield",
+            "alphington",
+            "ivanhoe",
+            "heidelberg",
+            "reservoir",
+            "pascoe vale",
+            "essendon",
+            "moonee ponds",
+            "ascot vale",
+            "fawkner",
+            "northern suburbs"
+          ],
+          "lead": "On the north side of the city.",
+          "groupOrder": [
+            "park",
+            "water",
+            "open",
+            "woodland",
+            "coast"
+          ],
+          "groupNotes": {
+            "park": "Suburban parks, street trees, and the inner-north parks such as Edinburgh Gardens.",
+            "water": "Creek pools and park lakes along the Merri, Darebin, and Moonee Ponds creeks.",
+            "open": "Ovals and the grass beside the creeks.",
+            "woodland": "Along the creeks, and at Yarra Bend and the Darebin Parklands, more than on a bare nature strip.",
+            "coast": "The bay is not the local habitat."
+          }
+        },
+        {
+          "id": "west",
+          "label": "Western suburbs",
+          "aliases": [
+            "footscray",
+            "yarraville",
+            "seddon",
+            "maribyrnong",
+            "sunshine",
+            "st albans",
+            "deer park",
+            "point cook",
+            "hoppers crossing",
+            "werribee",
+            "tarneit",
+            "newport",
+            "spotswood",
+            "braybrook",
+            "keilor",
+            "niddrie",
+            "western suburbs"
+          ],
+          "lead": "In the western suburbs.",
+          "groupOrder": [
+            "open",
+            "water",
+            "coast",
+            "park",
+            "woodland"
+          ],
+          "groupNotes": {
+            "open": "Ovals, grasslands, and the wide western paddocks.",
+            "water": "Lakes and wetlands, including Point Cook and the western treatment plant, plus suburban retarding basins.",
+            "coast": "The bay edge is Williamstown, Altona, and the Werribee shore, not the inland estates.",
+            "park": "Street trees and local parks, often sparser than in the east.",
+            "woodland": "Scarcer than in the east. Creek corridors and the larger planted parks are the places to look."
+          }
+        },
+        {
+          "id": "hills",
+          "label": "Dandenong Ranges",
+          "aliases": [
+            "dandenong ranges",
+            "dandenongs",
+            "belgrave",
+            "olinda",
+            "sassafras",
+            "kallista",
+            "emerald",
+            "ferny creek",
+            "mount dandenong",
+            "upwey",
+            "tecoma",
+            "ferntree gully",
+            "upper ferntree gully",
+            "montrose",
+            "kalorama",
+            "sherbrooke"
+          ],
+          "lead": "In the Dandenong Ranges and the treed eastern foothills.",
+          "groupOrder": [
+            "woodland",
+            "park",
+            "open",
+            "water",
+            "coast"
+          ],
+          "groupNotes": {
+            "woodland": "This is the main habitat: gullies and the denser bush, which hold birds that are missing from a bare suburban lawn.",
+            "park": "Gardens under tall trees, and the picnic grounds.",
+            "open": "Clearings and picnic lawns. Many open-country birds of the western plains are scarce here.",
+            "water": "Small dams and forest creeks, not the bay or the big suburban lakes.",
+            "coast": "Not here. The bay is a drive back down."
+          }
+        },
+        {
+          "id": "peninsula",
+          "label": "Mornington Peninsula",
+          "aliases": [
+            "mornington peninsula",
+            "mornington",
+            "mount eliza",
+            "mount martha",
+            "safety beach",
+            "dromana",
+            "rosebud",
+            "rye",
+            "sorrento",
+            "portsea",
+            "flinders",
+            "hastings",
+            "somerville"
+          ],
+          "lead": "On the Mornington Peninsula, at the southern edge of the area this guide covers.",
+          "groupOrder": [
+            "coast",
+            "water",
+            "park",
+            "open",
+            "woodland"
+          ],
+          "groupNotes": {
+            "coast": "Bay shores, rock shelves, and the piers.",
+            "water": "Peninsula wetlands such as Coolart, not the small eastern suburban lakes.",
+            "park": "Town gardens and foreshore parks.",
+            "open": "Farm paddocks, golf courses, and grass behind the beach.",
+            "woodland": "The better bush is in the larger reserves, not the shopping strip."
+          }
+        }
+      ],
+      "species": [
+        {
+          "id": "black-swan",
+          "commonName": "Black Swan",
+          "scientificName": "Cygnus atratus",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "swan",
+            "waterbird"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "water",
+          "strata": [
+            "ground"
+          ],
+          "summary": "Large park lakes and broad wetlands.",
+          "habitat": "The usual swan of Melbourne’s bigger lakes. Easy to see at Albert Park Lake, the Royal Botanic Gardens, and large suburban lakes such as Jells Park and Karkarook. They graze the bank and feed on the water, often with coots and ducks.",
+          "sexes": "Males and females look alike. Males are larger. Young birds are grey and take months to turn black.",
+          "stratumNote": "On the water and on the grassy bank, at ground level.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/black-swan.jpg",
+              "alt": "Black Swan. Males and females look alike.",
+              "width": 1000,
+              "height": 1000,
+              "author": "Charles J. Sharp",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Black_swan_%28Cygnus_atratus%29_Scottsdale.jpg",
+              "file": "File:Black swan (Cygnus atratus) Scottsdale.jpg"
+            }
+          ]
+        },
+        {
+          "id": "australian-wood-duck",
+          "commonName": "Australian Wood Duck",
+          "scientificName": "Chenonetta jubata",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "duck",
+            "waterbird"
+          ],
+          "dimorphic": true,
+          "origin": "native",
+          "status": "Resident",
+          "group": "water",
+          "strata": [
+            "ground",
+            "low"
+          ],
+          "summary": "Grazes on grass beside lakes, and perches in trees.",
+          "habitat": "A grazing duck of parkland more than open deep water. Look on the lawns beside the Yarra, golf courses, and creek flats, including Westerfolds and the Merri Creek trail. They walk well away from the bank and also sit in trees near hollows.",
+          "sexes": "Males have a dark brown head and a pale grey body. Females are lighter, with a pale stripe above and below the eye. Both show a dark stripe along the back when standing.",
+          "stratumNote": "Feeds on the ground, and often rests in low branches near the water.",
+          "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/australian-wood-duck-male.jpg",
+              "alt": "Male Australian Wood Duck",
+              "width": 1000,
+              "height": 750,
+              "author": "SuperJew",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Australian_wood_duck_10.jpg",
+              "file": "File:Australian wood duck 10.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/australian-wood-duck-female.jpg",
+              "alt": "Female Australian Wood Duck",
+              "width": 1000,
+              "height": 750,
+              "author": "DickDaniels (http://theworldbirds.org/)",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Australian_Wood_Duck_female_RWD.jpg",
+              "file": "File:Australian Wood Duck female RWD.jpg"
+            }
+          ]
+        },
+        {
+          "id": "pacific-black-duck",
+          "commonName": "Pacific Black Duck",
+          "scientificName": "Anas superciliosa",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "duck",
+            "waterbird"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "water",
+          "strata": [
+            "ground"
+          ],
+          "summary": "The default duck of almost any Melbourne pond.",
+          "habitat": "Any pond, creek pool, or lake. A reliable bird at the Royal Botanic Gardens, Albert Park, and suburban retarding basins. Often the duck that comes looking for bread; please don’t feed them.",
+          "sexes": "Males and females look alike: a dark duck with a pale face and stripes through the eye.",
+          "stratumNote": "On the water and the immediate edge.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/pacific-black-duck.jpg",
+              "alt": "Pacific Black Duck. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "Charles J. Sharp",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pacific_black_duck_%28Anas_superciliosa%29_male_swimming_Sydney.jpg",
+              "file": "File:Pacific black duck (Anas superciliosa) male swimming Sydney.jpg"
+            }
+          ]
+        },
+        {
+          "id": "grey-teal",
+          "commonName": "Grey Teal",
+          "scientificName": "Anas gracilis",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "duck",
+            "teal",
+            "waterbird"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "water",
+          "strata": [
+            "ground"
+          ],
+          "summary": "Small brown duck of freshwater wetlands.",
+          "habitat": "Freshwater wetlands and flood ponds. Regular at Westgate Park, Edithvale–Seaford, and river lagoons. It overlaps with Chestnut Teal, which is more typical of saltier water near the bay. This guide does not try to separate a Grey Teal from a female Chestnut Teal on plumage alone.",
+          "sexes": "Males and females look alike: a small mottled brown duck with a light face.",
+          "stratumNote": "On the water and mud at the edge.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/grey-teal.jpg",
+              "alt": "Grey Teal. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "Charles J. Sharp",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Grey_teal_%28Anas_gracilis%29_Adelaide.jpg",
+              "file": "File:Grey teal (Anas gracilis) Adelaide.jpg"
+            }
+          ]
+        },
+        {
+          "id": "chestnut-teal",
+          "commonName": "Chestnut Teal",
+          "scientificName": "Anas castanea",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "duck",
+            "teal",
+            "waterbird"
+          ],
+          "dimorphic": true,
+          "origin": "native",
+          "status": "Resident",
+          "group": "water",
+          "strata": [
+            "ground"
+          ],
+          "summary": "The teal of the bay edge and saltmarsh.",
+          "habitat": "Saltmarsh, brackish wetlands, and the edge of Port Phillip. Jawbone Reserve, Altona, Point Cook, and Edithvale–Seaford are typical. Males are easy to pick. Females are mottled brown and are easy to confuse with Grey Teal where the two share a wetland.",
+          "sexes": "Males are dark, with a bottle-green head and a chestnut body. Females are mottled brown, without the male’s dark head.",
+          "stratumNote": "On the water, mudflats, and low banks.",
+          "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/chestnut-teal-male.jpg",
+              "alt": "Male Chestnut Teal",
+              "width": 1000,
+              "height": 750,
+              "author": "PsJeremy from Melbourne, Australia",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anas_castanea_Mont_Albert_North_2.jpg",
+              "file": "File:Anas castanea Mont Albert North 2.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/chestnut-teal-female.jpg",
+              "alt": "Female Chestnut Teal",
+              "width": 1000,
+              "height": 667,
+              "author": "Frankzed from Melbourne, Australia",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anas_castanea_Coolart_Wetlands_2.jpg",
+              "file": "File:Anas castanea Coolart Wetlands 2.jpg"
+            }
+          ]
+        },
+        {
+          "id": "hardhead",
+          "commonName": "Hardhead",
+          "scientificName": "Aythya australis",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "duck",
+            "waterbird"
+          ],
+          "dimorphic": true,
+          "origin": "native",
+          "status": "Regular",
+          "group": "water",
+          "strata": [
+            "ground"
+          ],
+          "summary": "A diving duck that sits out on deeper water.",
+          "habitat": "Deeper, more open lakes rather than tiny ponds. Albert Park when conditions suit, reservoir parks, and larger wetlands. Usually well out from the bank, diving, so it is easy to miss among coots.",
+          "sexes": "Males are a rich dark chestnut with a white eye. Females are paler brown, with a dark eye. Both have a pale band near the tip of the bill.",
+          "stratumNote": "On open water, at the surface.",
+          "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/hardhead-male.jpg",
+              "alt": "Male Hardhead",
+              "width": 1000,
+              "height": 667,
+              "author": "Frankzed from Melbourne, Australia",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aythya_australis_-Coolart_Wetlands%2C_Mornington_Peninsula%2C_Victoria%2C_Australia_-male-8.jpg",
+              "file": "File:Aythya australis -Coolart Wetlands, Mornington Peninsula, Victoria, Australia -male-8.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/hardhead-female.jpg",
+              "alt": "Female Hardhead",
+              "width": 1000,
+              "height": 667,
+              "author": "JJ Harrison (https://tiny.jjharrison.com.au/t/VcHWJIMlVY6vk6hU)",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aythya_australis_female_-_Hurstville_Golf_Course.jpg",
+              "file": "File:Aythya australis female - Hurstville Golf Course.jpg"
+            }
+          ]
+        },
+        {
+          "id": "australasian-grebe",
+          "commonName": "Australasian Grebe",
+          "scientificName": "Tachybaptus novaehollandiae",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "grebe",
+            "waterbird"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "water",
+          "strata": [
+            "ground"
+          ],
+          "summary": "Small diving bird of sheltered ponds.",
+          "habitat": "Suburban ponds, retarding basins, and the quiet corners of larger lakes. It dives rather than dabbles and rarely comes onto the grass. Common, but small enough to overlook.",
+          "sexes": "Males and females look alike. In breeding plumage the head is blacker and the neck shows a chestnut patch; in winter they are plainer.",
+          "stratumNote": "On the water, usually close to cover.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/australasian-grebe.jpg",
+              "alt": "Australasian Grebe. Males and females look alike.",
+              "width": 1000,
+              "height": 666,
+              "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tachybaptus_novaehollandiae_-_Mulligan%27s_Flat.jpg",
+              "file": "File:Tachybaptus novaehollandiae - Mulligan's Flat.jpg"
+            }
+          ]
+        },
+        {
+          "id": "australasian-darter",
+          "commonName": "Australasian Darter",
+          "scientificName": "Anhinga novaehollandiae",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "darter",
+            "waterbird"
+          ],
+          "dimorphic": true,
+          "origin": "native",
+          "status": "Resident",
+          "group": "water",
+          "strata": [
+            "ground",
+            "low"
+          ],
+          "summary": "Snake-necked swimmer that hangs its wings out to dry.",
+          "habitat": "Sheltered water with snags, jetties, or poles. Westerfolds Park, the lower Yarra, Albert Park, and Newport Lakes are typical. It swims very low, with only the neck showing, then climbs out and spreads its wings.",
+          "sexes": "Males look mostly black, with a chestnut streak on the neck. Females are pale underneath, with a pale grey-brown head and neck. Both have the long straight bill and snaky neck.",
+          "stratumNote": "Swims at the surface, and perches on low snags, poles, and branches over the water.",
+          "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/australasian-darter-male.jpg",
+              "alt": "Male Australasian Darter",
+              "width": 1000,
+              "height": 1000,
+              "author": "Charles J. Sharp",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Australasian_darter_%28Anhinga_novaehollandiae%29_male_with_northern_saratoga_%28Scleropages_jardinii%29_Kakadu_10.jpg",
+              "file": "File:Australasian darter (Anhinga novaehollandiae) male with northern saratoga (Scleropages jardinii) Kakadu 10.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/australasian-darter-female.jpg",
+              "alt": "Female Australasian Darter",
+              "width": 1000,
+              "height": 1000,
+              "author": "Charles J. Sharp",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Australasian_darter_%28Anhinga_novaehollandiae%29_female_spreading_wings_Kakadu.jpg",
+              "file": "File:Australasian darter (Anhinga novaehollandiae) female spreading wings Kakadu.jpg"
+            }
+          ]
+        },
+        {
+          "id": "little-pied-cormorant",
+          "commonName": "Little Pied Cormorant",
+          "scientificName": "Microcarbo melanoleucos",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "cormorant",
+            "waterbird"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "water",
+          "strata": [
+            "ground",
+            "low"
+          ],
+          "summary": "The small black-and-white cormorant, often alone.",
+          "habitat": "Ponds, creeks, and the bay. Usually a single bird on a post, a jetty, or a half-submerged branch, including at Albert Park and along the Yarra. It also works small suburban lakes that bigger cormorants ignore.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "On the water, and on low posts and branches.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/little-pied-cormorant.jpg",
+              "alt": "Little Pied Cormorant. Males and females look alike.",
+              "width": 999,
+              "height": 1000,
+              "author": "Charles J. Sharp",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Little_pied_cormorant_%28Microcarbo_melanoleucos%29_Freycinet.jpg",
+              "file": "File:Little pied cormorant (Microcarbo melanoleucos) Freycinet.jpg"
+            }
+          ]
+        },
+        {
+          "id": "little-black-cormorant",
+          "commonName": "Little Black Cormorant",
+          "scientificName": "Phalacrocorax sulcirostris",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "cormorant",
+            "waterbird"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "water",
+          "strata": [
+            "ground",
+            "low"
+          ],
+          "summary": "All-dark cormorant, often fishing in a group.",
+          "habitat": "Lakes and the bay, frequently in small flocks that fish together. Look for a line of black birds on a rail, a fallen tree, or a boat. Regular at Albert Park and around the river mouth.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "On the water, and lined up on low rails and branches.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/little-black-cormorant.jpg",
+              "alt": "Little Black Cormorant. Males and females look alike.",
+              "width": 1000,
+              "height": 666,
+              "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phalacrocorax_sulcirostris_-_Gould%27s_Lagoon.jpg",
+              "file": "File:Phalacrocorax sulcirostris - Gould's Lagoon.jpg"
+            }
+          ]
+        },
+        {
+          "id": "australian-pelican",
+          "commonName": "Australian Pelican",
+          "scientificName": "Pelecanus conspicillatus",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "pelican",
+            "waterbird"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "water",
+          "strata": [
+            "ground"
+          ],
+          "summary": "Unmistakable on the bay, the river, and larger lakes.",
+          "habitat": "Port Phillip, the Maribyrnong and Yarra mouths, and bigger lakes including Albert Park. They loaf on sandbars, jetties, and pontoons. Numbers at a given lake come and go.",
+          "sexes": "Males and females look alike. Males are larger.",
+          "stratumNote": "On the water and on low shores and jetties.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/australian-pelican.jpg",
+              "alt": "Australian Pelican. Males and females look alike.",
+              "width": 1000,
+              "height": 579,
+              "author": "Basar",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pelecanus_conspicillatus4.jpg",
+              "file": "File:Pelecanus conspicillatus4.jpg"
+            }
+          ]
+        },
+        {
+          "id": "australian-white-ibis",
+          "commonName": "Australian White Ibis",
+          "scientificName": "Threskiornis moluccus",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "ibis",
+            "waterbird"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "water",
+          "strata": [
+            "ground"
+          ],
+          "summary": "Park lawns, picnic grounds, and wetland edges.",
+          "habitat": "As much a city bird as a swamp bird in Melbourne. Albert Park, the Royal Botanic Gardens, creek corridors, and anywhere people eat outdoors. They also feed in shallow wetlands and on sports fields after rain.",
+          "sexes": "Males and females look alike. Adults have a bare black head; younger birds are scruffier, with some feathering on the head.",
+          "stratumNote": "Walking on the ground. They roost in trees, but that is not where you usually watch them.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/australian-white-ibis.jpg",
+              "alt": "Australian White Ibis. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "Alex Proimos from Sydney, Australia",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Australian_White_Ibis_Bird_%286603467963%29.jpg",
+              "file": "File:Australian White Ibis Bird (6603467963).jpg"
+            }
+          ]
+        },
+        {
+          "id": "straw-necked-ibis",
+          "commonName": "Straw-necked Ibis",
+          "scientificName": "Threskiornis spinicollis",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "ibis",
+            "waterbird"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Regular",
+          "group": "water",
+          "strata": [
+            "ground"
+          ],
+          "summary": "Dark-backed ibis of paddocks and shallow wetlands.",
+          "habitat": "More of a paddock and wetland bird than the Australian White Ibis, and less interested in street bins. Sports fields after rain, market-garden country on the western edge, and shallow wetlands such as Edithvale–Seaford. Often in small flocks, probing the ground.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "On the ground in grass and shallow water.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/straw-necked-ibis.jpg",
+              "alt": "Straw-necked Ibis. Males and females look alike.",
+              "width": 1000,
+              "height": 800,
+              "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Threskiornis_spinicollis_-_Centenary_Lakes.jpg",
+              "file": "File:Threskiornis spinicollis - Centenary Lakes.jpg"
+            }
+          ]
+        },
+        {
+          "id": "royal-spoonbill",
+          "commonName": "Royal Spoonbill",
+          "scientificName": "Platalea regia",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "spoonbill",
+            "waterbird"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Regular",
+          "group": "water",
+          "strata": [
+            "ground"
+          ],
+          "summary": "White bird sweeping a spoon-shaped bill through the shallows.",
+          "habitat": "Shallow wetlands. Westgate Park, Edithvale–Seaford, Jawbone, and Point Cook are public places where spoonbills are regular. They wade slowly and swing the bill from side to side.",
+          "sexes": "Males and females look alike. Breeding birds grow longer plumes on the nape.",
+          "stratumNote": "Wading in shallow water.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/royal-spoonbill.jpg",
+              "alt": "Royal Spoonbill. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "JJ Harrison (https://tiny.jjharrison.com.au/t/f3shNdDdfPWnaEiM)",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Platalea_regia_in_flight_-_Sydney_Olympic_Park.jpg",
+              "file": "File:Platalea regia in flight - Sydney Olympic Park.jpg"
+            }
+          ]
+        },
+        {
+          "id": "white-faced-heron",
+          "commonName": "White-faced Heron",
+          "scientificName": "Egretta novaehollandiae",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "heron",
+            "waterbird"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "water",
+          "strata": [
+            "ground",
+            "low"
+          ],
+          "summary": "The everyday heron of wetlands, ovals, and paddocks.",
+          "habitat": "Wetland margins, tidal creeks, flooded ovals, and paddocks. Often the grey heron standing on a fence or a low branch as well as in the shallows. Widespread from the bay to suburban creeks.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "Forages on the ground, and often perches on fences and low branches.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/white-faced-heron.jpg",
+              "alt": "White-faced Heron. Males and females look alike.",
+              "width": 1000,
+              "height": 739,
+              "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Egretta_novaehollandiae_Tasmania_1.jpg",
+              "file": "File:Egretta novaehollandiae Tasmania 1.jpg"
+            }
+          ]
+        },
+        {
+          "id": "nankeen-night-heron",
+          "commonName": "Nankeen Night-Heron",
+          "scientificName": "Nycticorax caledonicus",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "heron",
+            "waterbird"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "water",
+          "strata": [
+            "low",
+            "mid"
+          ],
+          "summary": "Roosts by day in dense trees over water.",
+          "habitat": "The Royal Botanic Gardens and quieter, well-treed stretches of the Yarra are the classic Melbourne roosts. By day they sit hunched in foliage over the water and are easy to walk past. They come down to the edge at dusk.",
+          "sexes": "Adult males and females look alike: cinnamon back, black cap, and a heavy bill. Young birds are streaked brown and look quite different.",
+          "stratumNote": "Usually in low and mid-level cover over water, not out on open lawn.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/nankeen-night-heron.jpg",
+              "alt": "Nankeen Night-Heron. Males and females look alike.",
+              "width": 1000,
+              "height": 800,
+              "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nycticorax_caledonicus_-_Sydney_Olympic_Park.jpg",
+              "file": "File:Nycticorax caledonicus - Sydney Olympic Park.jpg"
+            }
+          ]
+        },
+        {
+          "id": "purple-swamphen",
+          "commonName": "Purple Swamphen",
+          "scientificName": "Porphyrio porphyrio",
+          "aliases": [],
+          "alsoCalled": [
+            "Australasian Swamphen"
+          ],
+          "alsoScientific": [
+            "Porphyrio melanotus"
+          ],
+          "tags": [
+            "rail",
+            "swamphen",
+            "waterbird"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "water",
+          "strata": [
+            "ground"
+          ],
+          "summary": "Big blue-purple rail of reed beds and swampy lawns.",
+          "habitat": "Reed beds and grassy swamp edges. It walks on the bank, climbs into reeds, and flicks a white undertail. Common at Westgate Park, Edithvale–Seaford, and well-vegetated lakes. BirdLife Australia uses Purple Swamphen; many field apps still say Australasian Swamphen.",
+          "sexes": "Males and females look alike. Males are larger.",
+          "stratumNote": "On the ground at the water’s edge, and clambering in reeds.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/purple-swamphen.jpg",
+              "alt": "Purple Swamphen. Males and females look alike.",
+              "width": 1000,
+              "height": 746,
+              "author": "Toby Hudson",
+              "license": "CC BY-SA 3.0 au",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/au/deed.en",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Purple_Swamp_Hen_Wollongong.jpg",
+              "file": "File:Purple Swamp Hen Wollongong.jpg"
+            }
+          ]
+        },
+        {
+          "id": "dusky-moorhen",
+          "commonName": "Dusky Moorhen",
+          "scientificName": "Gallinula tenebrosa",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "rail",
+            "waterbird"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "water",
+          "strata": [
+            "ground"
+          ],
+          "summary": "Dark rail with a red frontal shield on park lakes.",
+          "habitat": "Park lakes with vegetated edges. The Royal Botanic Gardens, Albert Park, and countless suburban ponds. It flicks a white tail as it walks the margin and swims short distances. Smaller and darker than a swamphen, and usually closer to the bank than a coot.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "On the bank and on the water, at ground level.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/dusky-moorhen.jpg",
+              "alt": "Dusky Moorhen. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "Charles J. Sharp",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dusky_moorhen_%28Gallinula_tenebrosa_tenebrosa%29_Sydney.jpg",
+              "file": "File:Dusky moorhen (Gallinula tenebrosa tenebrosa) Sydney.jpg"
+            }
+          ]
+        },
+        {
+          "id": "eurasian-coot",
+          "commonName": "Eurasian Coot",
+          "scientificName": "Fulica atra",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "rail",
+            "waterbird"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "water",
+          "strata": [
+            "ground"
+          ],
+          "summary": "Black bird with a white bill and shield, out on open water.",
+          "habitat": "Open water on larger lakes, often in flocks and farther from the reeds than moorhens. Albert Park Lake is a reliable place. They dive as well as dabble.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "On open water.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/eurasian-coot.jpg",
+              "alt": "Eurasian Coot. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "Alexis Lours",
+              "license": "CC BY 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Eurasian_Coot_2023_11_25_03.jpg",
+              "file": "File:Eurasian Coot 2023 11 25 03.jpg"
+            }
+          ]
+        },
+        {
+          "id": "silver-gull",
+          "commonName": "Silver Gull",
+          "scientificName": "Larus novaehollandiae",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [
+            "Chroicocephalus novaehollandiae"
+          ],
+          "tags": [
+            "gull",
+            "seabird"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "coast",
+          "strata": [
+            "ground",
+            "low"
+          ],
+          "summary": "The common gull of the bay, the river, and the ovals.",
+          "habitat": "Everywhere food is dropped: Port Phillip beaches, the Yarra, piers, ovals, and car parks. This is the gull around inner-city bins. BirdLife Australia still lists it as Larus; the global AviList uses Chroicocephalus.",
+          "sexes": "Adult males and females look alike, with a white head and red bill and legs. Young birds are mottled brown on the wings.",
+          "stratumNote": "On the ground, and sitting on low posts and rails.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/silver-gull.jpg",
+              "alt": "Silver Gull. Males and females look alike.",
+              "width": 1000,
+              "height": 800,
+              "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Larus_novaehollandiae_-_Austin%27s_Ferry.jpg",
+              "file": "File:Larus novaehollandiae - Austin's Ferry.jpg"
+            }
+          ]
+        },
+        {
+          "id": "pacific-gull",
+          "commonName": "Pacific Gull",
+          "scientificName": "Larus pacificus",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "gull",
+            "seabird"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "coast",
+          "strata": [
+            "ground"
+          ],
+          "summary": "The big gull of ocean and outer-bay shores.",
+          "habitat": "Rocky platforms, piers, and beaches toward the heads and the Mornington coast, rather than city bins. A much heavier bird than a Silver Gull, with a massive yellow bill tipped in red. Scarcer around the inner bay.",
+          "sexes": "Males and females look alike. Young birds are mottled brown for several years.",
+          "stratumNote": "On rocks, sand, and low breakwaters.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/pacific-gull.jpg",
+              "alt": "Pacific Gull. Males and females look alike.",
+              "width": 1000,
+              "height": 750,
+              "author": "Calistemon",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pacific_gull_%28Larus_pacificus%29_at_Quagi_Beach%2C_Western_Australia%2C_January_2024_06.jpg",
+              "file": "File:Pacific gull (Larus pacificus) at Quagi Beach, Western Australia, January 2024 06.jpg"
+            }
+          ]
+        },
+        {
+          "id": "greater-crested-tern",
+          "commonName": "Greater Crested Tern",
+          "scientificName": "Thalasseus bergii",
+          "aliases": [],
+          "alsoCalled": [
+            "Crested Tern"
+          ],
+          "alsoScientific": [],
+          "tags": [
+            "tern",
+            "seabird"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "coast",
+          "strata": [
+            "ground",
+            "low"
+          ],
+          "summary": "The regular tern of Port Phillip beaches and piers.",
+          "habitat": "St Kilda, Brighton, Sandringham, and Black Rock are easy places, on the sand and on pier rails, often near Silver Gulls. Still widely called Crested Tern. A yellow bill and a shaggy black cap separate it from the gulls beside it.",
+          "sexes": "Males and females look alike. The black cap is fuller in breeding plumage and recedes in winter.",
+          "stratumNote": "On the sand, and on low rails and rocks.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/greater-crested-tern.jpg",
+              "alt": "Greater Crested Tern. Males and females look alike.",
+              "width": 1000,
+              "height": 773,
+              "author": "Glen Fergus",
+              "license": "CC BY-SA 2.5",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Crested_Tern_courtship.jpg",
+              "file": "File:Crested Tern courtship.jpg"
+            }
+          ]
+        },
+        {
+          "id": "australian-pied-oystercatcher",
+          "commonName": "Australian Pied Oystercatcher",
+          "scientificName": "Haematopus longirostris",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "shorebird",
+            "oystercatcher"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "coast",
+          "strata": [
+            "ground"
+          ],
+          "summary": "Black-and-white shorebird with a long red bill.",
+          "habitat": "Quiet bay beaches and mudflats on a falling tide. More likely at Altona, Point Cook, and the quieter Mornington beaches than on a crowded promenade. They walk the shoreline in pairs or small groups.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "On sand and mud at the waterline.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/australian-pied-oystercatcher.jpg",
+              "alt": "Australian Pied Oystercatcher. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Haematopus_longirostris_-_Austins_Ferry.jpg",
+              "file": "File:Haematopus longirostris - Austins Ferry.jpg"
+            }
+          ]
+        },
+        {
+          "id": "little-penguin",
+          "commonName": "Little Penguin",
+          "scientificName": "Eudyptula minor",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "penguin",
+            "seabird"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "coast",
+          "strata": [
+            "ground"
+          ],
+          "summary": "The St Kilda breakwater colony, ashore at dusk.",
+          "habitat": "The St Kilda breakwater is the reliable Melbourne place. Birds come in after dusk; use the viewing area and give them room, and keep torches dim and pointed down. This is a bay specialty, not a bird of inland parks. The colony is real and local, but you will not see them on a midday street walk.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "At the waterline and on the rocks of the breakwater.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/little-penguin.jpg",
+              "alt": "Little Penguin. Males and females look alike.",
+              "width": 901,
+              "height": 1000,
+              "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Eudyptula_minor_Bruny_1.jpg",
+              "file": "File:Eudyptula minor Bruny 1.jpg"
+            }
+          ]
+        },
+        {
+          "id": "masked-lapwing",
+          "commonName": "Masked Lapwing",
+          "scientificName": "Vanellus miles",
+          "aliases": [
+            "Spur-winged Plover"
+          ],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "plover",
+            "lapwing",
+            "shorebird"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "open",
+          "strata": [
+            "ground"
+          ],
+          "summary": "Noisy yellow-wattled bird of ovals and short grass.",
+          "habitat": "Sports grounds, nature strips, wetland edges, and paddocks. Melbourne birds are the southern form, with hanging yellow wattles and a black band across the shoulder. They nest on open ground and will swoop if you walk too close to chicks.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "On short grass and bare ground.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/masked-lapwing.jpg",
+              "alt": "Masked Lapwing. Males and females look alike.",
+              "width": 1000,
+              "height": 742,
+              "author": "Toby Hudson",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Masked_Lapwing_with_worm.jpg",
+              "file": "File:Masked Lapwing with worm.jpg"
+            }
+          ]
+        },
+        {
+          "id": "nankeen-kestrel",
+          "commonName": "Nankeen Kestrel",
+          "scientificName": "Falco cenchroides",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "falcon",
+            "raptor"
+          ],
+          "dimorphic": true,
+          "origin": "native",
+          "status": "Resident",
+          "group": "open",
+          "strata": [
+            "low",
+            "mid"
+          ],
+          "summary": "The small falcon that hovers over ovals and roadsides.",
+          "habitat": "The raptor you are most likely to see in the open suburbs. It hangs in the wind over sports fields, grasslands, and road verges, then drops, and it sits on wires, light poles, and dead trees. Widespread, including the western edge.",
+          "sexes": "Males have a grey head and a grey tail. Females are rufous on the head and tail, with dark bars across the tail. Both show the warm rufous back that gives the bird its name.",
+          "stratumNote": "Hunts low over the grass, and perches on wires, poles, and mid-level snags.",
+          "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/nankeen-kestrel-male.jpg",
+              "alt": "Male Nankeen Kestrel",
+              "width": 1000,
+              "height": 667,
+              "author": "Frankzed",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Australian_Kestrel.jpg",
+              "file": "File:Australian Kestrel.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/nankeen-kestrel-female.jpg",
+              "alt": "Female Nankeen Kestrel",
+              "width": 1000,
+              "height": 1000,
+              "author": "Charles J. Sharp",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nankeen_kestrel_%28Falco_cenchroides_cenchroides%29_female_Penneshaw.jpg",
+              "file": "File:Nankeen kestrel (Falco cenchroides cenchroides) female Penneshaw.jpg"
+            }
+          ]
+        },
+        {
+          "id": "black-shouldered-kite",
+          "commonName": "Black-shouldered Kite",
+          "scientificName": "Elanus axillaris",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "kite",
+            "raptor"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "open",
+          "strata": [
+            "low",
+            "mid"
+          ],
+          "summary": "Pale kite hovering over long grass on the city’s edge.",
+          "habitat": "Grassland reserves, freeway verges, and the western plains. It hovers with quick wingbeats, then drops, and sits on poles and dead trees. Numbers rise and fall with mice. Less a bird of leafy inner-eastern gardens than of open ground.",
+          "sexes": "Males and females look alike: white underneath, grey above, with a black shoulder patch and a red eye.",
+          "stratumNote": "Hovers low over grass, and perches at low to mid height on poles and bare trees.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/black-shouldered-kite.jpg",
+              "alt": "Black-shouldered Kite. Males and females look alike.",
+              "width": 1000,
+              "height": 666,
+              "author": "Frankzed from Melbourne, Australia",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Elanus_axillaris_-Royal_Botanic_Gardens%2C_Cranbourne%2C_Melbourne%2C_Victoria%2C_Australia-8.jpg",
+              "file": "File:Elanus axillaris -Royal Botanic Gardens, Cranbourne, Melbourne, Victoria, Australia-8.jpg"
+            }
+          ]
+        },
+        {
+          "id": "red-rumped-parrot",
+          "commonName": "Red-rumped Parrot",
+          "scientificName": "Psephotus haematonotus",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "parrot"
+          ],
+          "dimorphic": true,
+          "origin": "native",
+          "status": "Resident",
+          "group": "open",
+          "strata": [
+            "ground",
+            "low"
+          ],
+          "summary": "Small parrot feeding on the grass of ovals and roadsides.",
+          "habitat": "Short grass of sports fields, road reserves, and open parks, then a fence or a low branch. Widespread, and especially easy in the north and west, including grassland edges and places such as Woodlands Historic Park. They are quiet for parrots and easy to walk past.",
+          "sexes": "Males are bright green with a red rump and a yellow shoulder. Females are olive and much plainer, with a greener rump.",
+          "stratumNote": "Feeds on the ground and perches on fences and low branches.",
+          "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/red-rumped-parrot-male.jpg",
+              "alt": "Male Red-rumped Parrot",
+              "width": 1000,
+              "height": 667,
+              "author": "JJ Harrison (https://tiny.jjharrison.com.au/t/BTm96K66KIdKCbXc)",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Psephotus_haematonotus_male_-_Cornwallis_Rd.jpg",
+              "file": "File:Psephotus haematonotus male - Cornwallis Rd.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/red-rumped-parrot-female.jpg",
+              "alt": "Female Red-rumped Parrot",
+              "width": 1000,
+              "height": 667,
+              "author": "JJ Harrison (https://tiny.jjharrison.com.au/t/P7qon4oJmcmSl9N1)",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Psephotus_haematonotus_female_-_Cornwallis_Rd.jpg",
+              "file": "File:Psephotus haematonotus female - Cornwallis Rd.jpg"
+            }
+          ]
+        },
+        {
+          "id": "flame-robin",
+          "commonName": "Flame Robin",
+          "scientificName": "Petroica phoenicea",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "robin"
+          ],
+          "dimorphic": true,
+          "origin": "native",
+          "status": "Winter visitor",
+          "group": "open",
+          "strata": [
+            "ground",
+            "low"
+          ],
+          "summary": "Autumn and winter robin of open paddocks and fences.",
+          "habitat": "An autumn–winter visitor to open country on the fringe: western grasslands, coastal paddocks, and fencelines around places such as Woodlands and the edges of the peninsula. It sits on a fence or a low post and drops to the ground. Not a bird of leafy inner-suburban gardens; Scarlet Robins use the treed parks.",
+          "sexes": "Males have a flame-orange breast and throat. Females are brown above, with a pale buff bar in the wing and no bright orange.",
+          "stratumNote": "On the ground, and on fences and other low perches.",
+          "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/flame-robin-male.jpg",
+              "alt": "Male Flame Robin",
+              "width": 1000,
+              "height": 750,
+              "author": "Tim Collins",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Petroica_phoenicea_-_Levendale.jpg",
+              "file": "File:Petroica phoenicea - Levendale.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/flame-robin-female.jpg",
+              "alt": "Female Flame Robin",
+              "width": 1000,
+              "height": 667,
+              "author": "JJ Harrison",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Flame_Robin_female_0A2A8864.jpg",
+              "file": "File:Flame Robin female 0A2A8864.jpg"
+            }
+          ]
+        },
+        {
+          "id": "sulphur-crested-cockatoo",
+          "commonName": "Sulphur-crested Cockatoo",
+          "scientificName": "Cacatua galerita",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "cockatoo",
+            "parrot"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "ground",
+            "canopy"
+          ],
+          "summary": "The big white cockatoo with the yellow crest.",
+          "habitat": "Parks and leafy streets across the suburbs. Flocks feed on the ground on ovals and nature strips, then sit yelling in the canopy. Regular from the Botanic Gardens to outer suburbia.",
+          "sexes": "Males and females look alike in the field. Eye colour differs if you are very close, which this guide does not try to show.",
+          "stratumNote": "Feeds on the ground and loafs in the canopy.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/sulphur-crested-cockatoo.jpg",
+              "alt": "Sulphur-crested Cockatoo. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cacatua_galerita_Risdon.jpg",
+              "file": "File:Cacatua galerita Risdon.jpg"
+            }
+          ]
+        },
+        {
+          "id": "long-billed-corella",
+          "commonName": "Long-billed Corella",
+          "scientificName": "Cacatua tenuirostris",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "cockatoo",
+            "corella",
+            "parrot"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "ground",
+            "canopy"
+          ],
+          "summary": "White cockatoo with a long bill and a salmon wash on the face.",
+          "habitat": "Very much a Melbourne bird, especially on the northern and western lava plains, and now widespread on ovals and nature strips. Flocks feed on short grass and roost in big old eucalypts. They often mix with Little Corellas. The long upper bill and the pink wash across the face and upper chest are the usual way to separate them.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "Feeds on the ground and perches in the canopy.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/long-billed-corella.jpg",
+              "alt": "Long-billed Corella. Males and females look alike.",
+              "width": 1000,
+              "height": 700,
+              "author": "Geoff Penaluna from Australia",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cacatua_tenuirostris_-Melbourne_-many_feeding-8.jpg",
+              "file": "File:Cacatua tenuirostris -Melbourne -many feeding-8.jpg"
+            }
+          ]
+        },
+        {
+          "id": "little-corella",
+          "commonName": "Little Corella",
+          "scientificName": "Cacatua sanguinea",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "cockatoo",
+            "corella",
+            "parrot"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "ground",
+            "canopy"
+          ],
+          "summary": "Smaller white cockatoo in big, noisy flocks.",
+          "habitat": "Wandering flocks turn up across the suburbs, including bayside and the east, feeding on ovals and roosting in tall trees. The bill is shorter than a Long-billed Corella’s, and the face is plainer white with a pale blue eye-ring. The two species often sit in the same tree.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "Feeds on the ground and perches in the canopy.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/little-corella.jpg",
+              "alt": "Little Corella. Males and females look alike.",
+              "width": 769,
+              "height": 1000,
+              "author": "Charles J. Sharp",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Little_corellas_%28Cacatua_sanguinea_gymnopis%29_Blanchetown.jpg",
+              "file": "File:Little corellas (Cacatua sanguinea gymnopis) Blanchetown.jpg"
+            }
+          ]
+        },
+        {
+          "id": "galah",
+          "commonName": "Galah",
+          "scientificName": "Eolophus roseicapilla",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "cockatoo",
+            "parrot"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "ground",
+            "canopy"
+          ],
+          "summary": "Pink-and-grey cockatoo of ovals and open parks.",
+          "habitat": "Feeds on the ground on sports fields and road verges, often near corellas, and sits in the canopy in noisy groups. Common through the suburbs, especially where there is open grass and scattered trees.",
+          "sexes": "Males and females look alike at a glance. The eye is darker in males and reddish in females, which is hard to see in the field.",
+          "stratumNote": "Feeds on the ground and perches in the canopy.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/galah.jpg",
+              "alt": "Galah. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "Charles J. Sharp",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Galah_%28Eolophus_roseicapilla_albiceps%29_male_Adelaide.jpg",
+              "file": "File:Galah (Eolophus roseicapilla albiceps) male Adelaide.jpg"
+            }
+          ]
+        },
+        {
+          "id": "rainbow-lorikeet",
+          "commonName": "Rainbow Lorikeet",
+          "scientificName": "Trichoglossus moluccanus",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "lorikeet",
+            "parrot"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "mid",
+            "canopy"
+          ],
+          "summary": "The noisy, multicoloured lorikeet of flowering gums.",
+          "habitat": "Flowering eucalypts and suburban bottlebrush, from inner streets to the hills. Flocks commute overhead at dawn and dusk and feed in the outer canopy. One of the most constant parrot voices in Melbourne.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "In the outer foliage of trees and tall shrubs, from mid height up into the canopy.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/rainbow-lorikeet.jpg",
+              "alt": "Rainbow Lorikeet. Males and females look alike.",
+              "width": 746,
+              "height": 1000,
+              "author": "Charles J. Sharp",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rainbow_lorikeet_%28Trichoglossus_moluccanus_moluccanus%29_Sydney_2.jpg",
+              "file": "File:Rainbow lorikeet (Trichoglossus moluccanus moluccanus) Sydney 2.jpg"
+            }
+          ]
+        },
+        {
+          "id": "musk-lorikeet",
+          "commonName": "Musk Lorikeet",
+          "scientificName": "Glossopsitta concinna",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "lorikeet",
+            "parrot"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "canopy"
+          ],
+          "summary": "Small green lorikeet that follows eucalypt blossom.",
+          "habitat": "Mostly high in flowering gums, often with Rainbow Lorikeets, and easy to miss until a flock shrieks overhead. Numbers in a suburb rise and fall with the blossom. A red forehead and cheek, and a much smaller body than a Rainbow Lorikeet.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "Almost always in the canopy.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/musk-lorikeet.jpg",
+              "alt": "Musk Lorikeet. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "Patrick_K59",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Glossopsitta_concinna_-Kangaroo_Flat%2C_Bendigo%2C_Victoria%2C_Australia-8_%281%29.jpg",
+              "file": "File:Glossopsitta concinna -Kangaroo Flat, Bendigo, Victoria, Australia-8 (1).jpg"
+            }
+          ]
+        },
+        {
+          "id": "eastern-rosella",
+          "commonName": "Eastern Rosella",
+          "scientificName": "Platycercus eximius",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "rosella",
+            "parrot"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "ground",
+            "mid"
+          ],
+          "summary": "Bright rosella of open parks, feeding on the ground.",
+          "habitat": "Open parks, golf courses, and farmland edges across the north, west, and east. They feed on grass seeds on the ground and sit in scattered trees. More a bird of open country than the Crimson Rosella, which prefers the hills and wetter east.",
+          "sexes": "Males and females look very similar. Females are often a little duller. This guide shows one photo.",
+          "stratumNote": "Feeds on the ground and perches at mid height in open trees.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/eastern-rosella.jpg",
+              "alt": "Eastern Rosella. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Platycercus_eximius_diemenensis_female.jpg",
+              "file": "File:Platycercus eximius diemenensis female.jpg"
+            }
+          ]
+        },
+        {
+          "id": "red-wattlebird",
+          "commonName": "Red Wattlebird",
+          "scientificName": "Anthochaera carunculata",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "honeyeater",
+            "wattlebird"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "mid",
+            "canopy"
+          ],
+          "summary": "Large, noisy honeyeater with red cheek wattles.",
+          "habitat": "Flowering gums, banksias, and grevilleas across the suburbs. A big streaky grey-brown bird that chases other honeyeaters and calls harshly from a high branch. Hard to spend a day in a leafy park without hearing one.",
+          "sexes": "Males and females look alike. Males are larger.",
+          "stratumNote": "In the mid-storey and canopy of flowering trees.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/red-wattlebird.jpg",
+              "alt": "Red Wattlebird. Males and females look alike.",
+              "width": 1000,
+              "height": 751,
+              "author": "Duncan McCaskill",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anthochaera_carunculata_-Canberra%2C_Australia-8.jpg",
+              "file": "File:Anthochaera carunculata -Canberra, Australia-8.jpg"
+            }
+          ]
+        },
+        {
+          "id": "noisy-miner",
+          "commonName": "Noisy Miner",
+          "scientificName": "Manorina melanocephala",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "honeyeater",
+            "miner"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "low",
+            "mid",
+            "canopy"
+          ],
+          "summary": "Grey honeyeater that dominates open eucalypt streets.",
+          "habitat": "Eucalypt suburbs and parkland with lawns and few shrubs. Colonies chase smaller birds out of miner-dominated streets. Grey body, black head, and a yellow patch behind the bill. One of the most constant garden birds in Melbourne, for better or worse.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "Uses low shrubs, mid branches, and the canopy in the same trees.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/noisy-miner.jpg",
+              "alt": "Noisy Miner. Males and females look alike.",
+              "width": 1000,
+              "height": 753,
+              "author": "Krigore",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Miodo%C5%BCer_maskowy_%E2%80%93_Noisy_miner_%E2%80%93_Manorina_melanocephala.jpg",
+              "file": "File:Miodożer maskowy – Noisy miner – Manorina melanocephala.jpg"
+            }
+          ]
+        },
+        {
+          "id": "new-holland-honeyeater",
+          "commonName": "New Holland Honeyeater",
+          "scientificName": "Phylidonyris novaehollandiae",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "honeyeater"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "low",
+            "mid"
+          ],
+          "summary": "Black-and-white honeyeater of banksias and garden grevilleas.",
+          "habitat": "Coastal heath, bayside gardens, and any planting of banksia, grevillea, or correa. Fusses at about shrub to small-tree height and rarely feeds on the lawn. Common around Ricketts Point, Braeside, and well-planted suburbs.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "In shrubs and the lower canopy of flowering small trees.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/new-holland-honeyeater.jpg",
+              "alt": "New Holland Honeyeater. Males and females look alike.",
+              "width": 1000,
+              "height": 1000,
+              "author": "Charles J. Sharp",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:New_Holland_honeyeater_%28Phylidonyris_novaehollandiae_canescens%29_South_Bruny.jpg",
+              "file": "File:New Holland honeyeater (Phylidonyris novaehollandiae canescens) South Bruny.jpg"
+            }
+          ]
+        },
+        {
+          "id": "eastern-spinebill",
+          "commonName": "Eastern Spinebill",
+          "scientificName": "Acanthorhynchus tenuirostris",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "honeyeater",
+            "spinebill"
+          ],
+          "dimorphic": true,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "low",
+            "mid"
+          ],
+          "summary": "Small, long-billed honeyeater of tubular garden flowers.",
+          "habitat": "Gardens and parks with correa, fuchsia, and other tubular flowers, and the shrub layer of the eastern hills. It hovers briefly at flowers the way a hummingbird would, then sits in a shrub. More often low and mid than high in a gum.",
+          "sexes": "Males have a glossy black crown and a stronger rufous throat. Females have an olive-grey crown and are duller. The white-and-rufous pattern is otherwise the same, so the crown is the useful clue.",
+          "stratumNote": "In shrubs and small trees.",
+          "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/eastern-spinebill-male.jpg",
+              "alt": "Male Eastern Spinebill",
+              "width": 1000,
+              "height": 667,
+              "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Acanthorhynchus_tenuirostris_-_Mogo_Campground.jpg",
+              "file": "File:Acanthorhynchus tenuirostris - Mogo Campground.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/eastern-spinebill-female.jpg",
+              "alt": "Female Eastern Spinebill",
+              "width": 1000,
+              "height": 854,
+              "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Acanthorhynchus_tenuirostris_female.jpg",
+              "file": "File:Acanthorhynchus tenuirostris female.jpg"
+            }
+          ]
+        },
+        {
+          "id": "superb-fairy-wren",
+          "commonName": "Superb Fairy-wren",
+          "scientificName": "Malurus cyaneus",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "fairy-wren",
+            "wren"
+          ],
+          "dimorphic": true,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "ground",
+            "low"
+          ],
+          "summary": "Blue males and brown females in low shrubs beside paths.",
+          "habitat": "Low shrubs and weedy edges of paths in parks, creek lines, and coastal scrub. They hop on the ground and dive back into cover. Yarra Bend, Braeside, bayside heath, and any park that has kept its shrub layer. In miner-dominated streets with only lawn and gums, they are usually missing.",
+          "sexes": "Breeding males are bright blue and black. Females, young birds, and males outside the breeding season are brown, with a rufous bill and a blue tail. A brown bird in the group is not always a female.",
+          "stratumNote": "On the ground under cover, and in low shrubs. Not a canopy bird.",
+          "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/superb-fairy-wren-male.jpg",
+              "alt": "Male Superb Fairy-wren",
+              "width": 1000,
+              "height": 667,
+              "author": "Patrick_K59",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Malurus_cyaneus_-Victoria%2C_Australia_-male-8_%283%29.jpg",
+              "file": "File:Malurus cyaneus -Victoria, Australia -male-8 (3).jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/superb-fairy-wren-female.jpg",
+              "alt": "Female Superb Fairy-wren",
+              "width": 1000,
+              "height": 667,
+              "author": "patrickkavanagh",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Superb_Fairy-wren_%28Malurus_cyaneus%29_female_%2826398405066%29.jpg",
+              "file": "File:Superb Fairy-wren (Malurus cyaneus) female (26398405066).jpg"
+            }
+          ]
+        },
+        {
+          "id": "silvereye",
+          "commonName": "Silvereye",
+          "scientificName": "Zosterops lateralis",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "silvereye"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "low",
+            "mid"
+          ],
+          "summary": "Small olive bird with a white eye-ring, often in a flock.",
+          "habitat": "Shrubs and garden trees along creeks and in parks. Flocks work through foliage rather than lawns. Numbers grow in winter when birds from Tasmania join the local ones. The white ring around the eye is the straightforward mark.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "In shrubs and the mid-storey.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/silvereye.jpg",
+              "alt": "Silvereye. Males and females look alike.",
+              "width": 999,
+              "height": 1000,
+              "author": "JJ Harrison",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Silvereye.jpg",
+              "file": "File:Silvereye.jpg"
+            }
+          ]
+        },
+        {
+          "id": "red-browed-finch",
+          "commonName": "Red-browed Finch",
+          "scientificName": "Neochmia temporalis",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "finch"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "ground",
+            "low"
+          ],
+          "summary": "Olive finch with a red brow and red rump, on grass seed.",
+          "habitat": "Creek paths and weedy edges where grass has been allowed to seed: the Merri and Darebin trails, Yarra Bend, and shrubby parks. Small flocks feed on the ground, then sit up in a shrub. The red brow and rump are bright once you are close.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "On the ground for seed, and in low shrubs between feeds.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/red-browed-finch.jpg",
+              "alt": "Red-browed Finch. Males and females look alike.",
+              "width": 1000,
+              "height": 1000,
+              "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Red-browed_Finch_-_Penrith.jpg",
+              "file": "File:Red-browed Finch - Penrith.jpg"
+            }
+          ]
+        },
+        {
+          "id": "welcome-swallow",
+          "commonName": "Welcome Swallow",
+          "scientificName": "Hirundo neoxena",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "swallow"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "low"
+          ],
+          "summary": "Hawks just above water and grass, and lines up on wires.",
+          "habitat": "Lakes, creeks, and sports fields. They hunt low, often skimming the surface, and rest on wires, bridge rails, and bare twigs. Nests of mud are stuck under bridges and building eaves. Present all year, more obvious in the warmer months.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "In open air close to the ground or water, and perched on wires and low rails. Not in the canopy.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/welcome-swallow.jpg",
+              "alt": "Welcome Swallow. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "Summerdrought",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hirundo_neoxena_8923.jpg",
+              "file": "File:Hirundo neoxena 8923.jpg"
+            }
+          ]
+        },
+        {
+          "id": "australian-magpie",
+          "commonName": "Australian Magpie",
+          "scientificName": "Gymnorhina tibicen",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [
+            "Cracticus tibicen"
+          ],
+          "tags": [
+            "magpie"
+          ],
+          "dimorphic": true,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "ground",
+            "mid"
+          ],
+          "summary": "The carolling black-and-white bird of every oval.",
+          "habitat": "Ovals, nature strips, and parkland across greater Melbourne. They forage on the ground and sing from a mid-level branch. Local birds are the white-backed form. In spring, nesting adults may swoop people who pass the tree; a wide hat is the usual local advice.",
+          "sexes": "Around Melbourne, an adult male shows a clean white back. Females and young birds show a grey, scalloped back. Black-backed magpies from further north are not the usual suburban bird here.",
+          "stratumNote": "Feeds on the ground and sings from mid-level perches.",
+          "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/australian-magpie-male.jpg",
+              "alt": "Male Australian Magpie, white-backed form",
+              "width": 900,
+              "height": 1000,
+              "author": "jjron",
+              "license": "GFDL 1.2",
+              "licenseUrl": "http://www.gnu.org/licenses/old-licenses/fdl-1.2.html",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Australian_Magpie_1,_jjron,_5.07.10.jpg",
+              "file": "File:Australian Magpie 1, jjron, 5.07.10.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/australian-magpie-female.jpg",
+              "alt": "Female Australian Magpie",
+              "width": 1000,
+              "height": 1000,
+              "author": "Charles J. Sharp",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Australian_magpie_%28Gymnorhina_tibicen_telonocua%29_female_Adelaide.jpg",
+              "file": "File:Australian magpie (Gymnorhina tibicen telonocua) female Adelaide.jpg"
+            }
+          ]
+        },
+        {
+          "id": "magpie-lark",
+          "commonName": "Magpie-lark",
+          "scientificName": "Grallina cyanoleuca",
+          "aliases": [
+            "Peewee"
+          ],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "magpie-lark"
+          ],
+          "dimorphic": true,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "ground",
+            "low"
+          ],
+          "summary": "Black-and-white bird that walks on lawns and calls peewee.",
+          "habitat": "Lawns, paths, and the edges of ponds, including tiny suburban parks. Much smaller than a magpie, with a different pattern, and often in pairs. Mud nests sit on a horizontal branch over a street or a lake.",
+          "sexes": "The male has a black throat and a thin white eyebrow. The female has a white throat and white on the forehead, without that eyebrow.",
+          "stratumNote": "Walks on the ground and perches on fences, wires, and low branches.",
+          "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/magpie-lark-male.jpg",
+              "alt": "Male Magpie-lark",
+              "width": 1000,
+              "height": 667,
+              "author": "Charles J. Sharp",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Magpie-lark_%28Grallina_cyanoleuca_cyanoleuca%29_male_Adelaide.jpg",
+              "file": "File:Magpie-lark (Grallina cyanoleuca cyanoleuca) male Adelaide.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/magpie-lark-female.jpg",
+              "alt": "Female Magpie-lark",
+              "width": 1000,
+              "height": 667,
+              "author": "Wayne Butterworth",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Grallina_cyanoleuca_-Braeside_Park%2C_Melbourne%2C_Victoria%2C_Australia_-female-8.jpg",
+              "file": "File:Grallina cyanoleuca -Braeside Park, Melbourne, Victoria, Australia -female-8.jpg"
+            }
+          ]
+        },
+        {
+          "id": "willie-wagtail",
+          "commonName": "Willie Wagtail",
+          "scientificName": "Rhipidura leucophrys",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "fantail",
+            "wagtail"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "ground",
+            "low"
+          ],
+          "summary": "Black-and-white fantail that runs on open ground.",
+          "habitat": "Ovals, paths, farm edges, and the margins of wetlands, anywhere there is open ground and a perch nearby. It runs, fans its tail, and flits up to a fence or a low branch. A different bird from the Grey Fantail, which stays in foliage.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "On the ground, and on fences and low perches.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/willie-wagtail.jpg",
+              "alt": "Willie Wagtail. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rhipidura_leucophrys_-_Glen_Davis.jpg",
+              "file": "File:Rhipidura leucophrys - Glen Davis.jpg"
+            }
+          ]
+        },
+        {
+          "id": "grey-butcherbird",
+          "commonName": "Grey Butcherbird",
+          "scientificName": "Cracticus torquatus",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "butcherbird"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "mid"
+          ],
+          "summary": "Mid-sized grey, black, and white bird with a piping song.",
+          "habitat": "Suburban parks and gardens with trees. Sits upright at about mid height, then drops on insects and small prey. Smaller than a magpie, with a grey back and a black head. The rolling song is often the first clue in a quiet park.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "Typically on a mid-level perch, not feeding on open lawn the way a magpie does.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/grey-butcherbird.jpg",
+              "alt": "Grey Butcherbird. Males and females look alike.",
+              "width": 766,
+              "height": 1000,
+              "author": "Christopher Watson (http://www.comebirdwatching.blogspot.com/)",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cracticus_torquatus_singing_-_Christopher_Watson.jpg",
+              "file": "File:Cracticus torquatus singing - Christopher Watson.jpg"
+            }
+          ]
+        },
+        {
+          "id": "little-raven",
+          "commonName": "Little Raven",
+          "scientificName": "Corvus mellori",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "raven",
+            "crow"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "ground",
+            "mid"
+          ],
+          "summary": "The usual raven of Melbourne ovals, roadsides, and beaches.",
+          "habitat": "Sports fields, road verges, beaches, and farmland edges, often in groups, walking on the ground or sitting on light poles. Australian Ravens also occur, mostly toward rural edges. This guide does not try to separate the two black ravens by plumage.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "Forages on the ground and perches on poles and mid-level trees.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/little-raven.jpg",
+              "alt": "Little Raven. Males and females look alike.",
+              "width": 1000,
+              "height": 925,
+              "author": "Toby Hudson",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Corvus_mellori.jpg",
+              "file": "File:Corvus mellori.jpg"
+            }
+          ]
+        },
+        {
+          "id": "laughing-kookaburra",
+          "commonName": "Laughing Kookaburra",
+          "scientificName": "Dacelo novaeguineae",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "kookaburra",
+            "kingfisher"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "mid"
+          ],
+          "summary": "The big kingfisher that laughs from a prominent branch.",
+          "habitat": "Parks and leafy gardens with a clear view of the ground. Family groups sit on a mid-level branch or a wire, then drop for prey, and call at dawn and dusk. Yarra Bend, the Botanic Gardens, and older suburbs are full of them.",
+          "sexes": "Males and females look alike in ordinary viewing.",
+          "stratumNote": "Watches from mid-level perches and comes to the ground to feed.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/laughing-kookaburra.jpg",
+              "alt": "Laughing Kookaburra. Males and females look alike.",
+              "width": 1000,
+              "height": 750,
+              "author": "Benjamint444",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Laughing_kookaburra444.jpg",
+              "file": "File:Laughing kookaburra444.jpg"
+            }
+          ]
+        },
+        {
+          "id": "tawny-frogmouth",
+          "commonName": "Tawny Frogmouth",
+          "scientificName": "Podargus strigoides",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "frogmouth",
+            "night"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "mid"
+          ],
+          "summary": "By day, a bark-coloured shape on a sloping branch.",
+          "habitat": "Parks and gardens with mature trees. Fitzroy Gardens and many suburban parks have regular day roosts, often at about mid height on a branch that matches the bird’s colour. They are active at dusk. If you find a roost, watch from a distance so the bird can keep resting.",
+          "sexes": "Males and females look much alike at a roost. Females can be a little browner, and that is not reliable at a glance, so this guide uses one photo.",
+          "stratumNote": "Day roost is usually a mid-level branch, sometimes lower, rarely in the high canopy.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/tawny-frogmouth.jpg",
+              "alt": "Tawny Frogmouth. Males and females look alike.",
+              "width": 1000,
+              "height": 750,
+              "author": "Benjamint444",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tawny_frogmouth_wholebody444.jpg",
+              "file": "File:Tawny frogmouth wholebody444.jpg"
+            }
+          ]
+        },
+        {
+          "id": "black-faced-cuckoo-shrike",
+          "commonName": "Black-faced Cuckoo-shrike",
+          "scientificName": "Coracina novaehollandiae",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "cuckoo-shrike"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "mid",
+            "canopy"
+          ],
+          "summary": "Grey bird that shuffles its wings after it lands.",
+          "habitat": "Parks, golf courses, and woodland edges. Flight between trees is undulating. After landing it often shuffles its wings. It feeds along outer branches rather than on the lawn. Present all year, with some local movement.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "Outer branches at mid height and in the canopy.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/black-faced-cuckoo-shrike.jpg",
+              "alt": "Black-faced Cuckoo-shrike. Males and females look alike.",
+              "width": 660,
+              "height": 1000,
+              "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Coracina_novaehollandiae.jpg",
+              "file": "File:Coracina novaehollandiae.jpg"
+            }
+          ]
+        },
+        {
+          "id": "crested-pigeon",
+          "commonName": "Crested Pigeon",
+          "scientificName": "Ocyphaps lophotes",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "pigeon",
+            "dove"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "ground"
+          ],
+          "summary": "Native pigeon with a thin crest and whistling wings.",
+          "habitat": "Ovals, service stations, and open parks. Now common through suburbs where it was scarce a few decades ago. The crest and the metallic wing patch show well when it walks on the ground. Wings whistle when it takes off.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "On the ground in open places.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/crested-pigeon.jpg",
+              "alt": "Crested Pigeon. Males and females look alike.",
+              "width": 1000,
+              "height": 800,
+              "author": "Lip Kee Yap",
+              "license": "CC BY-SA 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Crested_Pigeon_%28Ocyphaps_lophotes%29_mating_display.jpg",
+              "file": "File:Crested Pigeon (Ocyphaps lophotes) mating display.jpg"
+            }
+          ]
+        },
+        {
+          "id": "spotted-dove",
+          "commonName": "Spotted Dove",
+          "scientificName": "Spilopelia chinensis",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "pigeon",
+            "dove"
+          ],
+          "dimorphic": false,
+          "origin": "introduced",
+          "status": "Introduced",
+          "group": "park",
+          "strata": [
+            "ground",
+            "low"
+          ],
+          "summary": "Garden dove with a spotted black neck patch.",
+          "habitat": "An introduced dove of garden paths, nature strips, and overhead wires. Walks on the ground under shrubs and sits on low wires and roofs. The white-spotted black patch on the side of the neck is the easy mark. Different from the native Crested Pigeon, which has a crest and no neck spots.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "On the ground, and on wires, roofs, and low branches.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/spotted-dove.jpg",
+              "alt": "Spotted Dove. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "Bernard DUPONT from FRANCE",
+              "license": "CC BY-SA 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Spotted_Dove_%28Spilopelia_chinensis%29_%2853973360380%29.jpg",
+              "file": "File:Spotted Dove (Spilopelia chinensis) (53973360380).jpg"
+            }
+          ]
+        },
+        {
+          "id": "common-blackbird",
+          "commonName": "Common Blackbird",
+          "scientificName": "Turdus merula",
+          "aliases": [
+            "Eurasian Blackbird"
+          ],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "blackbird",
+            "thrush"
+          ],
+          "dimorphic": true,
+          "origin": "introduced",
+          "status": "Introduced",
+          "group": "park",
+          "strata": [
+            "ground",
+            "low"
+          ],
+          "summary": "Introduced thrush of lawns, leaf litter, and garden song posts.",
+          "habitat": "Lawns and garden beds across the suburbs. Males sing from a low roof, a tv antenna, or the top of a shrub in spring. They turn over leaf litter and run across grass. Not related to Australian magpies or other black native birds.",
+          "sexes": "Males are black with a yellow bill and a yellow eye-ring. Females are dark brown, with a duller bill and a faintly spotted throat.",
+          "stratumNote": "Feeds on the ground and sings from low perches.",
+          "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/common-blackbird-male.jpg",
+              "alt": "Male Common Blackbird",
+              "width": 1000,
+              "height": 800,
+              "author": "Lip Kee from Singapore, Republic of Singapore",
+              "license": "CC BY-SA 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Common_blackbird_-_male_-_Flickr_-_Lip_Kee.jpg",
+              "file": "File:Common blackbird - male - Flickr - Lip Kee.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/common-blackbird-female.jpg",
+              "alt": "Female Common Blackbird",
+              "width": 1000,
+              "height": 1000,
+              "author": "Charles J. Sharp",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Common_Blackbird_%28Turdus_merula_mauritanicus%29_female.jpg",
+              "file": "File:Common Blackbird (Turdus merula mauritanicus) female.jpg"
+            }
+          ]
+        },
+        {
+          "id": "common-starling",
+          "commonName": "Common Starling",
+          "scientificName": "Sturnus vulgaris",
+          "aliases": [
+            "European Starling"
+          ],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "starling"
+          ],
+          "dimorphic": false,
+          "origin": "introduced",
+          "status": "Introduced",
+          "group": "park",
+          "strata": [
+            "ground",
+            "mid"
+          ],
+          "summary": "Introduced flocking bird of ovals and short grass.",
+          "habitat": "Sports fields, paddocks, and shopping-centre roofs. Flocks walk on the grass and, on the western edge, form large evening gatherings. The plumage looks black at a distance and spotted close up. An introduced species.",
+          "sexes": "Males and females look alike for the purposes of this guide. The base of the bill differs between the sexes in the breeding season, which is easier to miss than to use.",
+          "stratumNote": "Feeds on the ground and perches on roofs, wires, and mid-level trees.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/common-starling.jpg",
+              "alt": "Common Starling. Males and females look alike.",
+              "width": 1000,
+              "height": 681,
+              "author": "Arnstein Rønning",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sturnus_vulgaris_no.JPG",
+              "file": "File:Sturnus vulgaris no.JPG"
+            }
+          ]
+        },
+        {
+          "id": "common-myna",
+          "commonName": "Common Myna",
+          "scientificName": "Acridotheres tristis",
+          "aliases": [
+            "Indian Myna"
+          ],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "myna"
+          ],
+          "dimorphic": false,
+          "origin": "introduced",
+          "status": "Introduced",
+          "group": "park",
+          "strata": [
+            "ground",
+            "mid"
+          ],
+          "summary": "Brown introduced bird of streets, stations, and car parks.",
+          "habitat": "Walks on footpaths and in car parks, and nests in roofs and tree holes. Chocolate brown with a yellow bill, yellow legs, and a white patch in the wing that shows when it flies. An introduced species, now one of the most familiar birds in inner Melbourne.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "On the ground, and on roofs, signs, and mid-level perches.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/common-myna.jpg",
+              "alt": "Common Myna. Males and females look alike.",
+              "width": 1000,
+              "height": 780,
+              "author": "Richard Taylor from Australia",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Acridotheres_tristis_-Sydney%2C_Australia-8.jpg",
+              "file": "File:Acridotheres tristis -Sydney, Australia-8.jpg"
+            }
+          ]
+        },
+        {
+          "id": "house-sparrow",
+          "commonName": "House Sparrow",
+          "scientificName": "Passer domesticus",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "sparrow"
+          ],
+          "dimorphic": true,
+          "origin": "introduced",
+          "status": "Introduced",
+          "group": "park",
+          "strata": [
+            "ground",
+            "low"
+          ],
+          "summary": "Introduced sparrow of cafes, platforms, and hedges.",
+          "habitat": "Outdoor tables, rail platforms, and dense garden hedges, mostly close to buildings. Less a bird of bushland parks than of people. Flocks hop on the ground for crumbs and dive into low shrubs.",
+          "sexes": "Males have a grey crown, a chestnut nape, and a black bib. Females are plain brown with a pale stripe behind the eye and no bib.",
+          "stratumNote": "On the ground, and in low hedges and eaves.",
+          "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/house-sparrow-male.jpg",
+              "alt": "Male House Sparrow",
+              "width": 1000,
+              "height": 750,
+              "author": "Paul",
+              "license": "CC BY-SA 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Passer_domesticus_-Istanbul-8b.jpg",
+              "file": "File:Passer domesticus -Istanbul-8b.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/house-sparrow-female.jpg",
+              "alt": "Female House Sparrow",
+              "width": 1000,
+              "height": 667,
+              "author": "Charles J. Sharp",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:House_sparrow_%28Passer_domesticus%29_female_Heligan.jpg",
+              "file": "File:House sparrow (Passer domesticus) female Heligan.jpg"
+            }
+          ]
+        },
+        {
+          "id": "yellow-rumped-thornbill",
+          "commonName": "Yellow-rumped Thornbill",
+          "scientificName": "Acanthiza chrysorrhoa",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "thornbill"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "ground",
+            "low"
+          ],
+          "summary": "The thornbill that feeds on open park grass.",
+          "habitat": "Short grass in parks, golf courses, and roadsides. Small flocks hop on the ground, then fly to a low bush and show a bright yellow rump. Unlike the Brown Thornbill, they are not birds of dense gully shrubs.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "On the ground, and in low bushes between feeds.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/yellow-rumped-thornbill.jpg",
+              "alt": "Yellow-rumped Thornbill. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "sunphlo from South Australia",
+              "license": "CC BY-SA 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Acanthiza_chrysorrhoa_-_Yellow-rumped_Thornbill.jpg",
+              "file": "File:Acanthiza chrysorrhoa - Yellow-rumped Thornbill.jpg"
+            }
+          ]
+        },
+        {
+          "id": "european-goldfinch",
+          "commonName": "European Goldfinch",
+          "scientificName": "Carduelis carduelis",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "finch",
+            "goldfinch"
+          ],
+          "dimorphic": false,
+          "origin": "introduced",
+          "status": "Introduced",
+          "group": "open",
+          "strata": [
+            "ground",
+            "low"
+          ],
+          "summary": "Introduced finch of thistles and weedy verges.",
+          "habitat": "Weedy road verges, thistle heads, and the edges of sports fields. Small flocks feed on seed heads low to the ground. Common in Melbourne, and easiest where the mower has left some weeds. The red face and gold wing bar show well once the bird sits up.",
+          "sexes": "Males and females look alike at field distance. Males have a slightly larger red mask, which this guide does not try to separate.",
+          "stratumNote": "On low seed heads and the ground beneath them.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/european-goldfinch.jpg",
+              "alt": "European Goldfinch. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "Charles J. Sharp",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:European_goldfinch_%28Carduelis_carduelis_niediecki%29_Cyprus.jpg",
+              "file": "File:European goldfinch (Carduelis carduelis niediecki) Cyprus.jpg"
+            }
+          ]
+        },
+        {
+          "id": "little-wattlebird",
+          "commonName": "Little Wattlebird",
+          "scientificName": "Anthochaera chrysoptera",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "honeyeater",
+            "wattlebird"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "coast",
+          "strata": [
+            "low",
+            "mid"
+          ],
+          "summary": "Plain brown wattlebird of coastal tea-tree and banksia.",
+          "habitat": "Bayside tea-tree and banksia scrub, and coastal gardens. Common around Sandringham, Ricketts Point, and the Mornington coast. No red cheek wattle, which separates it from the Red Wattlebird of more widespread suburbs. Noisy, and often low in the heath.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "In coastal shrubs and small trees, low to mid height.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/little-wattlebird.jpg",
+              "alt": "Little Wattlebird. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anthochaera_chrysoptera_4.jpg",
+              "file": "File:Anthochaera chrysoptera 4.jpg"
+            }
+          ]
+        },
+        {
+          "id": "gang-gang-cockatoo",
+          "commonName": "Gang-gang Cockatoo",
+          "scientificName": "Callocephalon fimbriatum",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "cockatoo",
+            "parrot"
+          ],
+          "dimorphic": true,
+          "origin": "native",
+          "status": "Resident in the hills",
+          "group": "woodland",
+          "strata": [
+            "canopy"
+          ],
+          "summary": "Small, quiet cockatoo of the Dandenongs, with a wispy crest.",
+          "habitat": "Fern gullies and tall forest of the Dandenongs through the year. In autumn and winter, small groups often come down into oak, hawthorn, and other street trees in the eastern suburbs to eat berries and cones. Uncommon on the western plains and in the inner city.",
+          "sexes": "Males have a red head and crest. Females are grey, finely barred, with a small grey crest.",
+          "stratumNote": "Feeds in the canopy of eucalypts and, in winter, of exotic street trees.",
+          "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/gang-gang-cockatoo-male.jpg",
+              "alt": "Male Gang-gang Cockatoo",
+              "width": 1000,
+              "height": 750,
+              "author": "Peter Shanks",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Callocephalon_fimbriatum_%28male%29_-Blue_Mountains-8.jpg",
+              "file": "File:Callocephalon fimbriatum (male) -Blue Mountains-8.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/gang-gang-cockatoo-female.jpg",
+              "alt": "Female Gang-gang Cockatoo",
+              "width": 1000,
+              "height": 750,
+              "author": "Peter Shanks",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Callocephalon_fimbriatum_%28female%29_-Blue_Mountains-8.jpg",
+              "file": "File:Callocephalon fimbriatum (female) -Blue Mountains-8.jpg"
+            }
+          ]
+        },
+        {
+          "id": "yellow-tailed-black-cockatoo",
+          "commonName": "Yellow-tailed Black-Cockatoo",
+          "scientificName": "Zanda funerea",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "cockatoo",
+            "parrot"
+          ],
+          "dimorphic": true,
+          "origin": "native",
+          "status": "Regular",
+          "group": "woodland",
+          "strata": [
+            "mid",
+            "canopy"
+          ],
+          "summary": "Huge dark cockatoo, often heard before it is seen.",
+          "habitat": "Tall forest in the east, and a frequent visitor over suburbs wherever there are pines, hakeas, or banksias. Flocks fly with slow wingbeats and a far-carrying wailing call. They tear into cones and can sit in a pine for a long time.",
+          "sexes": "Adult females have a larger yellow cheek patch and a light-coloured bill. Adult males have a dark bill and a smaller cheek patch. Young birds look more like females, so a pale bill does not always mean a female.",
+          "stratumNote": "In the canopy, and in the crowns of pines and banksias that may be only mid height.",
+          "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/yellow-tailed-black-cockatoo-male.jpg",
+              "alt": "Male Yellow-tailed Black-Cockatoo",
+              "width": 750,
+              "height": 1000,
+              "author": "David Cook Wildlife Photography",
+              "license": "CC BY-SA 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Calyptorhynchus_funereus_%28male%29_-Wamboin-8.jpg",
+              "file": "File:Calyptorhynchus funereus (male) -Wamboin-8.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/yellow-tailed-black-cockatoo-female.jpg",
+              "alt": "Female Yellow-tailed Black-Cockatoo",
+              "width": 1000,
+              "height": 564,
+              "author": "Tim from Ithaca",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Calyptorhynchus_funereus_-Australia_-female-8.jpg",
+              "file": "File:Calyptorhynchus funereus -Australia -female-8.jpg"
+            }
+          ]
+        },
+        {
+          "id": "crimson-rosella",
+          "commonName": "Crimson Rosella",
+          "scientificName": "Platycercus elegans",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "rosella",
+            "parrot"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "woodland",
+          "strata": [
+            "mid",
+            "canopy"
+          ],
+          "summary": "Red rosella of the eastern suburbs and the hills.",
+          "habitat": "Wet forest and treed parks of the east and the Dandenongs, and leafy eastern streets. Less a bird of the open west than the Eastern Rosella. Around Melbourne the local birds are the deep red form. They feed in foliage and sometimes come to the ground, but you usually see them in trees.",
+          "sexes": "Males and females look alike in the field. Young birds are greener.",
+          "stratumNote": "In the mid-storey and canopy.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/crimson-rosella.jpg",
+              "alt": "Crimson Rosella. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Platycercus_elegans_Wilsons_Prom.jpg",
+              "file": "File:Platycercus elegans Wilsons Prom.jpg"
+            }
+          ]
+        },
+        {
+          "id": "australian-king-parrot",
+          "commonName": "Australian King-Parrot",
+          "scientificName": "Alisterus scapularis",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "parrot"
+          ],
+          "dimorphic": true,
+          "origin": "native",
+          "status": "Resident in the hills",
+          "group": "woodland",
+          "strata": [
+            "mid",
+            "canopy"
+          ],
+          "summary": "Red-and-green parrot of the Dandenongs and outer-east gardens.",
+          "habitat": "Forested gullies of the Dandenongs year-round. In winter, pairs visit gardens with seed and fruit in the outer east. Not a typical bird of the inner city or the western suburbs. They sit quietly in the mid-storey and can be closer than you expect.",
+          "sexes": "Males have a red head and chest. Females have a green head and chest, with red on the belly.",
+          "stratumNote": "In the mid-storey and canopy, sometimes quite low in garden shrubs when feeding.",
+          "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/australian-king-parrot-male.jpg",
+              "alt": "Male Australian King-Parrot",
+              "width": 800,
+              "height": 600,
+              "author": "Peter Firminger",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Alisterus_scapularis_-Yango_Creek_-male-8.jpg",
+              "file": "File:Alisterus scapularis -Yango Creek -male-8.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/australian-king-parrot-female.jpg",
+              "alt": "Female Australian King-Parrot",
+              "width": 1000,
+              "height": 649,
+              "author": "Dominic Sherony",
+              "license": "CC BY-SA 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Australian_King-Parrot_%28Alisterus_scapularis%29_female_%2831233341392%29.jpg",
+              "file": "File:Australian King-Parrot (Alisterus scapularis) female (31233341392).jpg"
+            }
+          ]
+        },
+        {
+          "id": "spotted-pardalote",
+          "commonName": "Spotted Pardalote",
+          "scientificName": "Pardalotus punctatus",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "pardalote"
+          ],
+          "dimorphic": true,
+          "origin": "native",
+          "status": "Resident",
+          "group": "woodland",
+          "strata": [
+            "canopy"
+          ],
+          "summary": "Tiny jewel of a bird, usually high in eucalypt leaves.",
+          "habitat": "Eucalypt canopy in parks, creek lines, and the hills. You often hear the clear three-note call before you see the bird. Nest tunnels are dug into earth banks and cuttings, but the birds spend the day overhead. One of the smallest birds in Melbourne and worth learning the call for.",
+          "sexes": "Males have a black crown spotted with white, and a bright yellow throat. Females have a crown spotted with yellow, and a paler, creamier throat.",
+          "stratumNote": "In the canopy. The nest is in the ground, but that is not where you usually see the bird.",
+          "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/spotted-pardalote-male.jpg",
+              "alt": "Male Spotted Pardalote",
+              "width": 1000,
+              "height": 667,
+              "author": "Patrick_K59",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Spotted_Pardalote_%28Pardalotus_punctatus%29_male_%2821325231196%29.jpg",
+              "file": "File:Spotted Pardalote (Pardalotus punctatus) male (21325231196).jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/spotted-pardalote-female.jpg",
+              "alt": "Female Spotted Pardalote",
+              "width": 1000,
+              "height": 667,
+              "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pardalotus_punctatus_-_Glen_Davis.jpg",
+              "file": "File:Pardalotus punctatus - Glen Davis.jpg"
+            }
+          ]
+        },
+        {
+          "id": "white-browed-scrubwren",
+          "commonName": "White-browed Scrubwren",
+          "scientificName": "Sericornis frontalis",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "scrubwren"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "woodland",
+          "strata": [
+            "low"
+          ],
+          "summary": "Skulking brown bird of dense low cover.",
+          "habitat": "Blackberry, bracken, and gully thickets along creeks, and the shrubby edges of bushland parks and the Dandenongs. More often heard scolding than seen in the open. It stays in the undergrowth and does not feed on open lawn.",
+          "sexes": "Males and females look much alike in the bushes. Males have darker lores if you get a clear view. This guide shows one photo.",
+          "stratumNote": "In low, dense cover only.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/white-browed-scrubwren.jpg",
+              "alt": "White-browed Scrubwren. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "chujoslaw",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:White-browed_scrubwren_Sericornis_frontalis_DSC_zxc.jpg",
+              "file": "File:White-browed scrubwren Sericornis frontalis DSC zxc.jpg"
+            }
+          ]
+        },
+        {
+          "id": "brown-thornbill",
+          "commonName": "Brown Thornbill",
+          "scientificName": "Acanthiza pusilla",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "thornbill"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "woodland",
+          "strata": [
+            "low",
+            "mid"
+          ],
+          "summary": "Small brown bird of shrubs and gully mid-storey.",
+          "habitat": "The little bird working through shrubs in gullies, coastal scrub, and well-planted parks. It forages in foliage, not on open lawn, which is the useful contrast with the Yellow-rumped Thornbill. The rump is brown, not bright yellow.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "In shrubs and the lower mid-storey.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/brown-thornbill.jpg",
+              "alt": "Brown Thornbill. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Acanthiza_pusilla_-_Austin%27s_Ferry.jpg",
+              "file": "File:Acanthiza pusilla - Austin's Ferry.jpg"
+            }
+          ]
+        },
+        {
+          "id": "mistletoebird",
+          "commonName": "Mistletoebird",
+          "scientificName": "Dicaeum hirundinaceum",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "mistletoebird"
+          ],
+          "dimorphic": true,
+          "origin": "native",
+          "status": "Resident",
+          "group": "woodland",
+          "strata": [
+            "canopy"
+          ],
+          "summary": "Tiny bird that follows mistletoe in gums and she-oaks.",
+          "habitat": "Parks and creek lines with mature eucalypts or she-oaks carrying mistletoe. Often high and quick, and easier once you know the sharp, clear call. Yarra Bend, the outer parks, and remnant woodland are typical.",
+          "sexes": "Males are glossy blue-black above, with a red throat and chest and a white belly. Females are grey-brown above and pale below, with a hint of red under the tail.",
+          "stratumNote": "In the canopy, where the mistletoe is.",
+          "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/mistletoebird-male.jpg",
+              "alt": "Male Mistletoebird",
+              "width": 1000,
+              "height": 750,
+              "author": "Duncan McCaskill",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dicaeum_hirundinaceum_-near_Lake_Ginninderra%2C_Canberra%2C_Australia_-male-8.jpg",
+              "file": "File:Dicaeum hirundinaceum -near Lake Ginninderra, Canberra, Australia -male-8.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/mistletoebird-female.jpg",
+              "alt": "Female Mistletoebird",
+              "width": 831,
+              "height": 1000,
+              "author": "Christopher Watson (http://www.comebirdwatching.blogspot.com/)",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anatyeke_mistletoebird_-_Christopher_Watson.jpg",
+              "file": "File:Anatyeke mistletoebird - Christopher Watson.jpg"
+            }
+          ]
+        },
+        {
+          "id": "eastern-yellow-robin",
+          "commonName": "Eastern Yellow Robin",
+          "scientificName": "Eopsaltria australis",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "robin"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "woodland",
+          "strata": [
+            "ground",
+            "low"
+          ],
+          "summary": "Yellow-breasted robin that perches low and drops to the ground.",
+          "habitat": "Gullies, treed creeks, and shrubby parks. Yarra Bend, Banyule, and the Dandenongs are reliable. It sits sideways on a low trunk, waits, and drops to the leaf litter. Not a bird of open ovals.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "Low perches and the ground beneath them.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/eastern-yellow-robin.jpg",
+              "alt": "Eastern Yellow Robin. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Eopsaltria_australis_-_Mogo_Campground.jpg",
+              "file": "File:Eopsaltria australis - Mogo Campground.jpg"
+            }
+          ]
+        },
+        {
+          "id": "grey-fantail",
+          "commonName": "Grey Fantail",
+          "scientificName": "Rhipidura albiscapa",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "fantail"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "woodland",
+          "strata": [
+            "low",
+            "mid"
+          ],
+          "summary": "Restless grey fantail of creeks and garden edges.",
+          "habitat": "Creek lines, gullies, and shrubby gardens. It fans its tail and flits out after insects from a twig, rarely landing on open lawn the way a Willie Wagtail does. Present all year in the hills and along creeks; some move locally.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "Low and mid-level twigs, in or beside cover.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/grey-fantail.jpg",
+              "alt": "Grey Fantail. Males and females look alike.",
+              "width": 1000,
+              "height": 751,
+              "author": "Duncan McCaskill",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rhipidura_albiscapa_-Canberra%2C_Australia-8.jpg",
+              "file": "File:Rhipidura albiscapa -Canberra, Australia-8.jpg"
+            }
+          ]
+        },
+        {
+          "id": "grey-shrike-thrush",
+          "commonName": "Grey Shrike-thrush",
+          "scientificName": "Colluricincla harmonica",
+          "aliases": [
+            "Grey Shrikethrush"
+          ],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "shrike-thrush",
+            "thrush"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "woodland",
+          "strata": [
+            "low",
+            "mid"
+          ],
+          "summary": "Plain grey-brown bird with a rich, ringing song.",
+          "habitat": "Quiet parks, the hills, and timbered creeks. It forages on trunks and in the mid-storey and sometimes comes low. More often heard than noticed. The song is a series of clear, ringing notes, slower than a butcherbird’s.",
+          "sexes": "Males and females look much alike. Females can show faint streaking on the breast, which this guide does not treat as a separate plumage.",
+          "stratumNote": "On trunks and branches from low to mid height.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/grey-shrike-thrush.jpg",
+              "alt": "Grey Shrike-thrush. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "Philip Mallis from Melbourne",
+              "license": "CC BY-SA 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Grey_Shrike-thrush_%28Colluricincla_harmonica%29_at_Bolin_Bolin_Billabong.jpg",
+              "file": "File:Grey Shrike-thrush (Colluricincla harmonica) at Bolin Bolin Billabong.jpg"
+            }
+          ]
+        },
+        {
+          "id": "golden-whistler",
+          "commonName": "Golden Whistler",
+          "scientificName": "Pachycephala pectoralis",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "whistler"
+          ],
+          "dimorphic": true,
+          "origin": "native",
+          "status": "Resident in the hills",
+          "group": "woodland",
+          "strata": [
+            "mid",
+            "canopy"
+          ],
+          "summary": "Yellow-breasted whistler of wetter forest and winter gullies.",
+          "habitat": "Resident in the wetter forest of the Dandenongs and other foothill gullies. In autumn and winter some move into well-treed parks and creek lines lower down. More a bird of foliage than of open paddocks. The song is a strong, whip-like series.",
+          "sexes": "Males have a white throat, a black breast band, and golden-yellow underparts. Females are grey-brown, with a pale throat and only a light wash of yellow.",
+          "stratumNote": "Mid-storey and canopy in forest and tall shrubs.",
+          "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/golden-whistler-male.jpg",
+              "alt": "Male Golden Whistler",
+              "width": 877,
+              "height": 1000,
+              "author": "Aviceda",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Golden_Whistler_male_kobble08.jpg",
+              "file": "File:Golden Whistler male kobble08.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/golden-whistler-female.jpg",
+              "alt": "Female Golden Whistler",
+              "width": 1000,
+              "height": 667,
+              "author": "Arthur Chapman from Australia",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pachycephala_pectoralis_female.jpg",
+              "file": "File:Pachycephala pectoralis female.jpg"
+            }
+          ]
+        },
+        {
+          "id": "rufous-whistler",
+          "commonName": "Rufous Whistler",
+          "scientificName": "Pachycephala rufiventris",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "whistler"
+          ],
+          "dimorphic": true,
+          "origin": "native",
+          "status": "Summer visitor",
+          "group": "woodland",
+          "strata": [
+            "mid"
+          ],
+          "summary": "Spring and summer whistler of open woodland.",
+          "habitat": "Arrives in spring in open woodland, golf-course edges, and box-ironbark remnants, and is mostly gone by late autumn. Sits in the mid-storey and gives a loud, ringing song through the warm months. Less tied to wet gullies than the Golden Whistler.",
+          "sexes": "Males have a white throat, a black breast band, and rufous underparts. Females are brown above and streaked underneath, without the black band.",
+          "stratumNote": "Mid-level branches in open woodland.",
+          "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/rufous-whistler-male.jpg",
+              "alt": "Male Rufous Whistler",
+              "width": 1000,
+              "height": 800,
+              "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pachycephala_rufiventris_male_1_-_Glen_Davis.jpg",
+              "file": "File:Pachycephala rufiventris male 1 - Glen Davis.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/rufous-whistler-female.jpg",
+              "alt": "Female Rufous Whistler",
+              "width": 1000,
+              "height": 667,
+              "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pachycephala_rufiventris_female_-_Glen_Davis.jpg",
+              "file": "File:Pachycephala rufiventris female - Glen Davis.jpg"
+            }
+          ]
+        },
+        {
+          "id": "pied-currawong",
+          "commonName": "Pied Currawong",
+          "scientificName": "Strepera graculina",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "currawong"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident in the east",
+          "group": "woodland",
+          "strata": [
+            "mid",
+            "canopy"
+          ],
+          "summary": "Big dark bird with a yellow eye, commoner in the east and in winter.",
+          "habitat": "Resident in the Dandenongs and the treed east. Through autumn and winter it spreads more widely into suburban gardens, where it eats fruit and will take nestlings. Bigger and darker than a magpie, with a yellow eye, a heavy bill, and white in the wing and the tip of the tail.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "Mid-storey and canopy. It sometimes comes to the ground, but you usually see it in trees.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/pied-currawong.jpg",
+              "alt": "Pied Currawong. Males and females look alike.",
+              "width": 1000,
+              "height": 800,
+              "author": "Ron Knight from Seaford, East Sussex, United Kingdom",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pied_Currawong_%28Strepera_graculina%29_%288601927551%29.jpg",
+              "file": "File:Pied Currawong (Strepera graculina) (8601927551).jpg"
+            }
+          ]
+        },
+        {
+          "id": "scarlet-robin",
+          "commonName": "Scarlet Robin",
+          "scientificName": "Petroica boodang",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "robin"
+          ],
+          "dimorphic": true,
+          "origin": "native",
+          "status": "Winter visitor",
+          "group": "woodland",
+          "strata": [
+            "ground",
+            "low"
+          ],
+          "summary": "Autumn and winter robin of treed parks and woodland edges.",
+          "habitat": "From autumn into winter, in treed parks, golf courses, and woodland edges with a quiet mid-storey. A few remain in the hills through the year. It sits on a low branch or stump and pounces on the ground. Flame Robins, by contrast, prefer open paddocks.",
+          "sexes": "Males have a scarlet breast and a black throat, with a white forehead spot. Females are brown-grey, with a washed pink-red breast and a pale buff forehead spot.",
+          "stratumNote": "Low perches and the ground underneath.",
+          "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/scarlet-robin-male.jpg",
+              "alt": "Male Scarlet Robin",
+              "width": 1000,
+              "height": 667,
+              "author": "Summerdrought",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Scarlet_Robin_0401.jpg",
+              "file": "File:Scarlet Robin 0401.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/scarlet-robin-female.jpg",
+              "alt": "Female Scarlet Robin",
+              "width": 1000,
+              "height": 1000,
+              "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Scarlet_Robin_female_-_Blackheath.jpg",
+              "file": "File:Scarlet Robin female - Blackheath.jpg"
+            }
+          ]
+        },
+        {
+          "id": "white-plumed-honeyeater",
+          "commonName": "White-plumed Honeyeater",
+          "scientificName": "Ptilotula penicillata",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "honeyeater"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "woodland",
+          "strata": [
+            "mid",
+            "canopy"
+          ],
+          "summary": "Olive-grey honeyeater of river red gums.",
+          "habitat": "River red gums along the Yarra, Merri, and Darebin, and gum-lined parks. Small and active in the outer foliage, with a white plume on the side of the neck. Often the honeyeater you are hearing in the gums when the Noisy Miners are somewhere else in the park.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "Outer foliage at mid height and in the canopy.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/white-plumed-honeyeater.jpg",
+              "alt": "White-plumed Honeyeater. Males and females look alike.",
+              "width": 1000,
+              "height": 1000,
+              "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ptilotula_penicillata_-_Glen_Davis.jpg",
+              "file": "File:Ptilotula penicillata - Glen Davis.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "san-jose",
+      "label": "San José",
+      "placeTitle": "San José, Costa Rica",
+      "country": "Costa Rica",
+      "realm": "americas",
+      "summary": "A starter sample of birds you can see in Central Valley parks and gardens. Not a full checklist.",
+      "sampleNote": "This sample was not taken from a notes export. It is a short list of common Central Valley species so San José works as its own place in the guide. A list from your notes can replace it later.",
+      "aliases": [
+        "san jose",
+        "san jose costa rica",
+        "san josé",
+        "chepe"
+      ],
+      "groups": [
+        {
+          "id": "park",
+          "label": "Parks and gardens"
+        },
+        {
+          "id": "open",
+          "label": "Lawns, wires, and weedy edges"
+        },
+        {
+          "id": "shade",
+          "label": "Shade and ravines"
+        }
+      ],
+      "districts": [
+        {
+          "id": "all",
+          "label": "San José",
+          "aliases": [
+            "san jose",
+            "san jose costa rica",
+            "chepe",
+            "central valley"
+          ],
+          "lead": "",
+          "groupOrder": [
+            "park",
+            "open",
+            "shade"
+          ],
+          "groupNotes": {}
+        },
+        {
+          "id": "sabana",
+          "label": "La Sabana and the west of the city",
+          "aliases": [
+            "la sabana",
+            "sabana",
+            "rohrmoser",
+            "mata redonda",
+            "pavas"
+          ],
+          "lead": "Around La Sabana and the western neighborhoods.",
+          "groupOrder": [
+            "park",
+            "open",
+            "shade"
+          ],
+          "groupNotes": {
+            "park": "The park trees, palms, and the lake edge at La Sabana.",
+            "open": "The big lawns, paths, and parking areas.",
+            "shade": "Less of this habitat on the open lawn. Look in the planted shade and the gardens just off the park."
+          }
+        },
+        {
+          "id": "east",
+          "label": "San Pedro and Curridabat",
+          "aliases": [
+            "san pedro",
+            "curridabat",
+            "montes de oca",
+            "sabanilla",
+            "zapote",
+            "tres rios"
+          ],
+          "lead": "In San Pedro, Curridabat, and the eastern suburbs.",
+          "groupOrder": [
+            "park",
+            "shade",
+            "open"
+          ],
+          "groupNotes": {
+            "park": "Campus and garden trees, including the university grounds in San Pedro.",
+            "shade": "The wooded ravines and older gardens are the spot for shade birds.",
+            "open": "Rough grass, wires, and the edges of lots."
+          }
+        },
+        {
+          "id": "west",
+          "label": "Escazú and Santa Ana",
+          "aliases": [
+            "escazu",
+            "santa ana",
+            "ciudad colon"
+          ],
+          "lead": "In Escazú and Santa Ana, on the western edge of the valley.",
+          "groupOrder": [
+            "park",
+            "shade",
+            "open"
+          ],
+          "groupNotes": {
+            "park": "Gardens and shade trees in town.",
+            "shade": "Coffee edges and the wooded gullies hold the shade birds.",
+            "open": "Wires, lawns, and weedy edges of the towns."
+          }
+        },
+        {
+          "id": "heredia",
+          "label": "Heredia",
+          "aliases": [
+            "heredia"
+          ],
+          "lead": "In Heredia, in the same Central Valley sample as San José. Not a separate checklist.",
+          "groupOrder": [
+            "park",
+            "open",
+            "shade"
+          ],
+          "groupNotes": {
+            "park": "Town parks and garden trees.",
+            "open": "Lawns, wires, and weedy edges.",
+            "shade": "Shaded gardens and the nearby wooded edges."
+          }
+        },
+        {
+          "id": "cartago",
+          "label": "Cartago",
+          "aliases": [
+            "cartago"
+          ],
+          "lead": "In Cartago, at the eastern end of the Central Valley. The same starter sample as San José, not a separate checklist.",
+          "groupOrder": [
+            "park",
+            "open",
+            "shade"
+          ],
+          "groupNotes": {
+            "park": "Town gardens and park trees.",
+            "open": "Lawns, wires, and weedy edges.",
+            "shade": "Shaded gardens rather than the open plaza."
+          }
+        }
+      ],
+      "species": [
+        {
+          "id": "clay-colored-thrush",
+          "commonName": "Clay-colored Thrush",
+          "scientificName": "Turdus grayi",
+          "aliases": [
+            "yiguirro",
+            "clay colored robin"
+          ],
+          "alsoCalled": [
+            "Yigüirro"
+          ],
+          "alsoScientific": [],
+          "tags": [
+            "thrush"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "ground",
+            "low",
+            "mid"
+          ],
+          "summary": "The plain thrush of Central Valley lawns and gardens.",
+          "habitat": "Parks and gardens through San José, often hopping on mown grass under trees and then sitting on a low branch. Parque La Sabana, the university campus in San Pedro, and shaded suburban gardens are typical. It is the national bird, and one of the first songs at dawn.",
+          "sexes": "Males and females look alike: plain clay-brown, with a yellowish bill.",
+          "stratumNote": "Feeds on the ground and perches in shrubs and small trees.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/clay-colored-thrush.jpg",
+              "alt": "Clay-colored Thrush. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "Hobbyfotowiki",
+              "license": "CC0",
+              "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Clay-colored_thrush_%28Turdus_grayi%29.jpg",
+              "file": "File:Clay-colored thrush (Turdus grayi).jpg"
+            }
+          ]
+        },
+        {
+          "id": "great-tailed-grackle",
+          "commonName": "Great-tailed Grackle",
+          "scientificName": "Quiscalus mexicanus",
+          "aliases": [
+            "zanate"
+          ],
+          "alsoCalled": [
+            "Zanate"
+          ],
+          "alsoScientific": [],
+          "tags": [
+            "grackle"
+          ],
+          "dimorphic": true,
+          "origin": "native",
+          "status": "Resident",
+          "group": "open",
+          "strata": [
+            "ground",
+            "mid"
+          ],
+          "summary": "The large, noisy blackbird of car parks and lawns.",
+          "habitat": "Parking areas, plazas, and the open grass of parks such as La Sabana. They walk on the ground and sit in palms and street trees, often in a noisy group. Hard to miss in central San José.",
+          "sexes": "Males are glossy black, with a long keel-shaped tail and a pale eye. Females are smaller and brown, with a shorter tail and a pale eyebrow.",
+          "stratumNote": "Feeds on the ground and perches at mid height in trees and palms.",
+          "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/great-tailed-grackle-male.jpg",
+              "alt": "Male Great-tailed Grackle",
+              "width": 1000,
+              "height": 667,
+              "author": "Charles J. Sharp",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Great-tailed_grackle_%28Quiscalus_mexicanus_mexicanus%29_male_Copan.jpg",
+              "file": "File:Great-tailed grackle (Quiscalus mexicanus mexicanus) male Copan.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/great-tailed-grackle-female.jpg",
+              "alt": "Female Great-tailed Grackle",
+              "width": 1000,
+              "height": 667,
+              "author": "Charles J. Sharp",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Great-tailed_grackle_%28Quiscalus_mexicanus_mexicanus%29_female_Rio_Dulce.jpg",
+              "file": "File:Great-tailed grackle (Quiscalus mexicanus mexicanus) female Rio Dulce.jpg"
+            }
+          ]
+        },
+        {
+          "id": "rufous-collared-sparrow",
+          "commonName": "Rufous-collared Sparrow",
+          "scientificName": "Zonotrichia capensis",
+          "aliases": [
+            "comemaiz",
+            "rufous collared sparrow"
+          ],
+          "alsoCalled": [
+            "Comemaíz"
+          ],
+          "alsoScientific": [],
+          "tags": [
+            "sparrow"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "open",
+          "strata": [
+            "ground",
+            "low"
+          ],
+          "summary": "Small streaked sparrow with a rufous collar, on lawns and edges.",
+          "habitat": "Lawns, garden edges, and weedy corners in the Central Valley. Look on the ground under park trees and along quiet suburban streets, then up on a low fence or shrub.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "Feeds on the ground and sits in low shrubs and on fences.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/rufous-collared-sparrow.jpg",
+              "alt": "Rufous-collared Sparrow. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "Charles J. Sharp",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rufous-collared_sparrow_%28Zonotrichia_capensis_costaricensis%29_2.jpg",
+              "file": "File:Rufous-collared sparrow (Zonotrichia capensis costaricensis) 2.jpg"
+            }
+          ]
+        },
+        {
+          "id": "blue-gray-tanager",
+          "commonName": "Blue-gray Tanager",
+          "scientificName": "Thraupis episcopus",
+          "aliases": [
+            "blue grey tanager"
+          ],
+          "alsoCalled": [
+            "Tangara azuleja"
+          ],
+          "alsoScientific": [],
+          "tags": [
+            "tanager"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "mid",
+            "canopy"
+          ],
+          "summary": "Pale blue-gray tanager of garden trees.",
+          "habitat": "Gardens, park trees, and the edges of shade in San José. Often with Palm Tanagers in fruiting trees around La Sabana, San Pedro, and suburban yards. It stays in the foliage more than on the lawn.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "In small trees and the canopy of garden trees.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/blue-gray-tanager.jpg",
+              "alt": "Blue-gray Tanager. Males and females look alike.",
+              "width": 1000,
+              "height": 750,
+              "author": "Rhododendrites",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Blue-gray_tanager_%2803108%292.jpg",
+              "file": "File:Blue-gray tanager (03108)2.jpg"
+            }
+          ]
+        },
+        {
+          "id": "palm-tanager",
+          "commonName": "Palm Tanager",
+          "scientificName": "Thraupis palmarum",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "tanager"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "mid",
+            "canopy"
+          ],
+          "summary": "Olive-gray tanager with dark wings, often beside the blue-gray one.",
+          "habitat": "The same park and garden trees as the Blue-gray Tanager, including palms. Common through the Central Valley suburbs. Look in the crown of a fruiting tree rather than on open grass.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "In the mid-level and canopy of garden trees and palms.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/palm-tanager.jpg",
+              "alt": "Palm Tanager. Males and females look alike.",
+              "width": 1000,
+              "height": 751,
+              "author": "Hans Hillewaert",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Thraupis_palmarum_%28Costa_Rica%29.jpg",
+              "file": "File:Thraupis palmarum (Costa Rica).jpg"
+            }
+          ]
+        },
+        {
+          "id": "great-kiskadee",
+          "commonName": "Great Kiskadee",
+          "scientificName": "Pitangus sulphuratus",
+          "aliases": [
+            "kiskadee",
+            "cristofue"
+          ],
+          "alsoCalled": [
+            "Cristofué"
+          ],
+          "alsoScientific": [],
+          "tags": [
+            "flycatcher"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "low",
+            "mid"
+          ],
+          "summary": "Big yellow-bellied flycatcher that shouts its name.",
+          "habitat": "Park edges, wires, and trees beside ponds and lawns. Regular in La Sabana and along suburban streets. It sits in the open, unlike the smaller flycatchers that stay inside a shrub.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "On low and mid-level perches, including wires and exposed branches.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/great-kiskadee.jpg",
+              "alt": "Great Kiskadee. Males and females look alike.",
+              "width": 735,
+              "height": 1000,
+              "author": "Rhododendrites",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Great_kiskadee_%2870240%29.jpg",
+              "file": "File:Great kiskadee (70240).jpg"
+            }
+          ]
+        },
+        {
+          "id": "tropical-kingbird",
+          "commonName": "Tropical Kingbird",
+          "scientificName": "Tyrannus melancholicus",
+          "aliases": [
+            "kingbird"
+          ],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "flycatcher"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "open",
+          "strata": [
+            "mid",
+            "canopy"
+          ],
+          "summary": "Gray and yellow flycatcher on wires and bare treetops.",
+          "habitat": "Wires, aerials, and the top of a lone tree along streets and the edge of parks. Widespread in the Central Valley. It hunts from a high open perch and returns to the same spot.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "On exposed mid-level and canopy perches, including wires.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/tropical-kingbird.jpg",
+              "alt": "Tropical Kingbird. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "Charles J. Sharp",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tropical_kingbird_%28Tyrannus_melancholicus%29.JPG",
+              "file": "File:Tropical kingbird (Tyrannus melancholicus).JPG"
+            }
+          ]
+        },
+        {
+          "id": "hoffmanns-woodpecker",
+          "commonName": "Hoffmann's Woodpecker",
+          "scientificName": "Melanerpes hoffmannii",
+          "aliases": [
+            "hoffmann woodpecker"
+          ],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "woodpecker"
+          ],
+          "dimorphic": true,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "mid",
+            "canopy"
+          ],
+          "summary": "The barred woodpecker of Central Valley gardens.",
+          "habitat": "Shade trees, palms, and garden edges through San José and the neighboring Central Valley towns. More a suburb and coffee-edge bird than a deep-forest one. Listen for tapping in a park tree, then look on the trunk.",
+          "sexes": "Males have a red nape. Females have a pale nape without the red. Both show a barred back and a yellowish belly.",
+          "stratumNote": "On trunks and branches from mid height into the canopy.",
+          "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/hoffmanns-woodpecker-male.jpg",
+              "alt": "Male Hoffmann's Woodpecker",
+              "width": 1000,
+              "height": 667,
+              "author": "Dominic Sherony",
+              "license": "CC BY-SA 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hoffmanns_Woodpecker_%28Melanerpes_hoffmannii%29_%285771781083%29.jpg",
+              "file": "File:Hoffmanns Woodpecker (Melanerpes hoffmannii) (5771781083).jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/hoffmanns-woodpecker-female.jpg",
+              "alt": "Female Hoffmann's Woodpecker",
+              "width": 1000,
+              "height": 667,
+              "author": "Dominic Sherony",
+              "license": "CC BY-SA 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hoffmanns_Woodpecker_%28Melanerpes_hoffmannii%29_%285772324368%29.jpg",
+              "file": "File:Hoffmanns Woodpecker (Melanerpes hoffmannii) (5772324368).jpg"
+            }
+          ]
+        },
+        {
+          "id": "crimson-fronted-parakeet",
+          "commonName": "Crimson-fronted Parakeet",
+          "scientificName": "Psittacara finschi",
+          "aliases": [
+            "perico frentirrojo",
+            "finschi parakeet"
+          ],
+          "alsoCalled": [
+            "Perico frentirrojo"
+          ],
+          "alsoScientific": [
+            "Aratinga finschi"
+          ],
+          "tags": [
+            "parrot"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "canopy"
+          ],
+          "summary": "Noisy green parakeet in flocks over the city.",
+          "habitat": "Flocks cross San José through the day and roost in palms and tall trees, including around La Sabana. You usually hear them before you see them. They feed in the canopy, not on the lawn.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "In the canopy, and flying over it.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/crimson-fronted-parakeet.jpg",
+              "alt": "Crimson-fronted Parakeet. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "Hobbyfotowiki",
+              "license": "CC0",
+              "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Crimson-fronted_Parakeet%2C_Psittacara_finschi.jpg",
+              "file": "File:Crimson-fronted Parakeet, Psittacara finschi.jpg"
+            }
+          ]
+        },
+        {
+          "id": "lessons-motmot",
+          "commonName": "Lesson's Motmot",
+          "scientificName": "Momotus lessonii",
+          "aliases": [
+            "lesson motmot"
+          ],
+          "alsoCalled": [],
+          "alsoScientific": [
+            "Momotus momota"
+          ],
+          "tags": [
+            "motmot"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "shade",
+          "strata": [
+            "low",
+            "mid"
+          ],
+          "summary": "Green motmot with a racket tail, in shade rather than on the lawn.",
+          "habitat": "Shaded gardens, coffee edges, and the wooded ravines that cut through the eastern suburbs. Much less a bird of the open Sabana lawn than the thrushes and grackles. Older books lump it with the Blue-crowned Motmot.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "On low and mid-level perches in shade.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/lessons-motmot.jpg",
+              "alt": "Lesson's Motmot. Males and females look alike.",
+              "width": 667,
+              "height": 1000,
+              "author": "Giles Laurent",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:062_Lesson%27s_motmot_in_San_Jos%C3%A9_Province_Photo_by_Giles_Laurent.jpg",
+              "file": "File:062 Lesson's motmot in San José Province Photo by Giles Laurent.jpg"
+            }
+          ]
+        },
+        {
+          "id": "rufous-tailed-hummingbird",
+          "commonName": "Rufous-tailed Hummingbird",
+          "scientificName": "Amazilia tzacatl",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "hummingbird"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "low",
+            "mid"
+          ],
+          "summary": "The common garden hummingbird, with a rufous tail.",
+          "habitat": "Flowers in gardens, hedges, and park edges across the Central Valley. It defends a bush and returns to the same low perch. More a garden bird than a forest one in San José.",
+          "sexes": "Males and females look alike for field purposes. Females can be slightly duller on the throat.",
+          "stratumNote": "At flowers and low perches, up into small trees.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/rufous-tailed-hummingbird.jpg",
+              "alt": "Rufous-tailed Hummingbird. Males and females look alike.",
+              "width": 1000,
+              "height": 800,
+              "author": "Andy Morffew from Itchen Abbas, Hampshire, UK",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rufous-tailed_Hummingbird_%2854567044907%29.jpg",
+              "file": "File:Rufous-tailed Hummingbird (54567044907).jpg"
+            }
+          ]
+        },
+        {
+          "id": "white-winged-dove",
+          "commonName": "White-winged Dove",
+          "scientificName": "Zenaida asiatica",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "dove"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "ground",
+            "mid"
+          ],
+          "summary": "A large dove with a white wing stripe, on wires and lawns.",
+          "habitat": "Wires, palms, and the ground under park trees through San José. The white stripe shows when it flies. Common in the city, not only in dry forest.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "Feeds on the ground and perches at mid height on wires and in trees.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/white-winged-dove.jpg",
+              "alt": "White-winged Dove. Males and females look alike.",
+              "width": 1000,
+              "height": 664,
+              "author": "Korye Logan",
+              "license": "CC BY-SA 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:White-winged_Dove_%28Zenaida_asiatica%29_in_flight.png",
+              "file": "File:White-winged Dove (Zenaida asiatica) in flight.png"
+            }
+          ]
+        },
+        {
+          "id": "inca-dove",
+          "commonName": "Inca Dove",
+          "scientificName": "Columbina inca",
+          "aliases": [],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "dove"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "open",
+          "strata": [
+            "ground"
+          ],
+          "summary": "Tiny long-tailed dove, scaled gray, walking on quiet ground.",
+          "habitat": "Bare ground and short grass in gardens, courtyards, and quiet streets of the Central Valley. It flushes a short distance and shows rufous in the wings. Not a bird of the forest canopy.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "On the ground.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/inca-dove.jpg",
+              "alt": "Inca Dove. Males and females look alike.",
+              "width": 1000,
+              "height": 667,
+              "author": "lwolfartist",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Inca_Dove_Paton_Center_for_Hummingbirds_4.11.22_DSC_7313.jpg",
+              "file": "File:Inca Dove Paton Center for Hummingbirds 4.11.22 DSC 7313.jpg"
+            }
+          ]
+        },
+        {
+          "id": "blue-and-white-swallow",
+          "commonName": "Blue-and-white Swallow",
+          "scientificName": "Pygochelidon cyanoleuca",
+          "aliases": [
+            "blue and white swallow"
+          ],
+          "alsoCalled": [],
+          "alsoScientific": [
+            "Notiochelidon cyanoleuca"
+          ],
+          "tags": [
+            "swallow"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "open",
+          "strata": [
+            "low"
+          ],
+          "summary": "Small swallow, blue above and white below, over parks and streets.",
+          "habitat": "Over lawns, rooftops, and the open middle of parks such as La Sabana. They hunt low in the air and rest on wires. Present in the city year-round.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "In the open air close to the ground, and perched on wires. Not in the canopy.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/blue-and-white-swallow.jpg",
+              "alt": "Blue-and-white Swallow. Males and females look alike.",
+              "width": 1000,
+              "height": 777,
+              "author": "gailhampshire from Cradley, Malvern, U.K",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Blue-and-white_Swallow_Pygochelidon_cyanoleuca_-_Flickr_-_gailhampshire.jpg",
+              "file": "File:Blue-and-white Swallow Pygochelidon cyanoleuca - Flickr - gailhampshire.jpg"
+            }
+          ]
+        },
+        {
+          "id": "yellow-faced-grassquit",
+          "commonName": "Yellow-faced Grassquit",
+          "scientificName": "Tiaris olivaceus",
+          "aliases": [
+            "grassquit"
+          ],
+          "alsoCalled": [],
+          "alsoScientific": [],
+          "tags": [
+            "finch"
+          ],
+          "dimorphic": true,
+          "origin": "native",
+          "status": "Resident",
+          "group": "open",
+          "strata": [
+            "ground",
+            "low"
+          ],
+          "summary": "Tiny olive finch of weedy edges. The male has a yellow face.",
+          "habitat": "Weedy lots, rough grass, and the unkempt edge of a park or coffee patch. Scarcer on a closely mown plaza than the sparrow. Common in the Central Valley once there is some rank grass.",
+          "sexes": "Males have a bright yellow throat and eyebrow on an olive head. Females are duller olive, without that strong yellow face.",
+          "stratumNote": "On the ground in grass, and in low weeds.",
+          "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/yellow-faced-grassquit-male.jpg",
+              "alt": "Male Yellow-faced Grassquit",
+              "width": 864,
+              "height": 1000,
+              "author": "Félix Uribe from Rionegro, Antioquia, Colombia",
+              "license": "CC BY-SA 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tiaris_olivaceus_Semillero_cariamarillo_Yellow-faced_Grassquit_%28male%29_%287867966452%29.jpg",
+              "file": "File:Tiaris olivaceus Semillero cariamarillo Yellow-faced Grassquit (male) (7867966452).jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/yellow-faced-grassquit-female.jpg",
+              "alt": "Female Yellow-faced Grassquit",
+              "width": 867,
+              "height": 1000,
+              "author": "Félix Uribe from Rionegro, Antioquia, Colombia",
+              "license": "CC BY-SA 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tiaris_olivaceus_Semillero_cariamarillo_Yellow-faced_Grassquit_%28female%29_%2811482354314%29.jpg",
+              "file": "File:Tiaris olivaceus Semillero cariamarillo Yellow-faced Grassquit (female) (11482354314).jpg"
+            }
+          ]
+        },
+        {
+          "id": "house-wren",
+          "commonName": "House Wren",
+          "scientificName": "Troglodytes aedon",
+          "aliases": [
+            "southern house wren"
+          ],
+          "alsoCalled": [
+            "Southern House Wren"
+          ],
+          "alsoScientific": [
+            "Troglodytes musculus"
+          ],
+          "tags": [
+            "wren"
+          ],
+          "dimorphic": false,
+          "origin": "native",
+          "status": "Resident",
+          "group": "park",
+          "strata": [
+            "low"
+          ],
+          "summary": "Small brown wren with a big song, in shrubs and around eaves.",
+          "habitat": "Garden shrubs, hedges, and the edges of houses through San José. It scolds from a low bush more often than it sits in the open. Some current lists split the Central American birds as Southern House Wren.",
+          "sexes": "Males and females look alike.",
+          "stratumNote": "In shrubs, hedges, and other low cover.",
+          "photos": [
+            {
+              "role": "either",
+              "label": "Sexes look alike",
+              "src": "images/house-wren.jpg",
+              "alt": "House Wren. Males and females look alike.",
+              "width": 1000,
+              "height": 750,
+              "author": "Amarintj1986",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chercan_%28Troglodytes_aedon%29%2C_Costa_Rica.jpg",
+              "file": "File:Chercan (Troglodytes aedon), Costa Rica.jpg"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "outside": [
+    {
+      "names": [
+        "sydney",
+        "bondi",
+        "parramatta",
+        "newcastle",
+        "wollongong",
+        "canberra",
+        "brisbane",
+        "gold coast",
+        "adelaide",
+        "perth",
+        "hobart",
+        "launceston",
+        "darwin",
+        "cairns",
+        "townsville",
+        "geelong",
+        "ballarat",
+        "bendigo",
+        "shepparton",
+        "traralgon",
+        "warrnambool",
+        "queenscliff",
+        "ocean grove",
+        "barwon heads",
+        "torquay"
+      ],
+      "closestCoverageId": "greater-melbourne",
+      "because": "It is outside the greater Melbourne set curated for this guide."
+    },
+    {
+      "names": [
+        "monteverde",
+        "la fortuna",
+        "arenal",
+        "tortuguero",
+        "puerto viejo",
+        "limon",
+        "puntarenas",
+        "jaco",
+        "manuel antonio",
+        "quepos",
+        "dominical",
+        "liberia",
+        "tamarindo",
+        "nosara",
+        "samara",
+        "golfito",
+        "corcovado",
+        "panama",
+        "panama city",
+        "managua",
+        "san salvador"
+      ],
+      "closestCoverageId": "san-jose",
+      "because": "The San José sample is Central Valley parks and gardens, not this place."
+    },
+    {
+      "names": [
+        "san jose california",
+        "san josé california",
+        "san jose ca"
+      ],
+      "closestCoverageId": "san-jose",
+      "because": "San Jose, California is a different place from San José, Costa Rica. This guide has no California list."
+    },
+    {
+      "names": [
+        "auckland",
+        "wellington",
+        "christchurch"
+      ],
+      "closestCoverageId": "greater-melbourne",
+      "because": "New Zealand is outside both curated sets. Greater Melbourne is the nearer coverage in this guide."
+    },
+    {
+      "names": [
+        "new york",
+        "london",
+        "paris",
+        "tokyo",
+        "los angeles",
+        "mexico city",
+        "bogota"
+      ],
+      "closestCoverageId": "san-jose",
+      "because": "That place is outside both curated sets. The San José sample is the nearer of the two coverages in this guide, and it is not a list for the place you typed."
+    }
+  ]
+}
