@@ -99,6 +99,9 @@ struct GuideRootView: View {
             HomeFiltersView(guide: guide, place: place) {
                 showingAddLocation = true
             }
+            // Belt-and-suspenders with HomeFiltersView.fixedSize: inset must not
+            // claim a full-screen hit target over the ScrollView.
+            .fixedSize(horizontal: false, vertical: true)
         }
     }
 

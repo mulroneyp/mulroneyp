@@ -55,7 +55,16 @@ struct HomeFiltersView: View {
             .padding(.top, 8)
             .padding(.bottom, 6)
         }
-        .background(.bar)
+        // safeAreaInset proposes the full container height. Without fixedSize, this
+        // VStack expands to that proposal: layout still uses the ideal bar height, but
+        // hit-testing covers the bird list (and can block detail after push). Keep the
+        // material only on the bar + home indicator, not a full-screen layer.
+        .fixedSize(horizontal: false, vertical: true)
+        .background {
+            Rectangle()
+                .fill(.bar)
+                .ignoresSafeArea(edges: .bottom)
+        }
         .sheet(isPresented: $showingZoneInfo) {
             NavigationStack {
                 List {
@@ -86,10 +95,12 @@ struct HomeFiltersView: View {
     }
 
     private var barDivider: some View {
-        Rectangle()
+        // Capsule + fixed frame avoids a greedy Shape stretching with the HStack proposal.
+        Capsule()
             .fill(GuideColor.line)
             .frame(width: 1, height: 36)
             .padding(.vertical, 4)
+            .accessibilityHidden(true)
     }
 
     private var locationControl: some View {
