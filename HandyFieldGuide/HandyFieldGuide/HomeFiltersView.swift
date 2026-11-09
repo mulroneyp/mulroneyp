@@ -37,8 +37,17 @@ struct HomeFiltersView: View {
     }
 
     private var selectedZoneTitle: String {
-        if model.stratum == "all" { return "Any" }
-        return guide.strata.first(where: { $0.id == model.stratum })?.label ?? "Any"
+        let selected = guide.strata.filter { model.selectedStrata.contains($0.id) }
+        switch selected.count {
+        case 0:
+            return "Any"
+        case 1:
+            return selected[0].label
+        case 2:
+            return "\(selected[0].label) + \(selected[1].label)"
+        default:
+            return "\(selected.count) zones"
+        }
     }
 
     var body: some View {
@@ -144,16 +153,31 @@ struct HomeFiltersView: View {
     private var zoneControl: some View {
         HStack(spacing: 0) {
             Menu {
-                Picker("Zone", selection: $model.stratum) {
-                    Text("Any").tag("all")
-                    ForEach(guide.strata) { item in
-                        Text(item.label).tag(item.id)
+                Button {
+                    model.clearStrata()
+                } label: {
+                    if model.selectedStrata.isEmpty {
+                        Label("Any", systemImage: "checkmark")
+                    } else {
+                        Text("Any")
+                    }
+                }
+                ForEach(guide.strata) { item in
+                    Button {
+                        model.toggleStratum(item.id)
+                    } label: {
+                        if model.selectedStrata.contains(item.id) {
+                            Label(item.label, systemImage: "checkmark")
+                        } else {
+                            Text(item.label)
+                        }
                     }
                 }
             } label: {
                 filterColumn(title: "Zone", value: selectedZoneTitle)
             }
-            .accessibilityHint("Filter by height band, including Sky")
+            .menuActionDismissBehavior(.disabled)
+            .accessibilityHint("Select one or more height bands, including Sky. Any clears the filter.")
 
             Button {
                 showingZoneInfo = true

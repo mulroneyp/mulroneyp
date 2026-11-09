@@ -40,7 +40,7 @@ struct GuideRootView: View {
 
     private func list(guide: GuideFile, place: ResolvedPlace) -> some View {
         let birds = model.filteredSpecies(in: place)
-        let filtering = !model.searchText.trimmingCharacters(in: .whitespaces).isEmpty || model.stratum != "all"
+        let filtering = !model.searchText.trimmingCharacters(in: .whitespaces).isEmpty || model.isFilteringByZone
         return ScrollView {
             VStack(alignment: .leading, spacing: 14) {
                 Text(place.coverage.summary)

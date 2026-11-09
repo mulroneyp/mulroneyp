@@ -8,7 +8,7 @@ Location, Month, and Zone sit in a **bottom toolbar** so the bird list keeps the
 
 1. **Location** — menu of curated places and any imported eBird areas, plus **Add eBird barchart**.
 2. **Month** — picker that defaults to the device’s current calendar month. Imported eBird lists use that month’s frequencies for “likely” birds.
-3. **Zone** — ground / low / mid / canopy / sky (or Any). Long zone descriptions stay behind a small **i** button.
+3. **Zone** — multi-select ground / low / mid / canopy / sky. Birds matching **any** selected zone appear. **Any** clears the filter. Long zone descriptions stay behind a small **i** button.
 
 **Sky** is for birds typically seen overhead (flying, soaring, or hawking), separate from canopy perches.
 
