@@ -461,17 +461,30 @@
           "stratumNote": "Usually in low branches and the understory and the mid-level.",
           "photos": [
             {
-              "role": "unsexed",
-              "label": "Sex not labeled",
-              "src": "images/violet-sabrewing.jpg",
-              "alt": "Violet Sabrewing. The source photo is not labeled male or female.",
-              "width": 1000,
-              "height": 666,
-              "author": "Cephas",
+              "role": "male",
+              "label": "Male",
+              "src": "images/violet-sabrewing-male.jpg",
+              "alt": "Male Violet Sabrewing",
+              "width": 999,
+              "height": 1000,
+              "author": "Charles J. Sharp",
               "license": "CC BY-SA 4.0",
               "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Campylopterus_hemileucurus_Santa_Elena_2.JPG",
-              "file": "File:Campylopterus hemileucurus Santa Elena 2.JPG"
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Violet_sabrewing_%28Campylopterus_hemileucurus_mellitus%29_male_in_flight.jpg",
+              "file": "File:Violet sabrewing (Campylopterus hemileucurus mellitus) male in flight.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/violet-sabrewing-female.jpg",
+              "alt": "Female Violet Sabrewing",
+              "width": 1000,
+              "height": 1000,
+              "author": "Steve Ryan",
+              "license": "CC BY-SA 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Campylopterus_hemileucurus_-Costa_Rica_-flying-8.jpg",
+              "file": "File:Campylopterus hemileucurus -Costa Rica -flying-8.jpg"
             }
           ]
         },
@@ -1482,17 +1495,30 @@
           "stratumNote": "Usually in the mid-level and the canopy.",
           "photos": [
             {
-              "role": "unsexed",
-              "label": "Sex not labeled",
-              "src": "images/golden-browed-chlorophonia.jpg",
-              "alt": "Golden-browed Chlorophonia. The source photo is not labeled male or female.",
+              "role": "male",
+              "label": "Male",
+              "src": "images/golden-browed-chlorophonia-male.jpg",
+              "alt": "Male Golden-browed Chlorophonia",
               "width": 1000,
               "height": 666,
               "author": "Cephas",
               "license": "CC BY-SA 4.0",
               "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chlorophonia_callophrys_01.jpg",
-              "file": "File:Chlorophonia callophrys 01.jpg"
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chlorophonia_callophrys_03.jpg",
+              "file": "File:Chlorophonia callophrys 03.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/golden-browed-chlorophonia-female.jpg",
+              "alt": "Female Golden-browed Chlorophonia",
+              "width": 1000,
+              "height": 666,
+              "author": "Cephas",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chlorophonia_callophrys_04.jpg",
+              "file": "File:Chlorophonia callophrys 04.jpg"
             }
           ]
         },
@@ -2730,6 +2756,19 @@
           "stratumNote": "Usually in low branches and the understory and the mid-level.",
           "photos": [
             {
+              "role": "male",
+              "label": "Male",
+              "src": "images/violet-headed-hummingbird-male.jpg",
+              "alt": "Male Violet-headed Hummingbird",
+              "width": 1000,
+              "height": 1000,
+              "author": "lwolfartist",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Am_violet-headed_hummingbird_bijagua-_tapir_valley_4.15.25_DSC_2664-topaz-rawdenoise.jpg",
+              "file": "File:Am violet-headed hummingbird bijagua- tapir valley 4.15.25 DSC 2664-topaz-rawdenoise.jpg"
+            },
+            {
               "role": "female",
               "label": "Female",
               "src": "images/violet-headed-hummingbird-female.jpg",
@@ -2780,6 +2819,19 @@
               "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stripe-tailed_Hummingbird.jpg",
               "file": "File:Stripe-tailed Hummingbird.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/stripe-tailed-hummingbird-female.jpg",
+              "alt": "Female Stripe-tailed Hummingbird",
+              "width": 727,
+              "height": 1000,
+              "author": "Basar",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Eupherusa_eximia.jpg",
+              "file": "File:Eupherusa eximia.jpg"
             }
           ]
         },
@@ -5370,17 +5422,30 @@
           "stratumNote": "Usually in the mid-level and the canopy.",
           "photos": [
             {
-              "role": "unsexed",
-              "label": "Sex not labeled",
-              "src": "images/bare-necked-umbrellabird.jpg",
-              "alt": "Bare-necked Umbrellabird. The source photo is not labeled male or female.",
-              "width": 1000,
-              "height": 750,
-              "author": "Nick Athanas",
-              "license": "CC BY-SA 2.0",
-              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
-              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cephalopterus_glabricollis_-_Bare-necked_Umbrellabird.jpg",
-              "file": "File:Cephalopterus glabricollis - Bare-necked Umbrellabird.jpg"
+              "role": "male",
+              "label": "Male",
+              "src": "images/bare-necked-umbrellabird-male.jpg",
+              "alt": "Male Bare-necked Umbrellabird",
+              "width": 513,
+              "height": 599,
+              "author": "MauricioCalderon",
+              "license": "CC BY-SA 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cephalopterus_glabricollis.jpg",
+              "file": "File:Cephalopterus glabricollis.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/bare-necked-umbrellabird-female.jpg",
+              "alt": "Female Bare-necked Umbrellabird",
+              "width": 800,
+              "height": 600,
+              "author": "MauricioCalderon",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cephalopterus_glabricollis_2.jpg",
+              "file": "File:Cephalopterus glabricollis 2.jpg"
             }
           ]
         },
@@ -5913,6 +5978,19 @@
           "stratumNote": "Usually in low branches and the understory and the mid-level.",
           "photos": [
             {
+              "role": "male",
+              "label": "Male",
+              "src": "images/magenta-throated-woodstar-male.jpg",
+              "alt": "Male Magenta-throated Woodstar",
+              "width": 1000,
+              "height": 749,
+              "author": "stongey",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Calliphlox_bryantae%2C_Monteverde%2C_Costa_Rica_%28cropped%29.jpg",
+              "file": "File:Calliphlox bryantae, Monteverde, Costa Rica (cropped).jpg"
+            },
+            {
               "role": "female",
               "label": "Female",
               "src": "images/magenta-throated-woodstar-female.jpg",
@@ -5965,6 +6043,19 @@
               "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Flickr_-_Rainbirder_-_White-ruffed_Manakin_%28Corapipo_altera%29_displaying_male.jpg",
               "file": "File:Flickr - Rainbirder - White-ruffed Manakin (Corapipo altera) displaying male.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/white-ruffed-manakin-female.jpg",
+              "alt": "Female White-ruffed Manakin",
+              "width": 763,
+              "height": 1000,
+              "author": "Félix Uribe from Rionegro, Antioquia, Colombia",
+              "license": "CC BY-SA 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Corapipo_altera_Saltar%C3%ADn_occidental_White-ruffed_Manakin_%28male%29_%288114074627%29.jpg",
+              "file": "File:Corapipo altera Saltarín occidental White-ruffed Manakin (male) (8114074627).jpg"
             }
           ]
         },
@@ -6068,6 +6159,19 @@
           "sexes": "Males have a stronger black breast band. Females are browner, with a fainter band. Only a labeled female photograph was available under an open licence.",
           "stratumNote": "Usually in the ground and low branches and the understory.",
           "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/spotted-antbird-male.jpg",
+              "alt": "Male Spotted Antbird",
+              "width": 1000,
+              "height": 770,
+              "author": "gailhampshire from Cradley, Malvern, U.K",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Spotted_Antbird._Hylophylax_naevioides_-_Flickr_-_gailhampshire.jpg",
+              "file": "File:Spotted Antbird. Hylophylax naevioides - Flickr - gailhampshire.jpg"
+            },
             {
               "role": "female",
               "label": "Female",
@@ -6235,9 +6339,22 @@
           ],
           "summary": "Understory flocks in wet forest",
           "habitat": "Children's Eternal Rainforest, on the San Gerardo list for mid-late November. Understory flocks in wet forest.",
-          "sexes": "Males are slaty with a black throat. Females are olive-brown. The photograph is not labeled male or female.",
+          "sexes": "Males are slaty with a black throat. Females are olive-brown. The photograph is not labeled male or female. An openly licensed female photograph was not found on Wikimedia Commons; the male and an unlabeled open image are shown instead.",
           "stratumNote": "Usually in low branches and the understory and the mid-level.",
           "photos": [
+            {
+              "role": "male",
+              "label": "Male",
+              "src": "images/slaty-antwren-male.jpg",
+              "alt": "Male Slaty Antwren",
+              "width": 754,
+              "height": 1000,
+              "author": "Francesco Veronesi from Italy",
+              "license": "CC BY-SA 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Slaty_Antwren_-_Ecuador_05_dgs_%2816823121085%29.jpg",
+              "file": "File:Slaty Antwren - Ecuador 05 dgs (16823121085).jpg"
+            },
             {
               "role": "unsexed",
               "label": "Sex not labeled",
@@ -6833,6 +6950,19 @@
               "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Procnias_tricarunculata_-Costa_Rica_-male-8-4c.jpg",
               "file": "File:Procnias tricarunculata -Costa Rica -male-8-4c.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/three-wattled-bellbird-female.jpg",
+              "alt": "Female Three-wattled Bellbird",
+              "width": 854,
+              "height": 1000,
+              "author": "Joseph Wolf",
+              "license": "Public domain",
+              "licenseUrl": "",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Procnias_tricarunculataIbis1865P003A.jpg",
+              "file": "File:Procnias tricarunculataIbis1865P003A.jpg"
             }
           ]
         },
@@ -7127,17 +7257,30 @@
           "stratumNote": "Usually in the canopy.",
           "photos": [
             {
-              "role": "unsexed",
-              "label": "Sex not labeled",
-              "src": "images/black-and-yellow-tanager.jpg",
-              "alt": "Black-and-yellow Tanager. The source photo is not labeled male or female.",
+              "role": "male",
+              "label": "Male",
+              "src": "images/black-and-yellow-tanager-male.jpg",
+              "alt": "Male Black-and-yellow Tanager",
               "width": 1000,
-              "height": 666,
-              "author": "Codrin Bucur",
-              "license": "CC BY 4.0",
-              "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
-              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chrysothlypis_chrysomelas_316632168.jpg",
-              "file": "File:Chrysothlypis chrysomelas 316632168.jpg"
+              "height": 817,
+              "author": "Department of the Interior. U.S. Fish and Wildlife Service. National Conservation Training Center. 10/1997-8888",
+              "license": "Public domain",
+              "licenseUrl": "",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Western_tanager_-_DPLA_-_0a13d6e5869c3ef7c49b687c1e120ae9.jpg",
+              "file": "File:Western tanager - DPLA - 0a13d6e5869c3ef7c49b687c1e120ae9.jpg"
+            },
+            {
+              "role": "female",
+              "label": "Female",
+              "src": "images/black-and-yellow-tanager-female.jpg",
+              "alt": "Female Black-and-yellow Tanager",
+              "width": 1000,
+              "height": 667,
+              "author": "Don Faulkner",
+              "license": "CC BY-SA 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chrysothlypis_chrysomelas.jpg",
+              "file": "File:Chrysothlypis chrysomelas.jpg"
             }
           ]
         },

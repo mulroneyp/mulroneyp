@@ -2,7 +2,7 @@ import SwiftUI
 
 struct GuideRootView: View {
     @EnvironmentObject private var model: GuideModel
-    @State private var showingLocation = false
+    @State private var showingAddLocation = false
     @State private var path = NavigationPath()
 
     var body: some View {
@@ -20,16 +20,6 @@ struct GuideRootView: View {
             .guideBackground()
             .navigationTitle("Handy Field Guide")
             .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        showingLocation = true
-                    } label: {
-                        Label("Location", systemImage: "mappin.and.ellipse")
-                    }
-                    .accessibilityHint("Set the place")
-                }
-            }
             .navigationDestination(for: String.self) { speciesId in
                 if let place = model.place,
                    let species = place.coverage.species.first(where: { $0.id == speciesId }) {
@@ -40,8 +30,8 @@ struct GuideRootView: View {
                 }
             }
         }
-        .sheet(isPresented: $showingLocation) {
-            LocationSheet(current: model.locationQuery)
+        .sheet(isPresented: $showingAddLocation) {
+            LocationSheet(current: model.locationQuery, startInImportMode: true)
         }
         .onChange(of: model.locationQuery) { _, _ in
             path = NavigationPath()
@@ -53,53 +43,24 @@ struct GuideRootView: View {
         let filtering = !model.searchText.trimmingCharacters(in: .whitespaces).isEmpty || model.stratum != "all"
         return ScrollView {
             VStack(alignment: .leading, spacing: 14) {
-                Text(place.coverage.placeTitle)
-                    .font(.caption.weight(.semibold))
-                    .tracking(1.2)
-                    .textCase(.uppercase)
-                    .foregroundStyle(GuideColor.muted)
                 Text(place.coverage.summary)
                     .font(.subheadline)
                     .foregroundStyle(GuideColor.muted)
                     .fixedSize(horizontal: false, vertical: true)
 
-                Button {
-                    showingLocation = true
-                } label: {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text("Location")
-                                .font(.caption.weight(.semibold))
-                                .tracking(0.8)
-                                .textCase(.uppercase)
-                            Text(place.displayName)
-                                .font(.title3.weight(.semibold))
-                            if place.displayName != place.coverage.label {
-                                Text(place.coverage.placeTitle)
-                                    .font(.subheadline)
-                                    .foregroundStyle(GuideColor.muted)
-                            }
-                        }
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                    }
-                    .padding(12)
-                    .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
-                    .foregroundStyle(GuideColor.ink)
-                    .background(GuideColor.card)
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 2)
-                            .stroke(GuideColor.green, lineWidth: 1.5)
-                    }
+                HomeFiltersView(guide: guide, place: place) {
+                    showingAddLocation = true
                 }
-                .buttonStyle(.plain)
-                .accessibilityHint("Change the place")
 
                 if let notice = place.notice {
                     NoticeBox(text: notice, strong: true)
                 }
-                if let sample = place.coverage.sampleNote {
+                if place.imported != nil, let sample = place.coverage.sampleNote {
                     NoticeBox(text: sample, strong: false)
+                }
+
+                if place.imported != nil {
+                    importedExtras
                 }
 
                 TextField("Search name or scientific name", text: $model.searchText)
@@ -107,19 +68,17 @@ struct GuideRootView: View {
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
 
-                stratumFilters(guide)
-
-                StratumLegend(strata: guide.strata)
-
                 Text("Showing \(birds.count) of \(place.coverage.species.count)")
                     .font(.subheadline)
                     .foregroundStyle(GuideColor.muted)
 
                 if birds.isEmpty {
-                    Text("No birds match. Try a scientific name, or clear the height filter.")
+                    Text(place.imported == nil
+                         ? "No birds match. Try a scientific name, or clear the zone filter."
+                         : "No birds match for \(model.selectedMonthName). Preview another month, or show scarce birds.")
                         .padding(.vertical, 8)
-                } else if filtering {
-                    section(title: nil, birds: birds.sorted { $0.commonName < $1.commonName }, place: place)
+                } else if filtering || place.imported != nil {
+                    section(title: nil, birds: model.sortedForDisplay(birds, place: place), place: place)
                 } else {
                     ForEach(place.groupOrder, id: \.self) { groupId in
                         let rows = birds.filter { $0.group == groupId }.sorted { $0.commonName < $1.commonName }
@@ -129,7 +88,9 @@ struct GuideRootView: View {
                     }
                 }
 
-                Text("Height icons can be combined: a bird that feeds on a lawn and sings from a branch shows more than one. Photos are openly licensed; credits are on each bird.")
+                Text(place.imported == nil
+                     ? "Zone icons can be combined: a bird that feeds on a lawn and sings from a branch shows more than one. Photos are openly licensed; credits are on each bird."
+                     : "Imported lists keep every taxon from the file. Near-zero \(model.selectedMonthName) rows are hidden by default (below \(Int(EBirdBarchartParser.nearZeroThreshold * 1000) / 10)% mean frequency). Flagged “sp.” and slash taxa stay off the main list unless you turn them on. Photos are openly licensed when available.")
                     .font(.footnote)
                     .foregroundStyle(GuideColor.muted)
                     .padding(.top, 8)
@@ -140,26 +101,15 @@ struct GuideRootView: View {
         }
     }
 
-    private func stratumFilters(_ guide: GuideFile) -> some View {
+    private var importedExtras: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("HEIGHT")
-                .font(.caption.weight(.semibold))
-                .tracking(1)
-                .foregroundStyle(GuideColor.muted)
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 8) {
-                    stratumButton("Any height", id: "all")
-                    ForEach(guide.strata) { item in
-                        stratumButton(item.label, id: item.id)
-                    }
-                }
-            }
+            Toggle("Hide scarce / near-zero for \(model.selectedMonthName)", isOn: Binding(
+                get: { model.hideNearZero },
+                set: { model.setHideNearZero($0) }
+            ))
+            Toggle("Show flagged sp. / slash taxa", isOn: $model.showFlaggedTaxa)
         }
-    }
-
-    private func stratumButton(_ title: String, id: String) -> some View {
-        Button(title) { model.stratum = id }
-            .buttonStyle(GuideChipStyle(selected: model.stratum == id))
+        .font(.subheadline)
     }
 
     private func section(title: String?, birds: [Species], place: ResolvedPlace) -> some View {
@@ -173,7 +123,11 @@ struct GuideRootView: View {
             }
             ForEach(birds) { bird in
                 NavigationLink(value: bird.id) {
-                    BirdRow(species: bird, place: place)
+                    BirdRow(
+                        species: bird,
+                        place: place,
+                        frequency: model.frequency(for: bird, in: place)
+                    )
                 }
                 .buttonStyle(.plain)
             }
@@ -203,14 +157,23 @@ private struct NoticeBox: View {
 private struct BirdRow: View {
     var species: Species
     var place: ResolvedPlace
+    var frequency: Double?
+
+    private var likelihood: String {
+        Likelihood.label(for: species, frequency: frequency)
+    }
 
     var body: some View {
         HStack(alignment: .center, spacing: 12) {
             HStack(spacing: 3) {
-                ForEach(species.photos.prefix(2)) { photo in
+                ForEach(listPhotos) { photo in
                     BundlePhoto(path: photo.src, alt: "", fills: true)
-                        .frame(width: species.photos.count > 1 ? 44 : 88, height: 64)
+                        .frame(width: listPhotos.count > 1 ? 44 : 88, height: 64)
                         .clipped()
+                }
+                if listPhotos.isEmpty {
+                    GuideColor.green.opacity(0.12)
+                        .frame(width: 88, height: 64)
                 }
             }
             .frame(width: 92, height: 64, alignment: .leading)
@@ -228,10 +191,15 @@ private struct BirdRow: View {
                     .foregroundStyle(GuideColor.ink)
                     .lineLimit(2)
                 HStack(spacing: 8) {
-                    Text(species.status.uppercased())
+                    Text(likelihood.uppercased())
                         .font(.caption2.weight(.semibold))
                         .tracking(0.6)
                         .foregroundStyle(species.origin == "introduced" ? GuideColor.rust : GuideColor.green)
+                    if let frequency, frequency > 0 {
+                        Text(frequencyLabel(frequency))
+                            .font(.caption2.monospacedDigit())
+                            .foregroundStyle(GuideColor.muted)
+                    }
                     ForEach(species.strata, id: \.self) { id in
                         HStack(spacing: 2) {
                             StratumIcon(id: id, size: 18)
@@ -251,6 +219,24 @@ private struct BirdRow: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityHint("Opens habitat notes for \(place.displayName)")
+    }
+
+    private var listPhotos: [Photo] {
+        let order = ["male": 0, "female": 1, "either": 2, "unsexed": 3, "illustration": 4]
+        let sorted = species.photos.sorted {
+            (order[$0.role] ?? 9, $0.label) < (order[$1.role] ?? 9, $1.label)
+        }
+        if species.dimorphic {
+            let sexes = sorted.filter { $0.role == "male" || $0.role == "female" }
+            if sexes.count >= 2 { return Array(sexes.prefix(2)) }
+            return Array(sorted.prefix(2))
+        }
+        return Array(sorted.prefix(1))
+    }
+
+    private func frequencyLabel(_ value: Double) -> String {
+        if value < 0.01 { return "<1%" }
+        return "\(Int((value * 100).rounded()))%"
     }
 
     private func stratumLabel(_ id: String) -> String {
