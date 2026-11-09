@@ -1,48 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   Handy Field Guide — App Icon vector sketch
-  One character: bird looking through binoculars (not bird beside separate optics).
-  Matches composition of source-1024.png (authoritative raster).
-  Palette aligns with HandyFieldGuide/Theme.swift GuideColor.
+  One character: blue bird looking through black binoculars (not bird beside separate optics).
+  Matches composition of source-1024.png (authoritative raster from Paul’s artwork).
   Export sizes: python3 scripts/generate_app_icon.py
 -->
-<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="Handy Field Guide app icon: bird looking through binoculars">
-  <rect width="1024" height="1024" fill="#1B3330"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="Handy Field Guide app icon: blue bird looking through binoculars">
+  <rect width="1024" height="1024" fill="#000000"/>
 
-  <!-- Bird body (cream) -->
+  <!-- Bird body (bright blue) — ~10% margin from edges -->
   <g>
-    <ellipse cx="520" cy="560" rx="230" ry="250" fill="#F3EEE4"/>
-    <!-- belly shade -->
-    <ellipse cx="540" cy="620" rx="150" ry="160" fill="#E8E0D4"/>
+    <!-- body -->
+    <ellipse cx="512" cy="560" rx="250" ry="280" fill="#3BB4F0"/>
+    <!-- belly highlight -->
+    <ellipse cx="512" cy="620" rx="150" ry="170" fill="#6EC8F7"/>
     <!-- head -->
-    <circle cx="560" cy="340" r="150" fill="#F3EEE4"/>
+    <circle cx="512" cy="360" r="170" fill="#3BB4F0"/>
     <!-- crest tuft -->
-    <path d="M520 220 Q545 160 575 210 Q560 195 545 220 Z" fill="#F3EEE4"/>
+    <path d="M470 220 Q512 150 554 220 Q512 185 470 220 Z" fill="#3BB4F0"/>
+    <!-- eyes above bins -->
+    <circle cx="455" cy="320" r="28" fill="#0A0A0A"/>
+    <circle cx="569" cy="320" r="28" fill="#0A0A0A"/>
+    <circle cx="445" cy="308" r="8" fill="#FFFFFF"/>
+    <circle cx="559" cy="308" r="8" fill="#FFFFFF"/>
     <!-- beak peeking under bins -->
-    <polygon points="680,355 745,375 680,395" fill="#9A4630"/>
-    <!-- raised wing holding bins -->
-    <ellipse cx="380" cy="420" rx="90" ry="70" transform="rotate(-25 380 420)" fill="#E8E0D4"/>
-    <!-- tucked wing -->
-    <ellipse cx="420" cy="580" rx="110" ry="80" transform="rotate(-15 420 580)" fill="#D8CFC0"/>
-    <!-- tail -->
-    <ellipse cx="300" cy="700" rx="80" ry="50" transform="rotate(30 300 700)" fill="#F3EEE4"/>
+    <polygon points="512,390 545,410 512,425 479,410" fill="#F0B030"/>
+    <!-- wings holding bins -->
+    <ellipse cx="300" cy="430" rx="70" ry="55" transform="rotate(-20 300 430)" fill="#2A9AD8"/>
+    <ellipse cx="724" cy="430" rx="70" ry="55" transform="rotate(20 724 430)" fill="#2A9AD8"/>
+    <!-- feet -->
+    <ellipse cx="450" cy="820" rx="35" ry="18" fill="#F0A020"/>
+    <ellipse cx="574" cy="820" rx="35" ry="18" fill="#F0A020"/>
   </g>
 
   <!-- Binoculars held to eyes -->
   <g>
     <!-- left tube -->
-    <rect x="470" y="250" width="120" height="160" rx="40" fill="#9A4630"/>
+    <rect x="360" y="340" width="130" height="150" rx="45" fill="#1A1A1A"/>
     <!-- right tube -->
-    <rect x="610" y="250" width="120" height="160" rx="40" fill="#9A4630"/>
+    <rect x="534" y="340" width="130" height="150" rx="45" fill="#1A1A1A"/>
     <!-- bridge -->
-    <rect x="560" y="300" width="80" height="50" rx="14" fill="#763424"/>
-    <!-- objective / eyepiece faces toward viewer -->
-    <circle cx="530" cy="310" r="48" fill="#121E1C"/>
-    <circle cx="670" cy="310" r="48" fill="#121E1C"/>
-    <circle cx="530" cy="310" r="38" fill="none" stroke="#2A3C38" stroke-width="6"/>
-    <circle cx="670" cy="310" r="38" fill="none" stroke="#2A3C38" stroke-width="6"/>
-    <!-- tiny glints -->
-    <circle cx="515" cy="295" r="8" fill="#3D4A42"/>
-    <circle cx="655" cy="295" r="8" fill="#3D4A42"/>
+    <rect x="470" y="385" width="84" height="55" rx="16" fill="#0D0D0D"/>
+    <!-- focus dial -->
+    <circle cx="512" cy="412" r="14" fill="#E8C040"/>
+    <!-- objective lenses -->
+    <circle cx="425" cy="400" r="48" fill="#0A2840"/>
+    <circle cx="599" cy="400" r="48" fill="#0A2840"/>
+    <circle cx="425" cy="400" r="38" fill="#123A5C"/>
+    <circle cx="599" cy="400" r="38" fill="#123A5C"/>
+    <!-- glints -->
+    <path d="M400 375 Q415 365 430 375" fill="none" stroke="#7EC8F0" stroke-width="6" stroke-linecap="round"/>
+    <path d="M574 375 Q589 365 604 375" fill="none" stroke="#7EC8F0" stroke-width="6" stroke-linecap="round"/>
   </g>
 </svg>
