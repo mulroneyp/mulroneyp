@@ -1,6 +1,6 @@
 # App icon source
 
-Bird + binoculars mark for **Handy Field Guide**. Colors follow `GuideColor` in `HandyFieldGuide/Theme.swift` (forest green field, cream bird, rust optics).
+One-character mark for **Handy Field Guide**: a cream bird **looking through** rust binoculars (not a bird beside separate optics). Colors follow `GuideColor` in `HandyFieldGuide/Theme.swift` (forest green field, cream bird, rust optics).
 
 ## Files
 
@@ -36,6 +36,6 @@ Options:
 
 ## Design notes
 
-- Cream bird on deep green so the silhouette still reads at notification / Settings sizes.
-- Bird perched on binoculars — both shapes stay distinct; no text, no purple gradients.
-- Keep ~10% safe margin from the square edges for iOS continuous-corner masking.
+- Single scene: bird using binoculars at its eyes so the mark reads as one character.
+- Cream bird on deep green; rust binoculars with dark lenses stay clear at notification / Settings sizes.
+- No text, no purple gradients. Keep ~10% safe margin from the square edges for iOS continuous-corner masking.
