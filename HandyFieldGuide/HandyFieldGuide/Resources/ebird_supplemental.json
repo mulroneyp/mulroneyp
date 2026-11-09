@@ -1,0 +1,2352 @@
+[
+  {
+    "id": "great-curassow",
+    "commonName": "Great Curassow",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: ground, low.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/great-curassow.jpg",
+        "alt": "Great Curassow. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 776,
+        "author": "Rhododendrites",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Great_curassow_%2871145%29.jpg",
+        "file": "File:Great curassow (71145).jpg"
+      }
+    ]
+  },
+  {
+    "id": "palm-tanager",
+    "commonName": "Palm Tanager",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": true,
+    "origin": "native",
+    "status": "imported",
+    "group": "tanagers",
+    "strata": [
+      "canopy",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Male and female photographs are shown with clear labels.",
+    "stratumNote": "Estimated height band: canopy, mid.",
+    "photos": [
+      {
+        "role": "male",
+        "label": "Male",
+        "src": "images/palm-tanager-male.jpg",
+        "alt": "Male Palm Tanager",
+        "width": 999,
+        "height": 1000,
+        "author": "Mike & Chris",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Thraupis_palmarum_1.jpg",
+        "file": "File:Thraupis palmarum 1.jpg"
+      },
+      {
+        "role": "female",
+        "label": "Female",
+        "src": "images/palm-tanager-female.jpg",
+        "alt": "Female Palm Tanager",
+        "width": 739,
+        "height": 1000,
+        "author": "Internet Archive Book Images",
+        "license": "No restrictions",
+        "licenseUrl": "https://www.flickr.com/commons/usage/",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bird-lore_%281918%29_%2814748015494%29.jpg",
+        "file": "File:Bird-lore (1918) (14748015494).jpg"
+      }
+    ]
+  },
+  {
+    "id": "melodious-blackbird",
+    "commonName": "Melodious Blackbird",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": true,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "sexes": "Male and female photographs are shown with clear labels.",
+    "stratumNote": "Estimated height band: mid.",
+    "photos": [
+      {
+        "role": "male",
+        "label": "Male",
+        "src": "images/melodious-blackbird-male.jpg",
+        "alt": "Male Melodious Blackbird",
+        "width": 1000,
+        "height": 780,
+        "author": "Internet Archive Book Images",
+        "license": "No restrictions",
+        "licenseUrl": "https://www.flickr.com/commons/usage/",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Birds_of_Great_Britain_and_Ireland_%281907%29_%2814568619978%29.jpg",
+        "file": "File:Birds of Great Britain and Ireland (1907) (14568619978).jpg"
+      },
+      {
+        "role": "female",
+        "label": "Female",
+        "src": "images/melodious-blackbird-female.jpg",
+        "alt": "Female Melodious Blackbird",
+        "width": 1000,
+        "height": 752,
+        "author": "Bernard Spragg. NZ from Christchurch, New Zealand",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Blackbird._%28Turdus_merula%29_%289513269847%29.jpg",
+        "file": "File:Blackbird. (Turdus merula) (9513269847).jpg"
+      }
+    ]
+  },
+  {
+    "id": "scaly-breasted-hummingbird",
+    "commonName": "Scaly-breasted Hummingbird",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": true,
+    "origin": "native",
+    "status": "imported",
+    "group": "hummingbirds",
+    "strata": [
+      "canopy",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "sexes": "This species is typically sexually dimorphic; an openly licensed male or female photograph is still missing.",
+    "stratumNote": "Estimated height band: canopy, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/scaly-breasted-hummingbird.jpg",
+        "alt": "Scaly-breasted Hummingbird. The source photo is not labeled male or female.",
+        "width": 851,
+        "height": 1000,
+        "author": "keesgroenendijk",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phaeochroa_cuvierii_30065762.jpg",
+        "file": "File:Phaeochroa cuvierii 30065762.jpg"
+      }
+    ]
+  },
+  {
+    "id": "red-lored-amazon",
+    "commonName": "Red-lored Amazon",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/red-lored-amazon.jpg",
+        "alt": "Red-lored Amazon. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 1000,
+        "author": "lwolfartist",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Red-lored_amazon_the_nest_nature_center_4.18.25_DSC_3042-topaz-rawdenoise.jpg",
+        "file": "File:Red-lored amazon the nest nature center 4.18.25 DSC 3042-topaz-rawdenoise.jpg"
+      }
+    ]
+  },
+  {
+    "id": "black-striped-sparrow",
+    "commonName": "Black-striped Sparrow",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: ground, low.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/black-striped-sparrow.jpg",
+        "alt": "Black-striped Sparrow. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 666,
+        "author": "Adam Jackson",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Arremonops_conirostris_339610268.jpg",
+        "file": "File:Arremonops conirostris 339610268.jpg"
+      }
+    ]
+  },
+  {
+    "id": "black-crested-coquette",
+    "commonName": "Black-crested Coquette",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "hummingbirds",
+    "strata": [
+      "canopy",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: canopy, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/black-crested-coquette.jpg",
+        "alt": "Black-crested Coquette. The source photo is not labeled male or female.",
+        "width": 932,
+        "height": 1000,
+        "author": "Jerry Oldenettel from Socorro, NM, USA",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lophornis_helenae-2.jpg",
+        "file": "File:Lophornis helenae-2.jpg"
+      }
+    ]
+  },
+  {
+    "id": "stripe-breasted-wren",
+    "commonName": "Stripe-breasted Wren",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "songbirds",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: low, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/stripe-breasted-wren.jpg",
+        "alt": "Stripe-breasted Wren. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 666,
+        "author": "Chloe and Trevor Van Loon",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cantorchilus_thoracicus_176766616.jpg",
+        "file": "File:Cantorchilus thoracicus 176766616.jpg"
+      }
+    ]
+  },
+  {
+    "id": "blue-throated-goldentail",
+    "commonName": "Blue-throated Goldentail",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "hummingbirds",
+    "strata": [
+      "canopy",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: canopy, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/blue-throated-goldentail.jpg",
+        "alt": "Blue-throated Goldentail. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 665,
+        "author": "Stongey",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hylocharis_eliciae_-_Blue-throated_Goldentail_-_Rinc%C3%B3n_de_la_Vieja_National_Park%2C_Costa_Rica.jpg",
+        "file": "File:Hylocharis eliciae - Blue-throated Goldentail - Rincón de la Vieja National Park, Costa Rica.jpg"
+      }
+    ]
+  },
+  {
+    "id": "orange-chinned-parakeet",
+    "commonName": "Orange-chinned Parakeet",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/orange-chinned-parakeet.jpg",
+        "alt": "Orange-chinned Parakeet. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 666,
+        "author": "Anthony Batista",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brotogeris_jugularis_245196646.jpg",
+        "file": "File:Brotogeris jugularis 245196646.jpg"
+      }
+    ]
+  },
+  {
+    "id": "white-collared-manakin",
+    "commonName": "White-collared Manakin",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": true,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "sexes": "This species is typically sexually dimorphic; an openly licensed male or female photograph is still missing.",
+    "stratumNote": "Estimated height band: low, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/white-collared-manakin.jpg",
+        "alt": "White-collared Manakin. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 667,
+        "author": "Jose Calvo from San Jose, Costa Rica",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Manacus_candei_-La_Selva_Biological_Station%2C_Costa_Rica_-male-8.jpg",
+        "file": "File:Manacus candei -La Selva Biological Station, Costa Rica -male-8.jpg"
+      }
+    ]
+  },
+  {
+    "id": "bay-breasted-warbler",
+    "commonName": "Bay-breasted Warbler",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": true,
+    "origin": "native",
+    "status": "imported",
+    "group": "warblers",
+    "strata": [
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "sexes": "Male and female photographs are shown with clear labels.",
+    "stratumNote": "Estimated height band: mid.",
+    "photos": [
+      {
+        "role": "male",
+        "label": "Male",
+        "src": "images/bay-breasted-warbler-male.jpg",
+        "alt": "Male Bay-breasted Warbler",
+        "width": 750,
+        "height": 1000,
+        "author": "Ryan A. Candee",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bay-breasted_Warbler-Prospect_Park-1.jpg",
+        "file": "File:Bay-breasted Warbler-Prospect Park-1.jpg"
+      },
+      {
+        "role": "female",
+        "label": "Female",
+        "src": "images/bay-breasted-warbler-female.jpg",
+        "alt": "Female Bay-breasted Warbler",
+        "width": 1000,
+        "height": 723,
+        "author": "Andy Reago & Chrissy McClarren",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bay-breasted_Warbler_%28female%29_%2833975432378%29.jpg",
+        "file": "File:Bay-breasted Warbler (female) (33975432378).jpg"
+      }
+    ]
+  },
+  {
+    "id": "tawny-capped-euphonia",
+    "commonName": "Tawny-capped Euphonia",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": true,
+    "origin": "native",
+    "status": "imported",
+    "group": "tanagers",
+    "strata": [
+      "canopy",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "sexes": "This species is typically sexually dimorphic; an openly licensed male or female photograph is still missing.",
+    "stratumNote": "Estimated height band: canopy, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/tawny-capped-euphonia.jpg",
+        "alt": "Tawny-capped Euphonia. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 666,
+        "author": "Dominic Sherony",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tawny-capped_Euphonia_%28Euphonia_anneae%29_%284505535488%29_%282%29.jpg",
+        "file": "File:Tawny-capped Euphonia (Euphonia anneae) (4505535488) (2).jpg"
+      }
+    ]
+  },
+  {
+    "id": "bronze-tailed-plumeleteer",
+    "commonName": "Bronze-tailed Plumeleteer",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "hummingbirds",
+    "strata": [
+      "canopy",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: canopy, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/bronze-tailed-plumeleteer.jpg",
+        "alt": "Bronze-tailed Plumeleteer. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 742,
+        "author": "John Gerrard Keulemans",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chalybura_urochrysia_melanorrhoa_1902.jpg",
+        "file": "File:Chalybura urochrysia melanorrhoa 1902.jpg"
+      }
+    ]
+  },
+  {
+    "id": "cinnamon-becard",
+    "commonName": "Cinnamon Becard",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "flycatchers",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: low, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/cinnamon-becard.jpg",
+        "alt": "Cinnamon Becard. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 797,
+        "author": "gailhampshire from Cradley, Malvern, U.K",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cinnamon_Becard_Pachyramphus_cinnamomeus_%2841929908125%29.jpg",
+        "file": "File:Cinnamon Becard Pachyramphus cinnamomeus (41929908125).jpg"
+      }
+    ]
+  },
+  {
+    "id": "streak-headed-woodcreeper",
+    "commonName": "Streak-headed Woodcreeper",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: low, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/streak-headed-woodcreeper.jpg",
+        "alt": "Streak-headed Woodcreeper. The source photo is not labeled male or female.",
+        "width": 712,
+        "height": 1000,
+        "author": "Marc Athanase Parfait Œillet Des Murs (1804-1878)",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lepidocolaptes_souleyetii_1849.jpg",
+        "file": "File:Lepidocolaptes souleyetii 1849.jpg"
+      }
+    ]
+  },
+  {
+    "id": "cape-may-warbler",
+    "commonName": "Cape May Warbler",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": true,
+    "origin": "native",
+    "status": "imported",
+    "group": "warblers",
+    "strata": [
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "sexes": "Male and female photographs are shown with clear labels.",
+    "stratumNote": "Estimated height band: mid.",
+    "photos": [
+      {
+        "role": "male",
+        "label": "Male",
+        "src": "images/cape-may-warbler-male.jpg",
+        "alt": "Male Cape May Warbler",
+        "width": 1000,
+        "height": 563,
+        "author": "Andy Reago & Chrissy McClarren",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cape_May_Warbler_%288433805623%29.jpg",
+        "file": "File:Cape May Warbler (8433805623).jpg"
+      },
+      {
+        "role": "female",
+        "label": "Female",
+        "src": "images/cape-may-warbler-female.jpg",
+        "alt": "Female Cape May Warbler",
+        "width": 1000,
+        "height": 715,
+        "author": "Andy Reago & Chrissy McClarren",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cape_May_Warbler_%28female%29_%2847800657082%29.jpg",
+        "file": "File:Cape May Warbler (female) (47800657082).jpg"
+      }
+    ]
+  },
+  {
+    "id": "scale-crested-pygmy-tyrant",
+    "commonName": "Scale-crested Pygmy-Tyrant",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "flycatchers",
+    "strata": [
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/scale-crested-pygmy-tyrant.jpg",
+        "alt": "Scale-crested Pygmy-Tyrant. The source photo is not labeled male or female.",
+        "width": 750,
+        "height": 1000,
+        "author": "Chrystopher Canaday, Aves y Conservación",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lophotriccus_pileatus_-_Ecuador.jpg",
+        "file": "File:Lophotriccus pileatus - Ecuador.jpg"
+      }
+    ]
+  },
+  {
+    "id": "yellow-crowned-euphonia",
+    "commonName": "Yellow-crowned Euphonia",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": true,
+    "origin": "native",
+    "status": "imported",
+    "group": "tanagers",
+    "strata": [
+      "canopy",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Male and female photographs are shown with clear labels.",
+    "stratumNote": "Estimated height band: canopy, mid.",
+    "photos": [
+      {
+        "role": "male",
+        "label": "Male",
+        "src": "images/yellow-crowned-euphonia-male.jpg",
+        "alt": "Male Yellow-crowned Euphonia",
+        "width": 1000,
+        "height": 600,
+        "author": "Becky Matsubara from El Sobrante, California",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Yellow-crowned_Euphonia_%28male%29_%2849849968831%29.jpg",
+        "file": "File:Yellow-crowned Euphonia (male) (49849968831).jpg"
+      },
+      {
+        "role": "female",
+        "label": "Female",
+        "src": "images/yellow-crowned-euphonia-female.jpg",
+        "alt": "Female Yellow-crowned Euphonia",
+        "width": 1000,
+        "height": 600,
+        "author": "Becky Matsubara from El Sobrante, California",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Yellow-crowned_Euphonia_%28female%29_%2849849966531%29.jpg",
+        "file": "File:Yellow-crowned Euphonia (female) (49849966531).jpg"
+      }
+    ]
+  },
+  {
+    "id": "gartered-violaceous-trogon",
+    "commonName": "Gartered Violaceous Trogon",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": true,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "sexes": "This species is typically sexually dimorphic; an openly licensed male or female photograph is still missing.",
+    "stratumNote": "Estimated height band: low, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/gartered-violaceous-trogon.jpg",
+        "alt": "Gartered Violaceous Trogon. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 666,
+        "author": "Alastair Rae from London, United Kingdom",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gartered_Trogon%2C_Mexico_%283328453885%29.jpg",
+        "file": "File:Gartered Trogon, Mexico (3328453885).jpg"
+      }
+    ]
+  },
+  {
+    "id": "common-tody-flycatcher",
+    "commonName": "Common Tody-Flycatcher",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "flycatchers",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: low, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/common-tody-flycatcher.jpg",
+        "alt": "Common Tody-Flycatcher. The source photo is not labeled male or female.",
+        "width": 829,
+        "height": 1000,
+        "author": "Charles J. Sharp",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Common_tody-flycatcher_%28Todirostrum_cinereum%29.JPG",
+        "file": "File:Common tody-flycatcher (Todirostrum cinereum).JPG"
+      }
+    ]
+  },
+  {
+    "id": "olive-backed-euphonia",
+    "commonName": "Olive-backed Euphonia",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": true,
+    "origin": "native",
+    "status": "imported",
+    "group": "tanagers",
+    "strata": [
+      "canopy",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Male and female photographs are shown with clear labels.",
+    "stratumNote": "Estimated height band: canopy, mid.",
+    "photos": [
+      {
+        "role": "male",
+        "label": "Male",
+        "src": "images/olive-backed-euphonia-male.jpg",
+        "alt": "Male Olive-backed Euphonia",
+        "width": 800,
+        "height": 522,
+        "author": "Steve Garvie from Dunfermline, Fife, Scotland",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Flickr_-_Rainbirder_-_Olive-backed_Euphonia_%28Euphonia_gouldi%29_male_%281%29.jpg",
+        "file": "File:Flickr - Rainbirder - Olive-backed Euphonia (Euphonia gouldi) male (1).jpg"
+      },
+      {
+        "role": "female",
+        "label": "Female",
+        "src": "images/olive-backed-euphonia-female.jpg",
+        "alt": "Female Olive-backed Euphonia",
+        "width": 1000,
+        "height": 743,
+        "author": "Internet Archive Book Images",
+        "license": "No restrictions",
+        "licenseUrl": "https://www.flickr.com/commons/usage/",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Foreign_birds_for_cage_and_aviary_%281910%29_%2814564282028%29.jpg",
+        "file": "File:Foreign birds for cage and aviary (1910) (14564282028).jpg"
+      }
+    ]
+  },
+  {
+    "id": "long-tailed-tyrant",
+    "commonName": "Long-tailed Tyrant",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "flycatchers",
+    "strata": [
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/long-tailed-tyrant.jpg",
+        "alt": "Long-tailed Tyrant. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 863,
+        "author": "Dario Sanches from São Paulo, Brazil",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Colonia_colonus_-Parque_Nacional_do_Itatiaia%2C_Rio_de_Janeiro%2C_Brazil-8.jpg",
+        "file": "File:Colonia colonus -Parque Nacional do Itatiaia, Rio de Janeiro, Brazil-8.jpg"
+      }
+    ]
+  },
+  {
+    "id": "mistletoe-tyrannulet",
+    "commonName": "Mistletoe Tyrannulet",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "flycatchers",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: low, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/mistletoe-tyrannulet.jpg",
+        "alt": "Mistletoe Tyrannulet. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 800,
+        "author": "Cephas",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Zimmerius_parvus_Clbrg_01.jpg",
+        "file": "File:Zimmerius parvus Clbrg 01.jpg"
+      }
+    ]
+  },
+  {
+    "id": "rufous-winged-tanager",
+    "commonName": "Rufous-winged Tanager",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": true,
+    "origin": "native",
+    "status": "imported",
+    "group": "tanagers",
+    "strata": [
+      "canopy",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "sexes": "This species is typically sexually dimorphic; an openly licensed male or female photograph is still missing.",
+    "stratumNote": "Estimated height band: canopy, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/rufous-winged-tanager.jpg",
+        "alt": "Rufous-winged Tanager. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 667,
+        "author": "Andrew Hrycyna",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tangara_lavinia_182297538.jpg",
+        "file": "File:Tangara lavinia 182297538.jpg"
+      }
+    ]
+  },
+  {
+    "id": "bay-wren",
+    "commonName": "Bay Wren",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "songbirds",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: low, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/bay-wren.jpg",
+        "alt": "Bay Wren. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 913,
+        "author": "Jerry Oldenettel",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bay_Wren.jpg",
+        "file": "File:Bay Wren.jpg"
+      }
+    ]
+  },
+  {
+    "id": "southern-rough-winged-swallow",
+    "commonName": "Southern Rough-winged Swallow",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "canopy",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: canopy, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/southern-rough-winged-swallow.jpg",
+        "alt": "Southern Rough-winged Swallow. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 1000,
+        "author": "Charles J. Sharp",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Southern_rough-winged_swallow_%28Stelgidopteryx_ruficollis_ruficollis%29.JPG",
+        "file": "File:Southern rough-winged swallow (Stelgidopteryx ruficollis ruficollis).JPG"
+      }
+    ]
+  },
+  {
+    "id": "dull-mantled-antbird",
+    "commonName": "Dull-mantled Antbird",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": true,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "sexes": "This species is typically sexually dimorphic; an openly licensed male or female photograph is still missing.",
+    "stratumNote": "Estimated height band: low, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/dull-mantled-antbird.jpg",
+        "alt": "Dull-mantled Antbird. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 667,
+        "author": "Francesco Veronesi from Italy",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dull-mantled_Antbird_-_Braulio_Carrillo_-_Costa_Rica_%2826697353765%29.jpg",
+        "file": "File:Dull-mantled Antbird - Braulio Carrillo - Costa Rica (26697353765).jpg"
+      }
+    ]
+  },
+  {
+    "id": "golden-winged-warbler",
+    "commonName": "Golden-winged Warbler",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": true,
+    "origin": "native",
+    "status": "imported",
+    "group": "warblers",
+    "strata": [
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "sexes": "Male and female photographs are shown with clear labels.",
+    "stratumNote": "Estimated height band: mid.",
+    "photos": [
+      {
+        "role": "male",
+        "label": "Male",
+        "src": "images/golden-winged-warbler-male.jpg",
+        "alt": "Male Golden-winged Warbler",
+        "width": 1000,
+        "height": 695,
+        "author": "Caleb Putnam",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Golden-winged_Warbler_%28male%29%2C_Kate%27s_Grade%2C_Marquette_Co.%2C_MI%2C_19_May_2015_%2817915241585%29.jpg",
+        "file": "File:Golden-winged Warbler (male), Kate's Grade, Marquette Co., MI, 19 May 2015 (17915241585).jpg"
+      },
+      {
+        "role": "female",
+        "label": "Female",
+        "src": "images/golden-winged-warbler-female.jpg",
+        "alt": "Female Golden-winged Warbler",
+        "width": 1000,
+        "height": 563,
+        "author": "Andy Reago & Chrissy McClarren",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Golden-winged_Warbler_-_female_%287967725254%29.jpg",
+        "file": "File:Golden-winged Warbler - female (7967725254).jpg"
+      }
+    ]
+  },
+  {
+    "id": "red-billed-pigeon",
+    "commonName": "Red-billed Pigeon",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: ground, low.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/red-billed-pigeon.jpg",
+        "alt": "Red-billed Pigeon. The source photo is not labeled male or female.",
+        "width": 800,
+        "height": 547,
+        "author": "Michael Woodruff",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Patagioenas_flavirostris_-Costa_Rica-8.jpg",
+        "file": "File:Patagioenas flavirostris -Costa Rica-8.jpg"
+      }
+    ]
+  },
+  {
+    "id": "black-cowled-oriole",
+    "commonName": "Black-cowled Oriole",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": true,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "canopy",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "sexes": "This species is typically sexually dimorphic; an openly licensed male or female photograph is still missing.",
+    "stratumNote": "Estimated height band: canopy, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/black-cowled-oriole.jpg",
+        "alt": "Black-cowled Oriole. The source photo is not labeled male or female.",
+        "width": 667,
+        "height": 1000,
+        "author": "Charles J. Sharp",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Black-cowled_oriole_%28Icterus_prosthemelas_prosthemelas%29_Orange_Walk.jpg",
+        "file": "File:Black-cowled oriole (Icterus prosthemelas prosthemelas) Orange Walk.jpg"
+      }
+    ]
+  },
+  {
+    "id": "crested-caracara",
+    "commonName": "Crested Caracara",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "canopy",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: canopy, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/crested-caracara.jpg",
+        "alt": "Crested Caracara. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 889,
+        "author": "Charles J. Sharp",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Southern_crested_caracara_%28Caracara_plancus%29_head_adult.JPG",
+        "file": "File:Southern crested caracara (Caracara plancus) head adult.JPG"
+      }
+    ]
+  },
+  {
+    "id": "smoky-brown-woodpecker",
+    "commonName": "Smoky-brown Woodpecker",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": true,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "sexes": "Male and female photographs are shown with clear labels.",
+    "stratumNote": "Estimated height band: mid.",
+    "photos": [
+      {
+        "role": "male",
+        "label": "Male",
+        "src": "images/smoky-brown-woodpecker-male.jpg",
+        "alt": "Male Smoky-brown Woodpecker",
+        "width": 1000,
+        "height": 800,
+        "author": "Anthony Kaduck",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Smoky-brown_Woodpecker_%28male%29.jpg",
+        "file": "File:Smoky-brown Woodpecker (male).jpg"
+      },
+      {
+        "role": "female",
+        "label": "Female",
+        "src": "images/smoky-brown-woodpecker-female.jpg",
+        "alt": "Female Smoky-brown Woodpecker",
+        "width": 729,
+        "height": 1000,
+        "author": "Nomdeploom",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Smoky-brown_woodpecker_%28F%29.jpg",
+        "file": "File:Smoky-brown woodpecker (F).jpg"
+      }
+    ]
+  },
+  {
+    "id": "ruby-throated-hummingbird",
+    "commonName": "Ruby-throated Hummingbird",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": true,
+    "origin": "native",
+    "status": "imported",
+    "group": "hummingbirds",
+    "strata": [
+      "canopy",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Male and female photographs are shown with clear labels.",
+    "stratumNote": "Estimated height band: canopy, mid.",
+    "photos": [
+      {
+        "role": "male",
+        "label": "Male",
+        "src": "images/ruby-throated-hummingbird-male.jpg",
+        "alt": "Male Ruby-throated Hummingbird",
+        "width": 1000,
+        "height": 666,
+        "author": "Paul Danese",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:20260613_ruby_throated_hummingbird_bafflin_audubon_PD06695.jpg",
+        "file": "File:20260613 ruby throated hummingbird bafflin audubon PD06695.jpg"
+      },
+      {
+        "role": "female",
+        "label": "Female",
+        "src": "images/ruby-throated-hummingbird-female.jpg",
+        "alt": "Female Ruby-throated Hummingbird",
+        "width": 1000,
+        "height": 1000,
+        "author": "Charles J. Sharp",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ruby-throated_hummingbird_%28Archilochus_colubris%29_female_Palopo.jpg",
+        "file": "File:Ruby-throated hummingbird (Archilochus colubris) female Palopo.jpg"
+      }
+    ]
+  },
+  {
+    "id": "white-necked-jacobin",
+    "commonName": "White-necked Jacobin",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "hummingbirds",
+    "strata": [
+      "canopy",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: canopy, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/white-necked-jacobin.jpg",
+        "alt": "White-necked Jacobin. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 666,
+        "author": "Charles J. Sharp",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:White-necked_Jacobin_%28Florisuga_mellivora_mellivora%29_male_in_flight.jpg",
+        "file": "File:White-necked Jacobin (Florisuga mellivora mellivora) male in flight.jpg"
+      }
+    ]
+  },
+  {
+    "id": "slaty-tailed-trogon",
+    "commonName": "Slaty-tailed Trogon",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": true,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Male and female photographs are shown with clear labels.",
+    "stratumNote": "Estimated height band: low, mid.",
+    "photos": [
+      {
+        "role": "male",
+        "label": "Male",
+        "src": "images/slaty-tailed-trogon-male.jpg",
+        "alt": "Male Slaty-tailed Trogon",
+        "width": 1000,
+        "height": 667,
+        "author": "caspar s",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Slaty-tailed_Trogon_male_%285569351499%29.jpg",
+        "file": "File:Slaty-tailed Trogon male (5569351499).jpg"
+      },
+      {
+        "role": "female",
+        "label": "Female",
+        "src": "images/slaty-tailed-trogon-female.jpg",
+        "alt": "Female Slaty-tailed Trogon",
+        "width": 940,
+        "height": 1000,
+        "author": "Commons",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Slaty-tailed_trogon_%28Trogon_massena_hoffmanni%29_female_CROP.jpg",
+        "file": "File:Slaty-tailed trogon (Trogon massena hoffmanni) female CROP.jpg"
+      }
+    ]
+  },
+  {
+    "id": "yellow-bellied-flycatcher",
+    "commonName": "Yellow-bellied Flycatcher",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "flycatchers",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: low, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/yellow-bellied-flycatcher.jpg",
+        "alt": "Yellow-bellied Flycatcher. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 666,
+        "author": "Cephas",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Empidonax_flaviventris_GJ2.jpg",
+        "file": "File:Empidonax flaviventris GJ2.jpg"
+      }
+    ]
+  },
+  {
+    "id": "long-billed-gnatwren",
+    "commonName": "Long-billed Gnatwren",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "songbirds",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: low, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/long-billed-gnatwren.jpg",
+        "alt": "Long-billed Gnatwren. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 684,
+        "author": "Rick elis.simpson",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Long-billed_Gnatwren.jpg",
+        "file": "File:Long-billed Gnatwren.jpg"
+      }
+    ]
+  },
+  {
+    "id": "great-tailed-grackle",
+    "commonName": "Great-tailed Grackle",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/great-tailed-grackle.jpg",
+        "alt": "Great-tailed Grackle. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 666,
+        "author": "Charles J. Sharp",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Great-tailed_grackle_%28Quiscalus_mexicanus_mexicanus%29_male_Copan.jpg",
+        "file": "File:Great-tailed grackle (Quiscalus mexicanus mexicanus) male Copan.jpg"
+      }
+    ]
+  },
+  {
+    "id": "laughing-falcon",
+    "commonName": "Laughing Falcon",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "canopy",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: canopy, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/laughing-falcon.jpg",
+        "alt": "Laughing Falcon. The source photo is not labeled male or female.",
+        "width": 667,
+        "height": 1000,
+        "author": "Andreas Trepte",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lachfalke.jpg",
+        "file": "File:Lachfalke.jpg"
+      }
+    ]
+  },
+  {
+    "id": "sulphur-rumped-flycatcher",
+    "commonName": "Sulphur-rumped Flycatcher",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "flycatchers",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: low, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/sulphur-rumped-flycatcher.jpg",
+        "alt": "Sulphur-rumped Flycatcher. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 666,
+        "author": "Adam Jackson",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Myiobius_sulphureipygius_415856002.jpg",
+        "file": "File:Myiobius sulphureipygius 415856002.jpg"
+      }
+    ]
+  },
+  {
+    "id": "northern-rough-winged-swallow",
+    "commonName": "Northern Rough-winged Swallow",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "canopy",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: canopy, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/northern-rough-winged-swallow.jpg",
+        "alt": "Northern Rough-winged Swallow. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 988,
+        "author": "Basar",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stelgidopteryx_serripennis.jpg",
+        "file": "File:Stelgidopteryx serripennis.jpg"
+      }
+    ]
+  },
+  {
+    "id": "dusky-antbird",
+    "commonName": "Dusky Antbird",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": true,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Male and female photographs are shown with clear labels.",
+    "stratumNote": "Estimated height band: low, mid.",
+    "photos": [
+      {
+        "role": "male",
+        "label": "Male",
+        "src": "images/dusky-antbird-male.jpg",
+        "alt": "Male Dusky Antbird",
+        "width": 899,
+        "height": 899,
+        "author": "Hector Bottai",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cercomacra_tyrannina_-_Dusky_Antbird_%28male%29.JPG",
+        "file": "File:Cercomacra tyrannina - Dusky Antbird (male).JPG"
+      },
+      {
+        "role": "female",
+        "label": "Female",
+        "src": "images/dusky-antbird-female.jpg",
+        "alt": "Female Dusky Antbird",
+        "width": 480,
+        "height": 600,
+        "author": "Michael Woodruff from Spokane, Washington, USA",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dusky_Antbird_-_female_%28443003560%29.jpg",
+        "file": "File:Dusky Antbird - female (443003560).jpg"
+      }
+    ]
+  },
+  {
+    "id": "western-cattle-egret",
+    "commonName": "Western Cattle-Egret",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: ground, low.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/western-cattle-egret.jpg",
+        "alt": "Western Cattle-Egret. The source photo is not labeled male or female.",
+        "width": 750,
+        "height": 1000,
+        "author": "This Photo was taken by Timothy A. Gonsalves. Feel free to use my photos, but please mention me as the author. I would much appreciate if you send me an email tagooty@yahoo.com or ",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Western_Cattle-Egret_Fumba_Zanzibar_Oct26_A7CR_14789.jpg",
+        "file": "File:Western Cattle-Egret Fumba Zanzibar Oct26 A7CR 14789.jpg"
+      }
+    ]
+  },
+  {
+    "id": "northern-tropical-pewee",
+    "commonName": "Northern Tropical Pewee",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "flycatchers",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: low, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/northern-tropical-pewee.jpg",
+        "alt": "Northern Tropical Pewee. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 666,
+        "author": "Charles J. Sharp",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Northern_tropical_pewee_%28Contopus_bogotensis%29_Arenal.jpg",
+        "file": "File:Northern tropical pewee (Contopus bogotensis) Arenal.jpg"
+      }
+    ]
+  },
+  {
+    "id": "black-headed-nightingale-thrush",
+    "commonName": "Black-headed Nightingale-Thrush",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "songbirds",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: ground, low.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/black-headed-nightingale-thrush.jpg",
+        "alt": "Black-headed Nightingale-Thrush. The source photo is not labeled male or female.",
+        "width": 800,
+        "height": 574,
+        "author": "Michael Woodruff",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Catharus_mexicanus_-Costa_Rica-8.jpg",
+        "file": "File:Catharus mexicanus -Costa Rica-8.jpg"
+      }
+    ]
+  },
+  {
+    "id": "fawn-throated-foliage-gleaner",
+    "commonName": "Fawn-throated Foliage-gleaner",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: low, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/fawn-throated-foliage-gleaner.jpg",
+        "alt": "Fawn-throated Foliage-gleaner. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 563,
+        "author": "BhuyanBhaskar",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Turtle_%28a_species_of_animal%29.jpg",
+        "file": "File:Turtle (a species of animal).jpg"
+      }
+    ]
+  },
+  {
+    "id": "white-throated-shrike-tanager",
+    "commonName": "White-throated Shrike-Tanager",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": true,
+    "origin": "native",
+    "status": "imported",
+    "group": "tanagers",
+    "strata": [
+      "canopy",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Male and female photographs are shown with clear labels.",
+    "stratumNote": "Estimated height band: canopy, mid.",
+    "photos": [
+      {
+        "role": "male",
+        "label": "Male",
+        "src": "images/white-throated-shrike-tanager-male.jpg",
+        "alt": "Male White-throated Shrike-Tanager",
+        "width": 1000,
+        "height": 780,
+        "author": "Internet Archive Book Images",
+        "license": "No restrictions",
+        "licenseUrl": "https://www.flickr.com/commons/usage/",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bird_neighbors._An_introductory_acquaintance_with_one_hundred_and_fifty_birds_commonly_found_in_the_gardens%2C_meadows%2C_and_woods_about_our_homes%3B_%281900%29_%2814562336390%29.jpg",
+        "file": "File:Bird neighbors. An introductory acquaintance with one hundred and fifty birds commonly found in the gardens, meadows, and woods about our homes; (1900) (14562336390).jpg"
+      },
+      {
+        "role": "female",
+        "label": "Female",
+        "src": "images/white-throated-shrike-tanager-female.jpg",
+        "alt": "Female White-throated Shrike-Tanager",
+        "width": 1000,
+        "height": 712,
+        "author": "Internet Archive Book Images",
+        "license": "No restrictions",
+        "licenseUrl": "https://www.flickr.com/commons/usage/",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bird_neighbors._An_introductory_acquaintance_with_one_hundred_and_fifty_birds_commonly_found_in_the_gardens%2C_meadows%2C_and_woods_about_our_homes_%281903%29_%2814752917994%29.jpg",
+        "file": "File:Bird neighbors. An introductory acquaintance with one hundred and fifty birds commonly found in the gardens, meadows, and woods about our homes (1903) (14752917994).jpg"
+      }
+    ]
+  },
+  {
+    "id": "northern-yellow-warbler",
+    "commonName": "Northern Yellow Warbler",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": true,
+    "origin": "native",
+    "status": "imported",
+    "group": "warblers",
+    "strata": [
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "sexes": "Male and female photographs are shown with clear labels.",
+    "stratumNote": "Estimated height band: mid.",
+    "photos": [
+      {
+        "role": "male",
+        "label": "Male",
+        "src": "images/northern-yellow-warbler-male.jpg",
+        "alt": "Male Northern Yellow Warbler",
+        "width": 637,
+        "height": 1000,
+        "author": "Internet Archive Book Images",
+        "license": "No restrictions",
+        "licenseUrl": "https://www.flickr.com/commons/usage/",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_warblers_of_North_America_%281907%29_%2814747827984%29.jpg",
+        "file": "File:The warblers of North America (1907) (14747827984).jpg"
+      },
+      {
+        "role": "female",
+        "label": "Female",
+        "src": "images/northern-yellow-warbler-female.jpg",
+        "alt": "Female Northern Yellow Warbler",
+        "width": 659,
+        "height": 1000,
+        "author": "Internet Archive Book Images",
+        "license": "No restrictions",
+        "licenseUrl": "https://www.flickr.com/commons/usage/",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_warblers_of_North_America_%281907%29_%2814771581133%29.jpg",
+        "file": "File:The warblers of North America (1907) (14771581133).jpg"
+      }
+    ]
+  },
+  {
+    "id": "northern-plain-xenops",
+    "commonName": "Northern Plain-Xenops",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: low, mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/northern-plain-xenops.jpg",
+        "alt": "Northern Plain-Xenops. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 1000,
+        "author": "Anthony Batista",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Xenops_mexicanus_441774832.jpg",
+        "file": "File:Xenops mexicanus 441774832.jpg"
+      }
+    ]
+  },
+  {
+    "id": "streak-crowned-antvireo",
+    "commonName": "Streak-crowned Antvireo",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/streak-crowned-antvireo.jpg",
+        "alt": "Streak-crowned Antvireo. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 750,
+        "author": "Nick Athanas",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dysithamnus_striaticeps_-_Streak-crowned_Antvireo.jpg",
+        "file": "File:Dysithamnus striaticeps - Streak-crowned Antvireo.jpg"
+      }
+    ]
+  },
+  {
+    "id": "black-throated-blue-warbler",
+    "commonName": "Black-throated Blue Warbler",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": true,
+    "origin": "native",
+    "status": "imported",
+    "group": "warblers",
+    "strata": [
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "sexes": "Male and female photographs are shown with clear labels.",
+    "stratumNote": "Estimated height band: mid.",
+    "photos": [
+      {
+        "role": "male",
+        "label": "Male",
+        "src": "images/black-throated-blue-warbler-male.jpg",
+        "alt": "Male Black-throated Blue Warbler",
+        "width": 1000,
+        "height": 770,
+        "author": "Rhododendrites",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Black-throated_blue_warbler_%2881191%29.jpg",
+        "file": "File:Black-throated blue warbler (81191).jpg"
+      },
+      {
+        "role": "female",
+        "label": "Female",
+        "src": "images/black-throated-blue-warbler-female.jpg",
+        "alt": "Female Black-throated Blue Warbler",
+        "width": 1000,
+        "height": 783,
+        "author": "Andy Reago & Chrissy McClarren",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Black-throated_Blue_Warbler_%28female%29_%2843613254615%29.jpg",
+        "file": "File:Black-throated Blue Warbler (female) (43613254615).jpg"
+      }
+    ]
+  },
+  {
+    "id": "yellow-bellied-elaenia",
+    "commonName": "Yellow-bellied Elaenia",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/yellow-bellied-elaenia.jpg",
+        "alt": "Yellow-bellied Elaenia. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 1000,
+        "author": "Anthony Batista",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Elaenia_flavogaster_406708962.jpg",
+        "file": "File:Elaenia flavogaster 406708962.jpg"
+      }
+    ]
+  },
+  {
+    "id": "green-breasted-mango",
+    "commonName": "Green-breasted Mango",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/green-breasted-mango.jpg",
+        "alt": "Green-breasted Mango. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 755,
+        "author": "Dick Daniels (http://theworldbirds.org/)",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Green-breasted_Mango_%28Anthracothorax_prevostii%29RWD.jpg",
+        "file": "File:Green-breasted Mango (Anthracothorax prevostii)RWD.jpg"
+      }
+    ]
+  },
+  {
+    "id": "common-squirrel-cuckoo",
+    "commonName": "Common Squirrel-Cuckoo",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: mid.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/common-squirrel-cuckoo.jpg",
+        "alt": "Common Squirrel-Cuckoo. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 769,
+        "author": "Dario Sanches",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:ALMA-DE-GATO_%28Piaya_cayana%29.jpg",
+        "file": "File:ALMA-DE-GATO (Piaya cayana).jpg"
+      }
+    ]
+  },
+  {
+    "id": "short-billed-pigeon",
+    "commonName": "Short-billed Pigeon",
+    "scientificName": "—",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
+    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "sexes": "Sexes not separated in the bundled photograph set.",
+    "stratumNote": "Estimated height band: ground, low.",
+    "photos": [
+      {
+        "role": "unsexed",
+        "label": "Sex not labeled",
+        "src": "images/short-billed-pigeon.jpg",
+        "alt": "Short-billed Pigeon. The source photo is not labeled male or female.",
+        "width": 1000,
+        "height": 666,
+        "author": "Dominic Sherony",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Patagioenas_nigrirostris.jpg",
+        "file": "File:Patagioenas nigrirostris.jpg"
+      }
+    ]
+  }
+]

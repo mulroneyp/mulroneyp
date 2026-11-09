@@ -90,6 +90,8 @@ struct ResolvedPlace {
     var displayName: String
     var isOutside: Bool
     var notice: String?
+    var imported: ImportedLocationRecord? = nil
+    var monthIndex: Int = Calendar.current.component(.month, from: Date()) - 1
 }
 
 enum GuideLoader {

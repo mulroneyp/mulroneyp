@@ -3,5 +3,7 @@ xcuserdata/
 DerivedData/
 .DS_Store
 scripts/photo_progress.json
+scripts/.ebird_supplemental_progress.json
+scripts/.fill_dimorphic_progress.json
 __pycache__/
 *.pyc

@@ -9,21 +9,86 @@ final class GuideModel: ObservableObject {
     }
     @Published var searchText = ""
     @Published var stratum = "all"
+    /// 0 = January … 11 = December. Defaults to the device’s current month.
+    @Published var selectedMonthIndex: Int
+    @Published var hideNearZero = true
+    @Published var showFlaggedTaxa = false
+    @Published var importMessage: String?
+
+    let imports = ImportedLocationStore()
+    private(set) var catalog: SpeciesCatalog?
 
     static let storageKey = "handy.locationQuery"
+    static let monthKey = "handy.selectedMonthIndex"
+    static let hideNearZeroKey = "handy.hideNearZero"
 
-    init() {
+    init(now: Date = Date(), calendar: Calendar = .current) {
         locationQuery = UserDefaults.standard.string(forKey: Self.storageKey) ?? ""
+        if let stored = UserDefaults.standard.object(forKey: Self.monthKey) as? Int,
+           (0..<12).contains(stored) {
+            selectedMonthIndex = stored
+        } else {
+            selectedMonthIndex = calendar.component(.month, from: now) - 1
+        }
+        if UserDefaults.standard.object(forKey: Self.hideNearZeroKey) != nil {
+            hideNearZero = UserDefaults.standard.bool(forKey: Self.hideNearZeroKey)
+        }
         do {
-            guide = try GuideLoader.load()
+            let guide = try GuideLoader.load()
+            self.guide = guide
+            catalog = SpeciesCatalog(guide: guide, supplemental: SpeciesCatalog.loadSupplemental())
         } catch {
             loadError = "The species list could not be read from the app."
         }
     }
 
+    var selectedMonthName: String {
+        Calendar.current.monthSymbols[selectedMonthIndex]
+    }
+
+    var isUsingDeviceMonth: Bool {
+        let deviceMonth = Calendar.current.component(.month, from: Date()) - 1
+        return selectedMonthIndex == deviceMonth
+    }
+
+    func setMonthIndex(_ index: Int) {
+        guard (0..<12).contains(index) else { return }
+        selectedMonthIndex = index
+        UserDefaults.standard.set(index, forKey: Self.monthKey)
+    }
+
+    func resetMonthToDevice() {
+        setMonthIndex(Calendar.current.component(.month, from: Date()) - 1)
+    }
+
+    func setHideNearZero(_ value: Bool) {
+        hideNearZero = value
+        UserDefaults.standard.set(value, forKey: Self.hideNearZeroKey)
+    }
+
     var place: ResolvedPlace? {
         guard let guide else { return nil }
-        return LocationResolver.resolve(query: locationQuery, guide: guide)
+        if let imported = imports.location(matchingQuery: locationQuery), let catalog {
+            let coverage = ImportedCoverageBuilder.coverage(
+                for: imported,
+                catalog: catalog,
+                monthIndex: selectedMonthIndex,
+                includeFlagged: showFlaggedTaxa
+            )
+            return ResolvedPlace(
+                query: locationQuery,
+                coverage: coverage,
+                district: coverage.districts.first,
+                displayName: imported.name,
+                isOutside: false,
+                notice: nil,
+                imported: imported,
+                monthIndex: selectedMonthIndex
+            )
+        }
+        var resolved = LocationResolver.resolve(query: locationQuery, guide: guide)
+        resolved.monthIndex = selectedMonthIndex
+        return resolved
     }
 
     func stratumInfo(_ id: String) -> StratumInfo? {
@@ -34,10 +99,23 @@ final class GuideModel: ObservableObject {
         coverage.groups.first { $0.id == id }?.label ?? id
     }
 
+    func frequency(for species: Species, in place: ResolvedPlace) -> Double? {
+        guard let imported = place.imported else { return nil }
+        let match = imported.species.first {
+            SpeciesCatalog.normalize($0.commonName) == SpeciesCatalog.normalize(species.commonName)
+        }
+        return match?.mean(monthIndex: selectedMonthIndex)
+    }
+
     func filteredSpecies(in place: ResolvedPlace) -> [Species] {
         let words = LocationResolver.normalize(searchText).split(separator: " ").map(String.init)
         return place.coverage.species.filter { species in
             if stratum != "all" && !species.strata.contains(stratum) {
+                return false
+            }
+            if place.imported != nil, hideNearZero,
+               let frequency = frequency(for: species, in: place),
+               frequency < EBirdBarchartParser.nearZeroThreshold {
                 return false
             }
             if words.isEmpty { return true }
@@ -54,5 +132,34 @@ final class GuideModel: ObservableObject {
             ].joined(separator: " "))
             return words.allSatisfy { hay.contains($0) }
         }
+    }
+
+    func sortedForDisplay(_ birds: [Species], place: ResolvedPlace) -> [Species] {
+        guard place.imported != nil else {
+            return birds.sorted { $0.commonName < $1.commonName }
+        }
+        return birds.sorted { lhs, rhs in
+            let lf = frequency(for: lhs, in: place) ?? 0
+            let rf = frequency(for: rhs, in: place) ?? 0
+            if lf != rf { return lf > rf }
+            return lhs.commonName < rhs.commonName
+        }
+    }
+
+    @discardableResult
+    func importBarchart(data: Data, sourceFileName: String, displayName: String?) throws -> ImportedLocationRecord {
+        let parsed = try EBirdBarchartParser.parse(data: data, sourceFileName: sourceFileName)
+        let record = imports.upsert(from: parsed, displayName: displayName)
+        locationQuery = record.name
+        importMessage = "Imported \(parsed.species.count) taxa for \(record.name) (\(parsed.resolvableSpeciesCount) species; \(parsed.flaggedTaxonCount) flagged)."
+        return record
+    }
+
+    func importBundledSample() throws {
+        guard let url = imports.bundledFixtureURL() else {
+            throw EBirdBarchartParser.ParseError.empty
+        }
+        let data = try Data(contentsOf: url)
+        try importBarchart(data: data, sourceFileName: url.lastPathComponent, displayName: nil)
     }
 }
