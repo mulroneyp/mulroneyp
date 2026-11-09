@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Handy Field Guide — App Icon vector sketch
+  One character: bird looking through binoculars (not bird beside separate optics).
+  Matches composition of source-1024.png (authoritative raster).
+  Palette aligns with HandyFieldGuide/Theme.swift GuideColor.
+  Export sizes: python3 scripts/generate_app_icon.py
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="Handy Field Guide app icon: bird looking through binoculars">
+  <rect width="1024" height="1024" fill="#1B3330"/>
+
+  <!-- Bird body (cream) -->
+  <g>
+    <ellipse cx="520" cy="560" rx="230" ry="250" fill="#F3EEE4"/>
+    <!-- belly shade -->
+    <ellipse cx="540" cy="620" rx="150" ry="160" fill="#E8E0D4"/>
+    <!-- head -->
+    <circle cx="560" cy="340" r="150" fill="#F3EEE4"/>
+    <!-- crest tuft -->
+    <path d="M520 220 Q545 160 575 210 Q560 195 545 220 Z" fill="#F3EEE4"/>
+    <!-- beak peeking under bins -->
+    <polygon points="680,355 745,375 680,395" fill="#9A4630"/>
+    <!-- raised wing holding bins -->
+    <ellipse cx="380" cy="420" rx="90" ry="70" transform="rotate(-25 380 420)" fill="#E8E0D4"/>
+    <!-- tucked wing -->
+    <ellipse cx="420" cy="580" rx="110" ry="80" transform="rotate(-15 420 580)" fill="#D8CFC0"/>
+    <!-- tail -->
+    <ellipse cx="300" cy="700" rx="80" ry="50" transform="rotate(30 300 700)" fill="#F3EEE4"/>
+  </g>
+
+  <!-- Binoculars held to eyes -->
+  <g>
+    <!-- left tube -->
+    <rect x="470" y="250" width="120" height="160" rx="40" fill="#9A4630"/>
+    <!-- right tube -->
+    <rect x="610" y="250" width="120" height="160" rx="40" fill="#9A4630"/>
+    <!-- bridge -->
+    <rect x="560" y="300" width="80" height="50" rx="14" fill="#763424"/>
+    <!-- objective / eyepiece faces toward viewer -->
+    <circle cx="530" cy="310" r="48" fill="#121E1C"/>
+    <circle cx="670" cy="310" r="48" fill="#121E1C"/>
+    <circle cx="530" cy="310" r="38" fill="none" stroke="#2A3C38" stroke-width="6"/>
+    <circle cx="670" cy="310" r="38" fill="none" stroke="#2A3C38" stroke-width="6"/>
+    <!-- tiny glints -->
+    <circle cx="515" cy="295" r="8" fill="#3D4A42"/>
+    <circle cx="655" cy="295" r="8" fill="#3D4A42"/>
+  </g>
+</svg>
