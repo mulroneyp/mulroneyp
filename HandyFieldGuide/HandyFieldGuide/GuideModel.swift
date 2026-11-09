@@ -9,7 +9,8 @@ final class GuideModel: ObservableObject {
         didSet { UserDefaults.standard.set(locationQuery, forKey: Self.storageKey) }
     }
     @Published var searchText = ""
-    @Published var stratum = "all"
+    /// Selected height bands. Empty means Any (no zone filter). Matching is OR across selections.
+    @Published var selectedStrata: Set<String> = []
     /// 0 = January … 11 = December. Defaults to the device’s current month.
     @Published var selectedMonthIndex: Int
     @Published var hideNearZero = true
@@ -100,6 +101,22 @@ final class GuideModel: ObservableObject {
         guide?.strata.first { $0.id == id }
     }
 
+    var isFilteringByZone: Bool {
+        !selectedStrata.isEmpty
+    }
+
+    func toggleStratum(_ id: String) {
+        if selectedStrata.contains(id) {
+            selectedStrata.remove(id)
+        } else {
+            selectedStrata.insert(id)
+        }
+    }
+
+    func clearStrata() {
+        selectedStrata = []
+    }
+
     func groupLabel(_ id: String, coverage: Coverage) -> String {
         coverage.groups.first { $0.id == id }?.label ?? id
     }
@@ -115,7 +132,7 @@ final class GuideModel: ObservableObject {
     func filteredSpecies(in place: ResolvedPlace) -> [Species] {
         let words = LocationResolver.normalize(searchText).split(separator: " ").map(String.init)
         return place.coverage.species.filter { species in
-            if stratum != "all" && !species.strata.contains(stratum) {
+            if isFilteringByZone && !species.strata.contains(where: { selectedStrata.contains($0) }) {
                 return false
             }
             if place.imported != nil, hideNearZero,
