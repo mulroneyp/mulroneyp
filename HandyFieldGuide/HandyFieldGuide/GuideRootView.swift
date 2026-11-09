@@ -48,10 +48,6 @@ struct GuideRootView: View {
                     .foregroundStyle(GuideColor.muted)
                     .fixedSize(horizontal: false, vertical: true)
 
-                HomeFiltersView(guide: guide, place: place) {
-                    showingAddLocation = true
-                }
-
                 if let notice = place.notice {
                     NoticeBox(text: notice, strong: true)
                 }
@@ -98,6 +94,11 @@ struct GuideRootView: View {
             .padding(16)
             .frame(maxWidth: 720, alignment: .leading)
             .frame(maxWidth: .infinity)
+        }
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            HomeFiltersView(guide: guide, place: place) {
+                showingAddLocation = true
+            }
         }
     }
 
@@ -200,6 +201,12 @@ private struct BirdRow: View {
                             .font(.caption2.monospacedDigit())
                             .foregroundStyle(GuideColor.muted)
                     }
+                    Text(ActiveTime.rowLabel(for: species))
+                        .font(.caption2.weight(.medium))
+                        .foregroundStyle(GuideColor.muted)
+                        .lineLimit(1)
+                }
+                HStack(spacing: 8) {
                     ForEach(species.strata, id: \.self) { id in
                         HStack(spacing: 2) {
                             StratumIcon(id: id, size: 18)
@@ -244,7 +251,9 @@ private struct BirdRow: View {
         case "ground": return "Ground"
         case "low": return "Low"
         case "mid": return "Mid"
-        default: return "Canopy"
+        case "canopy": return "Canopy"
+        case "sky": return "Sky"
+        default: return id.capitalized
         }
     }
 }

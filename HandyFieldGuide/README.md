@@ -4,13 +4,17 @@ An iPhone field guide. Open `HandyFieldGuide.xcodeproj` in Xcode, pick the Handy
 
 ## Home filters
 
-The home screen sets three filters clearly:
+Location, Month, and Zone sit in a **bottom toolbar** so the bird list keeps the space above:
 
-1. **Location** — menu of curated places and any imported eBird areas, plus **Add new** to import a barchart.
+1. **Location** — menu of curated places and any imported eBird areas, plus **Add eBird barchart**.
 2. **Month** — picker that defaults to the device’s current calendar month. Imported eBird lists use that month’s frequencies for “likely” birds.
-3. **Zone** — ground / low / mid / canopy (or Any). Long zone descriptions stay behind a small **i** button.
+3. **Zone** — ground / low / mid / canopy / sky (or Any). Long zone descriptions stay behind a small **i** button.
+
+**Sky** is for birds typically seen overhead (flying, soaring, or hawking), separate from canopy perches.
 
 Likelihood on rows and detail uses plain wording only (**Near-certain**, **Likely**, **Possible**, and related phrases). The UI does not show “Tier 3” style labels.
+
+Each bird also shows a **most likely time of day** (dawn / morning / midday / afternoon / dusk / night) on list rows and on the detail screen. These are broad field periods from typical habits, not clock times. eBird barcharts are monthly, not hourly — uncurated import stubs say so when time-of-day data is missing.
 
 Species detail photographs support **pinch to zoom**, **drag to pan**, double-tap zoom, and long-press for a full-screen viewer. **Sexually dimorphic** species show a clearly labeled **Male** photo and **Female** photo when openly licensed Commons images exist; monomorphic species show one photo. Gaps are filled from Wikimedia Commons with attribution where possible.
 

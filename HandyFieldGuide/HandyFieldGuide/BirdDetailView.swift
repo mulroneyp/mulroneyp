@@ -62,6 +62,10 @@ struct BirdDetailView: View {
                 Text(species.stratumNote)
                     .fixedSize(horizontal: false, vertical: true)
 
+                sectionLabel("Time of day")
+                Text(ActiveTime.detailCaption(for: species))
+                    .fixedSize(horizontal: false, vertical: true)
+
                 sectionLabel(species.dimorphic ? "Male and female" : "Sexes")
                 Text(species.sexes)
                     .fixedSize(horizontal: false, vertical: true)
@@ -108,7 +112,7 @@ struct BirdDetailView: View {
                         .foregroundStyle(GuideColor.rust)
                 }
 
-                Text("Notes follow \(place.isOutside ? place.coverage.label : place.displayName). Habitat lines are a typical place to look, not a guarantee for a given day. Likelihood labels are estimates.")
+                Text("Notes follow \(place.isOutside ? place.coverage.label : place.displayName). Habitat lines are a typical place to look, not a guarantee for a given day. Likelihood and time-of-day labels are estimates.")
                     .font(.footnote)
                     .foregroundStyle(GuideColor.muted)
                     .padding(.top, 8)
@@ -133,7 +137,9 @@ struct BirdDetailView: View {
         case "mid":
             return StratumInfo(id: id, label: "Mid", hint: "The middle of the forest, or a small tree")
         case "canopy":
-            return StratumInfo(id: id, label: "Canopy", hint: "Crowns of tall trees, and birds overhead")
+            return StratumInfo(id: id, label: "Canopy", hint: "Crowns of tall trees")
+        case "sky":
+            return StratumInfo(id: id, label: "Sky", hint: "Overhead — flying, soaring, or hawking in open air")
         default:
             return nil
         }

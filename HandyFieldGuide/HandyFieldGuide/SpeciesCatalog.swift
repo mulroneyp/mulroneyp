@@ -85,6 +85,7 @@ struct SpeciesCatalog {
             status: taxon.kind == .species ? "imported" : (taxon.kind == .slash ? "slash taxon" : "sp. taxon"),
             group: taxon.kind == .species ? "imported" : "flagged",
             strata: ["mid"],
+            activeTimes: [],
             summary: summary,
             habitat: habitat,
             sexes: "Sexes not curated for this imported name yet.",

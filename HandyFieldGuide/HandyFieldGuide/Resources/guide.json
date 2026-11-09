@@ -19,7 +19,12 @@
     {
       "id": "canopy",
       "label": "Canopy",
-      "hint": "Crowns of tall trees, and birds overhead"
+      "hint": "Crowns of tall trees"
+    },
+    {
+      "id": "sky",
+      "label": "Sky",
+      "hint": "Overhead — flying, soaring, or hawking in open air"
     }
   ],
   "coverages": [
@@ -184,6 +189,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Flickr_-_ggallice_-_Montezuma_oropendola.jpg",
               "file": "File:Flickr - ggallice - Montezuma oropendola.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -223,6 +232,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:%22Choncho%22_Penelope_purpurascens%2C_en_Estacion_Cientifica_las_Joyas%2C_Jalisco.jpg",
               "file": "File:\"Choncho\" Penelope purpurascens, en Estacion Cientifica las Joyas, Jalisco.jpg"
             }
+          ],
+          "activeTimes": [
+            "dawn",
+            "morning"
           ]
         },
         {
@@ -263,6 +276,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Clay-colored_thrush_%28Turdus_grayi%29.jpg",
               "file": "File:Clay-colored thrush (Turdus grayi).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -302,6 +319,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Blue-gray_tanager_%2803108%292.jpg",
               "file": "File:Blue-gray tanager (03108)2.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -343,6 +364,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Golden-hooded_Tanager_%2815824065884%29.jpg",
               "file": "File:Golden-hooded Tanager (15824065884).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -395,6 +420,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Scarlet-rumped_Tanager_%28Passerini%27s%29_%28female%29_%2832547514188%29.jpg",
               "file": "File:Scarlet-rumped Tanager (Passerini's) (female) (32547514188).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -434,6 +463,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rufous-tailed_Hummingbird_%2854567044907%29.jpg",
               "file": "File:Rufous-tailed Hummingbird (54567044907).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -486,6 +519,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Campylopterus_hemileucurus_-Costa_Rica_-flying-8.jpg",
               "file": "File:Campylopterus hemileucurus -Costa Rica -flying-8.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -538,6 +575,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Green_crowned_brilliant_%28Heliodoxa_jacula%29_%2819406173133%29.jpg",
               "file": "File:Green crowned brilliant (Heliodoxa jacula) (19406173133).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -579,6 +620,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Belize-1164_-_Brown_Jay_%282214366376%29.jpg",
               "file": "File:Belize-1164 - Brown Jay (2214366376).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -618,6 +663,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Great_kiskadee_%2870240%29.jpg",
               "file": "File:Great kiskadee (70240).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -657,6 +706,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:1_social_flyacatcher_bougainvillea_4.12.25_DSC_7601-topaz-rawdenoise.jpg",
               "file": "File:1 social flyacatcher bougainvillea 4.12.25 DSC 7601-topaz-rawdenoise.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -696,6 +749,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Buff-throated_saltator_%2803199%29.jpg",
               "file": "File:Buff-throated saltator (03199).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -739,6 +796,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chlorospingus_flavopectus_Montero_ojiblanco_Common_Bush-Tanager_%2814797054287%29.jpg",
               "file": "File:Chlorospingus flavopectus Montero ojiblanco Common Bush-Tanager (14797054287).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -782,6 +843,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chipe_de_Monta%C3%B1a%2C_Slate_Throated_Redstart%2C_Myioborus_miniatus_%2811510262396%29.jpg",
               "file": "File:Chipe de Montaña, Slate Throated Redstart, Myioborus miniatus (11510262396).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -820,6 +885,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Black-faced_Solitaire_%287047601725%29.jpg",
               "file": "File:Black-faced Solitaire (7047601725).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -872,6 +941,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Melanerpes_pucherani_-Costa_Rica_-female-8.jpg",
               "file": "File:Melanerpes pucherani -Costa Rica -female-8.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -911,6 +984,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tropical_kingbird_%28Tyrannus_melancholicus%29.JPG",
               "file": "File:Tropical kingbird (Tyrannus melancholicus).JPG"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -929,12 +1006,12 @@
           "status": "Tier 1 · Near-certain",
           "group": "certain",
           "strata": [
-            "canopy"
+            "sky"
           ],
           "summary": "Overhead",
           "habitat": "Children's Eternal Rainforest, on the San Gerardo list for mid-late November. Overhead. It is not a bird of the understory.",
           "sexes": "Males and females look alike.",
-          "stratumNote": "Usually overhead or on a high perch, not in the shrub layer. The canopy mark means the sky and the crown.",
+          "stratumNote": "Usually overhead in open air, not in the shrub layer.",
           "photos": [
             {
               "role": "either",
@@ -949,6 +1026,11 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:2022-05-16_Turkey_vulture.JPG",
               "file": "File:2022-05-16 Turkey vulture.JPG"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "midday",
+            "afternoon"
           ]
         },
         {
@@ -967,12 +1049,12 @@
           "status": "Tier 1 · Near-certain",
           "group": "certain",
           "strata": [
-            "canopy"
+            "sky"
           ],
           "summary": "Overhead, often with Turkey Vultures",
           "habitat": "Children's Eternal Rainforest, on the San Gerardo list for mid-late November. Overhead, often with Turkey Vultures. Not a bird of the understory.",
           "sexes": "Males and females look alike.",
-          "stratumNote": "Usually overhead or on a high perch, not in the shrub layer. The canopy mark means the sky and the crown.",
+          "stratumNote": "Usually overhead in open air, not in the shrub layer.",
           "photos": [
             {
               "role": "either",
@@ -987,6 +1069,11 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:2022-05-16_Black_vulture.jpg",
               "file": "File:2022-05-16 Black vulture.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "midday",
+            "afternoon"
           ]
         },
         {
@@ -1005,12 +1092,12 @@
           "status": "Tier 1 · Near-certain",
           "group": "certain",
           "strata": [
-            "canopy"
+            "sky"
           ],
           "summary": "Flocks overhead, sometimes low over a ridge",
           "habitat": "Children's Eternal Rainforest, on the San Gerardo list for mid-late November. Flocks overhead, sometimes low over a ridge. They do not perch in the shrub layer.",
           "sexes": "Males and females look alike.",
-          "stratumNote": "Usually overhead or on a high perch, not in the shrub layer. The canopy mark means the sky and the crown.",
+          "stratumNote": "Usually overhead in open air, not in the shrub layer.",
           "photos": [
             {
               "role": "either",
@@ -1025,6 +1112,11 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Andorinh%C3%A3o-de-coleira-branca_MN_01.jpg",
               "file": "File:Andorinhão-de-coleira-branca MN 01.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "midday",
+            "afternoon"
           ]
         },
         {
@@ -1077,6 +1169,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chlorophanes_spiza_%28female%29.jpg",
               "file": "File:Chlorophanes spiza (female).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -1129,6 +1225,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cyanerpes_cyaneus-20090405.jpg",
               "file": "File:Cyanerpes cyaneus-20090405.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -1168,6 +1268,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bay-headed_tanager_%2802875%29.jpg",
               "file": "File:Bay-headed tanager (02875).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -1207,6 +1311,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Silver-throated_Tanager_%2815814073833%29.jpg",
               "file": "File:Silver-throated Tanager (15814073833).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -1248,6 +1356,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ixothraupis_guttata_SaGeRi_01.jpg",
               "file": "File:Ixothraupis guttata SaGeRi 01.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -1287,6 +1399,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Emerald_tanager_%2802512%29.jpg",
               "file": "File:Emerald tanager (02512).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -1326,6 +1442,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Crimson_collared_Tanager.jpg",
               "file": "File:Crimson collared Tanager.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -1378,6 +1498,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:060403_blue_dacnis_b_female_IG_-_Flickr_-_Lip_Kee.jpg",
               "file": "File:060403 blue dacnis b female IG - Flickr - Lip Kee.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -1429,6 +1553,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dacnis_venusta_Dacnis_negriazul_Scarlet-thighed_Dacnis_%28female%29_%288116881534%29.jpg",
               "file": "File:Dacnis venusta Dacnis negriazul Scarlet-thighed Dacnis (female) (8116881534).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -1468,6 +1596,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:0_Coereba_flaveola_flying_away.jpg",
               "file": "File:0 Coereba flaveola flying away.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -1520,6 +1652,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chlorophonia_callophrys_04.jpg",
               "file": "File:Chlorophonia callophrys 04.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -1572,6 +1708,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Yellow-throated_Euphonia-female.jpg",
               "file": "File:Yellow-throated Euphonia-female.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -1624,6 +1764,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Eufonia_Capucha_Azul_Hembra%2C_Tepoztl%C3%A1n_Morelos%2C_M%C3%A9xico_%288733217793%29.jpg",
               "file": "File:Eufonia Capucha Azul Hembra, Tepoztlán Morelos, México (8733217793).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -1676,6 +1820,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tiaris_olivaceus_Semillero_cariamarillo_Yellow-faced_Grassquit_%28female%29_%2811482354314%29.jpg",
               "file": "File:Tiaris olivaceus Semillero cariamarillo Yellow-faced Grassquit (female) (11482354314).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -1728,6 +1876,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sporophila_corvina_Espiguero_variable_Variable_Seedeater_%28female%29_%288115873995%29.jpg",
               "file": "File:Sporophila corvina Espiguero variable Variable Seedeater (female) (8115873995).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -1786,6 +1938,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hepatic_Tanager_%28_female%29_-_Hunter_Canyon_-_Huachuca_Mtns_-_Sierra_Vista_-_AZ_-_2015-09-03at10-34-461_%2821152179301%29.jpg",
               "file": "File:Hepatic Tanager ( female) - Hunter Canyon - Huachuca Mtns - Sierra Vista - AZ - 2015-09-03at10-34-461 (21152179301).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -1825,6 +1981,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Carmiol%E2%80%99s_Tanager_%286927434516%29.jpg",
               "file": "File:Carmiol’s Tanager (6927434516).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -1876,6 +2036,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Habia_fuscicauda_-near_Rancho_Naturalista%2C_Cordillera_de_Talamanca%2C_Costa_Rica_-female-8.jpg",
               "file": "File:Habia fuscicauda -near Rancho Naturalista, Cordillera de Talamanca, Costa Rica -female-8.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -1929,6 +2093,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cyanocompsa_cyanoides_-_female.jpg",
               "file": "File:Cyanocompsa cyanoides - female.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -1968,6 +2136,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Arremon_aurantiirostris_Pinz%C3%B3n_piquidorado_Orange-billed_Sparrow_%2816593345071%29.jpg",
               "file": "File:Arremon aurantiirostris Pinzón piquidorado Orange-billed Sparrow (16593345071).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -2007,6 +2179,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Arremon_brunneinucha_Santa_Elena.JPG",
               "file": "File:Arremon brunneinucha Santa Elena.JPG"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -2048,6 +2224,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pselliophorus_tibialis_CR.jpg",
               "file": "File:Pselliophorus tibialis CR.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -2087,6 +2267,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:063_Northern_Emerald-toucanet_in_Los_Quetzales_National_Park_Photo_by_Giles_Laurent.jpg",
               "file": "File:063 Northern Emerald-toucanet in Los Quetzales National Park Photo by Giles Laurent.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -2126,6 +2310,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Arasari_de_Collar%2C_Collared_Aracari%2C_Pteroglossus_torquatus_%2811915852015%29.jpg",
               "file": "File:Arasari de Collar, Collared Aracari, Pteroglossus torquatus (11915852015).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -2164,6 +2352,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Black-mandibled_Toucan.jpg",
               "file": "File:Black-mandibled Toucan.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -2202,6 +2394,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Keel-billed_toucan_%28Ramphastos_sulfuratus_sulfuratus%29_on_foxtail_palm_%28Wodyetia_bifurcata%29_Cayo.jpg",
               "file": "File:Keel-billed toucan (Ramphastos sulfuratus sulfuratus) on foxtail palm (Wodyetia bifurcata) Cayo.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -2241,6 +2437,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Prong-billed_Barbet_%2816605416701%29.jpg",
               "file": "File:Prong-billed Barbet (16605416701).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -2293,6 +2493,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Eubucco_bourcierii_Torito_cabecirrojo_Red-headed_Barbet_%28female%29_%2811894822504%29.jpg",
               "file": "File:Eubucco bourcierii Torito cabecirrojo Red-headed Barbet (female) (11894822504).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -2344,6 +2548,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Collared_Trogon_-_Sorocu%C3%A1_Acollarado_%28Trogon_collaris_exoptatus%29_%28%E2%99%80%29_%2812895254085%29.jpg",
               "file": "File:Collared Trogon - Sorocuá Acollarado (Trogon collaris exoptatus) (♀) (12895254085).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -2382,6 +2590,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Baryphthengus_martii_-Costa_Rica-8.jpg",
               "file": "File:Baryphthengus martii -Costa Rica-8.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -2420,6 +2632,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bird_in_the_surroundings_of_Puerto_Viejo_de_Sarapiqui_-_panoramio.jpg",
               "file": "File:Bird in the surroundings of Puerto Viejo de Sarapiqui - panoramio.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -2472,6 +2688,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Colaptes_rubiginosus_Carpintero_cariblanco_Golden-olive_Woodpecker_%28female%29_%2811485661095%29.jpg",
               "file": "File:Colaptes rubiginosus Carpintero cariblanco Golden-olive Woodpecker (female) (11485661095).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -2511,6 +2731,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Campephilus_guatemalensis_254938427.jpg",
               "file": "File:Campephilus guatemalensis 254938427.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -2563,6 +2787,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lineated_Woodpecker_%28Dryocopus_lineatus%29_%287222888864%29.jpg",
               "file": "File:Lineated Woodpecker (Dryocopus lineatus) (7222888864).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -2601,6 +2829,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Green_Hermit_%2825043885191%29.jpg",
               "file": "File:Green Hermit (25043885191).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -2639,6 +2871,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Colibr%C3%AD_Ermita%C3%B1ito_Gargantirayado_Stripe-Throated_Hermit_Phaethornis_Striigularis_Parque_Nacional_Henri_Pittier_Aragua_Venezuela_01.jpg",
               "file": "File:Colibrí Ermitañito Gargantirayado Stripe-Throated Hermit Phaethornis Striigularis Parque Nacional Henri Pittier Aragua Venezuela 01.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -2677,6 +2913,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hermit_DSC_5620_selva_verde_lodge_am_4.20.25-topaz-rawdenoise.jpg",
               "file": "File:Hermit DSC 5620 selva verde lodge am 4.20.25-topaz-rawdenoise.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -2729,6 +2969,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Crowned_woodnymph_%28female%29_%2825130369035%29.jpg",
               "file": "File:Crowned woodnymph (female) (25130369035).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -2781,6 +3025,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Violet-headed_Hummingbird_%28female%29.jpg",
               "file": "File:Violet-headed Hummingbird (female).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -2833,6 +3081,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Eupherusa_eximia.jpg",
               "file": "File:Eupherusa eximia.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -2878,6 +3130,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:002_Lesser_violetear_displaying_its_ears_to_a_Green-crowned_brilliant_in_Los_Quetzales_National_Park_Photo_by_Giles_Laurent.jpg",
               "file": "File:002 Lesser violetear displaying its ears to a Green-crowned brilliant in Los Quetzales National Park Photo by Giles Laurent.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -2917,6 +3173,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:050305_Brown_Violet-ear_crop.jpg",
               "file": "File:050305 Brown Violet-ear crop.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -2969,6 +3229,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Green_Thorntail_-_female_%2820038722138%29.jpg",
               "file": "File:Green Thorntail - female (20038722138).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3021,6 +3285,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Purple-crowned_Fairy_%28Heliothryx_barroti%29_female_%284504915857%29.jpg",
               "file": "File:Purple-crowned Fairy (Heliothryx barroti) female (4504915857).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3060,6 +3328,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dusky-capped_flycatcher_%28Myiarchus_tuberculifer_atriceps%29_San_Isidro.jpg",
               "file": "File:Dusky-capped flycatcher (Myiarchus tuberculifer atriceps) San Isidro.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3099,6 +3371,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:At_Possa_da_Londra_in_the_Brazilian_Patanal_%28105m%29_-_colourful_Boat-Billed_Flycatcher_%28Megarynchus_pitangua%29_-_%2824842096035%29.jpg",
               "file": "File:At Possa da Londra in the Brazilian Patanal (105m) - colourful Boat-Billed Flycatcher (Megarynchus pitangua) - (24842096035).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3138,6 +3414,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:095-365_-_Gray-capped_Flycatcher_-_Myiozetetes_granadensis%2C_Arenal_Lodge%2C_Alajuela%2C_Costa_Rica%2C_April_5%2C_2025_-_Flickr_-_Judy_Gallagher.jpg",
               "file": "File:095-365 - Gray-capped Flycatcher - Myiozetetes granadensis, Arenal Lodge, Alajuela, Costa Rica, April 5, 2025 - Flickr - Judy Gallagher.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3176,6 +3456,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mitrephanes_phaeocercus_-Costa_Rica-8.jpg",
               "file": "File:Mitrephanes phaeocercus -Costa Rica-8.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3215,6 +3499,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Golden-bellied_flycatcher_%28Myiodynastes_hemichrysus_minor%29_San_Isidro.jpg",
               "file": "File:Golden-bellied flycatcher (Myiodynastes hemichrysus minor) San Isidro.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3254,6 +3542,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mionectes_oleagineus_%28Mionectes_ocr%C3%A1ceo%29_%2814391178734%29.jpg",
               "file": "File:Mionectes oleagineus (Mionectes ocráceo) (14391178734).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3293,6 +3585,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leptopogon_superciliaris_Atrapamoscas_orejinegro_Slaty-capped_Flycatcher_%287381913234%29.jpg",
               "file": "File:Leptopogon superciliaris Atrapamoscas orejinegro Slaty-capped Flycatcher (7381913234).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3331,6 +3627,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Am_bright-rumped_attila_bijagua-_tapir_valley_4.15.25_DSC_2614-topaz-rawdenoise.jpg",
               "file": "File:Am bright-rumped attila bijagua- tapir valley 4.15.25 DSC 2614-topaz-rawdenoise.jpg"
             }
+          ],
+          "activeTimes": [
+            "dawn",
+            "morning"
           ]
         },
         {
@@ -3370,6 +3670,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Birding_%2820220225-FS-JC-001%29.jpg",
               "file": "File:Birding (20220225-FS-JC-001).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3409,6 +3713,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Serpophaga_cinerea_%28Tiranuelo_de_los_torrentes%29_%2816287453699%29.jpg",
               "file": "File:Serpophaga cinerea (Tiranuelo de los torrentes) (16287453699).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3447,6 +3755,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Masked_Tityra_%2824522207044%29_%28cropped%29.jpg",
               "file": "File:Masked Tityra (24522207044) (cropped).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3486,6 +3798,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cyclarhis_gujanensis_%28_Vire%C3%B3n_ceja_rufa%29.jpg",
               "file": "File:Cyclarhis gujanensis ( Vireón ceja rufa).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3527,6 +3843,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lesser_Greenlet_-_Chiapas_-_Mexico_S4E7300_%2822381845824%29.jpg",
               "file": "File:Lesser Greenlet - Chiapas - Mexico S4E7300 (22381845824).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3566,6 +3886,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cyanolyca_cucullata_foliage.jpg",
               "file": "File:Cyanolyca cucullata foliage.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3605,6 +3929,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chivir%C3%ADn_Pecho_Gris%2C_Gray_Breasted_Wood_Wren%2C_Henicorhina_leucophrys_%2811722557076%29.jpg",
               "file": "File:Chivirín Pecho Gris, Gray Breasted Wood Wren, Henicorhina leucophrys (11722557076).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3644,6 +3972,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Henicorhina_leucostica_White-Breasted_Wood-Wren_%2818617962172%29.jpg",
               "file": "File:Henicorhina leucostica White-Breasted Wood-Wren (18617962172).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3688,6 +4020,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chercan_%28Troglodytes_aedon%29%2C_Costa_Rica.jpg",
               "file": "File:Chercan (Troglodytes aedon), Costa Rica.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3727,6 +4063,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Catharus_aurantiirostris_Clbrg_01.jpg",
               "file": "File:Catharus aurantiirostris Clbrg 01.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3766,6 +4106,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mountain_Thrush_%286944853208%29.jpg",
               "file": "File:Mountain Thrush (6944853208).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3805,6 +4149,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Basileuterus_fulvicauda_-NBII_Image_Gallery-a00262.jpg",
               "file": "File:Basileuterus fulvicauda -NBII Image Gallery-a00262.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3844,6 +4192,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Basileuterus_culicivorus_-_Daniel_S._Katz_-_476751181.jpeg",
               "file": "File:Basileuterus culicivorus - Daniel S. Katz - 476751181.jpeg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3883,6 +4235,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Parula_pitiayumi_-_Ibera_Marshes.jpg",
               "file": "File:Parula pitiayumi - Ibera Marshes.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3921,6 +4277,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:101_Band-tailed_Pigeon.jpg",
               "file": "File:101 Band-tailed Pigeon.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3959,6 +4319,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Patagioenas_subvinacea_Paloma_colorada_Ruddy_Pigeon_%2818614786685%29.jpg",
               "file": "File:Patagioenas subvinacea Paloma colorada Ruddy Pigeon (18614786685).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -3997,6 +4361,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Juruti_pupu.jpg",
               "file": "File:Juruti pupu.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -4035,6 +4403,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brown-hooded_parrot_%2815972896763%29.jpg",
               "file": "File:Brown-hooded parrot (15972896763).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -4073,6 +4445,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pionus_senilis_-in_a_tree.JPG",
               "file": "File:Pionus senilis -in a tree.JPG"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -4093,12 +4469,13 @@
           "status": "Tier 2 · Likely",
           "group": "mixed",
           "strata": [
-            "canopy"
+            "canopy",
+            "sky"
           ],
           "summary": "Flocks overhead and in the canopy",
           "habitat": "Children's Eternal Rainforest, on the San Gerardo list for mid-late November. Flocks overhead and in the canopy. More a bird of edges and travel between trees than of the dark interior.",
           "sexes": "Males and females look alike.",
-          "stratumNote": "Usually in the canopy.",
+          "stratumNote": "Often overhead, and sometimes on a high perch in the canopy.",
           "photos": [
             {
               "role": "either",
@@ -4113,6 +4490,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Crimson-fronted_Parakeet%2C_Psittacara_finschi.jpg",
               "file": "File:Crimson-fronted Parakeet, Psittacara finschi.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -4152,6 +4533,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Alma_de_gato_na_moringa_ole%C3%ADfera.jpg",
               "file": "File:Alma de gato na moringa oleífera.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -4191,6 +4576,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Xenops_minutus_%2814964890469%29.jpg",
               "file": "File:Xenops minutus (14964890469).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -4229,6 +4618,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Spotted_Woodcreeper_-_Panama_H8O7732_%2816135588323%29.jpg",
               "file": "File:Spotted Woodcreeper - Panama H8O7732 (16135588323).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -4268,6 +4661,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Glyphorhynchus_spirurus_paraensis_-_Wedge-billed_Woodcreeper%3B_Carajas_National_Forest%2C_Par%C3%A1%2C_Brazil.jpg",
               "file": "File:Glyphorhynchus spirurus paraensis - Wedge-billed Woodcreeper; Carajas National Forest, Pará, Brazil.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -4307,6 +4704,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Premnoplex_brunnescens_1902.jpg",
               "file": "File:Premnoplex brunnescens 1902.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -4345,6 +4746,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:191L56greyheadchacha.JPG",
               "file": "File:191L56greyheadchacha.JPG"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -4363,12 +4768,12 @@
           "status": "Tier 2 · Likely",
           "group": "mixed",
           "strata": [
-            "canopy"
+            "sky"
           ],
           "summary": "A November migrant",
           "habitat": "Children's Eternal Rainforest, on the San Gerardo list for mid-late November. A November migrant. Look overhead and at forest edges, not in the understory.",
           "sexes": "Males and females look alike.",
-          "stratumNote": "Usually overhead or on a high perch, not in the shrub layer. The canopy mark means the sky and the crown.",
+          "stratumNote": "Usually overhead in open air, not in the shrub layer.",
           "photos": [
             {
               "role": "either",
@@ -4383,6 +4788,11 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Broad-winged_hawk_in_Costa_Rica.jpg",
               "file": "File:Broad-winged hawk in Costa Rica.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "midday",
+            "afternoon"
           ]
         },
         {
@@ -4401,12 +4811,12 @@
           "status": "Tier 2 · Likely",
           "group": "mixed",
           "strata": [
-            "canopy"
+            "sky"
           ],
           "summary": "Soaring over forest",
           "habitat": "Children's Eternal Rainforest, on the San Gerardo list for mid-late November. Soaring over forest. It hunts from the air.",
           "sexes": "Males and females look alike.",
-          "stratumNote": "Usually overhead or on a high perch, not in the shrub layer. The canopy mark means the sky and the crown.",
+          "stratumNote": "Usually overhead in open air, not in the shrub layer.",
           "photos": [
             {
               "role": "either",
@@ -4421,6 +4831,11 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Buteo_brachyurus_%28%C3%81guila_o_Gavil%C3%A1n_rabicorto_-_Short-tailed_Hawk%29_%2830784607267%29.jpg",
               "file": "File:Buteo brachyurus (Águila o Gavilán rabicorto - Short-tailed Hawk) (30784607267).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "midday",
+            "afternoon"
           ]
         },
         {
@@ -4460,6 +4875,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:070_Roadside_hawk_on_a_Pink_Ip%C3%AA_tree_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg",
               "file": "File:070 Roadside hawk on a Pink Ipê tree in Encontro das Águas State Park Photo by Giles Laurent.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -4501,6 +4920,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:225_-_GRAY_HAWK_%284-18-13%29_kino_springs%2C_scc%2C_az_%288674041836%29.jpg",
               "file": "File:225 - GRAY HAWK (4-18-13) kino springs, scc, az (8674041836).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -4553,6 +4976,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:20240508_baltimore_oriole_with_nest_south_meadows_PD203825.jpg",
               "file": "File:20240508 baltimore oriole with nest south meadows PD203825.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -4592,6 +5019,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:8G7D4136.jpg",
               "file": "File:8G7D4136.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -4630,6 +5061,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:0_Mniotilta_varia_in_Monte_Choca_State_Forest.jpg",
               "file": "File:0 Mniotilta varia in Monte Choca State Forest.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -4669,6 +5104,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:20260831_chestnut_sided_warbler_pleasant_valley_wildlife_sanctuary_PD06723.jpg",
               "file": "File:20260831 chestnut sided warbler pleasant valley wildlife sanctuary PD06723.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -4721,6 +5160,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Wilson%27s_Warbler_3372vv.jpg",
               "file": "File:Wilson's Warbler 3372vv.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -4760,6 +5203,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:20250815_black_throated_green_warbler_pleasant_valley_PD205101.jpg",
               "file": "File:20250815 black throated green warbler pleasant valley PD205101.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -4812,6 +5259,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Female_or_immature_Canada_warbler_%2846888%29.jpg",
               "file": "File:Female or immature Canada warbler (46888).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -4851,6 +5302,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Backyard_Townsend%27s_Warbler_%2815120259633%29.jpg",
               "file": "File:Backyard Townsend's Warbler (15120259633).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -4902,6 +5357,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Blackburnian_Warbler_%281st_fall_female%29_Pt_Reyes_CA_2018-10-02_13-12-24_%2843255306560%29.jpg",
               "file": "File:Blackburnian Warbler (1st fall female) Pt Reyes CA 2018-10-02 13-12-24 (43255306560).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -4954,6 +5413,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:American_redstart_%2881581%29.jpg",
               "file": "File:American redstart (81581).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -4992,6 +5455,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chipe_Suelero%2C_Ovenbird%2C_Seiurus_aurocapilla_%2816217521751%29.jpg",
               "file": "File:Chipe Suelero, Ovenbird, Seiurus aurocapilla (16217521751).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -5031,6 +5498,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:20240916_northern_waterthrush_point_meadows_PD205265.jpg",
               "file": "File:20240916 northern waterthrush point meadows PD205265.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -5070,6 +5541,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:20240421_louisiana_waterthrush_buckingham_reservoir_PD209586.jpg",
               "file": "File:20240421 louisiana waterthrush buckingham reservoir PD209586.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -5110,6 +5585,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:20260519_swainsons_thrush_pleasant_valley_ws_PD02426.jpg",
               "file": "File:20260519 swainsons thrush pleasant valley ws PD02426.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -5149,6 +5628,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:20240610_wood_thrush_south_meadows_PD209967.jpg",
               "file": "File:20240610 wood thrush south meadows PD209967.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -5201,6 +5684,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Female_Summer_Tanager_%2825798732127%29.jpg",
               "file": "File:Female Summer Tanager (25798732127).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -5253,6 +5740,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pheucticus_ludovicianus_CT4.jpg",
               "file": "File:Pheucticus ludovicianus CT4.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -5292,6 +5783,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Contopus_virens_%28Atrapamoscas_boreal%29_%285145860615%29.jpg",
               "file": "File:Contopus virens (Atrapamoscas boreal) (5145860615).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -5344,6 +5839,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Killarney_Granite_Ridge_Trail_Yellow-bellied_sapsucker_f.jpg",
               "file": "File:Killarney Granite Ridge Trail Yellow-bellied sapsucker f.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -5395,6 +5894,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mourning_Warbler_-_female.jpg",
               "file": "File:Mourning Warbler - female.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -5447,6 +5950,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cephalopterus_glabricollis_2.jpg",
               "file": "File:Cephalopterus glabricollis 2.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -5499,6 +6006,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Female_resplendent_quetzal_eating_a_wild_avocado.jpg",
               "file": "File:Female resplendent quetzal eating a wild avocado.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -5538,6 +6049,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:A_black_guan.jpg",
               "file": "File:A black guan.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -5576,6 +6091,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:075_Sunbittern_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg",
               "file": "File:075 Sunbittern in Encontro das Águas State Park Photo by Giles Laurent.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -5614,6 +6133,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hylopezus_dives_1902.jpg",
               "file": "File:Hylopezus dives 1902.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -5652,6 +6175,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Grallaria_guatimalensis_2.jpg",
               "file": "File:Grallaria guatimalensis 2.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -5690,6 +6217,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:27797-_Great_tinamou_wanders_the_forest_floor.jpg",
               "file": "File:27797- Great tinamou wanders the forest floor.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -5728,6 +6259,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nothocercus_bonapartei_1902.jpg",
               "file": "File:Nothocercus bonapartei 1902.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -5766,6 +6301,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Odontophorus_leucolaemus_31365857.jpg",
               "file": "File:Odontophorus leucolaemus 31365857.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -5804,6 +6343,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:03012025-DSC00318_copia.jpg",
               "file": "File:03012025-DSC00318 copia.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -5843,6 +6386,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Doryfera_ludovicae_1902.jpg",
               "file": "File:Doryfera ludovicae 1902.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -5895,6 +6442,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lampornis_calolaemus_%28female%29.jpg",
               "file": "File:Lampornis calolaemus (female).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -5949,6 +6500,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Coppery_Headed_Emerald_Female.JPG",
               "file": "File:Coppery Headed Emerald Female.JPG"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -6003,6 +6558,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Calliphlox_bryantae%2C_Monteverde%2C_Costa_Rica.jpg",
               "file": "File:Calliphlox bryantae, Monteverde, Costa Rica.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -6057,6 +6616,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Corapipo_altera_Saltar%C3%ADn_occidental_White-ruffed_Manakin_%28male%29_%288114074627%29.jpg",
               "file": "File:Corapipo altera Saltarín occidental White-ruffed Manakin (male) (8114074627).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -6095,6 +6658,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Black-capped_Antthrush_Formicarius_nigricapillus_in_Alajuela%2C_Costa_Rica_01.png",
               "file": "File:Black-capped Antthrush Formicarius nigricapillus in Alajuela, Costa Rica 01.png"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -6133,6 +6700,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rufous-breasted_Antthrush_%285201438136%29.jpg",
               "file": "File:Rufous-breasted Antthrush (5201438136).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -6185,6 +6756,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Spotted_Antbird_RWD.jpg",
               "file": "File:Spotted Antbird RWD.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -6226,6 +6801,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bicolored_Antbird_%2826829158518%29.jpg",
               "file": "File:Bicolored Antbird (26829158518).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -6264,6 +6843,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:CBBM15_215.png",
               "file": "File:CBBM15 215.png"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -6316,6 +6899,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Choquinha-lisa%2C_Formigueiro-vireo%2C_f%C3%AAmea%2C_Plain_antvireo%2C_female_%2854388575138%29.jpg",
               "file": "File:Choquinha-lisa, Formigueiro-vireo, fêmea, Plain antvireo, female (54388575138).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -6368,6 +6955,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Slaty_Antwren_Myrmotherula_schisticolor_-_Flickr_-_gailhampshire.jpg",
               "file": "File:Slaty Antwren Myrmotherula schisticolor - Flickr - gailhampshire.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -6406,6 +6997,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Microbates_cinereiventris_94212331_%28cropped%29.jpg",
               "file": "File:Microbates cinereiventris 94212331 (cropped).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -6445,6 +7040,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Song_Wren_-_iNaturalist_Panam%C3%A1.jpg",
               "file": "File:Song Wren - iNaturalist Panamá.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -6484,6 +7083,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Microcerculus_philomela_1902.jpg",
               "file": "File:Microcerculus philomela 1902.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -6523,6 +7126,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Buffy_Tuftedcheek_%28Pseudocolaptes_lawrencii%29_%285771957543%29.jpg",
               "file": "File:Buffy Tuftedcheek (Pseudocolaptes lawrencii) (5771957543).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -6562,6 +7169,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Streak-breasted_Treehunter_%28Thripadectes_rufobrunneus%29_%285771948005%29.jpg",
               "file": "File:Streak-breasted Treehunter (Thripadectes rufobrunneus) (5771948005).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -6601,6 +7212,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bangsia_arcaei_-Costa_Rica-8.jpg",
               "file": "File:Bangsia arcaei -Costa Rica-8.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -6640,6 +7255,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Spangle-cheeked_Tanager_%287047625367%29.jpg",
               "file": "File:Spangle-cheeked Tanager (7047625367).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -6678,6 +7297,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Amercan_Dipper.jpg",
               "file": "File:Amercan Dipper.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -6720,6 +7343,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aramides_cajaneus_717452089.jpg",
               "file": "File:Aramides cajaneus 717452089.jpg"
             }
+          ],
+          "activeTimes": [
+            "dawn",
+            "morning"
           ]
         },
         {
@@ -6738,12 +7365,12 @@
           "status": "Tier 3 · Possible",
           "group": "interior",
           "strata": [
-            "canopy"
+            "sky"
           ],
           "summary": "Soaring over wet foothill forest",
           "habitat": "Children's Eternal Rainforest, on the San Gerardo list for mid-late November. Soaring over wet foothill forest.",
           "sexes": "Males and females look alike.",
-          "stratumNote": "Usually overhead or on a high perch, not in the shrub layer. The canopy mark means the sky and the crown.",
+          "stratumNote": "Usually overhead in open air, not in the shrub layer.",
           "photos": [
             {
               "role": "either",
@@ -6758,6 +7385,11 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Barred_Hawk_%286914695390%29.jpg",
               "file": "File:Barred Hawk (6914695390).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "midday",
+            "afternoon"
           ]
         },
         {
@@ -6776,12 +7408,13 @@
           "status": "Tier 3 · Possible",
           "group": "interior",
           "strata": [
+            "sky",
             "canopy"
           ],
           "summary": "Soaring over forest, or perched high",
           "habitat": "Children's Eternal Rainforest, on the San Gerardo list for mid-late November. Soaring over forest, or perched high.",
           "sexes": "Males and females look alike.",
-          "stratumNote": "Usually overhead or on a high perch, not in the shrub layer. The canopy mark means the sky and the crown.",
+          "stratumNote": "Often overhead, and sometimes on a high perch in the canopy.",
           "photos": [
             {
               "role": "either",
@@ -6796,6 +7429,11 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aguililla_Blanca%2C_White_Hawk%2C_Leucopternis_albicollis_%2811915754375%29.jpg",
               "file": "File:Aguililla Blanca, White Hawk, Leucopternis albicollis (11915754375).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "midday",
+            "afternoon"
           ]
         },
         {
@@ -6836,6 +7474,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ciccaba_virgata_DT_-A_Gramalote-_%281%29_%2820235847193%29.jpg",
               "file": "File:Ciccaba virgata DT -A Gramalote- (1) (20235847193).jpg"
             }
+          ],
+          "activeTimes": [
+            "dusk",
+            "night"
           ]
         },
         {
@@ -6875,6 +7517,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Murucututu_no_Parque_Sesc_Serra_Azul-MT.jpg",
               "file": "File:Murucututu no Parque Sesc Serra Azul-MT.jpg"
             }
+          ],
+          "activeTimes": [
+            "dusk",
+            "night"
           ]
         },
         {
@@ -6913,6 +7559,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Crested_Owl_-_Lophostrix_cristata.jpg",
               "file": "File:Crested Owl - Lophostrix cristata.jpg"
             }
+          ],
+          "activeTimes": [
+            "dusk",
+            "night"
           ]
         },
         {
@@ -6964,6 +7614,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Procnias_tricarunculataIbis1865P003A.jpg",
               "file": "File:Procnias tricarunculataIbis1865P003A.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -6982,12 +7636,12 @@
           "status": "Tier 4 · Lucky find",
           "group": "lucky",
           "strata": [
-            "canopy"
+            "sky"
           ],
           "summary": "A lucky find, soaring high over forest",
           "habitat": "Children's Eternal Rainforest, on the San Gerardo list for mid-late November. A lucky find, soaring high over forest. Not a bird you look for in the understory.",
           "sexes": "Males and females look alike.",
-          "stratumNote": "Usually overhead or on a high perch, not in the shrub layer. The canopy mark means the sky and the crown.",
+          "stratumNote": "Usually overhead in open air, not in the shrub layer.",
           "photos": [
             {
               "role": "either",
@@ -7002,6 +7656,11 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Flickr_-_ggallice_-_King_vulture.jpg",
               "file": "File:Flickr - ggallice - King vulture.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "midday",
+            "afternoon"
           ]
         },
         {
@@ -7020,12 +7679,13 @@
           "status": "Tier 4 · Lucky find",
           "group": "lucky",
           "strata": [
+            "sky",
             "canopy"
           ],
           "summary": "A lucky find in the canopy or overhead",
           "habitat": "Children's Eternal Rainforest, on the San Gerardo list for mid-late November. A lucky find in the canopy or overhead. A forest eagle, not an edge bird you expect daily.",
           "sexes": "Males and females look alike.",
-          "stratumNote": "Usually overhead or on a high perch, not in the shrub layer. The canopy mark means the sky and the crown.",
+          "stratumNote": "Often overhead, and sometimes on a high perch in the canopy.",
           "photos": [
             {
               "role": "either",
@@ -7040,6 +7700,11 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Spizaetus_ornatus_111811416.jpg",
               "file": "File:Spizaetus ornatus 111811416.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "midday",
+            "afternoon"
           ]
         },
         {
@@ -7058,12 +7723,13 @@
           "status": "Tier 4 · Lucky find",
           "group": "lucky",
           "strata": [
+            "sky",
             "canopy"
           ],
           "summary": "A lucky find, soaring or perched high over forest",
           "habitat": "Children's Eternal Rainforest, on the San Gerardo list for mid-late November. A lucky find, soaring or perched high over forest.",
           "sexes": "Males and females look alike.",
-          "stratumNote": "Usually overhead or on a high perch, not in the shrub layer. The canopy mark means the sky and the crown.",
+          "stratumNote": "Often overhead, and sometimes on a high perch in the canopy.",
           "photos": [
             {
               "role": "either",
@@ -7078,6 +7744,11 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Black_hawk-eagle_%2852728536936%29.jpg",
               "file": "File:Black hawk-eagle (52728536936).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "midday",
+            "afternoon"
           ]
         },
         {
@@ -7117,6 +7788,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leucopternis_semiplumbea_-CR_LaSelva_fRF_01.jpg",
               "file": "File:Leucopternis semiplumbea -CR LaSelva fRF 01.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -7155,6 +7830,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Keel-billed_Motmot_-_Sarapiqui_-_Costa_Rica_S4E0981_%2826404351020%29.jpg",
               "file": "File:Keel-billed Motmot - Sarapiqui - Costa Rica S4E0981 (26404351020).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -7193,6 +7872,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Touit_costaricensis_-_Roger_A._Morales-Flores_-_722302079.jpeg",
               "file": "File:Touit costaricensis - Roger A. Morales-Flores - 722302079.jpeg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -7231,6 +7914,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Oxyruncus_cristatus_-_Daniel_S._Katz_-_476753642.jpeg",
               "file": "File:Oxyruncus cristatus - Daniel S. Katz - 476753642.jpeg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -7282,6 +7969,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chrysothlypis_chrysomelas.jpg",
               "file": "File:Chrysothlypis chrysomelas.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -7320,6 +8011,12 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Costa_Rican_Pygmy-owl_%28Glaucidium_costaricanum%29_on_branch.jpg",
               "file": "File:Costa Rican Pygmy-owl (Glaucidium costaricanum) on branch.jpg"
             }
+          ],
+          "activeTimes": [
+            "dawn",
+            "morning",
+            "afternoon",
+            "dusk"
           ]
         },
         {
@@ -7359,6 +8056,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ocellated_antbird_%2852724973502%29.jpg",
               "file": "File:Ocellated antbird (52724973502).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -7398,6 +8099,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:%28Galbula_ruficauda%29.jpg",
               "file": "File:(Galbula ruficauda).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         }
       ]
@@ -7770,6 +8475,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Black_swan_%28Cygnus_atratus%29_Scottsdale.jpg",
               "file": "File:Black swan (Cygnus atratus) Scottsdale.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -7822,6 +8531,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Australian_Wood_Duck_female_RWD.jpg",
               "file": "File:Australian Wood Duck female RWD.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -7860,6 +8573,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pacific_black_duck_%28Anas_superciliosa%29_male_swimming_Sydney.jpg",
               "file": "File:Pacific black duck (Anas superciliosa) male swimming Sydney.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -7899,6 +8616,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Grey_teal_%28Anas_gracilis%29_Adelaide.jpg",
               "file": "File:Grey teal (Anas gracilis) Adelaide.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -7951,6 +8672,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anas_castanea_Coolart_Wetlands_2.jpg",
               "file": "File:Anas castanea Coolart Wetlands 2.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -8002,6 +8727,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aythya_australis_female_-_Hurstville_Golf_Course.jpg",
               "file": "File:Aythya australis female - Hurstville Golf Course.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -8040,6 +8769,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tachybaptus_novaehollandiae_-_Mulligan%27s_Flat.jpg",
               "file": "File:Tachybaptus novaehollandiae - Mulligan's Flat.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -8092,6 +8825,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Australasian_darter_%28Anhinga_novaehollandiae%29_female_spreading_wings_Kakadu.jpg",
               "file": "File:Australasian darter (Anhinga novaehollandiae) female spreading wings Kakadu.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -8131,6 +8868,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Little_pied_cormorant_%28Microcarbo_melanoleucos%29_Freycinet.jpg",
               "file": "File:Little pied cormorant (Microcarbo melanoleucos) Freycinet.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -8170,6 +8911,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phalacrocorax_sulcirostris_-_Gould%27s_Lagoon.jpg",
               "file": "File:Phalacrocorax sulcirostris - Gould's Lagoon.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -8208,6 +8953,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pelecanus_conspicillatus4.jpg",
               "file": "File:Pelecanus conspicillatus4.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -8246,6 +8995,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Australian_White_Ibis_Bird_%286603467963%29.jpg",
               "file": "File:Australian White Ibis Bird (6603467963).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -8284,6 +9037,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Threskiornis_spinicollis_-_Centenary_Lakes.jpg",
               "file": "File:Threskiornis spinicollis - Centenary Lakes.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -8322,6 +9079,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Platalea_regia_in_flight_-_Sydney_Olympic_Park.jpg",
               "file": "File:Platalea regia in flight - Sydney Olympic Park.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -8361,6 +9122,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Egretta_novaehollandiae_Tasmania_1.jpg",
               "file": "File:Egretta novaehollandiae Tasmania 1.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -8400,6 +9165,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nycticorax_caledonicus_-_Sydney_Olympic_Park.jpg",
               "file": "File:Nycticorax caledonicus - Sydney Olympic Park.jpg"
             }
+          ],
+          "activeTimes": [
+            "dusk",
+            "night"
           ]
         },
         {
@@ -8443,6 +9212,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Purple_Swamp_Hen_Wollongong.jpg",
               "file": "File:Purple Swamp Hen Wollongong.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -8481,6 +9254,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dusky_moorhen_%28Gallinula_tenebrosa_tenebrosa%29_Sydney.jpg",
               "file": "File:Dusky moorhen (Gallinula tenebrosa tenebrosa) Sydney.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -8519,6 +9296,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Eurasian_Coot_2023_11_25_03.jpg",
               "file": "File:Eurasian Coot 2023 11 25 03.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -8540,12 +9321,13 @@
           "group": "coast",
           "strata": [
             "ground",
-            "low"
+            "low",
+            "sky"
           ],
           "summary": "The common gull of the bay, the river, and the ovals.",
           "habitat": "Everywhere food is dropped: Port Phillip beaches, the Yarra, piers, ovals, and car parks. This is the gull around inner-city bins. BirdLife Australia still lists it as Larus; the global AviList uses Chroicocephalus.",
           "sexes": "Adult males and females look alike, with a white head and red bill and legs. Young birds are mottled brown on the wings.",
-          "stratumNote": "On the ground, and sitting on low posts and rails.",
+          "stratumNote": "On the ground, and sitting on low posts and rails, and often in flight overhead.",
           "photos": [
             {
               "role": "either",
@@ -8560,6 +9342,11 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Larus_novaehollandiae_-_Austin%27s_Ferry.jpg",
               "file": "File:Larus novaehollandiae - Austin's Ferry.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "midday",
+            "afternoon"
           ]
         },
         {
@@ -8578,12 +9365,13 @@
           "status": "Resident",
           "group": "coast",
           "strata": [
-            "ground"
+            "ground",
+            "sky"
           ],
           "summary": "The big gull of ocean and outer-bay shores.",
           "habitat": "Rocky platforms, piers, and beaches toward the heads and the Mornington coast, rather than city bins. A much heavier bird than a Silver Gull, with a massive yellow bill tipped in red. Scarcer around the inner bay.",
           "sexes": "Males and females look alike. Young birds are mottled brown for several years.",
-          "stratumNote": "On rocks, sand, and low breakwaters.",
+          "stratumNote": "On rocks, sand, and low breakwaters, and often in flight overhead.",
           "photos": [
             {
               "role": "either",
@@ -8598,6 +9386,11 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pacific_gull_%28Larus_pacificus%29_at_Quagi_Beach%2C_Western_Australia%2C_January_2024_06.jpg",
               "file": "File:Pacific gull (Larus pacificus) at Quagi Beach, Western Australia, January 2024 06.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "midday",
+            "afternoon"
           ]
         },
         {
@@ -8619,12 +9412,13 @@
           "group": "coast",
           "strata": [
             "ground",
-            "low"
+            "low",
+            "sky"
           ],
           "summary": "The regular tern of Port Phillip beaches and piers.",
           "habitat": "St Kilda, Brighton, Sandringham, and Black Rock are easy places, on the sand and on pier rails, often near Silver Gulls. Still widely called Crested Tern. A yellow bill and a shaggy black cap separate it from the gulls beside it.",
           "sexes": "Males and females look alike. The black cap is fuller in breeding plumage and recedes in winter.",
-          "stratumNote": "On the sand, and on low rails and rocks.",
+          "stratumNote": "On the sand, and on low rails and rocks, and often in flight overhead.",
           "photos": [
             {
               "role": "either",
@@ -8639,6 +9433,11 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Crested_Tern_courtship.jpg",
               "file": "File:Crested Tern courtship.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "midday",
+            "afternoon"
           ]
         },
         {
@@ -8677,6 +9476,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Haematopus_longirostris_-_Austins_Ferry.jpg",
               "file": "File:Haematopus longirostris - Austins Ferry.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -8715,6 +9518,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Eudyptula_minor_Bruny_1.jpg",
               "file": "File:Eudyptula minor Bruny 1.jpg"
             }
+          ],
+          "activeTimes": [
+            "dusk",
+            "night"
           ]
         },
         {
@@ -8756,6 +9563,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Masked_Lapwing_with_worm.jpg",
               "file": "File:Masked Lapwing with worm.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -8774,13 +9585,14 @@
           "status": "Resident",
           "group": "open",
           "strata": [
+            "sky",
             "low",
             "mid"
           ],
           "summary": "The small falcon that hovers over ovals and roadsides.",
           "habitat": "The raptor you are most likely to see in the open suburbs. It hangs in the wind over sports fields, grasslands, and road verges, then drops, and it sits on wires, light poles, and dead trees. Widespread, including the western edge.",
           "sexes": "Males have a grey head and a grey tail. Females are rufous on the head and tail, with dark bars across the tail. Both show the warm rufous back that gives the bird its name.",
-          "stratumNote": "Hunts low over the grass, and perches on wires, poles, and mid-level snags.",
+          "stratumNote": "Hunts low over the grass, and perches on wires, poles, and mid-level snags, and hovering or hunting in open air.",
           "photos": [
             {
               "role": "male",
@@ -8808,6 +9620,11 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nankeen_kestrel_%28Falco_cenchroides_cenchroides%29_female_Penneshaw.jpg",
               "file": "File:Nankeen kestrel (Falco cenchroides cenchroides) female Penneshaw.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "midday",
+            "afternoon"
           ]
         },
         {
@@ -8826,6 +9643,7 @@
           "status": "Resident",
           "group": "open",
           "strata": [
+            "sky",
             "low",
             "mid"
           ],
@@ -8847,6 +9665,11 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Elanus_axillaris_-Royal_Botanic_Gardens%2C_Cranbourne%2C_Melbourne%2C_Victoria%2C_Australia-8.jpg",
               "file": "File:Elanus axillaris -Royal Botanic Gardens, Cranbourne, Melbourne, Victoria, Australia-8.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "midday",
+            "afternoon"
           ]
         },
         {
@@ -8898,6 +9721,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Psephotus_haematonotus_female_-_Cornwallis_Rd.jpg",
               "file": "File:Psephotus haematonotus female - Cornwallis Rd.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -8949,6 +9776,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Flame_Robin_female_0A2A8864.jpg",
               "file": "File:Flame Robin female 0A2A8864.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -8988,6 +9819,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cacatua_galerita_Risdon.jpg",
               "file": "File:Cacatua galerita Risdon.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -9028,6 +9863,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cacatua_tenuirostris_-Melbourne_-many_feeding-8.jpg",
               "file": "File:Cacatua tenuirostris -Melbourne -many feeding-8.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -9068,6 +9907,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Little_corellas_%28Cacatua_sanguinea_gymnopis%29_Blanchetown.jpg",
               "file": "File:Little corellas (Cacatua sanguinea gymnopis) Blanchetown.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -9107,6 +9950,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Galah_%28Eolophus_roseicapilla_albiceps%29_male_Adelaide.jpg",
               "file": "File:Galah (Eolophus roseicapilla albiceps) male Adelaide.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -9146,6 +9993,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rainbow_lorikeet_%28Trichoglossus_moluccanus_moluccanus%29_Sydney_2.jpg",
               "file": "File:Rainbow lorikeet (Trichoglossus moluccanus moluccanus) Sydney 2.jpg"
             }
+          ],
+          "activeTimes": [
+            "dawn",
+            "morning"
           ]
         },
         {
@@ -9184,6 +10035,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Glossopsitta_concinna_-Kangaroo_Flat%2C_Bendigo%2C_Victoria%2C_Australia-8_%281%29.jpg",
               "file": "File:Glossopsitta concinna -Kangaroo Flat, Bendigo, Victoria, Australia-8 (1).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -9223,6 +10078,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Platycercus_eximius_diemenensis_female.jpg",
               "file": "File:Platycercus eximius diemenensis female.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -9262,6 +10121,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anthochaera_carunculata_-Canberra%2C_Australia-8.jpg",
               "file": "File:Anthochaera carunculata -Canberra, Australia-8.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -9302,6 +10165,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Miodo%C5%BCer_maskowy_%E2%80%93_Noisy_miner_%E2%80%93_Manorina_melanocephala.jpg",
               "file": "File:Miodożer maskowy – Noisy miner – Manorina melanocephala.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -9340,6 +10207,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:New_Holland_honeyeater_%28Phylidonyris_novaehollandiae_canescens%29_South_Bruny.jpg",
               "file": "File:New Holland honeyeater (Phylidonyris novaehollandiae canescens) South Bruny.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -9392,6 +10263,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Acanthorhynchus_tenuirostris_female.jpg",
               "file": "File:Acanthorhynchus tenuirostris female.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -9444,6 +10319,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Superb_Fairy-wren_%28Malurus_cyaneus%29_female_%2826398405066%29.jpg",
               "file": "File:Superb Fairy-wren (Malurus cyaneus) female (26398405066).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -9482,6 +10361,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Silvereye.jpg",
               "file": "File:Silvereye.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -9520,6 +10403,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Red-browed_Finch_-_Penrith.jpg",
               "file": "File:Red-browed Finch - Penrith.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -9537,12 +10424,13 @@
           "status": "Resident",
           "group": "park",
           "strata": [
+            "sky",
             "low"
           ],
           "summary": "Hawks just above water and grass, and lines up on wires.",
           "habitat": "Lakes, creeks, and sports fields. They hunt low, often skimming the surface, and rest on wires, bridge rails, and bare twigs. Nests of mud are stuck under bridges and building eaves. Present all year, more obvious in the warmer months.",
           "sexes": "Males and females look alike.",
-          "stratumNote": "In open air close to the ground or water, and perched on wires and low rails. Not in the canopy.",
+          "stratumNote": "Usually hawking in open air, and lining up on low wires.",
           "photos": [
             {
               "role": "either",
@@ -9557,6 +10445,11 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hirundo_neoxena_8923.jpg",
               "file": "File:Hirundo neoxena 8923.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "midday",
+            "afternoon"
           ]
         },
         {
@@ -9610,6 +10503,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Australian_magpie_%28Gymnorhina_tibicen_telonocua%29_female_Adelaide.jpg",
               "file": "File:Australian magpie (Gymnorhina tibicen telonocua) female Adelaide.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -9663,6 +10560,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Grallina_cyanoleuca_-Braeside_Park%2C_Melbourne%2C_Victoria%2C_Australia_-female-8.jpg",
               "file": "File:Grallina cyanoleuca -Braeside Park, Melbourne, Victoria, Australia -female-8.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -9702,6 +10603,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rhipidura_leucophrys_-_Glen_Davis.jpg",
               "file": "File:Rhipidura leucophrys - Glen Davis.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -9739,6 +10644,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cracticus_torquatus_singing_-_Christopher_Watson.jpg",
               "file": "File:Cracticus torquatus singing - Christopher Watson.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -9778,6 +10687,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Corvus_mellori.jpg",
               "file": "File:Corvus mellori.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -9816,6 +10729,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Laughing_kookaburra444.jpg",
               "file": "File:Laughing kookaburra444.jpg"
             }
+          ],
+          "activeTimes": [
+            "dawn",
+            "morning"
           ]
         },
         {
@@ -9854,6 +10771,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tawny_frogmouth_wholebody444.jpg",
               "file": "File:Tawny frogmouth wholebody444.jpg"
             }
+          ],
+          "activeTimes": [
+            "dusk",
+            "night"
           ]
         },
         {
@@ -9892,6 +10813,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Coracina_novaehollandiae.jpg",
               "file": "File:Coracina novaehollandiae.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -9930,6 +10855,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Crested_Pigeon_%28Ocyphaps_lophotes%29_mating_display.jpg",
               "file": "File:Crested Pigeon (Ocyphaps lophotes) mating display.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -9969,6 +10898,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Spotted_Dove_%28Spilopelia_chinensis%29_%2853973360380%29.jpg",
               "file": "File:Spotted Dove (Spilopelia chinensis) (53973360380).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -10023,6 +10956,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Common_Blackbird_%28Turdus_merula_mauritanicus%29_female.jpg",
               "file": "File:Common Blackbird (Turdus merula mauritanicus) female.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -10063,6 +11000,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sturnus_vulgaris_no.JPG",
               "file": "File:Sturnus vulgaris no.JPG"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -10103,6 +11044,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Acridotheres_tristis_-Sydney%2C_Australia-8.jpg",
               "file": "File:Acridotheres tristis -Sydney, Australia-8.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -10154,6 +11099,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:House_sparrow_%28Passer_domesticus%29_female_Heligan.jpg",
               "file": "File:House sparrow (Passer domesticus) female Heligan.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -10192,6 +11141,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Acanthiza_chrysorrhoa_-_Yellow-rumped_Thornbill.jpg",
               "file": "File:Acanthiza chrysorrhoa - Yellow-rumped Thornbill.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -10231,6 +11184,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:European_goldfinch_%28Carduelis_carduelis_niediecki%29_Cyprus.jpg",
               "file": "File:European goldfinch (Carduelis carduelis niediecki) Cyprus.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -10270,6 +11227,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anthochaera_chrysoptera_4.jpg",
               "file": "File:Anthochaera chrysoptera 4.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -10321,6 +11282,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Callocephalon_fimbriatum_%28female%29_-Blue_Mountains-8.jpg",
               "file": "File:Callocephalon fimbriatum (female) -Blue Mountains-8.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -10373,6 +11338,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Calyptorhynchus_funereus_-Australia_-female-8.jpg",
               "file": "File:Calyptorhynchus funereus -Australia -female-8.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -10412,6 +11381,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Platycercus_elegans_Wilsons_Prom.jpg",
               "file": "File:Platycercus elegans Wilsons Prom.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -10463,6 +11436,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Australian_King-Parrot_%28Alisterus_scapularis%29_female_%2831233341392%29.jpg",
               "file": "File:Australian King-Parrot (Alisterus scapularis) female (31233341392).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -10513,6 +11490,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pardalotus_punctatus_-_Glen_Davis.jpg",
               "file": "File:Pardalotus punctatus - Glen Davis.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -10550,6 +11531,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:White-browed_scrubwren_Sericornis_frontalis_DSC_zxc.jpg",
               "file": "File:White-browed scrubwren Sericornis frontalis DSC zxc.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -10588,6 +11573,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Acanthiza_pusilla_-_Austin%27s_Ferry.jpg",
               "file": "File:Acanthiza pusilla - Austin's Ferry.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -10638,6 +11627,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anatyeke_mistletoebird_-_Christopher_Watson.jpg",
               "file": "File:Anatyeke mistletoebird - Christopher Watson.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -10676,6 +11669,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Eopsaltria_australis_-_Mogo_Campground.jpg",
               "file": "File:Eopsaltria australis - Mogo Campground.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -10714,6 +11711,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rhipidura_albiscapa_-Canberra%2C_Australia-8.jpg",
               "file": "File:Rhipidura albiscapa -Canberra, Australia-8.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -10755,6 +11756,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Grey_Shrike-thrush_%28Colluricincla_harmonica%29_at_Bolin_Bolin_Billabong.jpg",
               "file": "File:Grey Shrike-thrush (Colluricincla harmonica) at Bolin Bolin Billabong.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -10806,6 +11811,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pachycephala_pectoralis_female.jpg",
               "file": "File:Pachycephala pectoralis female.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -10856,6 +11865,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pachycephala_rufiventris_female_-_Glen_Davis.jpg",
               "file": "File:Pachycephala rufiventris female - Glen Davis.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -10894,6 +11907,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pied_Currawong_%28Strepera_graculina%29_%288601927551%29.jpg",
               "file": "File:Pied Currawong (Strepera graculina) (8601927551).jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -10945,6 +11962,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Scarlet_Robin_female_-_Blackheath.jpg",
               "file": "File:Scarlet Robin female - Blackheath.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         },
         {
@@ -10983,6 +12004,10 @@
               "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ptilotula_penicillata_-_Glen_Davis.jpg",
               "file": "File:Ptilotula penicillata - Glen Davis.jpg"
             }
+          ],
+          "activeTimes": [
+            "morning",
+            "afternoon"
           ]
         }
       ]
