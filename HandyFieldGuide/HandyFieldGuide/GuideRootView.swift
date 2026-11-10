@@ -1,10 +1,12 @@
 import SwiftUI
+import UIKit
 
 struct GuideRootView: View {
     @EnvironmentObject private var model: GuideModel
     @State private var showingAddLocation = false
     @State private var showingManageLocations = false
     @State private var path = NavigationPath()
+    @FocusState private var isSearchFocused: Bool
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -34,6 +36,12 @@ struct GuideRootView: View {
                         .guideBackground()
                 }
             }
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("Done") { dismissSearchKeyboard() }
+                }
+            }
         }
         .sheet(isPresented: $showingAddLocation) {
             LocationSheet(startInImportMode: true)
@@ -42,8 +50,31 @@ struct GuideRootView: View {
             LocationSheet(startInImportMode: false)
         }
         .onChange(of: model.locationQuery) { _, _ in
+            dismissSearchKeyboard()
             path = NavigationPath()
         }
+        .onChange(of: path.count) { _, _ in
+            // Selecting a result / pushing detail should hide the search keyboard.
+            dismissSearchKeyboard()
+        }
+        .onChange(of: showingAddLocation) { _, open in
+            if open { dismissSearchKeyboard() }
+        }
+        .onChange(of: showingManageLocations) { _, open in
+            if open { dismissSearchKeyboard() }
+        }
+    }
+
+    private func dismissSearchKeyboard() {
+        isSearchFocused = false
+        #if canImport(UIKit)
+        UIApplication.shared.sendAction(
+            #selector(UIResponder.resignFirstResponder),
+            to: nil,
+            from: nil,
+            for: nil
+        )
+        #endif
     }
 
     private func emptyLocations(guide: GuideFile) -> some View {
@@ -97,23 +128,48 @@ struct GuideRootView: View {
         return ScrollView {
             VStack(alignment: .leading, spacing: 14) {
                 LocationHeader(place: place)
+                    .simultaneousGesture(TapGesture().onEnded(dismissSearchKeyboard))
 
                 if let notice = place.notice {
                     NoticeBox(text: notice, strong: true)
+                        .simultaneousGesture(TapGesture().onEnded(dismissSearchKeyboard))
                 }
 
-                TextField("Search name or scientific name", text: $model.searchText)
-                    .textFieldStyle(.roundedBorder)
-                    .textInputAutocapitalization(.never)
-                    .autocorrectionDisabled()
+                HStack(spacing: 8) {
+                    TextField("Search name or scientific name", text: $model.searchText)
+                        .textFieldStyle(.roundedBorder)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                        .focused($isSearchFocused)
+                        .submitLabel(.search)
+                        .onSubmit(dismissSearchKeyboard)
+
+                    if !model.searchText.isEmpty {
+                        Button {
+                            model.searchText = ""
+                            dismissSearchKeyboard()
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .font(.title3)
+                                .foregroundStyle(GuideColor.muted)
+                        }
+                        .accessibilityLabel("Clear search")
+                    }
+                }
 
                 Text("Showing \(birds.count) of \(place.coverage.species.count)")
                     .font(.subheadline)
                     .foregroundStyle(GuideColor.muted)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
+                    .onTapGesture(perform: dismissSearchKeyboard)
 
                 if birds.isEmpty {
                     Text("No birds match for \(model.selectedMonthName). Try another month, or change scarce / flagged filters in Settings.")
                         .padding(.vertical, 8)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .contentShape(Rectangle())
+                        .onTapGesture(perform: dismissSearchKeyboard)
                 } else {
                     section(title: nil, birds: model.sortedForDisplay(birds, place: place), place: place)
                 }
@@ -122,17 +178,23 @@ struct GuideRootView: View {
                     .font(.footnote)
                     .foregroundStyle(GuideColor.muted)
                     .padding(.top, 8)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
+                    .onTapGesture(perform: dismissSearchKeyboard)
             }
             .padding(16)
             .frame(maxWidth: 720, alignment: .leading)
             .frame(maxWidth: .infinity)
         }
+        .scrollDismissesKeyboard(.interactively)
         .safeAreaInset(edge: .bottom, spacing: 0) {
             HomeFiltersView(
                 guide: guide,
                 onAddLocation: { showingAddLocation = true },
                 onManageLocations: { showingManageLocations = true }
             )
+            // Tapping the bottom filter bar should hide the keyboard without blocking menus.
+            .simultaneousGesture(TapGesture().onEnded(dismissSearchKeyboard))
         }
     }
 
@@ -154,6 +216,7 @@ struct GuideRootView: View {
                     )
                 }
                 .buttonStyle(.plain)
+                .simultaneousGesture(TapGesture().onEnded(dismissSearchKeyboard))
             }
         }
     }
