@@ -8,10 +8,12 @@ struct ZoomablePhoto: View {
     var label: String
 
     @State private var showingViewer = false
+    @State private var image: UIImage?
+    @State private var loadFailed = false
 
     var body: some View {
         Group {
-            if let image = BundleImages.image(for: path) {
+            if let image {
                 GeometryReader { geo in
                     ZoomableScrollImage(image: image, accessibilityLabel: alt)
                         .frame(width: geo.size.width, height: geo.size.height)
@@ -33,7 +35,7 @@ struct ZoomablePhoto: View {
                 .onLongPressGesture(minimumDuration: 0.35) {
                     showingViewer = true
                 }
-            } else {
+            } else if loadFailed {
                 GuideColor.green.opacity(0.12)
                     .frame(height: 160)
                     .overlay {
@@ -41,10 +43,27 @@ struct ZoomablePhoto: View {
                             .font(.caption)
                             .foregroundStyle(GuideColor.muted)
                     }
+            } else {
+                GuideColor.green.opacity(0.12)
+                    .frame(height: 220)
+                    .overlay { ProgressView() }
+            }
+        }
+        .task(id: path) {
+            loadFailed = false
+            image = nil
+            let path = path
+            let loaded = await Task.detached(priority: .userInitiated) {
+                BundleImages.image(for: path)
+            }.value
+            if let loaded {
+                image = loaded
+            } else {
+                loadFailed = true
             }
         }
         .fullScreenCover(isPresented: $showingViewer) {
-            if let image = BundleImages.image(for: path) {
+            if let image {
                 ZoomablePhotoViewer(image: image, title: label, alt: alt) {
                     showingViewer = false
                 }

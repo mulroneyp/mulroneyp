@@ -6,20 +6,29 @@ final class GuideModel: ObservableObject {
     @Published var guide: GuideFile?
     @Published var loadError: String?
     @Published var locationQuery: String {
-        didSet { UserDefaults.standard.set(locationQuery, forKey: Self.storageKey) }
+        didSet {
+            UserDefaults.standard.set(locationQuery, forKey: Self.storageKey)
+            invalidatePlaceCache()
+        }
     }
+    /// Debounced search query used for filtering. Typing updates this after a short delay.
     @Published var searchText = ""
     /// Selected height bands. Empty means Any (no zone filter). Matching is OR across selections.
     @Published var selectedStrata: Set<String> = []
     /// 0 = January … 11 = December. Defaults to the device’s current month.
     @Published var selectedMonthIndex: Int
     @Published var hideNearZero = true
-    @Published var showFlaggedTaxa = false
+    @Published var showFlaggedTaxa = false {
+        didSet { invalidatePlaceCache() }
+    }
     @Published var importMessage: String?
 
     let imports = ImportedLocationStore()
     private(set) var catalog: SpeciesCatalog?
     private var importsCancellable: AnyCancellable?
+
+    /// Cached resolved place so list / filter / navigation do not rebuild coverage every body pass.
+    private var placeCache: PlaceCache? = nil
 
     static let storageKey = "handy.locationQuery"
     static let monthKey = "handy.selectedMonthIndex"
@@ -36,22 +45,37 @@ final class GuideModel: ObservableObject {
         if UserDefaults.standard.object(forKey: Self.hideNearZeroKey) != nil {
             hideNearZero = UserDefaults.standard.bool(forKey: Self.hideNearZeroKey)
         }
+        importsCancellable = imports.objectWillChange.sink { [weak self] _ in
+            self?.invalidatePlaceCache()
+            self?.objectWillChange.send()
+        }
+        Task { await self.loadGuideAndCatalog() }
+    }
+
+    private func loadGuideAndCatalog() async {
         do {
-            let guide = try GuideLoader.load()
-            self.guide = guide
-            catalog = SpeciesCatalog(guide: guide, supplemental: SpeciesCatalog.loadSupplemental())
+            let loaded = try await Self.decodeBundledGuide()
+            guide = loaded.guide
+            catalog = SpeciesCatalog(guide: loaded.guide, supplemental: loaded.supplemental)
+            invalidatePlaceCache()
+            // Drop saved queries that no longer match an import (old curated presets).
+            // didSet does not run during init, so write UserDefaults explicitly.
+            if !locationQuery.isEmpty, imports.location(matchingQuery: locationQuery) == nil {
+                locationQuery = ""
+                UserDefaults.standard.set("", forKey: Self.storageKey)
+            }
         } catch {
             loadError = "The species list could not be read from the app."
         }
-        importsCancellable = imports.objectWillChange.sink { [weak self] _ in
-            self?.objectWillChange.send()
-        }
-        // Drop saved queries that no longer match an import (old curated presets).
-        // didSet does not run during init, so write UserDefaults explicitly.
-        if !locationQuery.isEmpty, imports.location(matchingQuery: locationQuery) == nil {
-            locationQuery = ""
-            UserDefaults.standard.set("", forKey: Self.storageKey)
-        }
+    }
+
+    /// Read + decode large JSON off the main actor so launch stays responsive.
+    private nonisolated static func decodeBundledGuide() async throws -> (guide: GuideFile, supplemental: [Species]) {
+        try await Task.detached(priority: .userInitiated) {
+            let guide = try GuideLoader.load()
+            let supplemental = SpeciesCatalog.loadSupplemental()
+            return (guide, supplemental)
+        }.value
     }
 
     var selectedMonthName: String {
@@ -67,6 +91,7 @@ final class GuideModel: ObservableObject {
         guard (0..<12).contains(index) else { return }
         selectedMonthIndex = index
         UserDefaults.standard.set(index, forKey: Self.monthKey)
+        invalidatePlaceCache()
     }
 
     func resetMonthToDevice() {
@@ -80,24 +105,7 @@ final class GuideModel: ObservableObject {
 
     /// Active place is only an imported eBird / user-added list. No curated fallback.
     var place: ResolvedPlace? {
-        guard guide != nil, let catalog else { return nil }
-        guard let imported = imports.location(matchingQuery: locationQuery) else { return nil }
-        let coverage = ImportedCoverageBuilder.coverage(
-            for: imported,
-            catalog: catalog,
-            monthIndex: selectedMonthIndex,
-            includeFlagged: showFlaggedTaxa
-        )
-        return ResolvedPlace(
-            query: locationQuery,
-            coverage: coverage,
-            district: coverage.districts.first,
-            displayName: imported.name,
-            isOutside: false,
-            notice: nil,
-            imported: imported,
-            monthIndex: selectedMonthIndex
-        )
+        refreshedPlaceCache()?.place
     }
 
     var hasImportedLocations: Bool {
@@ -129,36 +137,34 @@ final class GuideModel: ObservableObject {
     }
 
     func frequency(for species: Species, in place: ResolvedPlace) -> Double? {
-        guard let imported = place.imported else { return nil }
-        let match = imported.species.first {
-            SpeciesCatalog.normalize($0.commonName) == SpeciesCatalog.normalize(species.commonName)
-        }
-        return match?.mean(monthIndex: selectedMonthIndex)
+        guard place.imported != nil else { return nil }
+        let cache = refreshedPlaceCache()
+        let key = SpeciesCatalog.normalize(species.commonName)
+        return cache?.frequencies[key]
     }
 
     func filteredSpecies(in place: ResolvedPlace) -> [Species] {
         let words = LocationResolver.normalize(searchText).split(separator: " ").map(String.init)
+        let cache = refreshedPlaceCache()
+        let frequencies = cache?.frequencies ?? [:]
+        let haystacks = cache?.searchHaystacks ?? [:]
+        let hideNearZero = hideNearZero
+        let selectedStrata = selectedStrata
+        let filteringByZone = isFilteringByZone
+
         return place.coverage.species.filter { species in
-            if isFilteringByZone && !species.strata.contains(where: { selectedStrata.contains($0) }) {
+            if filteringByZone && !species.strata.contains(where: { selectedStrata.contains($0) }) {
                 return false
             }
-            if place.imported != nil, hideNearZero,
-               let frequency = frequency(for: species, in: place),
-               frequency < EBirdBarchartParser.nearZeroThreshold {
-                return false
+            if place.imported != nil, hideNearZero {
+                let key = SpeciesCatalog.normalize(species.commonName)
+                if let frequency = frequencies[key],
+                   frequency < EBirdBarchartParser.nearZeroThreshold {
+                    return false
+                }
             }
             if words.isEmpty { return true }
-            let hay = LocationResolver.normalize([
-                species.commonName,
-                species.scientificName,
-                species.summary,
-                species.habitat,
-                species.status,
-                species.aliases.joined(separator: " "),
-                species.alsoCalled.joined(separator: " "),
-                species.alsoScientific.joined(separator: " "),
-                species.tags.joined(separator: " "),
-            ].joined(separator: " "))
+            let hay = haystacks[species.id] ?? Self.makeSearchHaystack(for: species)
             return words.allSatisfy { hay.contains($0) }
         }
     }
@@ -167,18 +173,24 @@ final class GuideModel: ObservableObject {
         guard place.imported != nil else {
             return birds.sorted { $0.commonName < $1.commonName }
         }
-        return birds.sorted { lhs, rhs in
-            let lf = frequency(for: lhs, in: place) ?? 0
-            let rf = frequency(for: rhs, in: place) ?? 0
-            if lf != rf { return lf > rf }
-            return lhs.commonName < rhs.commonName
-        }
+        let frequencies = refreshedPlaceCache()?.frequencies ?? [:]
+        return birds
+            .map { species -> (Species, Double) in
+                let key = SpeciesCatalog.normalize(species.commonName)
+                return (species, frequencies[key] ?? 0)
+            }
+            .sorted { lhs, rhs in
+                if lhs.1 != rhs.1 { return lhs.1 > rhs.1 }
+                return lhs.0.commonName < rhs.0.commonName
+            }
+            .map(\.0)
     }
 
     @discardableResult
     func importBarchart(data: Data, sourceFileName: String, displayName: String?) throws -> ImportedLocationRecord {
         let parsed = try EBirdBarchartParser.parse(data: data, sourceFileName: sourceFileName)
         let record = imports.upsert(from: parsed, displayName: displayName)
+        invalidatePlaceCache()
         locationQuery = record.name
         importMessage = "Imported \(parsed.species.count) taxa for \(record.name) (\(parsed.resolvableSpeciesCount) species; \(parsed.flaggedTaxonCount) flagged)."
         return record
@@ -196,6 +208,7 @@ final class GuideModel: ObservableObject {
     func renameImportedLocation(_ id: String, to newName: String) {
         guard let previous = imports.locations.first(where: { $0.id == id }) else { return }
         imports.rename(id, to: newName)
+        invalidatePlaceCache()
         guard let updated = imports.locations.first(where: { $0.id == id }) else { return }
         if LocationResolver.normalize(locationQuery) == LocationResolver.normalize(previous.name)
             || imports.location(matchingQuery: locationQuery)?.id == id {
@@ -211,9 +224,111 @@ final class GuideModel: ObservableObject {
                 || LocationResolver.normalize(locationQuery) == LocationResolver.normalize(loc.name)
         } ?? false
         imports.remove(id)
+        invalidatePlaceCache()
         if wasActive {
             locationQuery = ""
             importMessage = nil
         }
+    }
+
+    // MARK: - Place cache
+
+    private struct PlaceCacheKey: Equatable {
+        var locationId: String
+        var locationName: String
+        var importedAt: Date
+        var taxonCount: Int
+        var monthIndex: Int
+        var includeFlagged: Bool
+        var query: String
+    }
+
+    private struct PlaceCache {
+        var key: PlaceCacheKey
+        var place: ResolvedPlace
+        var frequencies: [String: Double]
+        var searchHaystacks: [String: String]
+    }
+
+    private func invalidatePlaceCache() {
+        placeCache = nil
+    }
+
+    private func placeCacheKey(for imported: ImportedLocationRecord) -> PlaceCacheKey {
+        PlaceCacheKey(
+            locationId: imported.id,
+            locationName: imported.name,
+            importedAt: imported.importedAt,
+            taxonCount: imported.species.count,
+            monthIndex: selectedMonthIndex,
+            includeFlagged: showFlaggedTaxa,
+            query: locationQuery
+        )
+    }
+
+    @discardableResult
+    private func refreshedPlaceCache() -> PlaceCache? {
+        guard guide != nil, let catalog else { return nil }
+        guard let imported = imports.location(matchingQuery: locationQuery) else {
+            placeCache = nil
+            return nil
+        }
+        let key = placeCacheKey(for: imported)
+        if let placeCache, placeCache.key == key {
+            return placeCache
+        }
+
+        let coverage = ImportedCoverageBuilder.coverage(
+            for: imported,
+            catalog: catalog,
+            monthIndex: selectedMonthIndex,
+            includeFlagged: showFlaggedTaxa
+        )
+        let place = ResolvedPlace(
+            query: locationQuery,
+            coverage: coverage,
+            district: coverage.districts.first,
+            displayName: imported.name,
+            isOutside: false,
+            notice: nil,
+            imported: imported,
+            monthIndex: selectedMonthIndex
+        )
+
+        var frequencies: [String: Double] = [:]
+        frequencies.reserveCapacity(imported.species.count)
+        for taxon in imported.species {
+            frequencies[SpeciesCatalog.normalize(taxon.commonName)] = taxon.mean(monthIndex: selectedMonthIndex)
+        }
+
+        var haystacks: [String: String] = [:]
+        haystacks.reserveCapacity(coverage.species.count)
+        for species in coverage.species {
+            haystacks[species.id] = Self.makeSearchHaystack(for: species)
+        }
+
+        let built = PlaceCache(
+            key: key,
+            place: place,
+            frequencies: frequencies,
+            searchHaystacks: haystacks
+        )
+        placeCache = built
+        return built
+    }
+
+    /// Same fields as before — pre-normalized once per place build instead of per keystroke.
+    private static func makeSearchHaystack(for species: Species) -> String {
+        LocationResolver.normalize([
+            species.commonName,
+            species.scientificName,
+            species.summary,
+            species.habitat,
+            species.status,
+            species.aliases.joined(separator: " "),
+            species.alsoCalled.joined(separator: " "),
+            species.alsoScientific.joined(separator: " "),
+            species.tags.joined(separator: " "),
+        ].joined(separator: " "))
     }
 }
