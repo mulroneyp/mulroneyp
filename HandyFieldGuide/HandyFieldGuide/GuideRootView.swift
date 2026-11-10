@@ -7,6 +7,9 @@ struct GuideRootView: View {
     @State private var showingManageLocations = false
     @State private var path = NavigationPath()
     @FocusState private var isSearchFocused: Bool
+    /// Local draft so keystrokes do not republish GuideModel / rebuild the bottom bar every character.
+    @State private var searchDraft = ""
+    @State private var searchDebounceTask: Task<Void, Never>?
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -62,6 +65,26 @@ struct GuideRootView: View {
         }
         .onChange(of: showingManageLocations) { _, open in
             if open { dismissSearchKeyboard() }
+        }
+        .onAppear {
+            searchDraft = model.searchText
+        }
+    }
+
+    private func applySearchDraft(_ value: String, immediate: Bool) {
+        searchDebounceTask?.cancel()
+        if immediate {
+            if model.searchText != value {
+                model.searchText = value
+            }
+            return
+        }
+        searchDebounceTask = Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 220_000_000)
+            guard !Task.isCancelled else { return }
+            if model.searchText != value {
+                model.searchText = value
+            }
         }
     }
 
@@ -124,9 +147,10 @@ struct GuideRootView: View {
     }
 
     private func list(guide: GuideFile, place: ResolvedPlace) -> some View {
-        let birds = model.filteredSpecies(in: place)
+        let birds = model.sortedForDisplay(model.filteredSpecies(in: place), place: place)
+        // LazyVStack keeps off-screen rows (and their photo tasks) from building during scroll.
         return ScrollView {
-            VStack(alignment: .leading, spacing: 14) {
+            LazyVStack(alignment: .leading, spacing: 14) {
                 LocationHeader(place: place)
                     .simultaneousGesture(TapGesture().onEnded(dismissSearchKeyboard))
 
@@ -136,17 +160,24 @@ struct GuideRootView: View {
                 }
 
                 HStack(spacing: 8) {
-                    TextField("Search name or scientific name", text: $model.searchText)
+                    TextField("Search name or scientific name", text: $searchDraft)
                         .textFieldStyle(.roundedBorder)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
                         .focused($isSearchFocused)
                         .submitLabel(.search)
-                        .onSubmit(dismissSearchKeyboard)
+                        .onSubmit {
+                            applySearchDraft(searchDraft, immediate: true)
+                            dismissSearchKeyboard()
+                        }
+                        .onChange(of: searchDraft) { _, newValue in
+                            applySearchDraft(newValue, immediate: false)
+                        }
 
-                    if !model.searchText.isEmpty {
+                    if !searchDraft.isEmpty {
                         Button {
-                            model.searchText = ""
+                            searchDraft = ""
+                            applySearchDraft("", immediate: true)
                             dismissSearchKeyboard()
                         } label: {
                             Image(systemName: "xmark.circle.fill")
@@ -171,7 +202,17 @@ struct GuideRootView: View {
                         .contentShape(Rectangle())
                         .onTapGesture(perform: dismissSearchKeyboard)
                 } else {
-                    section(title: nil, birds: model.sortedForDisplay(birds, place: place), place: place)
+                    ForEach(birds) { bird in
+                        NavigationLink(value: bird.id) {
+                            BirdRow(
+                                species: bird,
+                                placeDisplayName: place.displayName,
+                                frequency: model.frequency(for: bird, in: place)
+                            )
+                        }
+                        .buttonStyle(.plain)
+                        .simultaneousGesture(TapGesture().onEnded(dismissSearchKeyboard))
+                    }
                 }
 
                 Text("Imported lists keep every taxon from the file. Near-zero \(model.selectedMonthName) rows and flagged “sp.” / slash taxa are controlled in Settings. Photos are openly licensed when available.")
@@ -195,29 +236,6 @@ struct GuideRootView: View {
             )
             // Tapping the bottom filter bar should hide the keyboard without blocking menus.
             .simultaneousGesture(TapGesture().onEnded(dismissSearchKeyboard))
-        }
-    }
-
-    private func section(title: String?, birds: [Species], place: ResolvedPlace) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            if let title {
-                Text(title)
-                    .font(.system(.title2, design: .serif))
-                    .foregroundStyle(GuideColor.green)
-                    .padding(.top, 8)
-                    .padding(.bottom, 4)
-            }
-            ForEach(birds) { bird in
-                NavigationLink(value: bird.id) {
-                    BirdRow(
-                        species: bird,
-                        place: place,
-                        frequency: model.frequency(for: bird, in: place)
-                    )
-                }
-                .buttonStyle(.plain)
-                .simultaneousGesture(TapGesture().onEnded(dismissSearchKeyboard))
-            }
         }
     }
 }
@@ -348,22 +366,28 @@ private struct NoticeBox: View {
 
 private struct BirdRow: View {
     var species: Species
-    var place: ResolvedPlace
+    var placeDisplayName: String
     var frequency: Double?
 
-    private var likelihood: String {
-        Likelihood.label(for: species, frequency: frequency)
-    }
+    /// Longest edge for list thumbnails (~88pt × 3x). Far smaller than full 900–1000px JPEGs.
+    private static let listThumbMaxPixels: CGFloat = 270
 
     var body: some View {
-        HStack(alignment: .center, spacing: 12) {
+        let photos = Self.listPhotos(for: species)
+        let likelihood = Likelihood.label(for: species, frequency: frequency)
+        return HStack(alignment: .center, spacing: 12) {
             HStack(spacing: 3) {
-                ForEach(listPhotos) { photo in
-                    BundlePhoto(path: photo.src, alt: "", fills: true)
-                        .frame(width: listPhotos.count > 1 ? 44 : 88, height: 64)
-                        .clipped()
+                ForEach(photos) { photo in
+                    BundlePhoto(
+                        path: photo.src,
+                        alt: "",
+                        fills: true,
+                        maxPixelSize: Self.listThumbMaxPixels
+                    )
+                    .frame(width: photos.count > 1 ? 44 : 88, height: 64)
+                    .clipped()
                 }
-                if listPhotos.isEmpty {
+                if photos.isEmpty {
                     GuideColor.green.opacity(0.12)
                         .frame(width: 88, height: 64)
                 }
@@ -416,10 +440,10 @@ private struct BirdRow: View {
             Rectangle().fill(GuideColor.line).frame(height: 1)
         }
         .accessibilityElement(children: .combine)
-        .accessibilityHint("Opens habitat notes for \(place.displayName)")
+        .accessibilityHint("Opens habitat notes for \(placeDisplayName)")
     }
 
-    private var listPhotos: [Photo] {
+    private static func listPhotos(for species: Species) -> [Photo] {
         let order = ["male": 0, "female": 1, "either": 2, "unsexed": 3, "illustration": 4]
         let sorted = species.photos.sorted {
             (order[$0.role] ?? 9, $0.label) < (order[$1.role] ?? 9, $1.label)

@@ -18,17 +18,25 @@ struct HomeFiltersView: View {
 
     /// For VoiceOver only — the bar label stays generic “Location”.
     private var selectedLocationAccessibilityValue: String {
-        let current = model.locationQuery.trimmingCharacters(in: .whitespacesAndNewlines)
-        if let match = importedLocationOptions.first(where: {
-            LocationResolver.normalize($0.query) == LocationResolver.normalize(current)
-                || LocationResolver.normalize($0.title) == LocationResolver.normalize(current)
-        }) {
+        if let match = matchingImportedOption {
             return match.title
         }
         if importedLocationOptions.isEmpty {
             return "No location yet"
         }
+        let current = model.locationQuery.trimmingCharacters(in: .whitespacesAndNewlines)
         return current.isEmpty ? "No location selected" : current
+    }
+
+    /// Match once per body pass instead of re-normalizing in several controls.
+    private var matchingImportedOption: LocationOption? {
+        let current = model.locationQuery.trimmingCharacters(in: .whitespacesAndNewlines)
+        let needle = LocationResolver.normalize(current)
+        guard !needle.isEmpty else { return nil }
+        return importedLocationOptions.first {
+            LocationResolver.normalize($0.query) == needle
+                || LocationResolver.normalize($0.title) == needle
+        }
     }
 
     private var selectedZoneTitle: String {
@@ -276,14 +284,9 @@ struct HomeFiltersView: View {
     private var locationSelection: Binding<String> {
         Binding(
             get: {
-                let current = model.locationQuery.trimmingCharacters(in: .whitespacesAndNewlines)
-                if let match = importedLocationOptions.first(where: {
-                    LocationResolver.normalize($0.query) == LocationResolver.normalize(current)
-                        || LocationResolver.normalize($0.title) == LocationResolver.normalize(current)
-                }) {
-                    return match.query
-                }
-                return importedLocationOptions.first?.query ?? ""
+                matchingImportedOption?.query
+                    ?? importedLocationOptions.first?.query
+                    ?? ""
             },
             set: { model.locationQuery = $0 }
         )
