@@ -4,7 +4,6 @@ import UniformTypeIdentifiers
 struct LocationSheet: View {
     @EnvironmentObject private var model: GuideModel
     @Environment(\.dismiss) private var dismiss
-    @State private var draft: String
     @State private var showingImporter: Bool
     @State private var importError: String?
     @State private var locationPendingRename: ImportedLocationRecord?
@@ -13,8 +12,7 @@ struct LocationSheet: View {
 
     private let startInImportMode: Bool
 
-    init(current: String, startInImportMode: Bool = false) {
-        _draft = State(initialValue: current)
+    init(startInImportMode: Bool = false) {
         self.startInImportMode = startInImportMode
         _showingImporter = State(initialValue: startInImportMode)
     }
@@ -25,7 +23,7 @@ struct LocationSheet: View {
                 VStack(alignment: .leading, spacing: 16) {
                     Text(startInImportMode
                          ? "Add a new area from an eBird Frequency / barchart `.txt` export (tab-separated, four week columns per month). The app names the place from the location id in the filename when it can (for example L436229)."
-                         : "Rename or delete saved eBird imports here. Bundled curated presets (Monteverde, Melbourne, and the district shortcuts) stay in the Location menu and are not removed.")
+                         : "Rename or delete saved eBird imports. Only imported locations appear in the Location menu.")
                         .font(.subheadline)
                         .foregroundStyle(GuideColor.muted)
                         .fixedSize(horizontal: false, vertical: true)
@@ -37,20 +35,17 @@ struct LocationSheet: View {
                     if !model.imports.locations.isEmpty {
                         importedSection
                     } else if !startInImportMode {
-                        Text("No saved imports yet. Use Add eBird barchart on the Location menu to add one.")
+                        Text("No saved imports yet. Use Add eBird barchart to import one.")
                             .font(.subheadline)
                             .foregroundStyle(GuideColor.muted)
-                    }
 
-                    if !startInImportMode {
-                        TextField("Place", text: $draft)
-                            .textFieldStyle(.roundedBorder)
-                            .textInputAutocapitalization(.words)
-                            .submitLabel(.done)
-                            .onSubmit(apply)
-
-                        Button("Use this place", action: apply)
-                            .buttonStyle(GuideChipStyle(selected: true))
+                        Button {
+                            importError = nil
+                            showingImporter = true
+                        } label: {
+                            Label("Add eBird barchart", systemImage: "plus")
+                        }
+                        .buttonStyle(GuideChipStyle(selected: true))
                     }
                 }
                 .padding(20)
@@ -83,16 +78,13 @@ struct LocationSheet: View {
             ) { location in
                 Button("Delete", role: .destructive) {
                     model.deleteImportedLocation(location.id)
-                    if LocationResolver.normalize(draft) == LocationResolver.normalize(location.name) {
-                        draft = model.locationQuery
-                    }
                     locationPendingDelete = nil
                 }
                 Button("Cancel", role: .cancel) {
                     locationPendingDelete = nil
                 }
             } message: { location in
-                Text("Remove “\(location.name)” from Handy Field Guide? This only deletes your saved import. Curated presets and the bundled sample file stay available to re-import.")
+                Text("Remove “\(location.name)” from Handy Field Guide? This only deletes your saved import. You can re-import the barchart later.")
             }
         }
     }
@@ -122,7 +114,6 @@ struct LocationSheet: View {
             Button {
                 do {
                     try model.importBundledSample()
-                    draft = model.locationQuery
                     dismiss()
                 } catch {
                     importError = error.localizedDescription
@@ -155,7 +146,6 @@ struct LocationSheet: View {
             ForEach(model.imports.locations) { location in
                 VStack(alignment: .leading, spacing: 8) {
                     Button {
-                        draft = location.name
                         model.locationQuery = location.name
                         dismiss()
                     } label: {
@@ -229,19 +219,8 @@ struct LocationSheet: View {
     }
 
     private func saveRename(_ location: ImportedLocationRecord) {
-        let previous = location.name
         model.renameImportedLocation(location.id, to: renameText)
-        if let updated = model.imports.locations.first(where: { $0.id == location.id }) {
-            if LocationResolver.normalize(draft) == LocationResolver.normalize(previous) {
-                draft = updated.name
-            }
-        }
         locationPendingRename = nil
-    }
-
-    private func apply() {
-        model.locationQuery = draft.trimmingCharacters(in: .whitespacesAndNewlines)
-        dismiss()
     }
 
     private func handleImport(_ result: Result<[URL], Error>) {
@@ -257,7 +236,6 @@ struct LocationSheet: View {
             do {
                 let data = try Data(contentsOf: url)
                 try model.importBarchart(data: data, sourceFileName: url.lastPathComponent, displayName: nil)
-                draft = model.locationQuery
                 dismiss()
             } catch {
                 importError = error.localizedDescription
