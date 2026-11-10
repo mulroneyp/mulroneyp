@@ -156,10 +156,16 @@
   {
     "id": "scaly-breasted-hummingbird",
     "commonName": "Scaly-breasted Hummingbird",
-    "scientificName": "—",
-    "aliases": [],
-    "alsoCalled": [],
-    "alsoScientific": [],
+    "scientificName": "Phaeochroa cuvierii",
+    "aliases": [
+      "Scaly-breasted Sabrewing"
+    ],
+    "alsoCalled": [
+      "Scaly-breasted Sabrewing"
+    ],
+    "alsoScientific": [
+      "Campylopterus cuvierii"
+    ],
     "tags": [
       "imported",
       "ebird-supplemental"
@@ -455,7 +461,7 @@
   {
     "id": "white-collared-manakin",
     "commonName": "White-collared Manakin",
-    "scientificName": "—",
+    "scientificName": "Manacus candei",
     "aliases": [],
     "alsoCalled": [],
     "alsoScientific": [],
@@ -477,10 +483,10 @@
     "stratumNote": "Estimated height band: low, mid.",
     "photos": [
       {
-        "role": "unsexed",
-        "label": "Sex not labeled",
-        "src": "images/white-collared-manakin.jpg",
-        "alt": "White-collared Manakin. The source photo is not labeled male or female.",
+        "role": "male",
+        "label": "Male",
+        "src": "images/white-collared-manakin-male.jpg",
+        "alt": "Male White-collared Manakin",
         "width": 1000,
         "height": 667,
         "author": "Jose Calvo from San Jose, Costa Rica",
@@ -488,6 +494,19 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Manacus_candei_-La_Selva_Biological_Station%2C_Costa_Rica_-male-8.jpg",
         "file": "File:Manacus candei -La Selva Biological Station, Costa Rica -male-8.jpg"
+      },
+      {
+        "role": "female",
+        "label": "Female",
+        "src": "images/white-collared-manakin-female.jpg",
+        "alt": "Female White-collared Manakin",
+        "width": 1000,
+        "height": 750,
+        "author": "HaleBopp",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Manacus_candei_Feale.jpg",
+        "file": "File:Manacus candei Feale.jpg"
       }
     ],
     "activeTimes": [
@@ -553,7 +572,7 @@
   {
     "id": "tawny-capped-euphonia",
     "commonName": "Tawny-capped Euphonia",
-    "scientificName": "—",
+    "scientificName": "Euphonia anneae",
     "aliases": [],
     "alsoCalled": [],
     "alsoScientific": [],
@@ -878,10 +897,20 @@
   {
     "id": "gartered-violaceous-trogon",
     "commonName": "Gartered Violaceous Trogon",
-    "scientificName": "—",
-    "aliases": [],
-    "alsoCalled": [],
-    "alsoScientific": [],
+    "scientificName": "Trogon caligatus",
+    "aliases": [
+      "Gartered Trogon",
+      "Northern Violaceous Trogon",
+      "Violaceous Trogon"
+    ],
+    "alsoCalled": [
+      "Gartered Trogon",
+      "Northern Violaceous Trogon",
+      "Violaceous Trogon"
+    ],
+    "alsoScientific": [
+      "Trogon violaceus"
+    ],
     "tags": [
       "imported",
       "ebird-supplemental"
@@ -900,17 +929,30 @@
     "stratumNote": "Estimated height band: low, mid.",
     "photos": [
       {
-        "role": "unsexed",
-        "label": "Sex not labeled",
-        "src": "images/gartered-violaceous-trogon.jpg",
-        "alt": "Gartered Violaceous Trogon. The source photo is not labeled male or female.",
-        "width": 1000,
-        "height": 666,
-        "author": "Alastair Rae from London, United Kingdom",
+        "role": "male",
+        "label": "Male",
+        "src": "images/gartered-violaceous-trogon-male.jpg",
+        "alt": "Male Gartered Violaceous Trogon",
+        "width": 724,
+        "height": 1000,
+        "author": "Félix Uribe from Rionegro, Antioquia, Colombia",
         "license": "CC BY-SA 2.0",
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gartered_Trogon%2C_Mexico_%283328453885%29.jpg",
-        "file": "File:Gartered Trogon, Mexico (3328453885).jpg"
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Trogon_caligatus_Trog%C3%B3n_de_liguero_Gartered_Trogon_%28male%29_%288252899900%29.jpg",
+        "file": "File:Trogon caligatus Trogón de liguero Gartered Trogon (male) (8252899900).jpg"
+      },
+      {
+        "role": "female",
+        "label": "Female",
+        "src": "images/gartered-violaceous-trogon-female.jpg",
+        "alt": "Female Gartered Violaceous Trogon",
+        "width": 1000,
+        "height": 638,
+        "author": "Dominic Sherony",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gartered_Trogon_%28Trogon_caligatus%29_female_%284505562348%29.jpg",
+        "file": "File:Gartered Trogon (Trogon caligatus) female (4505562348).jpg"
       }
     ],
     "activeTimes": [
@@ -1105,7 +1147,7 @@
   {
     "id": "rufous-winged-tanager",
     "commonName": "Rufous-winged Tanager",
-    "scientificName": "—",
+    "scientificName": "Tangara lavinia",
     "aliases": [],
     "alsoCalled": [],
     "alsoScientific": [],
@@ -1126,6 +1168,19 @@
     "sexes": "This species is typically sexually dimorphic; an openly licensed male or female photograph is still missing.",
     "stratumNote": "Estimated height band: canopy, mid.",
     "photos": [
+      {
+        "role": "male",
+        "label": "Male",
+        "src": "images/rufous-winged-tanager-male.jpg",
+        "alt": "Male Rufous-winged Tanager",
+        "width": 900,
+        "height": 1000,
+        "author": "Félix Uribe from Rionegro, Antioquia, Colombia",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tangara_lavinia_T%C3%A1ngara_alirrufa_Rufous-winged_Tanager_%28male%29_%288116553251%29.jpg",
+        "file": "File:Tangara lavinia Tángara alirrufa Rufous-winged Tanager (male) (8116553251).jpg"
+      },
       {
         "role": "unsexed",
         "label": "Sex not labeled",
@@ -1234,10 +1289,12 @@
   {
     "id": "dull-mantled-antbird",
     "commonName": "Dull-mantled Antbird",
-    "scientificName": "—",
+    "scientificName": "Myrmeciza laemosticta",
     "aliases": [],
     "alsoCalled": [],
-    "alsoScientific": [],
+    "alsoScientific": [
+      "Sipia laemosticta"
+    ],
     "tags": [
       "imported",
       "ebird-supplemental"
@@ -1255,6 +1312,19 @@
     "sexes": "This species is typically sexually dimorphic; an openly licensed male or female photograph is still missing.",
     "stratumNote": "Estimated height band: low, mid.",
     "photos": [
+      {
+        "role": "male",
+        "label": "Male",
+        "src": "images/dull-mantled-antbird-male.jpg",
+        "alt": "Male Dull-mantled Antbird",
+        "width": 1000,
+        "height": 667,
+        "author": "Ngaiognome",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dull-Mantled_Antbird%2C_Costa_Rica.jpg",
+        "file": "File:Dull-Mantled Antbird, Costa Rica.jpg"
+      },
       {
         "role": "unsexed",
         "label": "Sex not labeled",
@@ -1375,7 +1445,7 @@
   {
     "id": "black-cowled-oriole",
     "commonName": "Black-cowled Oriole",
-    "scientificName": "—",
+    "scientificName": "Icterus prosthemelas",
     "aliases": [],
     "alsoCalled": [],
     "alsoScientific": [],
@@ -1396,6 +1466,19 @@
     "sexes": "This species is typically sexually dimorphic; an openly licensed male or female photograph is still missing.",
     "stratumNote": "Estimated height band: canopy, mid.",
     "photos": [
+      {
+        "role": "male",
+        "label": "Male",
+        "src": "images/black-cowled-oriole-male.jpg",
+        "alt": "Male Black-cowled Oriole",
+        "width": 800,
+        "height": 1000,
+        "author": "ryanacandee",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Black-cowled_Oriole_%28male%29.jpg",
+        "file": "File:Black-cowled Oriole (male).jpg"
+      },
       {
         "role": "unsexed",
         "label": "Sex not labeled",

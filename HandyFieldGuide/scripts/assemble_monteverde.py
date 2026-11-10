@@ -113,13 +113,40 @@ def api(params: dict) -> dict:
     raise RuntimeError(f"Commons API failed: {last_error}")
 
 
+# Open licences only: PD / CC0 / CC BY / CC BY-SA / GFDL (and Commons synonyms).
+# Never accept NC, ND, or other non-open short names.
+_OPEN_LICENSE_FLAGS = (
+    "cc0",
+    "cc-zero",
+    "public domain",
+    "publicdomain",
+    "pdm",
+    "cc by",
+    "cc-by",
+    "gfdl",
+    "free documentation",
+)
+_OPEN_LICENSE_EXACT = {
+    "pd",
+    "pdm",
+    "no restrictions",
+    "copyrighted free use",  # Wikimedia synonym for unrestricted reuse
+}
+
+
 def license_ok(short: str) -> bool:
-    text = (short or "").strip().lower().replace("_", " ")
-    if any(flag in text for flag in ("nc", "noncommercial", "non-commercial", "nd", "noderiv")):
+    """Return True only for PD, CC0, CC BY, CC BY-SA, GFDL (and synonyms)."""
+    text = (short or "").strip().lower().replace("_", "-")
+    spaced = text.replace("-", " ")
+    # Reject non-open Creative Commons variants first (NC / ND).
+    if re.search(r"\bnc\b|noncommercial|non-commercial", spaced):
         return False
-    if any(flag in text for flag in ("cc0", "cc-zero", "public domain", "cc by", "cc-by", "gfdl", "free documentation")):
+    if re.search(r"\bnd\b|noderiv|no derivatives|no-deriv", spaced):
+        return False
+    haystacks = (text, spaced)
+    if any(flag in hay for hay in haystacks for flag in _OPEN_LICENSE_FLAGS):
         return True
-    return text in {"pd", "no restrictions"}
+    return spaced in _OPEN_LICENSE_EXACT or text in _OPEN_LICENSE_EXACT
 
 
 def slug(name: str) -> str:
@@ -137,13 +164,17 @@ def save_progress(progress: dict) -> None:
     PROGRESS_PATH.write_text(json.dumps(progress, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
-def search_files(query: str) -> list[str]:
+def search_files(query: str, limit: int = 40) -> list[str]:
+    """Search Commons file namespace; wider default limit than the old 16."""
+    query = (query or "").strip()
+    if not query or query in {"—", "-", "?"} or "—" in query:
+        return []
     data = api({
         "action": "query",
         "list": "search",
         "srsearch": query,
         "srnamespace": 6,
-        "srlimit": 16,
+        "srlimit": min(max(limit, 1), 50),
     })
     names = []
     for hit in data.get("query", {}).get("search", []):
@@ -153,13 +184,18 @@ def search_files(query: str) -> list[str]:
     return names
 
 
-def category_files(title: str) -> list[str]:
+def category_files(title: str, limit: int = 50) -> list[str]:
+    title = (title or "").strip()
+    if not title or "—" in title:
+        return []
+    if not title.startswith("Category:"):
+        title = f"Category:{title}"
     data = api({
         "action": "query",
         "list": "categorymembers",
         "cmtitle": title,
         "cmtype": "file",
-        "cmlimit": 30,
+        "cmlimit": min(max(limit, 1), 50),
     })
     names = []
     for hit in data.get("query", {}).get("categorymembers", []):
@@ -205,8 +241,8 @@ def imageinfo(titles: list[str]) -> dict[str, dict]:
 
 
 def sex_flags(text: str) -> tuple[bool, bool]:
-    male = bool(re.search(r"\bmales?\b|♂|\bmacho\b", text))
-    female = bool(re.search(r"\bfemales?\b|♀|\bhembra\b", text))
+    male = bool(re.search(r"\bmales?\b|♂|\bmacho\b|\bmännchen\b", text, re.I))
+    female = bool(re.search(r"\bfemales?\b|♀|\bhembra\b|\bweibchen\b", text, re.I))
     return male, female
 
 
@@ -224,25 +260,130 @@ def hard_skip(text: str) -> bool:
     return bool(re.search(r"\bplates?\b", text))
 
 
-def choose_photo(species: dict, role: str, avoid: set[str]) -> dict:
-    sci = species["scientific"]
-    common = species["common"]
-    queries = [f"{common} {sci}", f"{sci}"]
-    if role == "male":
-        queries = [f"{common} male {sci}", f"{sci} male", f"{common} male", f"♂ {sci}", *queries]
-    elif role == "female":
-        queries = [f"{common} female {sci}", f"{sci} female", f"{common} female", f"♀ {sci}", *queries]
-    for extra in species.get("also_scientific") or []:
-        queries.append(f"{extra} {role if role != 'either' else ''}".strip())
+_STOP_NAME_TOKENS = {
+    "the", "a", "an", "and", "or", "of", "common", "northern", "southern",
+    "eastern", "western", "american", "bird", "birds",
+}
 
-    titles: list[str] = []
-    titles.extend(category_files(f"Category:{sci}"))
+
+def name_tokens(value: str) -> list[str]:
+    return [
+        token
+        for token in re.findall(r"[a-z]+", (value or "").lower())
+        if len(token) >= 4 and token not in _STOP_NAME_TOKENS
+    ]
+
+
+def species_name_needles(species: dict) -> list[str]:
+    """Common, scientific, and alt names used to keep search on the right taxon."""
+    needles: list[str] = []
+    for value in (
+        species.get("common"),
+        species.get("scientific"),
+        *(species.get("also_called") or []),
+        *(species.get("also_scientific") or []),
+        *(species.get("aliases") or []),
+    ):
+        text = (value or "").strip().lower()
+        if text and text not in {"—", "-", "?"} and text not in needles:
+            needles.append(text)
+    return needles
+
+
+def name_match(text: str, species: dict) -> bool:
+    """True when the Commons hit is about this species (not a vague family match)."""
+    text = text.lower()
+    needles = species_name_needles(species)
+    if any(needle and needle in text for needle in needles):
+        return True
+    # Multi-token common / alias: require at least two distinctive tokens.
+    for label in [species.get("common") or "", *(species.get("also_called") or [])]:
+        tokens = name_tokens(label)
+        if len(tokens) >= 2 and sum(1 for token in tokens if token in text) >= 2:
+            return True
+    # Binomial: genus + species epithet both present.
+    sci = (species.get("scientific") or "").strip().lower()
+    parts = sci.split()
+    if len(parts) >= 2 and parts[0] in text and parts[1] in text:
+        return True
+    return False
+
+
+def sex_keywords(role: str) -> list[str]:
     if role == "male":
-        titles.extend(category_files(f"Category:Male {sci}"))
-    elif role == "female":
-        titles.extend(category_files(f"Category:Female {sci}"))
-    for query in queries:
-        titles.extend(search_files(query))
+        return ["male", "adult male", "♂", "macho", "männchen"]
+    if role == "female":
+        return ["female", "adult female", "♀", "hembra", "weibchen"]
+    return []
+
+
+def build_photo_queries(species: dict, role: str) -> list[str]:
+    """Broader Commons queries: scientific, common, alt names, and sex keywords.
+
+    Kept intentionally prioritized and capped so gap fills stay practical under
+    Commons rate limits, while still wider than the old common+sci pair.
+    """
+    sci = (species.get("scientific") or "").strip()
+    common = (species.get("common") or "").strip()
+    also_sci = [item.strip() for item in (species.get("also_scientific") or []) if item and item.strip()]
+    also_called = [item.strip() for item in (species.get("also_called") or []) if item and item.strip()]
+    aliases = [item.strip() for item in (species.get("aliases") or []) if item and item.strip()]
+    labels = []
+    for value in [common, *also_called, *aliases]:
+        if value and value not in labels and value not in {"—", "-"}:
+            labels.append(value)
+    binomials = []
+    for value in [sci, *also_sci]:
+        if value and value not in binomials and value not in {"—", "-", "?"} and " " in value:
+            binomials.append(value)
+
+    queries: list[str] = []
+
+    def add(query: str) -> None:
+        query = " ".join((query or "").split())
+        if query and query not in queries and "—" not in query:
+            queries.append(query)
+
+    primary_sex = {"male": "male", "female": "female"}.get(role)
+    extra_sex = [word for word in sex_keywords(role) if word != primary_sex][:2]
+    if primary_sex:
+        for binomial in binomials[:3]:
+            add(f"{binomial} {primary_sex}")
+            add(f'"{binomial}" {primary_sex}')
+        for label in labels[:4]:
+            add(f"{label} {primary_sex}")
+            add(f'"{label}" {primary_sex}')
+        for sex in extra_sex:
+            for binomial in binomials[:2]:
+                add(f"{binomial} {sex}")
+            for label in labels[:2]:
+                add(f"{label} {sex}")
+    for binomial in binomials[:3]:
+        add(binomial)
+        for label in labels[:3]:
+            add(f"{label} {binomial}")
+    for label in labels[:4]:
+        add(label)
+    return queries[:18]
+
+
+def candidate_file_titles(species: dict, role: str, avoid: set[str] | None = None) -> list[str]:
+    avoid = avoid or set()
+    titles: list[str] = []
+    sci = (species.get("scientific") or "").strip()
+    for binomial in [sci, *(species.get("also_scientific") or [])][:3]:
+        binomial = (binomial or "").strip()
+        if not binomial or "—" in binomial:
+            continue
+        titles.extend(category_files(f"Category:{binomial}"))
+        if role == "male":
+            titles.extend(category_files(f"Category:Male {binomial}"))
+        elif role == "female":
+            titles.extend(category_files(f"Category:Female {binomial}"))
+    for alias in (species.get("also_called") or [])[:2]:
+        titles.extend(category_files(f"Category:{alias}"))
+    for query in build_photo_queries(species, role):
+        titles.extend(search_files(query, limit=30))
 
     seen = set()
     ordered = []
@@ -250,42 +391,139 @@ def choose_photo(species: dict, role: str, avoid: set[str]) -> dict:
         if title not in seen and title not in avoid:
             seen.add(title)
             ordered.append(title)
-    info = imageinfo(ordered[:40])
+    return ordered
+
+
+def score_candidate(species: dict, role: str, item: dict) -> int | None:
+    text = f"{item.get('title', '')} {item.get('description', '')}".lower()
+    if hard_skip(text) or not name_match(text, species):
+        return None
+    score = 12
+    male, female = sex_flags(text)
+    if role == "male":
+        score += 36 if male and not female else -28
+    elif role == "female":
+        score += 36 if female and not male else -28
+    else:
+        score += 6
+        if male ^ female:
+            score -= 4
+    if "captive" in text or "zoo" in text or "aviary" in text:
+        score -= 8
+    if (item.get("width") or 0) >= 800:
+        score += 2
+    return score
+
+
+def choose_photo(species: dict, role: str, avoid: set[str]) -> dict:
+    ordered = candidate_file_titles(species, role, avoid)
     best = None
     best_score = -10_000
-    for title in ordered:
-        item = info.get(title)
-        if not item or not item["ok"]:
-            continue
-        text = f"{title} {item['description']}".lower()
-        if hard_skip(text):
-            continue
-        names = [sci.lower(), common.lower()]
-        names.extend(item.lower() for item in species.get("also_scientific") or [])
-        names.extend(item.lower() for item in species.get("also_called") or [])
-        if not any(name and name in text for name in names):
-            continue
-        score = 12
-        male, female = sex_flags(text)
-        if role == "male":
-            score += 36 if male and not female else -28
-        elif role == "female":
-            score += 36 if female and not male else -28
-        else:
-            score += 6
-        if "captive" in text or "zoo" in text or "aviary" in text:
-            score -= 8
-        if item["width"] >= 800:
-            score += 2
-        if score > best_score:
-            best_score = score
-            best = item
+    # Inspect in chunks so a strong early hit can stop the walk.
+    for start in range(0, min(len(ordered), 72), 12):
+        chunk = ordered[start:start + 12]
+        info = imageinfo(chunk)
+        for title in chunk:
+            item = info.get(title)
+            if not item or not item["ok"]:
+                continue
+            score = score_candidate(species, role, item)
+            if score is None:
+                continue
+            if score > best_score:
+                best_score = score
+                best = item
+        if role in {"male", "female"} and best_score >= 48:
+            break
+        if role == "either" and best_score >= 18:
+            break
     if best is None or best_score < 8:
         label = best["title"] if best else "none"
         raise RuntimeError(f"No acceptable {role} photo for {species['common']} (best {best_score}: {label})")
     best = dict(best)
     best["score"] = best_score
     return best
+
+
+_NON_EPITHETS = {
+    "perched", "flying", "adult", "male", "female", "juvenile", "immature",
+    "captive", "zoo", "aviary", "costa", "rica", "panama", "mexico", "ecuador",
+    "colombia", "brazil", "from", "with", "near", "park", "forest", "lodge",
+    "station", "biological", "national", "reserve", "flickr", "photo", "image",
+    "bird", "birds", "species", "genus", "family", "feeding", "singing",
+}
+
+
+def binomial_from_text(text: str) -> str:
+    """Extract a plausible Genus species binomial; skip English caption junk."""
+    for match in re.finditer(r"\b([A-Z][a-z]{2,}) ([a-z]{3,})\b", text or ""):
+        genus, epithet = match.group(1), match.group(2)
+        if epithet in _NON_EPITHETS or genus.lower() in _NON_EPITHETS:
+            continue
+        if epithet.endswith("ing") or epithet.endswith("ed"):
+            # Avoid caption verbs/adjectives ("perched", "feeding") unless classic Latin.
+            if epithet not in {"cristatus", "variegatus", "lineatus"}:
+                continue
+        return f"{genus} {epithet}"
+    return ""
+
+
+def resolve_scientific(common: str, hinted: str = "") -> str:
+    """Resolve a scientific name via hint, Wikidata P225, then careful text mining."""
+    hinted = (hinted or "").strip()
+    if hinted and hinted not in {"—", "-", "?"} and " " in hinted:
+        if binomial_from_text(hinted) == hinted or re.match(r"^[A-Z][a-z]+ [a-z]+$", hinted):
+            if hinted.split()[-1].lower() not in _NON_EPITHETS:
+                return hinted
+    title = common.replace(" ", "_")
+    # Wikidata taxon name (P225) via enwiki sitelink — most reliable.
+    url = (
+        "https://www.wikidata.org/w/api.php?"
+        + urllib.parse.urlencode({
+            "action": "wbgetentities",
+            "sites": "enwiki",
+            "titles": title,
+            "props": "claims",
+            "format": "json",
+        })
+    )
+    request = urllib.request.Request(url, headers={"User-Agent": UA})
+    try:
+        with urllib.request.urlopen(request, timeout=30) as response:
+            data = json.load(response)
+        time.sleep(0.25)
+        entities = data.get("entities") or {}
+        for entity in entities.values():
+            if entity.get("missing") is not None:
+                continue
+            claims = (entity.get("claims") or {}).get("P225") or []
+            for claim in claims:
+                value = (
+                    ((claim.get("mainsnak") or {}).get("datavalue") or {}).get("value")
+                )
+                if isinstance(value, str) and " " in value:
+                    return value
+    except Exception:  # noqa: BLE001
+        pass
+    # Commons filenames sometimes embed the binomial.
+    for file_title in search_files(common, limit=20)[:12]:
+        found = binomial_from_text(file_title.replace("File:", ""))
+        if found:
+            return found
+    # Wikipedia summary extract as last resort.
+    summary_url = "https://en.wikipedia.org/api/rest_v1/page/summary/" + urllib.parse.quote(title)
+    request = urllib.request.Request(summary_url, headers={"User-Agent": UA})
+    try:
+        with urllib.request.urlopen(request, timeout=30) as response:
+            data = json.load(response)
+        time.sleep(0.2)
+        blob = f"{data.get('description') or ''} {data.get('extract') or ''}"
+        found = binomial_from_text(blob)
+        if found:
+            return found
+    except Exception:  # noqa: BLE001
+        return ""
+    return ""
 
 
 def file_page(title: str) -> str:

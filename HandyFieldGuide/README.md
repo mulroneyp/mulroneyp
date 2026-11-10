@@ -51,6 +51,14 @@ python3 scripts/enrich_ebird_supplemental.py
 
 ## Photos
 
-Photos live in `HandyFieldGuide/Resources/images`. Credits are in `HandyFieldGuide/Resources/guide.json`, `HandyFieldGuide/Resources/ebird_supplemental.json`, and under each photo. Licences are public domain, CC0, CC BY, CC BY-SA, or GFDL.
+Photos live in `HandyFieldGuide/Resources/images`. Credits are in `HandyFieldGuide/Resources/guide.json`, `HandyFieldGuide/Resources/ebird_supplemental.json`, and under each photo. Licences are public domain, CC0, CC BY, CC BY-SA, or GFDL only — never NC/ND or other non-open licences.
+
+Commons search for gaps (especially dimorphic male/female pairs) uses a **wide query set**: common name, scientific name, alternate names, and sex keywords (including ♂/♀ and Spanish/German labels), plus Commons categories, with a higher result limit. Rebuild helpers:
+
+```bash
+python3 scripts/fill_dimorphic_photos.py   # fill / relabel male–female gaps
+python3 scripts/enrich_ebird_supplemental.py
+python3 scripts/check_guide.py
+```
 
 This project was assembled on a Linux machine without Xcode. It has not been compiled or run in the iOS simulator here.

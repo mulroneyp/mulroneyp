@@ -14,14 +14,23 @@ ROOT = Path(__file__).resolve().parents[1]
 RESOURCE = ROOT / "HandyFieldGuide" / "Resources"
 GUIDE = json.loads((RESOURCE / "guide.json").read_text(encoding="utf-8"))
 
-ALLOWED = ("cc0", "cc-zero", "public domain", "cc by", "cc-by", "gfdl", "free documentation", "pd")
-
-
 def license_ok(short: str) -> bool:
-    text = (short or "").strip().lower().replace("_", " ")
-    if any(flag in text for flag in ("nc", "noncommercial", "non-commercial", "nd", "noderiv")):
+    """PD / CC0 / CC BY / CC BY-SA / GFDL only — keep in sync with assemble_monteverde."""
+    import re
+
+    text = (short or "").strip().lower().replace("_", "-")
+    spaced = text.replace("-", " ")
+    if re.search(r"\bnc\b|noncommercial|non-commercial", spaced):
         return False
-    return any(flag in text for flag in ALLOWED) or text in {"pd", "no restrictions"}
+    if re.search(r"\bnd\b|noderiv|no derivatives|no-deriv", spaced):
+        return False
+    flags = (
+        "cc0", "cc-zero", "public domain", "publicdomain", "pdm",
+        "cc by", "cc-by", "gfdl", "free documentation",
+    )
+    if any(flag in text or flag in spaced for flag in flags):
+        return True
+    return spaced in {"pd", "pdm", "no restrictions", "copyrighted free use"}
 
 
 def main() -> None:
@@ -86,6 +95,21 @@ def main() -> None:
         for species in coverage["species"]:
             for photo in species["photos"]:
                 used.add(Path(photo["src"]).name)
+    supplemental_path = RESOURCE / "ebird_supplemental.json"
+    supplemental_count = 0
+    if supplemental_path.exists():
+        supplemental = json.loads(supplemental_path.read_text(encoding="utf-8"))
+        supplemental_count = len(supplemental)
+        for species in supplemental:
+            for photo in species.get("photos") or []:
+                used.add(Path(photo["src"]).name)
+                if not license_ok(photo.get("license", "")):
+                    errors.append(f"bad license supplemental {species['commonName']} {photo.get('license')}")
+                if not photo.get("author") or not photo.get("sourceUrl"):
+                    errors.append(f"missing credit supplemental {species['commonName']}")
+                path = RESOURCE / photo["src"]
+                if not path.exists() or path.stat().st_size < 2000:
+                    errors.append(f"missing supplemental image {photo['src']}")
     extra = sorted(image_names - used)
     if extra:
         errors.append(f"unreferenced images: {extra[:12]}")
@@ -95,7 +119,7 @@ def main() -> None:
     dimorphic = sum(1 for item in monteverde["species"] if item["dimorphic"])
     print(
         f"ok monteverde={len(monteverde['species'])} dimorphic={dimorphic} "
-        f"melbourne={len(melbourne['species'])} images={len(used)}"
+        f"melbourne={len(melbourne['species'])} supplemental={supplemental_count} images={len(used)}"
     )
 
 
