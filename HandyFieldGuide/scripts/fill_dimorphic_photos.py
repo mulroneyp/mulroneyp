@@ -185,6 +185,22 @@ def fill_species(species: dict, progress: dict) -> tuple[bool, str]:
             "alsoCalled": [],
             "alsoScientific": ["Sipia laemosticta", "Myrmeciza laemosticta"],
         },
+        "Middle American Leaftosser": {
+            "alsoCalled": ["Tawny-throated Leaftosser", "Mexican Leaftosser"],
+            "alsoScientific": ["Sclerurus mexicanus"],
+        },
+        "Blue-vented Hummingbird": {
+            "alsoCalled": ["Steely-vented Hummingbird"],
+            "alsoScientific": ["Saucerottia saucerottei", "Amazilia saucerottei"],
+        },
+        "Morelet's Seedeater": {
+            "alsoCalled": ["White-collared Seedeater"],
+            "alsoScientific": ["Sporophila moreleti", "Sporophila torqueola"],
+        },
+        "Black-thighed Grosbeak": {
+            "alsoCalled": ["Black-thighed Grosbeak"],
+            "alsoScientific": ["Pheucticus tibialis"],
+        },
     }
     if species["commonName"] in alias_map:
         extras = alias_map[species["commonName"]]

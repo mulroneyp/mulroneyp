@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
-"""Build ebird_supplemental.json + images for high-frequency imported taxa.
+"""Build ebird_supplemental.json + images for imported taxa still missing photos.
 
 Uses the bundled L436229 barchart. Reuses names already present in guide.json.
 For the rest, downloads openly licensed Wikimedia Commons photographs with the
-same licence rules as assemble_monteverde.py.
+same licence rules as assemble_monteverde.py (PD / CC0 / CC BY / CC BY-SA / GFDL).
 
 Enrichment set (documented threshold):
   - kind == species
-  - November mean frequency >= 0.05
-  - OR among the top 40 species by November mean
+  - any calendar-month mean frequency >= NEAR_ZERO (0.005), i.e. birds that can
+    appear on the default (non-scarce) list in at least one month
+  - download order still prioritizes the selected month (November in the fixture)
+  - existing ebird_supplemental.json entries are kept and merged
 """
 
 from __future__ import annotations
@@ -103,16 +105,44 @@ def save_progress(progress: dict) -> None:
 
 
 def enrichment_targets(parsed: dict, month_index: int = 10) -> list[dict]:
+    """Species that clear the scarce threshold in any month (default-visible somewhere).
+
+    Historically enrichment used ENRICHMENT (0.05) plus the top 40 for one month.
+    That left most imported checklist rows without offline photos. Widen to every
+    non-scarce taxon so Commons gap-fills match what the app can show by default.
+    """
     species_rows = [row for row in parsed["species"] if row["kind"] == "species"]
-    ranked = sorted(species_rows, key=lambda row: row["monthlyMean"][month_index], reverse=True)
-    top_names = {row["commonName"] for row in ranked[:40]}
-    chosen = []
-    for row in species_rows:
-        freq = row["monthlyMean"][month_index]
-        if freq >= ENRICHMENT or row["commonName"] in top_names:
-            chosen.append(row)
+    chosen = [
+        row
+        for row in species_rows
+        if max(row["monthlyMean"]) >= NEAR_ZERO
+    ]
     chosen.sort(key=lambda row: row["monthlyMean"][month_index], reverse=True)
     return chosen
+
+
+def load_existing_supplemental() -> dict[str, dict]:
+    if not OUT_JSON.exists():
+        return {}
+    rows = json.loads(OUT_JSON.read_text(encoding="utf-8"))
+    return {normalize(row["commonName"]): row for row in rows}
+
+
+def seed_progress_from_supplemental(existing: dict[str, dict], progress: dict) -> None:
+    """Reuse already-bundled supplemental photos instead of re-downloading."""
+    for row in existing.values():
+        species_id = row.get("id") or slug(row["commonName"])
+        photos = row.get("photos") or []
+        if not photos:
+            continue
+        cached = progress.get(species_id) or {}
+        if cached.get("photos"):
+            continue
+        progress[species_id] = {
+            "common": row["commonName"],
+            "scientific": row.get("scientificName") or "",
+            "photos": photos,
+        }
 
 
 DIMORPHIC_HINTS = (
@@ -141,9 +171,9 @@ def guess_active_times(common: str) -> list[str]:
 def make_stub(common: str, scientific: str, photos: list[dict]) -> dict:
     strata = guess_strata(common)
     roles = {photo.get("role") for photo in photos}
-    dimorphic = "male" in roles and "female" in roles
-    if not dimorphic and likely_dimorphic(common) and len(photos) >= 2:
-        dimorphic = True
+    # Mark likely dimorphic taxa even with a single photo so the app badge is
+    # honest and fill_dimorphic_photos.py can keep hunting for the other sex.
+    dimorphic = ("male" in roles and "female" in roles) or likely_dimorphic(common)
     alts = alt_names_for(common)
     return {
         "id": slug(common),
@@ -184,6 +214,10 @@ def alt_names_for(common: str) -> list[str]:
             "Violaceous Trogon",
         ],
         "Scaly-breasted Hummingbird": ["Scaly-breasted Sabrewing"],
+        "Middle American Leaftosser": [
+            "Tawny-throated Leaftosser",
+            "Mexican Leaftosser",
+        ],
     }
     return list(aliases.get(common, []))
 
@@ -267,42 +301,79 @@ def main() -> int:
     index = guide_index(guide)
     parsed = parse(FIXTURE.read_text(encoding="utf-8"), FIXTURE.name)
     targets = enrichment_targets(parsed)
+    existing = load_existing_supplemental()
     progress = load_progress()
-    supplemental: list[dict] = []
+    seed_progress_from_supplemental(existing, progress)
+    save_progress(progress)
+    supplemental_by_name: dict[str, dict] = dict(existing)
     skipped_existing = 0
+    reused = 0
     fetched = 0
+    upgraded = 0
     failed: list[str] = []
 
     for row in targets:
         common = row["commonName"]
-        if normalize(common) in index:
+        key = normalize(common)
+        if key in index:
             skipped_existing += 1
+            supplemental_by_name.pop(key, None)  # guide already covers this name
             continue
-        scientific = wikipedia_scientific(common)
+        prior = supplemental_by_name.get(key)
+        scientific = (prior or {}).get("scientificName") or wikipedia_scientific(common)
+        if scientific in {"—", "-", "?", ""}:
+            scientific = wikipedia_scientific(common)
         try:
             photos = fetch_photos(common, scientific, progress)
         except Exception as exc:  # noqa: BLE001
             failed.append(f"{common}: {exc}")
-            photos = []
+            photos = list((prior or {}).get("photos") or [])
         if not photos:
             failed.append(common)
             continue
-        supplemental.append(make_stub(common, scientific, photos))
-        fetched += 1
-        print(f"ok {fetched}: {common} ({len(photos)} photo)")
+        stub = make_stub(common, scientific, photos)
+        if prior and prior.get("photos"):
+            if len(photos) > len(prior.get("photos") or []):
+                upgraded += 1
+                print(f"upgrade {common}: {len(prior['photos'])} -> {len(photos)} photo", flush=True)
+            else:
+                reused += 1
+                print(f"keep {common} ({len(photos)} photo)", flush=True)
+        else:
+            fetched += 1
+            print(f"ok {fetched}: {common} ({len(photos)} photo)", flush=True)
+        supplemental_by_name[key] = stub
 
-    OUT_JSON.write_text(json.dumps(supplemental, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    # Stable order: target ranking first, then any leftover prior entries.
+    ordered: list[dict] = []
+    seen: set[str] = set()
+    for row in targets:
+        key = normalize(row["commonName"])
+        if key in index or key in seen:
+            continue
+        if key in supplemental_by_name:
+            ordered.append(supplemental_by_name[key])
+            seen.add(key)
+    for key, row in sorted(supplemental_by_name.items()):
+        if key not in seen and key not in index:
+            ordered.append(row)
+            seen.add(key)
+
+    OUT_JSON.write_text(json.dumps(ordered, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     report = {
         "targets": len(targets),
         "alreadyInGuide": skipped_existing,
-        "supplementalWritten": len(supplemental),
+        "reusedSupplemental": reused,
+        "upgradedSupplemental": upgraded,
+        "newlyFetched": fetched,
+        "supplementalWritten": len(ordered),
         "failed": failed,
         "nearZeroThreshold": NEAR_ZERO,
-        "enrichmentFrequencyThreshold": ENRICHMENT,
+        "legacyEnrichmentFrequencyThreshold": ENRICHMENT,
         "out": str(OUT_JSON),
     }
     print(json.dumps(report, indent=2))
-    return 0 if supplemental or skipped_existing else 1
+    return 0 if ordered or skipped_existing else 1
 
 
 if __name__ == "__main__":
