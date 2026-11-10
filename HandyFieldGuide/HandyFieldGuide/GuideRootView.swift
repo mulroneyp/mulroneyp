@@ -102,8 +102,6 @@ struct GuideRootView: View {
                     NoticeBox(text: notice, strong: true)
                 }
 
-                importedExtras
-
                 TextField("Search name or scientific name", text: $model.searchText)
                     .textFieldStyle(.roundedBorder)
                     .textInputAutocapitalization(.never)
@@ -114,13 +112,13 @@ struct GuideRootView: View {
                     .foregroundStyle(GuideColor.muted)
 
                 if birds.isEmpty {
-                    Text("No birds match for \(model.selectedMonthName). Preview another month, or show scarce birds.")
+                    Text("No birds match for \(model.selectedMonthName). Try another month, or change scarce / flagged filters in Settings.")
                         .padding(.vertical, 8)
                 } else {
                     section(title: nil, birds: model.sortedForDisplay(birds, place: place), place: place)
                 }
 
-                Text("Imported lists keep every taxon from the file. Near-zero \(model.selectedMonthName) rows are hidden by default (below \(Int(EBirdBarchartParser.nearZeroThreshold * 1000) / 10)% mean frequency). Flagged “sp.” and slash taxa stay off the main list unless you turn them on. Photos are openly licensed when available.")
+                Text("Imported lists keep every taxon from the file. Near-zero \(model.selectedMonthName) rows and flagged “sp.” / slash taxa are controlled in Settings. Photos are openly licensed when available.")
                     .font(.footnote)
                     .foregroundStyle(GuideColor.muted)
                     .padding(.top, 8)
@@ -136,17 +134,6 @@ struct GuideRootView: View {
                 onManageLocations: { showingManageLocations = true }
             )
         }
-    }
-
-    private var importedExtras: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Toggle("Hide scarce / near-zero for \(model.selectedMonthName)", isOn: Binding(
-                get: { model.hideNearZero },
-                set: { model.setHideNearZero($0) }
-            ))
-            Toggle("Show flagged sp. / slash taxa", isOn: $model.showFlaggedTaxa)
-        }
-        .font(.subheadline)
     }
 
     private func section(title: String?, birds: [Species], place: ResolvedPlace) -> some View {

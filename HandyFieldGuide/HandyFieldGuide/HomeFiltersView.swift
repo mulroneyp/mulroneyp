@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Bottom toolbar for Location, Month, and Zone — keeps the bird list above.
+/// Bottom toolbar for Location, Month, Zone, and Settings — keeps the bird list above.
 struct HomeFiltersView: View {
     @EnvironmentObject private var model: GuideModel
     var guide: GuideFile
@@ -8,6 +8,7 @@ struct HomeFiltersView: View {
     var onManageLocations: () -> Void
 
     @State private var showingZoneInfo = false
+    @State private var showingSettings = false
 
     private var importedLocationOptions: [LocationOption] {
         model.imports.locations.map {
@@ -15,7 +16,8 @@ struct HomeFiltersView: View {
         }
     }
 
-    private var selectedLocationTitle: String {
+    /// For VoiceOver only — the bar label stays generic “Location”.
+    private var selectedLocationAccessibilityValue: String {
         let current = model.locationQuery.trimmingCharacters(in: .whitespacesAndNewlines)
         if let match = importedLocationOptions.first(where: {
             LocationResolver.normalize($0.query) == LocationResolver.normalize(current)
@@ -24,9 +26,9 @@ struct HomeFiltersView: View {
             return match.title
         }
         if importedLocationOptions.isEmpty {
-            return "Add location"
+            return "No location yet"
         }
-        return current.isEmpty ? "Choose location" : current
+        return current.isEmpty ? "No location selected" : current
     }
 
     private var selectedZoneTitle: String {
@@ -52,6 +54,8 @@ struct HomeFiltersView: View {
                 monthControl
                 barDivider
                 zoneControl
+                barDivider
+                settingsControl
             }
             .padding(.horizontal, 4)
             .padding(.top, 8)
@@ -94,6 +98,10 @@ struct HomeFiltersView: View {
             }
             .presentationDetents([.medium, .large])
         }
+        .sheet(isPresented: $showingSettings) {
+            SettingsView()
+                .environmentObject(model)
+        }
     }
 
     private var barDivider: some View {
@@ -127,8 +135,10 @@ struct HomeFiltersView: View {
                 Label("Add eBird barchart", systemImage: "plus")
             }
         } label: {
-            filterColumn(title: "Location", value: selectedLocationTitle)
+            filterIconColumn(title: "Location", systemImage: "mappin.and.ellipse")
         }
+        .accessibilityLabel("Location")
+        .accessibilityValue(selectedLocationAccessibilityValue)
         .accessibilityHint("Choose an imported place, manage saved imports, or import an eBird barchart")
     }
 
@@ -144,16 +154,12 @@ struct HomeFiltersView: View {
             }
             if !model.isUsingDeviceMonth {
                 Divider()
-                Button("This month") {
+                Button("Use device month") {
                     model.resetMonthToDevice()
                 }
             }
         } label: {
-            filterColumn(
-                title: "Month",
-                value: model.selectedMonthName,
-                caption: model.isUsingDeviceMonth ? "Current" : "Preview"
-            )
+            filterColumn(title: "Month", value: model.selectedMonthName)
         }
         .accessibilityHint("Imported lists use this month’s eBird frequencies")
     }
@@ -199,7 +205,35 @@ struct HomeFiltersView: View {
         }
     }
 
-    private func filterColumn(title: String, value: String, caption: String? = nil) -> some View {
+    private var settingsControl: some View {
+        Button {
+            showingSettings = true
+        } label: {
+            VStack(spacing: 2) {
+                Text("SETTINGS")
+                    .font(.caption2.weight(.semibold))
+                    .tracking(0.8)
+                    .foregroundStyle(GuideColor.muted)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
+                Image(systemName: "gearshape")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(GuideColor.ink)
+                    .frame(height: 20)
+                // Match the chevron row height of other columns so the bar stays level.
+                Color.clear
+                    .frame(height: 11)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 4)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("Settings")
+        .accessibilityHint("Scarce birds and flagged taxa filters")
+    }
+
+    private func filterColumn(title: String, value: String) -> some View {
         VStack(spacing: 2) {
             Text(title.uppercased())
                 .font(.caption2.weight(.semibold))
@@ -210,15 +244,29 @@ struct HomeFiltersView: View {
                 .foregroundStyle(GuideColor.ink)
                 .lineLimit(1)
                 .minimumScaleFactor(0.75)
-            if let caption {
-                Text(caption)
-                    .font(.caption2)
-                    .foregroundStyle(GuideColor.muted)
-            } else {
-                Image(systemName: "chevron.up.chevron.down")
-                    .font(.caption2)
-                    .foregroundStyle(GuideColor.muted)
-            }
+            Image(systemName: "chevron.up.chevron.down")
+                .font(.caption2)
+                .foregroundStyle(GuideColor.muted)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 4)
+        .contentShape(Rectangle())
+    }
+
+    /// Generic Location (or similar) column — no place name in the bar.
+    private func filterIconColumn(title: String, systemImage: String) -> some View {
+        VStack(spacing: 2) {
+            Text(title.uppercased())
+                .font(.caption2.weight(.semibold))
+                .tracking(0.8)
+                .foregroundStyle(GuideColor.muted)
+            Image(systemName: systemImage)
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(GuideColor.ink)
+                .frame(height: 20)
+            Image(systemName: "chevron.up.chevron.down")
+                .font(.caption2)
+                .foregroundStyle(GuideColor.muted)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 4)
