@@ -35,7 +35,8 @@ Use **Add eBird barchart** (or **Add sample L436229**) to import an eBird Freque
 - Species with selected-month mean frequency below **0.5%** (`0.005`) are hidden by default as scarce / near-zero (toggle in **Settings**).
 - Photo and field-note enrichment targets every species whose **any-month** mean frequency is at or above the scarce threshold (**0.5%** / `0.005`), reusing `guide.json` when the common name matches and filling remaining gaps from `ebird_supplemental.json` / Wikimedia Commons (open licences only). Download order still prefers the selected month.
 - The sample file is bundled at `HandyFieldGuide/Resources/fixtures/ebird_L436229__2020_2026_1_12_barchart.txt` and copied into the app Documents folder (visible in Files → On My iPhone → Handy Field Guide) for re-import.
-- **Manage locations** renames or deletes saved imports (persisted in Documents). Deleting an active import returns to the empty state until you choose or add another import.
+- **Imported bird lists** persist under **Birdlists** in the app’s iCloud Documents container (`iCloud.com.mulroneyp.handyfieldguide` → `Documents/Birdlists/imported-locations.json`), shown in Files as **iCloud Drive → Handy Field Guide → Birdlists** when iCloud Drive is on. Ubiquity keeps a **local on-device copy**, so already-imported lists open with **no network**. If iCloud is signed out or unavailable, the app uses the sandbox mirror `Documents/Birdlists/` and promotes it to iCloud when available. Legacy `Documents/imported-locations.json` is migrated into Birdlists on first launch (legacy file is not wiped if the copy fails). Species photo cache stays in local Documents and is unchanged.
+- **Manage locations** renames or deletes saved imports against that Birdlists store. Deleting an active import returns to the empty state until you choose or add another import.
 
 Verify parsing on a machine with Python:
 
