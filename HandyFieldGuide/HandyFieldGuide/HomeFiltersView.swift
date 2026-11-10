@@ -68,6 +68,9 @@ struct HomeFiltersView: View {
             .padding(.horizontal, 4)
             .padding(.top, 8)
             .padding(.bottom, 6)
+            // On iPad the sidebar can be wide; keep the four controls clustered rather than stretched.
+            .frame(maxWidth: 560)
+            .frame(maxWidth: .infinity)
         }
         // safeAreaInset proposes the full container height. Without fixedSize, this
         // VStack expands to that proposal: layout still uses the ideal bar height, but

@@ -3,47 +3,28 @@ import UIKit
 
 struct GuideRootView: View {
     @EnvironmentObject private var model: GuideModel
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var showingAddLocation = false
     @State private var showingManageLocations = false
+    /// iPhone push stack — unchanged compact UX.
     @State private var path = NavigationPath()
+    /// iPad split selection — drives the detail column.
+    @State private var selectedSpeciesId: String?
     @FocusState private var isSearchFocused: Bool
     /// Local draft so keystrokes do not republish GuideModel / rebuild the bottom bar every character.
     @State private var searchDraft = ""
     @State private var searchDebounceTask: Task<Void, Never>?
 
+    private var usesSplitNavigation: Bool {
+        horizontalSizeClass == .regular
+    }
+
     var body: some View {
-        NavigationStack(path: $path) {
-            Group {
-                if let error = model.loadError {
-                    Text(error)
-                        .padding()
-                } else if let guide = model.guide {
-                    if let place = model.place {
-                        list(guide: guide, place: place)
-                    } else {
-                        emptyLocations(guide: guide)
-                    }
-                } else {
-                    ProgressView("Loading the guide")
-                }
-            }
-            .guideBackground()
-            .navigationTitle("Handy Field Guide")
-            .navigationBarTitleDisplayMode(.large)
-            .navigationDestination(for: String.self) { speciesId in
-                if let place = model.place,
-                   let species = place.coverage.species.first(where: { $0.id == speciesId }) {
-                    BirdDetailView(species: species, place: place)
-                } else {
-                    Text("That bird is not in this guide.")
-                        .guideBackground()
-                }
-            }
-            .toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    Spacer()
-                    Button("Done") { dismissSearchKeyboard() }
-                }
+        Group {
+            if usesSplitNavigation {
+                splitRoot
+            } else {
+                stackRoot
             }
         }
         .sheet(isPresented: $showingAddLocation) {
@@ -55,9 +36,12 @@ struct GuideRootView: View {
         .onChange(of: model.locationQuery) { _, _ in
             dismissSearchKeyboard()
             path = NavigationPath()
+            selectedSpeciesId = nil
         }
         .onChange(of: path.count) { _, _ in
-            // Selecting a result / pushing detail should hide the search keyboard.
+            dismissSearchKeyboard()
+        }
+        .onChange(of: selectedSpeciesId) { _, _ in
             dismissSearchKeyboard()
         }
         .onChange(of: showingAddLocation) { _, open in
@@ -66,8 +50,101 @@ struct GuideRootView: View {
         .onChange(of: showingManageLocations) { _, open in
             if open { dismissSearchKeyboard() }
         }
+        .onChange(of: horizontalSizeClass) { _, newValue in
+            // Moving between compact/regular (Stage Manager, slide-over) should not leave a stale selection.
+            if newValue != .regular {
+                selectedSpeciesId = nil
+            } else {
+                path = NavigationPath()
+            }
+        }
         .onAppear {
             searchDraft = model.searchText
+        }
+    }
+
+    private var stackRoot: some View {
+        NavigationStack(path: $path) {
+            sidebarContent
+                .guideBackground()
+                .navigationTitle("Handy Field Guide")
+                .navigationBarTitleDisplayMode(.large)
+                .navigationDestination(for: String.self) { speciesId in
+                    if let place = model.place,
+                       let species = place.coverage.species.first(where: { $0.id == speciesId }) {
+                        BirdDetailView(species: species, place: place)
+                    } else {
+                        Text("That bird is not in this guide.")
+                            .guideBackground()
+                    }
+                }
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+                        Button("Done") { dismissSearchKeyboard() }
+                    }
+                }
+        }
+    }
+
+    private var splitRoot: some View {
+        NavigationSplitView {
+            NavigationStack {
+                sidebarContent
+                    .guideBackground()
+                    .navigationTitle("Handy Field Guide")
+                    .navigationBarTitleDisplayMode(.large)
+                    .toolbar {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            Spacer()
+                            Button("Done") { dismissSearchKeyboard() }
+                        }
+                    }
+            }
+            .navigationSplitViewColumnWidth(min: 320, ideal: 400, max: 520)
+        } detail: {
+            NavigationStack {
+                splitDetail
+                    .guideBackground()
+            }
+        }
+        .navigationSplitViewStyle(.balanced)
+    }
+
+    @ViewBuilder
+    private var sidebarContent: some View {
+        if let error = model.loadError {
+            Text(error)
+                .padding()
+        } else if let guide = model.guide {
+            if let place = model.place {
+                list(guide: guide, place: place)
+            } else {
+                emptyLocations(guide: guide)
+            }
+        } else {
+            ProgressView("Loading the guide")
+        }
+    }
+
+    @ViewBuilder
+    private var splitDetail: some View {
+        if let speciesId = selectedSpeciesId,
+           let place = model.place,
+           let species = place.coverage.species.first(where: { $0.id == speciesId }) {
+            BirdDetailView(species: species, place: place)
+        } else if model.place != nil {
+            ContentUnavailableView {
+                Label("Select a bird", systemImage: "bird")
+            } description: {
+                Text("Choose a species from the list to see habitat notes, zones, and photos.")
+            }
+        } else {
+            ContentUnavailableView {
+                Label("Handy Field Guide", systemImage: "map")
+            } description: {
+                Text("Import an eBird barchart, then pick a bird from the list.")
+            }
         }
     }
 
@@ -98,6 +175,31 @@ struct GuideRootView: View {
             for: nil
         )
         #endif
+    }
+
+    @ViewBuilder
+    private func birdRowLink(bird: Species, place: ResolvedPlace) -> some View {
+        let row = BirdRow(
+            species: bird,
+            placeDisplayName: place.displayName,
+            frequency: model.frequency(for: bird, in: place),
+            isSelected: usesSplitNavigation && selectedSpeciesId == bird.id
+        )
+        if usesSplitNavigation {
+            Button {
+                selectedSpeciesId = bird.id
+            } label: {
+                row
+            }
+            .buttonStyle(.plain)
+            .simultaneousGesture(TapGesture().onEnded(dismissSearchKeyboard))
+        } else {
+            NavigationLink(value: bird.id) {
+                row
+            }
+            .buttonStyle(.plain)
+            .simultaneousGesture(TapGesture().onEnded(dismissSearchKeyboard))
+        }
     }
 
     private func emptyLocations(guide: GuideFile) -> some View {
@@ -133,7 +235,7 @@ struct GuideRootView: View {
                 }
             }
             .padding(20)
-            .frame(maxWidth: 720, alignment: .leading)
+            .frame(maxWidth: contentMaxWidth, alignment: .leading)
             .frame(maxWidth: .infinity, alignment: .leading)
             Spacer(minLength: 0)
         }
@@ -203,15 +305,7 @@ struct GuideRootView: View {
                         .onTapGesture(perform: dismissSearchKeyboard)
                 } else {
                     ForEach(birds) { bird in
-                        NavigationLink(value: bird.id) {
-                            BirdRow(
-                                species: bird,
-                                placeDisplayName: place.displayName,
-                                frequency: model.frequency(for: bird, in: place)
-                            )
-                        }
-                        .buttonStyle(.plain)
-                        .simultaneousGesture(TapGesture().onEnded(dismissSearchKeyboard))
+                        birdRowLink(bird: bird, place: place)
                     }
                 }
 
@@ -224,7 +318,7 @@ struct GuideRootView: View {
                     .onTapGesture(perform: dismissSearchKeyboard)
             }
             .padding(16)
-            .frame(maxWidth: 720, alignment: .leading)
+            .frame(maxWidth: contentMaxWidth, alignment: .leading)
             .frame(maxWidth: .infinity)
         }
         .scrollDismissesKeyboard(.interactively)
@@ -237,6 +331,11 @@ struct GuideRootView: View {
             // Tapping the bottom filter bar should hide the keyboard without blocking menus.
             .simultaneousGesture(TapGesture().onEnded(dismissSearchKeyboard))
         }
+    }
+
+    /// Sidebar / phone list stays readable; phone column is already narrow.
+    private var contentMaxWidth: CGFloat {
+        usesSplitNavigation ? 520 : 720
     }
 }
 
@@ -368,6 +467,7 @@ private struct BirdRow: View {
     var species: Species
     var placeDisplayName: String
     var frequency: Double?
+    var isSelected: Bool = false
 
     /// Longest edge for list thumbnails (~88pt × 3x). Far smaller than full 900–1000px JPEGs.
     private static let listThumbMaxPixels: CGFloat = 270
@@ -435,11 +535,14 @@ private struct BirdRow: View {
             }
             Spacer(minLength: 0)
         }
+        .padding(.horizontal, isSelected ? 8 : 0)
         .padding(.vertical, 10)
+        .background(isSelected ? GuideColor.green.opacity(0.08) : Color.clear)
         .overlay(alignment: .bottom) {
             Rectangle().fill(GuideColor.line).frame(height: 1)
         }
         .accessibilityElement(children: .combine)
+        .accessibilityAddTraits(isSelected ? [.isSelected] : [])
         .accessibilityHint("Opens habitat notes for \(placeDisplayName)")
     }
 

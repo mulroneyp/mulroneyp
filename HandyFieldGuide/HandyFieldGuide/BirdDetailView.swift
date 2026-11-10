@@ -2,6 +2,7 @@ import SwiftUI
 
 struct BirdDetailView: View {
     @EnvironmentObject private var model: GuideModel
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     var species: Species
     var place: ResolvedPlace
 
@@ -73,42 +74,7 @@ struct BirdDetailView: View {
                     sectionLabel("Photos")
                 }
 
-                VStack(spacing: 14) {
-                    ForEach(displayPhotos) { photo in
-                        VStack(alignment: .leading, spacing: 0) {
-                            HStack(alignment: .center, spacing: 8) {
-                                if showsPhotoRoleLabel(photo) {
-                                    Text(photoDisplayTitle(photo))
-                                        .font(.caption.weight(.semibold))
-                                        .tracking(1.1)
-                                        .foregroundStyle(GuideColor.green)
-                                }
-                                Spacer(minLength: 0)
-                                photoAttrBadge(for: photo)
-                            }
-                            .padding(.horizontal, 10)
-                            .padding(.top, 10)
-
-                            ZoomablePhoto(path: photo.src, alt: photo.alt, label: photoAccessibilityLabel(photo))
-
-                            VStack(alignment: .leading, spacing: 4) {
-                                if showsPhotoRoleLabel(photo) {
-                                    Text(photoDisplayTitle(photo))
-                                        .font(.system(.title3, design: .serif))
-                                }
-                                Text("Pinch or double-tap to zoom; drag to pan. Long-press for a full-screen view.")
-                                    .font(.caption)
-                                    .foregroundStyle(GuideColor.muted)
-                            }
-                            .padding(10)
-                        }
-                        .background(GuideColor.card)
-                        .overlay {
-                            RoundedRectangle(cornerRadius: 2)
-                                .stroke(GuideColor.line, lineWidth: 1)
-                        }
-                    }
-                }
+                photoGallery
 
                 if species.dimorphic && !hasMaleAndFemalePhotos {
                     Text("An openly licensed male or female photograph is still missing for this species. The app shows what is available and does not invent a second image.")
@@ -117,7 +83,7 @@ struct BirdDetailView: View {
                 }
             }
             .padding(20)
-            .frame(maxWidth: 720, alignment: .leading)
+            .frame(maxWidth: detailMaxWidth, alignment: .leading)
             .frame(maxWidth: .infinity)
         }
         .guideBackground()
@@ -126,6 +92,71 @@ struct BirdDetailView: View {
         .sheet(item: $attributionPhoto) { photo in
             PhotoAttributionSheet(photo: photo)
                 .presentationDetents([.medium, .large])
+        }
+    }
+
+    /// On iPad, keep readable line length without stretching body copy edge-to-edge.
+    private var detailMaxWidth: CGFloat {
+        horizontalSizeClass == .regular ? 900 : 720
+    }
+
+    /// Side-by-side male/female photos when the detail column is wide enough.
+    private var usesSideBySidePhotos: Bool {
+        horizontalSizeClass == .regular && displayPhotos.count >= 2
+    }
+
+    @ViewBuilder
+    private var photoGallery: some View {
+        if usesSideBySidePhotos {
+            LazyVGrid(
+                columns: [GridItem(.flexible(), spacing: 14), GridItem(.flexible(), spacing: 14)],
+                spacing: 14
+            ) {
+                ForEach(displayPhotos) { photo in
+                    photoCard(photo)
+                }
+            }
+        } else {
+            VStack(spacing: 14) {
+                ForEach(displayPhotos) { photo in
+                    photoCard(photo)
+                }
+            }
+        }
+    }
+
+    private func photoCard(_ photo: Photo) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(alignment: .center, spacing: 8) {
+                if showsPhotoRoleLabel(photo) {
+                    Text(photoDisplayTitle(photo))
+                        .font(.caption.weight(.semibold))
+                        .tracking(1.1)
+                        .foregroundStyle(GuideColor.green)
+                }
+                Spacer(minLength: 0)
+                photoAttrBadge(for: photo)
+            }
+            .padding(.horizontal, 10)
+            .padding(.top, 10)
+
+            ZoomablePhoto(path: photo.src, alt: photo.alt, label: photoAccessibilityLabel(photo))
+
+            VStack(alignment: .leading, spacing: 4) {
+                if showsPhotoRoleLabel(photo) {
+                    Text(photoDisplayTitle(photo))
+                        .font(.system(.title3, design: .serif))
+                }
+                Text("Pinch or double-tap to zoom; drag to pan. Long-press for a full-screen view.")
+                    .font(.caption)
+                    .foregroundStyle(GuideColor.muted)
+            }
+            .padding(10)
+        }
+        .background(GuideColor.card)
+        .overlay {
+            RoundedRectangle(cornerRadius: 2)
+                .stroke(GuideColor.line, lineWidth: 1)
         }
     }
 

@@ -7,6 +7,7 @@ struct ZoomablePhoto: View {
     var alt: String
     var label: String
 
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var showingViewer = false
     @State private var image: UIImage?
     @State private var loadFailed = false
@@ -74,7 +75,10 @@ struct ZoomablePhoto: View {
     private func viewerHeight(for image: UIImage) -> CGFloat {
         let aspect = image.size.height / max(image.size.width, 1)
         // Keep male/female photos usable in the scroll view without eating the whole screen.
-        return min(max(220, 320 * aspect), 420)
+        // On regular-width (iPad) columns, allow a bit more height so photos do not look cropped short.
+        let base: CGFloat = horizontalSizeClass == .regular ? 360 : 320
+        let ceiling: CGFloat = horizontalSizeClass == .regular ? 480 : 420
+        return min(max(220, base * aspect), ceiling)
     }
 }
 

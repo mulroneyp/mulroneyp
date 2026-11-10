@@ -49,6 +49,8 @@ struct LocationSheet: View {
                     }
                 }
                 .padding(20)
+                .frame(maxWidth: 720, alignment: .leading)
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
             .guideBackground()
             .navigationTitle(startInImportMode ? "Add location" : "Manage locations")
