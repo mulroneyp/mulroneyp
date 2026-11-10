@@ -33,7 +33,7 @@ Use **Add eBird barchart** (or **Add sample L436229**) to import an eBird Freque
 - Each month aggregates the four week columns as a **mean**.
 - “sp.” and slash taxa are parsed, flagged, and hidden from the main list unless you turn them on in **Settings**.
 - Species with selected-month mean frequency below **0.5%** (`0.005`) are hidden by default as scarce / near-zero (toggle in **Settings**).
-- Photo and field-note enrichment for first run targets species with selected-month mean frequency at or above **5%** (`0.05`), plus the top 40 by that month, reusing `guide.json` when the common name matches and filling gaps from `ebird_supplemental.json` / Commons.
+- Photo and field-note enrichment targets every species whose **any-month** mean frequency is at or above the scarce threshold (**0.5%** / `0.005`), reusing `guide.json` when the common name matches and filling remaining gaps from `ebird_supplemental.json` / Wikimedia Commons (open licences only). Download order still prefers the selected month.
 - The sample file is bundled at `HandyFieldGuide/Resources/fixtures/ebird_L436229__2020_2026_1_12_barchart.txt` and copied into the app Documents folder (visible in Files → On My iPhone → Handy Field Guide) for re-import.
 - **Manage locations** renames or deletes saved imports (persisted in Documents). Deleting an active import returns to the empty state until you choose or add another import.
 
