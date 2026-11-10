@@ -4,17 +4,23 @@ import Foundation
 /// Prefers the bundled guide coverages, then an optional supplemental catalog
 /// built offline for high-frequency taxa at imported hotspots.
 struct SpeciesCatalog {
-    private var byNormalizedName: [String: Species]
+    private struct Entry {
+        var species: Species
+        var sourcePlaceLabels: [String]
+    }
+
+    private var byNormalizedName: [String: Entry]
 
     init(guide: GuideFile, supplemental: [Species] = []) {
-        var map: [String: Species] = [:]
+        var map: [String: Entry] = [:]
         for coverage in guide.coverages {
+            let labels = [coverage.label, coverage.placeTitle].filter { !$0.isEmpty }
             for species in coverage.species {
-                Self.index(species, into: &map)
+                Self.index(species, sourcePlaceLabels: labels, into: &map)
             }
         }
         for species in supplemental {
-            Self.index(species, into: &map)
+            Self.index(species, sourcePlaceLabels: [], into: &map)
         }
         byNormalizedName = map
     }
@@ -36,7 +42,7 @@ struct SpeciesCatalog {
     }
 
     func species(forCommonName name: String) -> Species? {
-        byNormalizedName[Self.normalize(name)]
+        byNormalizedName[Self.normalize(name)]?.species
     }
 
     func resolvedSpecies(
@@ -46,8 +52,13 @@ struct SpeciesCatalog {
     ) -> Species {
         let frequency = taxon.mean(monthIndex: monthIndex)
         let percent = Int((frequency * 100).rounded())
-        if let existing = species(forCommonName: taxon.commonName) {
-            var copy = existing
+        if let entry = byNormalizedName[Self.normalize(taxon.commonName)] {
+            var copy = entry.species
+            copy.habitat = HabitatCopy.forActiveLocation(
+                locationLabel,
+                curatedHabitat: entry.species.habitat,
+                sourcePlaceLabels: entry.sourcePlaceLabels
+            )
             if taxon.kind != .species {
                 copy.tags = Array(Set(copy.tags + ["flagged-taxon"]))
                 copy.status = taxon.kind == .slash ? "slash taxon" : "sp. taxon"
@@ -94,12 +105,17 @@ struct SpeciesCatalog {
         )
     }
 
-    private static func index(_ species: Species, into map: inout [String: Species]) {
-        map[normalize(species.commonName)] = species
+    private static func index(
+        _ species: Species,
+        sourcePlaceLabels: [String],
+        into map: inout [String: Entry]
+    ) {
+        let entry = Entry(species: species, sourcePlaceLabels: sourcePlaceLabels)
+        map[normalize(species.commonName)] = entry
         for alias in species.aliases + species.alsoCalled {
             let key = normalize(alias)
             if map[key] == nil {
-                map[key] = species
+                map[key] = entry
             }
         }
     }

@@ -171,6 +171,11 @@ enum LocationResolver {
 
 extension ResolvedPlace {
     func habitat(for species: Species) -> String {
+        // Imported lists must never keep bundled place claims (e.g. Children's
+        // Eternal Rainforest) when the active location is somewhere else.
+        if imported != nil {
+            return HabitatCopy.forActiveLocation(displayName, curatedHabitat: species.habitat)
+        }
         guard !isOutside, let district, district.id != "all" else {
             return species.habitat
         }
@@ -187,5 +192,128 @@ extension ResolvedPlace {
             return district.groupOrder
         }
         return coverage.groups.map(\.id)
+    }
+}
+
+/// Rewrites curated habitat copy so detail screens claim the active list, not a
+/// bundled Monteverde / Melbourne place the species was first authored for.
+enum HabitatCopy {
+    /// Leads that name a specific list or a generic import placeholder.
+    private static let placeClaimLeads: [String] = [
+        "Children's Eternal Rainforest, on the San Gerardo list for mid-late November.",
+        "Children's Eternal Rainforest.",
+        "Seen on complete checklists for the imported eBird location.",
+    ]
+
+    /// Place-name phrases that must not appear under a different active location.
+    private static let foreignPlacePhrases: [String] = [
+        "Children's Eternal Rainforest",
+        "San Gerardo",
+        "Bosque Eterno",
+        "Monteverde",
+        "Greater Melbourne",
+        "Albert Park",
+        "Royal Botanic Gardens",
+        "Port Phillip",
+        "Yarra",
+        "Maribyrnong",
+    ]
+
+    static func forActiveLocation(
+        _ locationName: String,
+        curatedHabitat: String,
+        sourcePlaceLabels: [String] = []
+    ) -> String {
+        let place = locationName.trimmingCharacters(in: .whitespacesAndNewlines)
+        var remainder = curatedHabitat.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        for lead in placeClaimLeads {
+            if let stripped = strippingCaseInsensitivePrefix(remainder, lead) {
+                remainder = stripped
+            }
+        }
+
+        if remainder.lowercased().hasPrefix("imported from the ebird frequency export for") {
+            remainder = dropFirstSentence(remainder)
+        }
+
+        for label in sourcePlaceLabels {
+            let trimmedLabel = label.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard !trimmedLabel.isEmpty else { continue }
+            if LocationResolver.normalize(trimmedLabel) == LocationResolver.normalize(place) {
+                continue
+            }
+            if let first = firstSentence(remainder),
+               LocationResolver.normalize(first).contains(LocationResolver.normalize(trimmedLabel)) {
+                remainder = dropFirstSentence(remainder)
+            }
+        }
+
+        remainder = droppingForeignPlaceSentences(remainder, activeLocation: place)
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if remainder.isEmpty {
+            return place.isEmpty ? curatedHabitat : place
+        }
+        if place.isEmpty {
+            return remainder
+        }
+        if LocationResolver.normalize(remainder).hasPrefix(LocationResolver.normalize(place)) {
+            return remainder
+        }
+        return "\(place). \(remainder)"
+    }
+
+    private static func droppingForeignPlaceSentences(_ text: String, activeLocation: String) -> String {
+        let active = LocationResolver.normalize(activeLocation)
+        let sentences = splitSentences(text)
+        let kept = sentences.filter { sentence in
+            let normalized = LocationResolver.normalize(sentence)
+            for phrase in foreignPlacePhrases {
+                let needle = LocationResolver.normalize(phrase)
+                guard !needle.isEmpty, normalized.contains(needle) else { continue }
+                // Keep the sentence only if the active location itself mentions that place.
+                if active.contains(needle) { continue }
+                return false
+            }
+            return true
+        }
+        return kept.joined(separator: " ")
+    }
+
+    private static func strippingCaseInsensitivePrefix(_ text: String, _ prefix: String) -> String? {
+        guard text.lowercased().hasPrefix(prefix.lowercased()) else { return nil }
+        return String(text.dropFirst(prefix.count))
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private static func firstSentence(_ text: String) -> String? {
+        splitSentences(text).first
+    }
+
+    private static func dropFirstSentence(_ text: String) -> String {
+        let parts = splitSentences(text)
+        guard parts.count > 1 else { return "" }
+        return parts.dropFirst().joined(separator: " ")
+    }
+
+    private static func splitSentences(_ text: String) -> [String] {
+        var sentences: [String] = []
+        var current = ""
+        for character in text {
+            current.append(character)
+            if character == "." || character == "!" || character == "?" {
+                let trimmed = current.trimmingCharacters(in: .whitespacesAndNewlines)
+                if !trimmed.isEmpty {
+                    sentences.append(trimmed)
+                }
+                current = ""
+            }
+        }
+        let trailing = current.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !trailing.isEmpty {
+            sentences.append(trailing)
+        }
+        return sentences
     }
 }
