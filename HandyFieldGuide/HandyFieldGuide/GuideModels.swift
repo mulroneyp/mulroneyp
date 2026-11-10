@@ -70,7 +70,7 @@ struct Species: Decodable, Identifiable {
     var photos: [Photo]
 }
 
-struct Photo: Decodable, Identifiable {
+struct Photo: Codable, Identifiable, Hashable {
     var role: String
     var label: String
     var src: String

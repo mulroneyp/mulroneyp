@@ -33,6 +33,11 @@ struct GuideRootView: View {
         .sheet(isPresented: $showingManageLocations) {
             LocationSheet(startInImportMode: false)
         }
+        .sheet(item: $model.photoFetch, onDismiss: {
+            model.clearPhotoFetchIfIdle()
+        }) { fetcher in
+            PhotoFetchProgressSheet(fetcher: fetcher)
+        }
         .onChange(of: model.locationQuery) { _, _ in
             dismissSearchKeyboard()
             path = NavigationPath()
@@ -309,7 +314,7 @@ struct GuideRootView: View {
                     }
                 }
 
-                Text("Imported lists keep every taxon from the file. Near-zero \(model.selectedMonthName) rows and flagged “sp.” / slash taxa are controlled in Settings. Photos are openly licensed when available.")
+                Text("Imported lists keep every taxon from the file. Near-zero \(model.selectedMonthName) rows and flagged “sp.” / slash taxa are controlled in Settings. Missing photos are fetched from Wikimedia Commons after import and cached on device for offline use.")
                     .font(.footnote)
                     .foregroundStyle(GuideColor.muted)
                     .padding(.top, 8)

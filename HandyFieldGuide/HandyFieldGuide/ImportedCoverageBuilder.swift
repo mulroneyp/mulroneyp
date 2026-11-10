@@ -18,7 +18,7 @@ enum ImportedCoverageBuilder {
         Frequencies are the mean of eBird’s four week columns for each month. \
         The list below is filtered by \(monthName) on this device. \
         Species below \(percent(EBirdBarchartParser.nearZeroThreshold)) mean frequency for the selected month are hidden unless you show scarce birds. \
-        Photos and habitat notes reuse the bundled guide when the common name matches; otherwise a supplemental Commons catalog covers taxa at or above \(percent(EBirdBarchartParser.enrichmentFrequencyThreshold)) for a typical month, with stubs for the rest.
+        Photos and habitat notes reuse the bundled guide when the common name matches; otherwise a supplemental Commons catalog and on-device open-licence downloads fill gaps, with stubs for the rest.
         """
         return Coverage(
             id: record.id,

@@ -48,7 +48,13 @@ enum BundleImages {
         return image
     }
 
+    /// Relative paths written by `PhotoCacheStore` for on-import Commons downloads.
+    static let cachedPathPrefix = "cached-images/"
+
     static func url(for relativePath: String) -> URL? {
+        if relativePath.hasPrefix(cachedPathPrefix) {
+            return cachedFileURL(for: relativePath)
+        }
         let file = (relativePath as NSString).lastPathComponent
         let directory = (relativePath as NSString).deletingLastPathComponent
         let name = (file as NSString).deletingPathExtension
@@ -60,6 +66,16 @@ enum BundleImages {
             Bundle.main.url(forResource: file, withExtension: nil, subdirectory: directory),
         ]
         return candidates.compactMap { $0 }.first
+    }
+
+    /// Documents/species-photos/<file> for downloaded open-licence images.
+    static func cachedFileURL(for relativePath: String) -> URL? {
+        guard relativePath.hasPrefix(cachedPathPrefix) else { return nil }
+        let file = String(relativePath.dropFirst(cachedPathPrefix.count))
+        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("species-photos", isDirectory: true)
+            .appendingPathComponent(file)
+        return FileManager.default.fileExists(atPath: url.path) ? url : nil
     }
 }
 
