@@ -47,16 +47,10 @@ struct GuideRootView: View {
         let filtering = !model.searchText.trimmingCharacters(in: .whitespaces).isEmpty || model.isFilteringByZone
         return ScrollView {
             VStack(alignment: .leading, spacing: 14) {
-                Text(place.coverage.summary)
-                    .font(.subheadline)
-                    .foregroundStyle(GuideColor.muted)
-                    .fixedSize(horizontal: false, vertical: true)
+                LocationHeader(place: place)
 
                 if let notice = place.notice {
                     NoticeBox(text: notice, strong: true)
-                }
-                if place.imported != nil, let sample = place.coverage.sampleNote {
-                    NoticeBox(text: sample, strong: false)
                 }
 
                 if place.imported != nil {
@@ -139,6 +133,111 @@ struct GuideRootView: View {
                 }
                 .buttonStyle(.plain)
             }
+        }
+    }
+}
+
+/// Compact place chrome: name + Maps link + “i” for the long coverage prose.
+private struct LocationHeader: View {
+    var place: ResolvedPlace
+    @State private var showingInfo = false
+    @Environment(\.openURL) private var openURL
+
+    private var showsPlaceTitleSubtitle: Bool {
+        let title = place.coverage.placeTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !title.isEmpty else { return false }
+        return LocationResolver.normalize(title) != LocationResolver.normalize(place.displayName)
+    }
+
+    var body: some View {
+        HStack(alignment: .center, spacing: 8) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(place.displayName)
+                    .font(.system(.title2, design: .serif))
+                    .foregroundStyle(GuideColor.green)
+                    .fixedSize(horizontal: false, vertical: true)
+                if showsPlaceTitleSubtitle {
+                    Text(place.coverage.placeTitle)
+                        .font(.caption)
+                        .foregroundStyle(GuideColor.muted)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+            if let url = PlaceMaps.appleMapsURL(for: place) {
+                Button {
+                    openURL(url)
+                } label: {
+                    Label("Map", systemImage: "map")
+                        .font(.subheadline.weight(.semibold))
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 8)
+                        .background(GuideColor.green.opacity(0.10))
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 2)
+                                .stroke(GuideColor.green.opacity(0.35), lineWidth: 1)
+                        }
+                }
+                .foregroundStyle(GuideColor.green)
+                .accessibilityLabel("Open \(place.displayName) in Maps")
+                .accessibilityHint(PlaceMaps.searchQuery(for: place).map { "Searches Maps for \($0)" } ?? "")
+            }
+
+            Button {
+                showingInfo = true
+            } label: {
+                Image(systemName: "info.circle")
+                    .font(.body.weight(.semibold))
+                    .frame(width: 36, height: 44)
+            }
+            .accessibilityLabel("Location details")
+            .foregroundStyle(GuideColor.green)
+        }
+        .sheet(isPresented: $showingInfo) {
+            NavigationStack {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 16) {
+                        Text(place.displayName)
+                            .font(.system(.title2, design: .serif))
+                            .foregroundStyle(GuideColor.green)
+                        if showsPlaceTitleSubtitle {
+                            Text(place.coverage.placeTitle)
+                                .font(.subheadline)
+                                .foregroundStyle(GuideColor.muted)
+                        }
+                        Text(place.coverage.summary)
+                            .font(.body)
+                            .foregroundStyle(GuideColor.ink)
+                            .fixedSize(horizontal: false, vertical: true)
+                        if let lead = place.district?.lead.trimmingCharacters(in: .whitespacesAndNewlines),
+                           !lead.isEmpty {
+                            Text(lead)
+                                .font(.body)
+                                .foregroundStyle(GuideColor.ink)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                        if let sample = place.coverage.sampleNote?.trimmingCharacters(in: .whitespacesAndNewlines),
+                           !sample.isEmpty {
+                            Text(sample)
+                                .font(.subheadline)
+                                .foregroundStyle(GuideColor.muted)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(20)
+                }
+                .guideBackground()
+                .navigationTitle("About this place")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Done") { showingInfo = false }
+                    }
+                }
+            }
+            .presentationDetents([.medium, .large])
         }
     }
 }
