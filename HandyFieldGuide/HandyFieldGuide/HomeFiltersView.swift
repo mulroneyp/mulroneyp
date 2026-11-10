@@ -4,22 +4,10 @@ import SwiftUI
 struct HomeFiltersView: View {
     @EnvironmentObject private var model: GuideModel
     var guide: GuideFile
-    var place: ResolvedPlace
     var onAddLocation: () -> Void
     var onManageLocations: () -> Void
 
     @State private var showingZoneInfo = false
-
-    private var curatedLocationOptions: [LocationOption] {
-        [
-            .init(id: "monteverde", title: "Children's Eternal Rainforest", query: "Monteverde"),
-            .init(id: "san-gerardo", title: "San Gerardo", query: "San Gerardo"),
-            .init(id: "bajo", title: "Bajo del Tigre", query: "Bajo del Tigre"),
-            .init(id: "melbourne", title: "Greater Melbourne", query: "Melbourne"),
-            .init(id: "bayside", title: "Bayside", query: "Bayside"),
-            .init(id: "dandenong", title: "Dandenong Ranges", query: "Dandenong Ranges"),
-        ]
-    }
 
     private var importedLocationOptions: [LocationOption] {
         model.imports.locations.map {
@@ -27,20 +15,18 @@ struct HomeFiltersView: View {
         }
     }
 
-    private var locationOptions: [LocationOption] {
-        curatedLocationOptions + importedLocationOptions
-    }
-
     private var selectedLocationTitle: String {
         let current = model.locationQuery.trimmingCharacters(in: .whitespacesAndNewlines)
-        if let match = locationOptions.first(where: {
+        if let match = importedLocationOptions.first(where: {
             LocationResolver.normalize($0.query) == LocationResolver.normalize(current)
                 || LocationResolver.normalize($0.title) == LocationResolver.normalize(current)
         }) {
             return match.title
         }
-        if current.isEmpty { return "Children's Eternal Rainforest" }
-        return current
+        if importedLocationOptions.isEmpty {
+            return "Add location"
+        }
+        return current.isEmpty ? "Choose location" : current
     }
 
     private var selectedZoneTitle: String {
@@ -121,26 +107,20 @@ struct HomeFiltersView: View {
 
     private var locationControl: some View {
         Menu {
-            Picker("Location", selection: locationSelection) {
-                Section("Curated") {
-                    ForEach(curatedLocationOptions) { option in
+            if !importedLocationOptions.isEmpty {
+                Picker("Location", selection: locationSelection) {
+                    ForEach(importedLocationOptions) { option in
                         Text(option.title).tag(option.query)
                     }
                 }
-                if !importedLocationOptions.isEmpty {
-                    Section("Saved imports") {
-                        ForEach(importedLocationOptions) { option in
-                            Text(option.title).tag(option.query)
-                        }
-                    }
-                }
+                Divider()
             }
-            Divider()
             Button {
                 onManageLocations()
             } label: {
                 Label("Manage locations", systemImage: "pencil")
             }
+            .disabled(importedLocationOptions.isEmpty)
             Button {
                 onAddLocation()
             } label: {
@@ -149,7 +129,7 @@ struct HomeFiltersView: View {
         } label: {
             filterColumn(title: "Location", value: selectedLocationTitle)
         }
-        .accessibilityHint("Choose a place, manage saved imports, or import an eBird barchart")
+        .accessibilityHint("Choose an imported place, manage saved imports, or import an eBird barchart")
     }
 
     private var monthControl: some View {
@@ -175,11 +155,7 @@ struct HomeFiltersView: View {
                 caption: model.isUsingDeviceMonth ? "Current" : "Preview"
             )
         }
-        .accessibilityHint(
-            place.imported != nil
-                ? "Imported lists use this month’s eBird frequencies"
-                : "Defaults to the current calendar month"
-        )
+        .accessibilityHint("Imported lists use this month’s eBird frequencies")
     }
 
     private var zoneControl: some View {
@@ -253,14 +229,13 @@ struct HomeFiltersView: View {
         Binding(
             get: {
                 let current = model.locationQuery.trimmingCharacters(in: .whitespacesAndNewlines)
-                if current.isEmpty { return "Monteverde" }
-                if let match = locationOptions.first(where: {
+                if let match = importedLocationOptions.first(where: {
                     LocationResolver.normalize($0.query) == LocationResolver.normalize(current)
                         || LocationResolver.normalize($0.title) == LocationResolver.normalize(current)
                 }) {
                     return match.query
                 }
-                return current
+                return importedLocationOptions.first?.query ?? ""
             },
             set: { model.locationQuery = $0 }
         )

@@ -12,8 +12,12 @@ struct GuideRootView: View {
                 if let error = model.loadError {
                     Text(error)
                         .padding()
-                } else if let guide = model.guide, let place = model.place {
-                    list(guide: guide, place: place)
+                } else if let guide = model.guide {
+                    if let place = model.place {
+                        list(guide: guide, place: place)
+                    } else {
+                        emptyLocations(guide: guide)
+                    }
                 } else {
                     ProgressView("Loading the guide")
                 }
@@ -32,19 +36,64 @@ struct GuideRootView: View {
             }
         }
         .sheet(isPresented: $showingAddLocation) {
-            LocationSheet(current: model.locationQuery, startInImportMode: true)
+            LocationSheet(startInImportMode: true)
         }
         .sheet(isPresented: $showingManageLocations) {
-            LocationSheet(current: model.locationQuery, startInImportMode: false)
+            LocationSheet(startInImportMode: false)
         }
         .onChange(of: model.locationQuery) { _, _ in
             path = NavigationPath()
         }
     }
 
+    private func emptyLocations(guide: GuideFile) -> some View {
+        VStack(spacing: 0) {
+            Spacer(minLength: 0)
+            VStack(alignment: .leading, spacing: 16) {
+                Text("No location yet")
+                    .font(.system(.title2, design: .serif))
+                    .foregroundStyle(GuideColor.green)
+                Text(
+                    model.hasImportedLocations
+                        ? "Choose a saved import from Location, or add another eBird barchart. The guide only shows birds from places you import — it does not invent lists."
+                        : "Add or import an eBird barchart to see birds for a place. Only imported locations appear here — there is no default checklist."
+                )
+                .font(.body)
+                .foregroundStyle(GuideColor.ink)
+                .fixedSize(horizontal: false, vertical: true)
+
+                Button {
+                    showingAddLocation = true
+                } label: {
+                    Label("Add eBird barchart", systemImage: "plus")
+                }
+                .buttonStyle(GuideChipStyle(selected: true))
+
+                if model.hasImportedLocations {
+                    Button {
+                        showingManageLocations = true
+                    } label: {
+                        Label("Manage locations", systemImage: "pencil")
+                    }
+                    .buttonStyle(GuideChipStyle(selected: false))
+                }
+            }
+            .padding(20)
+            .frame(maxWidth: 720, alignment: .leading)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            Spacer(minLength: 0)
+        }
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            HomeFiltersView(
+                guide: guide,
+                onAddLocation: { showingAddLocation = true },
+                onManageLocations: { showingManageLocations = true }
+            )
+        }
+    }
+
     private func list(guide: GuideFile, place: ResolvedPlace) -> some View {
         let birds = model.filteredSpecies(in: place)
-        let filtering = !model.searchText.trimmingCharacters(in: .whitespaces).isEmpty || model.isFilteringByZone
         return ScrollView {
             VStack(alignment: .leading, spacing: 14) {
                 LocationHeader(place: place)
@@ -53,9 +102,7 @@ struct GuideRootView: View {
                     NoticeBox(text: notice, strong: true)
                 }
 
-                if place.imported != nil {
-                    importedExtras
-                }
+                importedExtras
 
                 TextField("Search name or scientific name", text: $model.searchText)
                     .textFieldStyle(.roundedBorder)
@@ -67,24 +114,13 @@ struct GuideRootView: View {
                     .foregroundStyle(GuideColor.muted)
 
                 if birds.isEmpty {
-                    Text(place.imported == nil
-                         ? "No birds match. Try a scientific name, or clear the zone filter."
-                         : "No birds match for \(model.selectedMonthName). Preview another month, or show scarce birds.")
+                    Text("No birds match for \(model.selectedMonthName). Preview another month, or show scarce birds.")
                         .padding(.vertical, 8)
-                } else if filtering || place.imported != nil {
-                    section(title: nil, birds: model.sortedForDisplay(birds, place: place), place: place)
                 } else {
-                    ForEach(place.groupOrder, id: \.self) { groupId in
-                        let rows = birds.filter { $0.group == groupId }.sorted { $0.commonName < $1.commonName }
-                        if !rows.isEmpty {
-                            section(title: model.groupLabel(groupId, coverage: place.coverage), birds: rows, place: place)
-                        }
-                    }
+                    section(title: nil, birds: model.sortedForDisplay(birds, place: place), place: place)
                 }
 
-                Text(place.imported == nil
-                     ? "Zone icons can be combined: a bird that feeds on a lawn and sings from a branch shows more than one. Photos are openly licensed; credits are on each bird."
-                     : "Imported lists keep every taxon from the file. Near-zero \(model.selectedMonthName) rows are hidden by default (below \(Int(EBirdBarchartParser.nearZeroThreshold * 1000) / 10)% mean frequency). Flagged “sp.” and slash taxa stay off the main list unless you turn them on. Photos are openly licensed when available.")
+                Text("Imported lists keep every taxon from the file. Near-zero \(model.selectedMonthName) rows are hidden by default (below \(Int(EBirdBarchartParser.nearZeroThreshold * 1000) / 10)% mean frequency). Flagged “sp.” and slash taxa stay off the main list unless you turn them on. Photos are openly licensed when available.")
                     .font(.footnote)
                     .foregroundStyle(GuideColor.muted)
                     .padding(.top, 8)
@@ -96,7 +132,6 @@ struct GuideRootView: View {
         .safeAreaInset(edge: .bottom, spacing: 0) {
             HomeFiltersView(
                 guide: guide,
-                place: place,
                 onAddLocation: { showingAddLocation = true },
                 onManageLocations: { showingManageLocations = true }
             )

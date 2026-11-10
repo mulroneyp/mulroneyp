@@ -46,6 +46,12 @@ final class GuideModel: ObservableObject {
         importsCancellable = imports.objectWillChange.sink { [weak self] _ in
             self?.objectWillChange.send()
         }
+        // Drop saved queries that no longer match an import (old curated presets).
+        // didSet does not run during init, so write UserDefaults explicitly.
+        if !locationQuery.isEmpty, imports.location(matchingQuery: locationQuery) == nil {
+            locationQuery = ""
+            UserDefaults.standard.set("", forKey: Self.storageKey)
+        }
     }
 
     var selectedMonthName: String {
@@ -72,29 +78,30 @@ final class GuideModel: ObservableObject {
         UserDefaults.standard.set(value, forKey: Self.hideNearZeroKey)
     }
 
+    /// Active place is only an imported eBird / user-added list. No curated fallback.
     var place: ResolvedPlace? {
-        guard let guide else { return nil }
-        if let imported = imports.location(matchingQuery: locationQuery), let catalog {
-            let coverage = ImportedCoverageBuilder.coverage(
-                for: imported,
-                catalog: catalog,
-                monthIndex: selectedMonthIndex,
-                includeFlagged: showFlaggedTaxa
-            )
-            return ResolvedPlace(
-                query: locationQuery,
-                coverage: coverage,
-                district: coverage.districts.first,
-                displayName: imported.name,
-                isOutside: false,
-                notice: nil,
-                imported: imported,
-                monthIndex: selectedMonthIndex
-            )
-        }
-        var resolved = LocationResolver.resolve(query: locationQuery, guide: guide)
-        resolved.monthIndex = selectedMonthIndex
-        return resolved
+        guard guide != nil, let catalog else { return nil }
+        guard let imported = imports.location(matchingQuery: locationQuery) else { return nil }
+        let coverage = ImportedCoverageBuilder.coverage(
+            for: imported,
+            catalog: catalog,
+            monthIndex: selectedMonthIndex,
+            includeFlagged: showFlaggedTaxa
+        )
+        return ResolvedPlace(
+            query: locationQuery,
+            coverage: coverage,
+            district: coverage.districts.first,
+            displayName: imported.name,
+            isOutside: false,
+            notice: nil,
+            imported: imported,
+            monthIndex: selectedMonthIndex
+        )
+    }
+
+    var hasImportedLocations: Bool {
+        !imports.locations.isEmpty
     }
 
     func stratumInfo(_ id: String) -> StratumInfo? {
@@ -197,7 +204,6 @@ final class GuideModel: ObservableObject {
     }
 
     /// Deletes a saved/imported location after confirmation in the UI.
-    /// Curated bundled presets are not stored here and cannot be removed.
     func deleteImportedLocation(_ id: String) {
         let record = imports.locations.first(where: { $0.id == id })
         let wasActive = record.map { loc in

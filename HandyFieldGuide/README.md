@@ -6,11 +6,11 @@ An iPhone field guide. Open `HandyFieldGuide.xcodeproj` in Xcode, pick the Handy
 
 Location, Month, and Zone sit in a **bottom toolbar** so the bird list keeps the space above:
 
-1. **Location** — menu of curated places and any imported eBird areas, plus **Manage locations** (rename / delete saved imports) and **Add eBird barchart**. Curated bundled presets stay in the menu and are not deleted.
+1. **Location** — menu of **imported** eBird areas only, plus **Manage locations** (rename / delete saved imports) and **Add eBird barchart**. There is no default / curated place list in the menu. With no imports, the home screen prompts you to add a barchart.
 2. **Month** — picker that defaults to the device’s current calendar month. Imported eBird lists use that month’s frequencies for “likely” birds.
 3. **Zone** — multi-select ground / low / mid / canopy / sky. Birds matching **any** selected zone appear. **Any** clears the filter. Long zone descriptions stay behind a small **i** button.
 
-Above the bird list, the active **location name** is shown with a **Map** control (opens Apple Maps using the best place query available — curated `placeTitle` / district + region, or a known eBird hotspot name for sample L-codes) and a small **i** that reveals the long coverage prose in a sheet, matching the Zone info pattern.
+Above the bird list for an active import, the **location name** is shown with a **Map** control (opens Apple Maps using a renamed title or a known eBird hotspot name for sample L-codes) and a small **i** that reveals the long coverage prose in a sheet, matching the Zone info pattern.
 
 **Sky** is for birds typically seen overhead (flying, soaring, or hawking), separate from canopy perches.
 
@@ -20,9 +20,9 @@ Each bird also shows a **most likely time of day** (dawn / morning / midday / af
 
 Species detail shows one badge — **Sexually dimorphic** or **Not sexually dimorphic** — instead of a Sexes paragraph. Photographs support **pinch to zoom**, **drag to pan**, double-tap zoom, and long-press for a full-screen viewer. Dimorphic species keep labeled **Male** / **Female** photos when openly licensed Commons images exist; monomorphic species show one photo. A compact **Photo Attr** badge opens photographer, licence, and source (required attribution stays available, just not inline under every image).
 
-## Curated places
+## Locations
 
-An empty or default location opens the Children's Eternal Rainforest checklist for Monteverde: 171 species taken from the San Gerardo station list. Likelihood bands there are mid–late November estimates, not eBird frequencies. San Gerardo and Bajo del Tigre are presets on that same list. Greater Melbourne is a second, smaller curated list. If a typed place is outside both, the app says so and shows the closest list it actually has. It does not invent birds.
+The Location picker shows **only** places you have imported (or added via the sample). Bundled `guide.json` species notes still enrich matching common names on imports, but Monteverde / Melbourne presets are not offered as selectable lists. With no active import, the app shows an empty state and does not invent birds.
 
 ## eBird barchart import
 
@@ -34,7 +34,7 @@ Use **Add eBird barchart** (or **Add sample L436229**) to import an eBird Freque
 - Species with selected-month mean frequency below **0.5%** (`0.005`) are hidden by default as scarce / near-zero.
 - Photo and field-note enrichment for first run targets species with selected-month mean frequency at or above **5%** (`0.05`), plus the top 40 by that month, reusing `guide.json` when the common name matches and filling gaps from `ebird_supplemental.json` / Commons.
 - The sample file is bundled at `HandyFieldGuide/Resources/fixtures/ebird_L436229__2020_2026_1_12_barchart.txt` and copied into the app Documents folder (visible in Files → On My iPhone → Handy Field Guide) for re-import.
-- **Manage locations** renames or deletes saved imports (persisted in Documents). Deleting an active import returns to the default curated Monteverde list; curated presets themselves cannot be deleted.
+- **Manage locations** renames or deletes saved imports (persisted in Documents). Deleting an active import returns to the empty state until you choose or add another import.
 
 Verify parsing on a machine with Python:
 

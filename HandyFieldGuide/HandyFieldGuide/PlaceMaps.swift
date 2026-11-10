@@ -12,15 +12,7 @@ enum PlaceMaps {
         if let imported = place.imported {
             return queryForImported(imported)
         }
-        if let district = place.district, district.id != "all" {
-            let title = place.coverage.placeTitle.trimmingCharacters(in: .whitespacesAndNewlines)
-            if title.isEmpty {
-                return "\(district.label), \(place.coverage.country)"
-            }
-            return "\(district.label), \(title)"
-        }
-        let title = place.coverage.placeTitle.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !title.isEmpty { return title }
+        // Active places are imports only; keep a displayName fallback for safety.
         let name = place.displayName.trimmingCharacters(in: .whitespacesAndNewlines)
         return name.isEmpty ? nil : name
     }
