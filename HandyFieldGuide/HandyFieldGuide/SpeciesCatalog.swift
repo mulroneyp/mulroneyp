@@ -10,8 +10,9 @@ struct SpeciesCatalog {
     }
 
     private var byNormalizedName: [String: Entry]
+    private let photoCache: PhotoCacheStore?
 
-    init(guide: GuideFile, supplemental: [Species] = []) {
+    init(guide: GuideFile, supplemental: [Species] = [], photoCache: PhotoCacheStore? = nil) {
         var map: [String: Entry] = [:]
         for coverage in guide.coverages {
             let labels = [coverage.label, coverage.placeTitle].filter { !$0.isEmpty }
@@ -23,6 +24,7 @@ struct SpeciesCatalog {
             Self.index(species, sourcePlaceLabels: [], into: &map)
         }
         byNormalizedName = map
+        self.photoCache = photoCache
     }
 
     static func loadSupplemental() -> [Species] {
@@ -63,6 +65,7 @@ struct SpeciesCatalog {
                 copy.tags = Array(Set(copy.tags + ["flagged-taxon"]))
                 copy.status = taxon.kind == .slash ? "slash taxon" : "sp. taxon"
             }
+            photoCache?.applyCachedPhotos(to: &copy)
             return copy
         }
 
@@ -83,7 +86,7 @@ struct SpeciesCatalog {
             habitat = "Observers reported a bird only to genus or a broader group. It is flagged here and not treated as a species account."
         }
 
-        return Species(
+        var stub = Species(
             id: "imported-\(slug)",
             commonName: taxon.commonName,
             scientificName: taxon.kind == .species ? "—" : "taxon not resolved",
@@ -103,6 +106,8 @@ struct SpeciesCatalog {
             stratumNote: "Height band not curated for this imported name; mid is a placeholder.",
             photos: []
         )
+        photoCache?.applyCachedPhotos(to: &stub)
+        return stub
     }
 
     private static func index(

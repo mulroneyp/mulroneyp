@@ -53,6 +53,8 @@ python3 scripts/enrich_ebird_supplemental.py
 
 Photos live in `HandyFieldGuide/Resources/images`. Credits are in `HandyFieldGuide/Resources/guide.json`, `HandyFieldGuide/Resources/ebird_supplemental.json`, and under each photo. Licences are public domain, CC0, CC BY, CC BY-SA, or GFDL only — never NC/ND or other non-open licences.
 
+After an eBird barchart import, the app looks up open-licence Wikimedia Commons photos for species that still lack a local image. Downloads are cached under the app Documents folder (`species-photos/`, keyed by species id) and reused across locations. A progress sheet shows count done / total, percent, and an updating time-remaining estimate; cancel stops further network work without undoing the import. Dimorphic species try male + female and fall back to a single photo when only one open-licence image is found. Bundled / offline photos stay preferred; new fetches fill gaps only. Network failures are partial and non-blocking (timeouts + Commons rate limiting).
+
 Commons search for gaps (especially dimorphic male/female pairs) uses a **wide query set**: common name, scientific name, alternate names, and sex keywords (including ♂/♀ and Spanish/German labels), plus Commons categories, with a higher result limit. Rebuild helpers:
 
 ```bash

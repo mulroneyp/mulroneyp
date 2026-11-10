@@ -22,10 +22,14 @@ final class GuideModel: ObservableObject {
         didSet { invalidatePlaceCache() }
     }
     @Published var importMessage: String?
+    /// Active on-import Commons photo download (progress UI). Nil when idle.
+    @Published var photoFetch: ImportPhotoFetcher?
 
     let imports = ImportedLocationStore()
+    let photoCache = PhotoCacheStore()
     private(set) var catalog: SpeciesCatalog?
     private var importsCancellable: AnyCancellable?
+    private var photoCacheCancellable: AnyCancellable?
 
     /// Cached resolved place so list / filter / navigation do not rebuild coverage every body pass.
     private var placeCache: PlaceCache? = nil
@@ -49,6 +53,10 @@ final class GuideModel: ObservableObject {
             self?.invalidatePlaceCache()
             self?.objectWillChange.send()
         }
+        photoCacheCancellable = photoCache.$revision.sink { [weak self] _ in
+            self?.invalidatePlaceCache()
+            self?.objectWillChange.send()
+        }
         Task { await self.loadGuideAndCatalog() }
     }
 
@@ -56,7 +64,7 @@ final class GuideModel: ObservableObject {
         do {
             let loaded = try await Self.decodeBundledGuide()
             guide = loaded.guide
-            catalog = SpeciesCatalog(guide: loaded.guide, supplemental: loaded.supplemental)
+            catalog = SpeciesCatalog(guide: loaded.guide, supplemental: loaded.supplemental, photoCache: photoCache)
             invalidatePlaceCache()
             // Drop saved queries that no longer match an import (old curated presets).
             // didSet does not run during init, so write UserDefaults explicitly.
@@ -193,6 +201,7 @@ final class GuideModel: ObservableObject {
         invalidatePlaceCache()
         locationQuery = record.name
         importMessage = "Imported \(parsed.species.count) taxa for \(record.name) (\(parsed.resolvableSpeciesCount) species; \(parsed.flaggedTaxonCount) flagged)."
+        startPhotoFetch(for: record)
         return record
     }
 
@@ -202,6 +211,38 @@ final class GuideModel: ObservableObject {
         }
         let data = try Data(contentsOf: url)
         try importBarchart(data: data, sourceFileName: url.lastPathComponent, displayName: nil)
+    }
+
+    /// Looks up open-licence Commons photos for imported species missing a local image.
+    /// Import persistence already finished — cancel only stops remaining downloads.
+    func startPhotoFetch(for record: ImportedLocationRecord) {
+        guard let catalog else { return }
+        photoFetch?.cancel()
+        photoFetch = nil
+        let items = ImportPhotoFetcher.workItems(
+            for: record,
+            catalog: catalog,
+            photoCache: photoCache,
+            monthIndex: selectedMonthIndex
+        )
+        // Nothing missing — keep the list quiet; bundled/cache already cover this import.
+        guard !items.isEmpty else { return }
+
+        let fetcher = ImportPhotoFetcher(photoCache: photoCache)
+        // Defer so the Add location sheet can dismiss before the progress sheet presents.
+        Task { @MainActor [weak self] in
+            try? await Task.sleep(nanoseconds: 450_000_000)
+            guard let self else { return }
+            self.photoFetch = fetcher
+            fetcher.start(items: items)
+        }
+    }
+
+    func clearPhotoFetchIfIdle() {
+        guard let photoFetch else { return }
+        if photoFetch.phase == .finished || photoFetch.phase == .cancelled || photoFetch.phase == .idle {
+            self.photoFetch = nil
+        }
     }
 
     /// Renames a saved/imported location and keeps the active query in sync.
