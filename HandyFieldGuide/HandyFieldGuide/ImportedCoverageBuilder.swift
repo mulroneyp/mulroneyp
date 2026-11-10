@@ -4,6 +4,7 @@ enum ImportedCoverageBuilder {
     static let importedGroup = BirdGroup(id: "imported", label: "From eBird frequency")
     static let flaggedGroup = BirdGroup(id: "flagged", label: "Flagged taxa (sp. / slash)")
 
+    @MainActor
     static func coverage(
         for record: ImportedLocationRecord,
         catalog: SpeciesCatalog,

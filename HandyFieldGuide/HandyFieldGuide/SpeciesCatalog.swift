@@ -3,6 +3,10 @@ import Foundation
 /// Looks up field notes and photos for imported eBird common names.
 /// Prefers the bundled guide coverages, then an optional supplemental catalog
 /// built offline for high-frequency taxa at imported hotspots.
+///
+/// Isolated to the main actor because it may apply photos from `PhotoCacheStore`
+/// (`@MainActor` / `ObservableObject`) when resolving imported taxa.
+@MainActor
 struct SpeciesCatalog {
     private struct Entry {
         var species: Species
@@ -27,7 +31,8 @@ struct SpeciesCatalog {
         self.photoCache = photoCache
     }
 
-    static func loadSupplemental() -> [Species] {
+    /// Pure bundle I/O — safe off the main actor (guide decode path).
+    nonisolated static func loadSupplemental() -> [Species] {
         let names = [
             Bundle.main.url(forResource: "ebird_supplemental", withExtension: "json", subdirectory: "Resources"),
             Bundle.main.url(forResource: "ebird_supplemental", withExtension: "json"),
@@ -125,7 +130,7 @@ struct SpeciesCatalog {
         }
     }
 
-    static func normalize(_ value: String) -> String {
+    nonisolated static func normalize(_ value: String) -> String {
         value.folding(options: .diacriticInsensitive, locale: Locale(identifier: "en_US_POSIX"))
             .lowercased()
             .replacingOccurrences(of: "grey", with: "gray")
@@ -134,7 +139,7 @@ struct SpeciesCatalog {
             .joined(separator: " ")
     }
 
-    static func slug(_ value: String) -> String {
+    nonisolated static func slug(_ value: String) -> String {
         normalize(value).replacingOccurrences(of: " ", with: "-")
     }
 }
