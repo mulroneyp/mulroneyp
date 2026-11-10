@@ -16,21 +16,18 @@ from __future__ import annotations
 import json
 import re
 import sys
-import time
-import urllib.parse
-import urllib.request
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from assemble_monteverde import (  # noqa: E402
-    UA,
     choose_photo,
     hard_skip,
-    imageinfo,
     license_ok,
+    name_match,
     photo_record,
+    resolve_scientific,
     save_jpeg,
-    search_files,
+    sex_flags,
     slug,
 )
 from verify_ebird_barchart import ENRICHMENT, NEAR_ZERO, parse  # noqa: E402
@@ -91,20 +88,8 @@ def guess_group(common: str) -> str:
 
 
 def wikipedia_scientific(common: str) -> str:
-    title = common.replace(" ", "_")
-    url = "https://en.wikipedia.org/api/rest_v1/page/summary/" + urllib.parse.quote(title)
-    request = urllib.request.Request(url, headers={"User-Agent": UA})
-    try:
-        with urllib.request.urlopen(request, timeout=30) as response:
-            data = json.load(response)
-        time.sleep(0.2)
-        desc = (data.get("description") or "") + " " + (data.get("extract") or "")
-        match = re.search(r"\b([A-Z][a-z]+ [a-z]+)\b", desc)
-        if match:
-            return match.group(1)
-    except Exception:  # noqa: BLE001
-        return ""
-    return ""
+    """Prefer Wikidata / Commons binomial resolution over summary-extract regex."""
+    return resolve_scientific(common, "")
 
 
 def load_progress() -> dict:
@@ -159,12 +144,13 @@ def make_stub(common: str, scientific: str, photos: list[dict]) -> dict:
     dimorphic = "male" in roles and "female" in roles
     if not dimorphic and likely_dimorphic(common) and len(photos) >= 2:
         dimorphic = True
+    alts = alt_names_for(common)
     return {
         "id": slug(common),
         "commonName": common,
         "scientificName": scientific or "—",
-        "aliases": [],
-        "alsoCalled": [],
+        "aliases": list(alts),
+        "alsoCalled": list(alts),
         "alsoScientific": [],
         "tags": ["imported", "ebird-supplemental"],
         "dimorphic": dimorphic,
@@ -189,31 +175,59 @@ def make_stub(common: str, scientific: str, photos: list[dict]) -> dict:
     }
 
 
+def alt_names_for(common: str) -> list[str]:
+    """Lightweight open aliases for awkward eBird / checklist common names."""
+    aliases = {
+        "Gartered Violaceous Trogon": [
+            "Gartered Trogon",
+            "Northern Violaceous Trogon",
+            "Violaceous Trogon",
+        ],
+        "Scaly-breasted Hummingbird": ["Scaly-breasted Sabrewing"],
+    }
+    return list(aliases.get(common, []))
+
+
 def fetch_one(common: str, scientific: str, role: str, avoid: set[str], species_id: str):
-    payload = {"common": common, "scientific": scientific or common, "also_scientific": [], "also_called": []}
+    payload = {
+        "common": common,
+        "scientific": scientific or common,
+        "also_scientific": [],
+        "also_called": alt_names_for(common),
+        "aliases": alt_names_for(common),
+    }
+    want = role if role != "unsexed" else "either"
     try:
-        item = choose_photo(payload, role if role != "unsexed" else "either", avoid)
+        item = choose_photo(payload, want, avoid)
     except RuntimeError:
-        titles = search_files(f"{common} {role}" if role in {"male", "female"} else common)[:20]
-        info = imageinfo(titles)
-        item = None
-        for title, meta in info.items():
-            if title in avoid or not meta.get("ok"):
-                continue
-            text = f"{title} {meta.get('description', '')}".lower()
-            if hard_skip(text):
-                continue
-            if not license_ok(meta.get("license", "")):
-                continue
-            item = meta
-            break
-        if item is None:
-            return None
+        return None
+    if not item or not license_ok(item.get("license", "")):
+        return None
+    text = f"{item.get('title', '')} {item.get('description', '')}".lower()
+    if hard_skip(text) or not name_match(text, payload):
+        return None
+    # If Commons clearly labels sex, keep that role rather than forcing unsexed.
+    male, female = sex_flags(text)
+    photo_role = role
+    if role in {"either", "unsexed"}:
+        if male and not female:
+            photo_role = "male"
+        elif female and not male:
+            photo_role = "female"
+        else:
+            photo_role = "unsexed"
+    elif role == "male" and not (male and not female):
+        return None
+    elif role == "female" and not (female and not male):
+        return None
     avoid.add(item["title"])
-    filename = f"{species_id}.jpg" if role in {"either", "unsexed"} else f"{species_id}-{role}.jpg"
+    filename = (
+        f"{species_id}.jpg"
+        if photo_role in {"either", "unsexed"}
+        else f"{species_id}-{photo_role}.jpg"
+    )
     dest = IMAGE_DIR / filename
     width, height = save_jpeg(item["download"], dest)
-    photo_role = "unsexed" if role == "either" else role
     return photo_record(species_id, common, photo_role, item, width, height)
 
 
