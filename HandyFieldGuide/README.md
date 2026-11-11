@@ -19,7 +19,7 @@ Likelihood on rows and detail uses plain wording only (**Near-certain**, **Likel
 
 Each bird also shows a **most likely time of day** (dawn / morning / midday / afternoon / dusk / night) on list rows and on the detail screen. These are broad field periods from typical habits, not clock times. eBird barcharts are monthly, not hourly — uncurated import stubs say so when time-of-day data is missing.
 
-Species detail shows one badge — **Sexually dimorphic** or **Not sexually dimorphic** — instead of a Sexes paragraph. Photographs support **pinch to zoom**, **drag to pan**, double-tap zoom, and long-press for a full-screen viewer. Dimorphic species keep labeled **Male** / **Female** photos when openly licensed Commons images exist; monomorphic species show one photo. A compact **Photo Attr** badge opens photographer, licence, and source (required attribution stays available, just not inline under every image).
+Species detail shows one badge — **Sexually dimorphic** (“Sexes do not look alike”) or **Not sexually dimorphic** (“Sexes look alike”) — instead of a Sexes paragraph. Photographs support **pinch to zoom**, **drag to pan**, double-tap zoom, and long-press for a full-screen viewer. Dimorphic species keep labeled **Male** / **Female** photos when openly licensed Commons images exist; monomorphic species show one photo. A compact **Photo Attr** badge opens photographer, licence, and source (required attribution stays available, just not inline under every image).
 
 ## Locations
 
