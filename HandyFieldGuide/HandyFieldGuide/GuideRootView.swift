@@ -521,10 +521,12 @@ private struct BirdRow: View {
                             .font(.caption2.monospacedDigit())
                             .foregroundStyle(GuideColor.muted)
                     }
-                    Text(ActiveTime.rowLabel(for: species))
-                        .font(.caption2.weight(.medium))
-                        .foregroundStyle(GuideColor.muted)
-                        .lineLimit(1)
+                    if ActiveTime.hasKnownTimes(for: species) {
+                        Text(ActiveTime.rowLabel(for: species))
+                            .font(.caption2.weight(.medium))
+                            .foregroundStyle(GuideColor.muted)
+                            .lineLimit(1)
+                    }
                 }
                 HStack(spacing: 8) {
                     ForEach(species.strata, id: \.self) { id in

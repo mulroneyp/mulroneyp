@@ -160,12 +160,12 @@ def likely_dimorphic(common: str) -> bool:
 
 
 def guess_active_times(common: str) -> list[str]:
+    """Only distinctive curated-style periods. Empty when unknown — never invent diurnal defaults."""
     low = common.lower()
-    if any(key in low for key in ("owl", "nightjar", "pauraque", "potoo", "frogmouth", "night-heron")):
+    nocturnal = ("owl", "nightjar", "pauraque", "potoo", "frogmouth", "night-heron")
+    if any(re.search(rf"(?<![a-z]){re.escape(key)}(?![a-z])", low) for key in nocturnal):
         return ["dusk", "night"]
-    if any(key in low for key in ("swift", "swallow", "martin", "vulture", "kite", "hawk", "eagle", "falcon", "kestrel")):
-        return ["morning", "midday", "afternoon"]
-    return ["morning", "afternoon"]
+    return []
 
 
 def make_stub(common: str, scientific: str, photos: list[dict]) -> dict:

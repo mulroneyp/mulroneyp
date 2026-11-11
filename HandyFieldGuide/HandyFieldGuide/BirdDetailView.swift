@@ -69,9 +69,11 @@ struct BirdDetailView: View {
                         .fixedSize(horizontal: false, vertical: true)
                 }
 
-                sectionLabel("Time of day")
-                Text(ActiveTime.detailCaption(for: species))
-                    .fixedSize(horizontal: false, vertical: true)
+                if ActiveTime.hasKnownTimes(for: species) {
+                    sectionLabel("Time of day")
+                    Text(ActiveTime.detailCaption(for: species))
+                        .fixedSize(horizontal: false, vertical: true)
+                }
 
                 if !displayPhotos.isEmpty {
                     sectionLabel("Photos")
