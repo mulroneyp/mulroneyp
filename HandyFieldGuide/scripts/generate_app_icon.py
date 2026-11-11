@@ -53,16 +53,13 @@ SIZES = [
 
 
 def contents_json() -> str:
-    """Universal 1024 entry (modern Xcode) plus explicit legacy slots."""
-    images: list[dict] = [
-        {
-            "filename": "icon-1024.png",
-            "idiom": "universal",
-            "platform": "ios",
-            "size": "1024x1024",
-        }
-    ]
-    legacy = [
+    """Classic iPhone + iPad slots with a single opaque ios-marketing 1024.
+
+    Do not mix a modern ``universal`` / ``platform: ios`` single-size entry with
+    these legacy slots — that hybrid Contents.json can leave TestFlight /
+    App Store Connect without a usable marketing icon.
+    """
+    slots = [
         ("iphone", "20x20", "2x", "icon-40.png"),
         ("iphone", "20x20", "3x", "icon-60.png"),
         ("iphone", "29x29", "2x", "icon-58.png"),
@@ -82,15 +79,15 @@ def contents_json() -> str:
         ("ipad", "83.5x83.5", "2x", "icon-167.png"),
         ("ios-marketing", "1024x1024", "1x", "icon-1024.png"),
     ]
-    for idiom, size, scale, filename in legacy:
-        images.append(
-            {
-                "filename": filename,
-                "idiom": idiom,
-                "scale": scale,
-                "size": size,
-            }
-        )
+    images = [
+        {
+            "filename": filename,
+            "idiom": idiom,
+            "scale": scale,
+            "size": size,
+        }
+        for idiom, size, scale, filename in slots
+    ]
     return json.dumps({"images": images, "info": {"author": "xcode", "version": 1}}, indent=2) + "\n"
 
 
@@ -100,7 +97,15 @@ def load_master(path: Path) -> Image.Image:
             f"Missing source art: {path}\n"
             "Place a 1024×1024 RGB PNG there, then re-run this script."
         )
-    img = Image.open(path).convert("RGB")
+    # Flatten any alpha onto white — App Store / TestFlight reject transparent
+    # marketing icons and may show a blank generic icon instead.
+    src = Image.open(path)
+    if src.mode in ("RGBA", "LA") or (src.mode == "P" and "transparency" in src.info):
+        rgba = src.convert("RGBA")
+        img = Image.new("RGB", rgba.size, (255, 255, 255))
+        img.paste(rgba, mask=rgba.split()[-1])
+    else:
+        img = src.convert("RGB")
     if img.size != (1024, 1024):
         img = img.resize((1024, 1024), Image.Resampling.LANCZOS)
     return img

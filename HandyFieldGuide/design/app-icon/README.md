@@ -20,7 +20,7 @@ pip install Pillow
 python3 scripts/generate_app_icon.py
 ```
 
-That reads `design/app-icon/source-1024.png`, writes every PNG size into `HandyFieldGuide/Assets.xcassets/AppIcon.appiconset/`, refreshes `Contents.json` (universal 1024 + iPhone/iPad slots), and updates `preview-1024.png`.
+That reads `design/app-icon/source-1024.png`, writes every PNG size into `HandyFieldGuide/Assets.xcassets/AppIcon.appiconset/`, refreshes `Contents.json` (classic iPhone + iPad slots + opaque `ios-marketing` 1024 — no hybrid `universal` single-size entry), and updates `preview-1024.png`.
 
 Options:
 
