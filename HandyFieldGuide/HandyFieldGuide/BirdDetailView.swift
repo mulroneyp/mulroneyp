@@ -185,18 +185,25 @@ struct BirdDetailView: View {
     }
 
     private var dimorphismBadge: some View {
-        Text(species.dimorphic ? "Sexually dimorphic" : "Not sexually dimorphic")
-            .font(.caption.weight(.semibold))
-            .tracking(0.6)
-            .foregroundStyle(GuideColor.green)
-            .padding(.horizontal, 10)
-            .padding(.vertical, 6)
-            .background(GuideColor.green.opacity(0.10))
-            .overlay {
-                RoundedRectangle(cornerRadius: 2)
-                    .stroke(GuideColor.green.opacity(0.35), lineWidth: 1)
-            }
-            .accessibilityLabel(species.dimorphic ? "Sexually dimorphic" : "Not sexually dimorphic")
+        let title = species.dimorphic ? "Sexually dimorphic" : "Not sexually dimorphic"
+        let subtitle = species.dimorphic ? "Sexes do not look alike" : "Sexes look alike"
+        return VStack(alignment: .leading, spacing: 2) {
+            Text(title)
+                .font(.caption.weight(.semibold))
+                .tracking(0.6)
+            Text(subtitle)
+                .font(.caption2)
+        }
+        .foregroundStyle(GuideColor.green)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 6)
+        .background(GuideColor.green.opacity(0.10))
+        .overlay {
+            RoundedRectangle(cornerRadius: 2)
+                .stroke(GuideColor.green.opacity(0.35), lineWidth: 1)
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(title). \(subtitle)")
     }
 
     private func photoAttrBadge(for photo: Photo) -> some View {
