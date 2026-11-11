@@ -1,7 +1,7 @@
 import Foundation
 
 /// Broad field periods for when a bird is most worth looking for.
-/// Not clock times — eBird barcharts are monthly, not hourly.
+/// Shown only when curated; never invented from monthly eBird columns.
 enum ActiveTime {
     static let orderedIds = ["dawn", "morning", "midday", "afternoon", "dusk", "night"]
 
@@ -17,24 +17,23 @@ enum ActiveTime {
         }
     }
 
-    /// e.g. "Dawn · Morning"
+    /// e.g. "Dawn · Morning". Empty when no curated periods.
     static func display(_ ids: [String]) -> String {
         orderedIds.filter { ids.contains($0) }.map(label(for:)).joined(separator: " · ")
     }
 
-    static func rowLabel(for species: Species) -> String {
-        let text = display(species.activeTimes)
-        if text.isEmpty {
-            return "Time not listed"
-        }
-        return text
+    static func hasKnownTimes(for species: Species) -> Bool {
+        !display(species.activeTimes).isEmpty
     }
 
+    /// List-row chip; empty string when unknown so callers can hide it.
+    static func rowLabel(for species: Species) -> String {
+        display(species.activeTimes)
+    }
+
+    /// Detail body when times are known. Call only after `hasKnownTimes`.
     static func detailCaption(for species: Species) -> String {
         let text = display(species.activeTimes)
-        if text.isEmpty {
-            return "Time of day is not curated for this name. eBird barcharts are monthly, not hourly, so the export does not say when in the day the bird is most likely."
-        }
-        return "Most likely: \(text). Broad field periods from typical habits, not precise clock times. eBird barcharts are monthly, not hourly."
+        return "Most likely: \(text). Broad field periods from typical habits, not precise clock times."
     }
 }

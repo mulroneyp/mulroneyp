@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -97,19 +98,20 @@ def normalize_times(times: list[str]) -> list[str]:
 
 
 def default_times(name: str, summary: str, habitat: str) -> list[str]:
+    """Curated / distinctive periods only. Empty when unknown — do not invent diurnal defaults."""
     if name in ACTIVE_OVERRIDES:
         return normalize_times(ACTIVE_OVERRIDES[name])
     blob = f"{name} {summary} {habitat}".lower()
     if any(token in blob for token in ("night bird", "nocturnal", "by night", "after dark")):
         return ["dusk", "night"]
-    if "owl" in name.lower() or "frogmouth" in name.lower() or "night-heron" in name.lower():
+    nocturnal = ("owl", "frogmouth", "night-heron")
+    if any(re.search(rf"(?<![a-z]){re.escape(key)}(?![a-z])", name.lower()) for key in nocturnal):
         return ["dusk", "night"]
-    if "ashore at dusk" in blob or "at dusk" in blob and "penguin" in name.lower():
+    if "ashore at dusk" in blob or ("at dusk" in blob and "penguin" in name.lower()):
         return ["dusk", "night"]
     if "dawn" in blob:
         return ["dawn", "morning"]
-    # Default diurnal songbird / park bird: morning and afternoon are the safest “most likely” windows.
-    return ["morning", "afternoon"]
+    return []
 
 
 def patch_species(coverage_id: str, species: dict) -> None:
@@ -158,12 +160,12 @@ def guess_supp_strata(common: str, strata: list[str]) -> list[str]:
 
 
 def guess_supp_times(common: str) -> list[str]:
+    """Distinctive periods only; empty when unknown."""
     lower = common.lower()
-    if any(key in lower for key in ("owl", "nightjar", "pauraque", "potoo", "frogmouth", "night-heron")):
+    nocturnal = ("owl", "nightjar", "pauraque", "potoo", "frogmouth", "night-heron")
+    if any(re.search(rf"(?<![a-z]){re.escape(key)}(?![a-z])", lower) for key in nocturnal):
         return ["dusk", "night"]
-    if any(key in lower for key in ("swift", "swallow", "vulture", "kite", "hawk", "eagle", "falcon", "kestrel")):
-        return ["morning", "midday", "afternoon"]
-    return ["morning", "afternoon"]
+    return []
 
 
 def main() -> None:

@@ -61,7 +61,7 @@ struct Species: Decodable, Identifiable {
     var group: String
     var strata: [String]
     /// Broad periods such as dawn / morning / midday / afternoon / dusk / night.
-    /// Empty when not curated (common for sparse eBird-only stubs).
+    /// Empty when unknown — UI omits Time of day rather than inventing from eBird months.
     var activeTimes: [String]
     var summary: String
     var habitat: String

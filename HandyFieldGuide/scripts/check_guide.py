@@ -61,7 +61,7 @@ def main() -> None:
     for coverage in GUIDE["coverages"]:
         for species in coverage["species"]:
             times = species.get("activeTimes")
-            if not isinstance(times, list) or not times:
+            if not isinstance(times, list):
                 errors.append(f"missing activeTimes {coverage['id']} {species['commonName']}")
             elif any(item not in allowed_times for item in times):
                 errors.append(f"bad activeTimes {species['commonName']} {times}")
