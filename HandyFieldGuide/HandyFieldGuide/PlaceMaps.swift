@@ -39,6 +39,14 @@ enum PlaceMaps {
 
     private static func queryForImported(_ record: ImportedLocationRecord) -> String? {
         let name = record.name.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        // Merged area lists have no single hotspot L-code. Search Maps by the
+        // user-chosen name only — never invent coordinates from a source hotspot.
+        if record.isMerged {
+            guard !name.isEmpty, !isEBirdLocationCode(name) else { return nil }
+            return name
+        }
+
         let renamedAwayFromCode = !name.isEmpty
             && !isEBirdLocationCode(name)
             && (record.ebirdLocationId.map { name.caseInsensitiveCompare($0) != .orderedSame } ?? true)

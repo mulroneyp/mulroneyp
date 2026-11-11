@@ -6,6 +6,7 @@ struct HomeFiltersView: View {
     var guide: GuideFile
     var onAddLocation: () -> Void
     var onManageLocations: () -> Void
+    var onMergeLists: () -> Void
 
     @State private var showingZoneInfo = false
     @State private var showingSettings = false
@@ -141,6 +142,12 @@ struct HomeFiltersView: View {
             }
             .disabled(importedLocationOptions.isEmpty)
             Button {
+                onMergeLists()
+            } label: {
+                Label("Merge lists", systemImage: "arrow.triangle.merge")
+            }
+            .disabled(importedLocationOptions.count < 2)
+            Button {
                 onAddLocation()
             } label: {
                 Label("Add eBird barchart", systemImage: "plus")
@@ -150,7 +157,7 @@ struct HomeFiltersView: View {
         }
         .accessibilityLabel("Location")
         .accessibilityValue(selectedLocationAccessibilityValue)
-        .accessibilityHint("Choose an imported place, manage saved imports, or import an eBird barchart")
+        .accessibilityHint("Choose an imported place, merge lists, manage saved imports, or import an eBird barchart")
     }
 
     private var monthControl: some View {

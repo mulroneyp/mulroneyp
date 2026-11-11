@@ -9,6 +9,8 @@ struct LocationSheet: View {
     @State private var locationPendingRename: ImportedLocationRecord?
     @State private var renameText = ""
     @State private var locationPendingDelete: ImportedLocationRecord?
+    @State private var showingMergeLists = false
+    @State private var dismissAfterMerge = false
 
     private let startInImportMode: Bool
 
@@ -23,13 +25,22 @@ struct LocationSheet: View {
                 VStack(alignment: .leading, spacing: 16) {
                     Text(startInImportMode
                          ? "Add a new area from an eBird Frequency / barchart `.txt` export (tab-separated, four week columns per month). The app names the place from the location id in the filename when it can (for example L436229)."
-                         : "Rename or delete saved eBird imports. Only imported locations appear in the Location menu.")
+                         : "Rename or delete saved eBird imports. Merge nearby hotspot lists into a new named area. Only imported locations appear in the Location menu.")
                         .font(.subheadline)
                         .foregroundStyle(GuideColor.muted)
                         .fixedSize(horizontal: false, vertical: true)
 
                     if startInImportMode {
                         importSection
+                    }
+
+                    if !startInImportMode, model.imports.locations.count >= 2 {
+                        Button {
+                            showingMergeLists = true
+                        } label: {
+                            Label("Merge lists", systemImage: "arrow.triangle.merge")
+                        }
+                        .buttonStyle(GuideChipStyle(selected: false))
                     }
 
                     if !model.imports.locations.isEmpty {
@@ -69,6 +80,15 @@ struct LocationSheet: View {
             }
             .sheet(item: $locationPendingRename) { location in
                 renameSheet(for: location)
+            }
+            .sheet(isPresented: $showingMergeLists, onDismiss: {
+                if dismissAfterMerge {
+                    dismissAfterMerge = false
+                    dismiss()
+                }
+            }) {
+                MergeListsSheet(onMerged: { dismissAfterMerge = true })
+                    .environmentObject(model)
             }
             .alert(
                 deleteAlertTitle,

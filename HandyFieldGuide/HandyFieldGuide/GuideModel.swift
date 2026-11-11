@@ -205,6 +205,29 @@ final class GuideModel: ObservableObject {
         return record
     }
 
+    /// Merges two or more saved imports into a new named list. Source lists are kept.
+    /// Per-species week/month rates use the **maximum** across sources (never summed).
+    @discardableResult
+    func mergeImportedLocations(ids: [String], displayName: String) throws -> ImportedLocationRecord {
+        var seen = Set<String>()
+        var records: [ImportedLocationRecord] = []
+        for id in ids where seen.insert(id).inserted {
+            if let record = imports.locations.first(where: { $0.id == id }) {
+                records.append(record)
+            }
+        }
+        guard records.count >= 2 else { throw BirdlistMerger.MergeError.needAtLeastTwo }
+        let merged = try BirdlistMerger.merge(records: records, displayName: displayName)
+        let record = imports.upsert(merged)
+        invalidatePlaceCache()
+        locationQuery = record.name
+        let flagged = record.species.filter { $0.kind != .species }.count
+        importMessage = "Merged \(records.count) lists into \(record.name) (\(record.species.count) taxa; \(record.resolvableCount) species; \(flagged) flagged). Source lists were kept."
+        // Nested Manage → Merge sheets need a beat longer before the photo sheet presents.
+        startPhotoFetch(for: record, sheetSettleNanoseconds: 700_000_000)
+        return record
+    }
+
     func importBundledSample() throws {
         guard let url = imports.bundledFixtureURL() else {
             throw EBirdBarchartParser.ParseError.empty
@@ -215,7 +238,10 @@ final class GuideModel: ObservableObject {
 
     /// Looks up open-licence Commons photos for imported species missing a local image.
     /// Import persistence already finished — cancel only stops remaining downloads.
-    func startPhotoFetch(for record: ImportedLocationRecord) {
+    func startPhotoFetch(
+        for record: ImportedLocationRecord,
+        sheetSettleNanoseconds: UInt64 = 450_000_000
+    ) {
         guard let catalog else { return }
         photoFetch?.cancel()
         photoFetch = nil
@@ -229,9 +255,9 @@ final class GuideModel: ObservableObject {
         guard !items.isEmpty else { return }
 
         let fetcher = ImportPhotoFetcher(photoCache: photoCache)
-        // Defer so the Add location sheet can dismiss before the progress sheet presents.
+        // Defer so the Add / Merge location sheet can dismiss before the progress sheet presents.
         Task { @MainActor [weak self] in
-            try? await Task.sleep(nanoseconds: 450_000_000)
+            try? await Task.sleep(nanoseconds: sheetSettleNanoseconds)
             guard let self else { return }
             self.photoFetch = fetcher
             fetcher.start(items: items)

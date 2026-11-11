@@ -9,7 +9,15 @@ struct ImportedLocationRecord: Codable, Identifiable, Hashable {
     var reportedTaxonCount: Int?
     var species: [ImportedTaxonRecord]
 
+    /// True for lists created by merging two or more saved imports.
+    var isMerged: Bool {
+        id.hasPrefix("merged-")
+    }
+
     var placeTitle: String {
+        if isMerged {
+            return "Merged checklist"
+        }
         if let ebirdLocationId, !ebirdLocationId.isEmpty {
             return "eBird \(ebirdLocationId)"
         }
@@ -163,6 +171,19 @@ final class ImportedLocationStore: ObservableObject {
             }
         )
         if let index = locations.firstIndex(where: { $0.id == record.id || ($0.ebirdLocationId != nil && $0.ebirdLocationId == record.ebirdLocationId) }) {
+            locations[index] = record
+        } else {
+            locations.append(record)
+        }
+        persist()
+        return record
+    }
+
+    /// Persists a hand-built record (e.g. a merged checklist). Matches by `id` only —
+    /// never by eBird L-code — so merges do not overwrite hotspot imports.
+    @discardableResult
+    func upsert(_ record: ImportedLocationRecord) -> ImportedLocationRecord {
+        if let index = locations.firstIndex(where: { $0.id == record.id }) {
             locations[index] = record
         } else {
             locations.append(record)
