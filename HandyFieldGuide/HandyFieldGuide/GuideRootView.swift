@@ -6,6 +6,7 @@ struct GuideRootView: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var showingAddLocation = false
     @State private var showingManageLocations = false
+    @State private var showingMergeLists = false
     /// iPhone push stack — unchanged compact UX.
     @State private var path = NavigationPath()
     /// iPad split selection — drives the detail column.
@@ -33,6 +34,9 @@ struct GuideRootView: View {
         .sheet(isPresented: $showingManageLocations) {
             LocationSheet(startInImportMode: false)
         }
+        .sheet(isPresented: $showingMergeLists) {
+            MergeListsSheet()
+        }
         .sheet(item: $model.photoFetch, onDismiss: {
             model.clearPhotoFetchIfIdle()
         }) { fetcher in
@@ -53,6 +57,9 @@ struct GuideRootView: View {
             if open { dismissSearchKeyboard() }
         }
         .onChange(of: showingManageLocations) { _, open in
+            if open { dismissSearchKeyboard() }
+        }
+        .onChange(of: showingMergeLists) { _, open in
             if open { dismissSearchKeyboard() }
         }
         .onChange(of: horizontalSizeClass) { _, newValue in
@@ -248,7 +255,8 @@ struct GuideRootView: View {
             HomeFiltersView(
                 guide: guide,
                 onAddLocation: { showingAddLocation = true },
-                onManageLocations: { showingManageLocations = true }
+                onManageLocations: { showingManageLocations = true },
+                onMergeLists: { showingMergeLists = true }
             )
         }
     }
@@ -331,7 +339,8 @@ struct GuideRootView: View {
             HomeFiltersView(
                 guide: guide,
                 onAddLocation: { showingAddLocation = true },
-                onManageLocations: { showingManageLocations = true }
+                onManageLocations: { showingManageLocations = true },
+                onMergeLists: { showingMergeLists = true }
             )
             // Tapping the bottom filter bar should hide the keyboard without blocking menus.
             .simultaneousGesture(TapGesture().onEnded(dismissSearchKeyboard))
