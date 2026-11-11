@@ -21,11 +21,6 @@ struct BirdDetailView: View {
                     .font(.title3.italic())
                     .foregroundStyle(GuideColor.muted)
                 dimorphismBadge
-                if let frequency = model.frequency(for: species, in: place) {
-                    Text("\(model.selectedMonthName) checklist rate \(frequencyPercent(frequency)) (mean of eBird week columns)")
-                        .font(.subheadline)
-                        .foregroundStyle(GuideColor.green)
-                }
                 if !species.alsoCalled.isEmpty {
                     Text("Also called \(species.alsoCalled.joined(separator: ", "))")
                         .foregroundStyle(GuideColor.muted)
@@ -260,12 +255,6 @@ struct BirdDetailView: View {
             return photoDisplayTitle(photo)
         }
         return photo.alt.isEmpty ? species.commonName : photo.alt
-    }
-
-    private func frequencyPercent(_ value: Double) -> String {
-        if value <= 0 { return "0%" }
-        if value < 0.01 { return "<1%" }
-        return "\(Int((value * 100).rounded()))%"
     }
 }
 
