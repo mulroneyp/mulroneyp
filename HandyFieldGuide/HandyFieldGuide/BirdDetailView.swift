@@ -30,11 +30,15 @@ struct BirdDetailView: View {
                         .foregroundStyle(GuideColor.muted)
                 }
 
-                sectionLabel("Where you find it")
-                Text(place.habitat(for: species))
-                    .fixedSize(horizontal: false, vertical: true)
+                let habitatText = place.habitat(for: species)
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                if !habitatText.isEmpty {
+                    sectionLabel("Where you find it")
+                    Text(habitatText)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
 
-                sectionLabel("Height")
+                sectionLabel("Habitat Zone")
                 VStack(spacing: 8) {
                     ForEach(species.strata, id: \.self) { id in
                         if let info = stratum(id) {
@@ -58,8 +62,12 @@ struct BirdDetailView: View {
                         }
                     }
                 }
-                Text(species.stratumNote)
-                    .fixedSize(horizontal: false, vertical: true)
+                let stratumNote = species.stratumNote
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                if !stratumNote.isEmpty {
+                    Text(stratumNote)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
 
                 sectionLabel("Time of day")
                 Text(ActiveTime.detailCaption(for: species))

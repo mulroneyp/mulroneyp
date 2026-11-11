@@ -180,15 +180,18 @@ def main() -> None:
         species["strata"] = guess_supp_strata(species["commonName"], species.get("strata", ["mid"]))
         species["activeTimes"] = guess_supp_times(species["commonName"])
         if "sky" in species["strata"]:
-            species["stratumNote"] = f"Estimated height band: {', '.join(species['strata'])}."
-            if "Typical height band estimated as" in species.get("habitat", ""):
-                # Keep habitat wording in sync with strata list.
-                prefix = species["habitat"].split("Typical height band estimated as")[0]
-                species["habitat"] = (
-                    prefix
-                    + f"Typical height band estimated as {', '.join(species['strata'])}. "
-                    + "Curate a better habitat line when you know the site."
-                )
+            species["stratumNote"] = f"Estimated habitat zone: {', '.join(species['strata'])}."
+            habitat = species.get("habitat", "")
+            for old in (
+                "Typical habitat zone estimated as",
+                "Typical height band estimated as",
+            ):
+                if old in habitat:
+                    prefix = habitat.split(old)[0]
+                    species["habitat"] = (
+                        prefix + f"Typical habitat zone estimated as {', '.join(species['strata'])}."
+                    ).strip()
+                    break
     SUPP_PATH.write_text(json.dumps(supplemental, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
     sky_count = sum(
