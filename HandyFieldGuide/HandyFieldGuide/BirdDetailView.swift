@@ -32,41 +32,43 @@ struct BirdDetailView: View {
 
                 let habitatText = place.habitat(for: species)
                     .trimmingCharacters(in: .whitespacesAndNewlines)
-                if !habitatText.isEmpty {
-                    sectionLabel("Where you find it")
-                    Text(habitatText)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-
-                sectionLabel("Habitat Zone")
-                VStack(spacing: 8) {
-                    ForEach(species.strata, id: \.self) { id in
-                        if let info = stratum(id) {
-                            HStack(spacing: 10) {
-                                StratumIcon(id: id, size: 44)
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(info.label).font(.headline)
-                                    Text(info.hint)
-                                        .font(.subheadline)
-                                        .foregroundStyle(GuideColor.muted)
-                                }
-                                Spacer(minLength: 0)
-                            }
-                            .padding(8)
-                            .background(GuideColor.card)
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 2)
-                                    .stroke(GuideColor.line, lineWidth: 1)
-                            }
-                            .accessibilityElement(children: .combine)
-                        }
-                    }
-                }
                 let stratumNote = species.stratumNote
                     .trimmingCharacters(in: .whitespacesAndNewlines)
-                if !stratumNote.isEmpty {
-                    Text(stratumNote)
-                        .fixedSize(horizontal: false, vertical: true)
+                let knownStrata = species.strata.compactMap { stratum($0) }
+                if !habitatText.isEmpty || !knownStrata.isEmpty || !stratumNote.isEmpty {
+                    // One section for microhabitat notes and habitat-zone (stratum) labels.
+                    sectionLabel("Where you find it")
+                    if !habitatText.isEmpty {
+                        Text(habitatText)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    if !knownStrata.isEmpty {
+                        VStack(spacing: 8) {
+                            ForEach(knownStrata, id: \.id) { info in
+                                HStack(spacing: 10) {
+                                    StratumIcon(id: info.id, size: 44)
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text(info.label).font(.headline)
+                                        Text(info.hint)
+                                            .font(.subheadline)
+                                            .foregroundStyle(GuideColor.muted)
+                                    }
+                                    Spacer(minLength: 0)
+                                }
+                                .padding(8)
+                                .background(GuideColor.card)
+                                .overlay {
+                                    RoundedRectangle(cornerRadius: 2)
+                                        .stroke(GuideColor.line, lineWidth: 1)
+                                }
+                                .accessibilityElement(children: .combine)
+                            }
+                        }
+                    }
+                    if !stratumNote.isEmpty {
+                        Text(stratumNote)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
                 }
 
                 sectionLabel("Time of day")
