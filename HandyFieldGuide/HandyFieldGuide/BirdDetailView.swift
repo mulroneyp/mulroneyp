@@ -21,11 +21,6 @@ struct BirdDetailView: View {
                     .font(.title3.italic())
                     .foregroundStyle(GuideColor.muted)
                 dimorphismBadge
-                if let frequency = model.frequency(for: species, in: place) {
-                    Text("\(model.selectedMonthName) checklist rate \(frequencyPercent(frequency)) (mean of eBird week columns)")
-                        .font(.subheadline)
-                        .foregroundStyle(GuideColor.green)
-                }
                 if !species.alsoCalled.isEmpty {
                     Text("Also called \(species.alsoCalled.joined(separator: ", "))")
                         .foregroundStyle(GuideColor.muted)
@@ -35,11 +30,15 @@ struct BirdDetailView: View {
                         .foregroundStyle(GuideColor.muted)
                 }
 
-                sectionLabel("Where you find it")
-                Text(place.habitat(for: species))
-                    .fixedSize(horizontal: false, vertical: true)
+                let habitatText = place.habitat(for: species)
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                if !habitatText.isEmpty {
+                    sectionLabel("Where you find it")
+                    Text(habitatText)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
 
-                sectionLabel("Height")
+                sectionLabel("Habitat Zone")
                 VStack(spacing: 8) {
                     ForEach(species.strata, id: \.self) { id in
                         if let info = stratum(id) {
@@ -63,8 +62,12 @@ struct BirdDetailView: View {
                         }
                     }
                 }
-                Text(species.stratumNote)
-                    .fixedSize(horizontal: false, vertical: true)
+                let stratumNote = species.stratumNote
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                if !stratumNote.isEmpty {
+                    Text(stratumNote)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
 
                 sectionLabel("Time of day")
                 Text(ActiveTime.detailCaption(for: species))
@@ -260,12 +263,6 @@ struct BirdDetailView: View {
             return photoDisplayTitle(photo)
         }
         return photo.alt.isEmpty ? species.commonName : photo.alt
-    }
-
-    private func frequencyPercent(_ value: Double) -> String {
-        if value <= 0 { return "0%" }
-        if value < 0.01 { return "<1%" }
-        return "\(Int((value * 100).rounded()))%"
     }
 }
 

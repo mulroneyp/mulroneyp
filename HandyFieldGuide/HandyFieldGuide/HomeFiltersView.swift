@@ -202,7 +202,7 @@ struct HomeFiltersView: View {
                 filterColumn(title: "Zone", value: selectedZoneTitle)
             }
             .menuActionDismissBehavior(.disabled)
-            .accessibilityHint("Select one or more height bands, including Sky. Any clears the filter.")
+            .accessibilityHint("Select one or more habitat zones, including Sky. Any clears the filter.")
 
             Button {
                 showingZoneInfo = true

@@ -23,9 +23,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -66,9 +66,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: canopy, mid.",
+    "stratumNote": "Estimated habitat zone: canopy, mid.",
     "photos": [
       {
         "role": "male",
@@ -121,9 +121,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "male",
@@ -183,9 +183,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: canopy, mid.",
+    "stratumNote": "Estimated habitat zone: canopy, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -225,9 +225,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -268,9 +268,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -311,9 +311,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: canopy, mid.",
+    "stratumNote": "Estimated habitat zone: canopy, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -354,9 +354,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -397,9 +397,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: canopy, mid.",
+    "stratumNote": "Estimated habitat zone: canopy, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -439,9 +439,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -482,9 +482,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "male",
@@ -537,9 +537,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "male",
@@ -593,9 +593,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: canopy, mid.",
+    "stratumNote": "Estimated habitat zone: canopy, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -636,9 +636,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: canopy, mid.",
+    "stratumNote": "Estimated habitat zone: canopy, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -679,9 +679,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -722,9 +722,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -764,9 +764,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "male",
@@ -819,9 +819,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -862,9 +862,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: canopy, mid.",
+    "stratumNote": "Estimated habitat zone: canopy, mid.",
     "photos": [
       {
         "role": "male",
@@ -926,9 +926,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "male",
@@ -982,9 +982,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -1025,9 +1025,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: canopy, mid.",
+    "stratumNote": "Estimated habitat zone: canopy, mid.",
     "photos": [
       {
         "role": "male",
@@ -1080,9 +1080,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -1123,9 +1123,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -1166,9 +1166,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Openly licensed male photograph bundled; a clearly labeled female image was not found on Wikimedia Commons under an open licence.",
-    "stratumNote": "Estimated height band: canopy, mid.",
+    "stratumNote": "Estimated habitat zone: canopy, mid.",
     "photos": [
       {
         "role": "male",
@@ -1209,9 +1209,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -1252,9 +1252,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -1297,9 +1297,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Openly licensed male photograph bundled; a clearly labeled female image was not found on Wikimedia Commons under an open licence.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "male",
@@ -1339,9 +1339,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "male",
@@ -1395,9 +1395,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -1438,9 +1438,9 @@
       "night"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Openly licensed male photograph bundled; a clearly labeled female image was not found on Wikimedia Commons under an open licence.",
-    "stratumNote": "Estimated height band: canopy, mid.",
+    "stratumNote": "Estimated habitat zone: canopy, mid.",
     "photos": [
       {
         "role": "male",
@@ -1480,9 +1480,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -1522,9 +1522,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "male",
@@ -1578,9 +1578,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: canopy, mid.",
+    "stratumNote": "Estimated habitat zone: canopy, mid.",
     "photos": [
       {
         "role": "male",
@@ -1634,9 +1634,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: canopy, mid.",
+    "stratumNote": "Estimated habitat zone: canopy, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -1677,9 +1677,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "male",
@@ -1733,9 +1733,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -1776,9 +1776,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -1818,9 +1818,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -1861,9 +1861,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -1904,9 +1904,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -1947,9 +1947,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -1990,9 +1990,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "male",
@@ -2046,9 +2046,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -2089,9 +2089,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -2132,9 +2132,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -2175,9 +2175,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -2218,9 +2218,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: canopy, mid.",
+    "stratumNote": "Estimated habitat zone: canopy, mid.",
     "photos": [
       {
         "role": "male",
@@ -2273,9 +2273,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "male",
@@ -2329,9 +2329,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -2371,9 +2371,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -2413,9 +2413,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "male",
@@ -2468,9 +2468,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -2510,9 +2510,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -2552,9 +2552,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -2595,9 +2595,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -2637,9 +2637,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -2679,9 +2679,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -2722,9 +2722,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -2764,9 +2764,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Openly licensed male photograph bundled; a clearly labeled female image was not found on Wikimedia Commons under an open licence.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "male",
@@ -2807,9 +2807,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -2849,9 +2849,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -2891,9 +2891,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -2934,9 +2934,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Openly licensed male photograph bundled; a clearly labeled female image was not found on Wikimedia Commons under an open licence.",
-    "stratumNote": "Estimated height band: canopy, mid.",
+    "stratumNote": "Estimated habitat zone: canopy, mid.",
     "photos": [
       {
         "role": "male",
@@ -2977,9 +2977,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -3019,9 +3019,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -3061,9 +3061,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -3104,9 +3104,9 @@
       "night"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -3146,9 +3146,9 @@
       "night"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -3188,9 +3188,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -3231,9 +3231,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -3274,9 +3274,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "male",
@@ -3329,9 +3329,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -3371,9 +3371,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -3414,9 +3414,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -3456,9 +3456,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -3498,9 +3498,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "male",
@@ -3553,9 +3553,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -3595,9 +3595,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "male",
@@ -3651,9 +3651,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -3694,9 +3694,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -3736,9 +3736,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -3779,9 +3779,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -3822,9 +3822,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: canopy, mid.",
+    "stratumNote": "Estimated habitat zone: canopy, mid.",
     "photos": [
       {
         "role": "male",
@@ -3878,9 +3878,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -3920,9 +3920,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -3963,9 +3963,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -4013,9 +4013,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: canopy, mid.",
+    "stratumNote": "Estimated habitat zone: canopy, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -4055,9 +4055,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -4098,9 +4098,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -4140,9 +4140,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -4183,9 +4183,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -4226,9 +4226,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -4269,9 +4269,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "male",
@@ -4325,9 +4325,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -4368,9 +4368,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Openly licensed male photograph bundled; a clearly labeled female image was not found on Wikimedia Commons under an open licence.",
-    "stratumNote": "Estimated height band: canopy, mid.",
+    "stratumNote": "Estimated habitat zone: canopy, mid.",
     "photos": [
       {
         "role": "male",
@@ -4411,9 +4411,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Openly licensed male photograph bundled; a clearly labeled female image was not found on Wikimedia Commons under an open licence.",
-    "stratumNote": "Estimated height band: canopy, mid.",
+    "stratumNote": "Estimated habitat zone: canopy, mid.",
     "photos": [
       {
         "role": "male",
@@ -4453,9 +4453,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -4496,9 +4496,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: canopy, mid.",
+    "stratumNote": "Estimated habitat zone: canopy, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -4539,9 +4539,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -4581,9 +4581,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -4624,9 +4624,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -4667,9 +4667,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -4709,9 +4709,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "male",
@@ -4765,9 +4765,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -4807,9 +4807,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -4850,9 +4850,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -4893,9 +4893,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -4935,9 +4935,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -4978,9 +4978,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -5021,9 +5021,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -5064,9 +5064,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -5107,9 +5107,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -5150,9 +5150,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -5192,9 +5192,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -5234,9 +5234,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -5276,9 +5276,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -5319,9 +5319,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -5361,9 +5361,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -5404,9 +5404,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -5447,9 +5447,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "male",
@@ -5503,9 +5503,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -5546,9 +5546,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -5589,9 +5589,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -5631,9 +5631,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -5674,9 +5674,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -5717,9 +5717,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -5760,9 +5760,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -5802,9 +5802,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -5845,9 +5845,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -5887,9 +5887,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -5930,9 +5930,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: canopy, mid.",
+    "stratumNote": "Estimated habitat zone: canopy, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -5973,9 +5973,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -6015,9 +6015,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -6058,9 +6058,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -6100,9 +6100,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -6150,9 +6150,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "male",
@@ -6205,9 +6205,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -6248,9 +6248,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: canopy, mid.",
+    "stratumNote": "Estimated habitat zone: canopy, mid.",
     "photos": [
       {
         "role": "male",
@@ -6303,9 +6303,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -6346,9 +6346,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -6389,9 +6389,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -6432,9 +6432,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -6475,9 +6475,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -6518,9 +6518,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -6560,9 +6560,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "male",
@@ -6615,9 +6615,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -6658,9 +6658,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -6700,9 +6700,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -6742,9 +6742,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -6785,9 +6785,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -6827,9 +6827,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "male",
@@ -6882,9 +6882,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -6925,9 +6925,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -6967,9 +6967,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -7010,9 +7010,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -7053,9 +7053,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "male",
@@ -7108,9 +7108,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -7151,9 +7151,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -7193,9 +7193,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -7236,9 +7236,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -7278,9 +7278,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -7320,9 +7320,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -7363,9 +7363,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -7406,9 +7406,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -7448,9 +7448,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -7491,9 +7491,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: canopy, mid.",
+    "stratumNote": "Estimated habitat zone: canopy, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -7534,9 +7534,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "male",
@@ -7589,9 +7589,9 @@
       "night"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -7631,9 +7631,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -7674,9 +7674,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -7717,9 +7717,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -7759,9 +7759,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -7802,9 +7802,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -7844,9 +7844,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -7887,9 +7887,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -7929,9 +7929,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Openly licensed female photograph bundled; a clearly labeled male image was not found on Wikimedia Commons under an open licence.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "female",
@@ -7972,9 +7972,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: canopy, mid.",
+    "stratumNote": "Estimated habitat zone: canopy, mid.",
     "photos": [
       {
         "role": "male",
@@ -8028,9 +8028,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "male",
@@ -8084,9 +8084,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -8126,9 +8126,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -8169,9 +8169,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -8212,9 +8212,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -8254,9 +8254,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -8297,9 +8297,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -8340,9 +8340,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -8383,9 +8383,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -8426,9 +8426,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Openly licensed male photograph bundled; a clearly labeled female image was not found on Wikimedia Commons under an open licence.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "male",
@@ -8468,9 +8468,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "male",
@@ -8524,9 +8524,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -8567,9 +8567,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -8610,9 +8610,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as ground, low. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: ground, low.",
+    "stratumNote": "Estimated habitat zone: ground, low.",
     "photos": [
       {
         "role": "unsexed",
@@ -8653,9 +8653,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as canopy, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: canopy, mid.",
+    "stratumNote": "Estimated habitat zone: canopy, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -8695,9 +8695,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -8738,9 +8738,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "male",
@@ -8794,9 +8794,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -8837,9 +8837,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -8880,9 +8880,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -8923,9 +8923,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as low, mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: low, mid.",
+    "stratumNote": "Estimated habitat zone: low, mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -8965,9 +8965,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as sky. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: sky.",
+    "stratumNote": "Estimated habitat zone: sky.",
     "photos": [
       {
         "role": "unsexed",
@@ -9007,9 +9007,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -9049,9 +9049,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "male",
@@ -9104,9 +9104,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "male",
@@ -9159,9 +9159,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "male",
@@ -9214,9 +9214,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "male",
@@ -9273,9 +9273,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",
@@ -9321,9 +9321,9 @@
       "afternoon"
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-    "habitat": "Seen on complete checklists for the imported eBird location. Typical height band estimated as mid. Curate a better habitat line when you know the site.",
+    "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
-    "stratumNote": "Estimated height band: mid.",
+    "stratumNote": "Estimated habitat zone: mid.",
     "photos": [
       {
         "role": "unsexed",

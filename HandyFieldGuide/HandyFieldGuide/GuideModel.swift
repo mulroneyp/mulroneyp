@@ -13,7 +13,7 @@ final class GuideModel: ObservableObject {
     }
     /// Debounced search query used for filtering. Typing updates this after a short delay.
     @Published var searchText = ""
-    /// Selected height bands. Empty means Any (no zone filter). Matching is OR across selections.
+    /// Selected habitat zones. Empty means Any (no zone filter). Matching is OR across selections.
     @Published var selectedStrata: Set<String> = []
     /// 0 = January … 11 = December. Defaults to the device’s current month.
     @Published var selectedMonthIndex: Int

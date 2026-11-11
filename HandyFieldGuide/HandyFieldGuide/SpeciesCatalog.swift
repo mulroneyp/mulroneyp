@@ -82,7 +82,8 @@ struct SpeciesCatalog {
             summary = frequency > 0
                 ? "About \(percent)% of complete checklists in the selected month."
                 : "Rare or absent in the selected month on this eBird export."
-            habitat = "Imported from the eBird frequency export for \(locationLabel). Field notes are limited until this species is curated; look it up by the common name on the list."
+            // No invented site notes — “Where you find it” stays hidden until curated.
+            habitat = ""
         case .slash:
             summary = "Slash taxon from the eBird export — not a single species."
             habitat = "eBird observers could not separate two similar species. Handy Field Guide keeps the row for completeness but does not invent an identification."
@@ -108,7 +109,7 @@ struct SpeciesCatalog {
             summary: summary,
             habitat: habitat,
             sexes: "Sexes not curated for this imported name yet.",
-            stratumNote: "Height band not curated for this imported name; mid is a placeholder.",
+            stratumNote: "",
             photos: []
         )
         photoCache?.applyCachedPhotos(to: &stub)

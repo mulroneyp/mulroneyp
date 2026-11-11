@@ -189,18 +189,14 @@ def make_stub(common: str, scientific: str, photos: list[dict]) -> dict:
         "group": guess_group(common),
         "strata": strata,
         "activeTimes": guess_active_times(common),
-        "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
-        "habitat": (
-            f"Seen on complete checklists for the imported eBird location. "
-            f"Typical height band estimated as {', '.join(strata)}. "
-            "Curate a better habitat line when you know the site."
-        ),
+        "summary": "High-frequency species on the imported eBird barchart.",
+        "habitat": f"Typical habitat zone estimated as {', '.join(strata)}.",
         "sexes": (
             "Male and female photographs are shown when openly licensed images were found."
             if dimorphic
             else "Sexes look alike, or are not separated in the bundled photograph set."
         ),
-        "stratumNote": f"Estimated height band: {', '.join(strata)}.",
+        "stratumNote": f"Estimated habitat zone: {', '.join(strata)}.",
         "photos": photos,
     }
 

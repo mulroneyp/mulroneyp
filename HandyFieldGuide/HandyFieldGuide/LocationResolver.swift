@@ -219,12 +219,23 @@ enum HabitatCopy {
         "Maribyrnong",
     ]
 
+    /// Sentences that prompt curation or describe import plumbing — not field notes.
+    private static let placeholderSentenceNeedles: [String] = [
+        "curate a better habitat",
+        "field notes are limited",
+        "look it up by the common name",
+        "field notes are a short placeholder",
+        "until this species is curated",
+    ]
+
     static func forActiveLocation(
         _ locationName: String,
         curatedHabitat: String,
         sourcePlaceLabels: [String] = []
     ) -> String {
-        let place = locationName.trimmingCharacters(in: .whitespacesAndNewlines)
+        let rawPlace = locationName.trimmingCharacters(in: .whitespacesAndNewlines)
+        // Never surface an import filename / path as the place claim in bird detail.
+        let place = looksLikeImportFileName(rawPlace) ? "" : rawPlace
         var remainder = curatedHabitat.trimmingCharacters(in: .whitespacesAndNewlines)
 
         for lead in placeClaimLeads {
@@ -240,7 +251,8 @@ enum HabitatCopy {
         for label in sourcePlaceLabels {
             let trimmedLabel = label.trimmingCharacters(in: .whitespacesAndNewlines)
             guard !trimmedLabel.isEmpty else { continue }
-            if LocationResolver.normalize(trimmedLabel) == LocationResolver.normalize(place) {
+            if !place.isEmpty,
+               LocationResolver.normalize(trimmedLabel) == LocationResolver.normalize(place) {
                 continue
             }
             if let first = firstSentence(remainder),
@@ -250,10 +262,13 @@ enum HabitatCopy {
         }
 
         remainder = droppingForeignPlaceSentences(remainder, activeLocation: place)
+        remainder = droppingPlaceholderAndFileSentences(remainder, activeLocation: place)
             .trimmingCharacters(in: .whitespacesAndNewlines)
+        remainder = rewritingHeightBandWording(remainder)
 
+        // Useful microhabitat only — no orphan place/filename when notes are gone.
         if remainder.isEmpty {
-            return place.isEmpty ? curatedHabitat : place
+            return ""
         }
         if place.isEmpty {
             return remainder
@@ -262,6 +277,57 @@ enum HabitatCopy {
             return remainder
         }
         return "\(place). \(remainder)"
+    }
+
+    /// eBird barchart export names / paths must not appear in “Where you find it”.
+    static func looksLikeImportFileName(_ value: String) -> Bool {
+        let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return false }
+        let lower = trimmed.lowercased()
+        if lower.hasSuffix(".txt") || lower.hasSuffix(".csv") || lower.hasSuffix(".tsv") {
+            return true
+        }
+        if lower.contains("barchart") { return true }
+        if trimmed.contains("/") || trimmed.contains("\\") { return true }
+        return false
+    }
+
+    private static func droppingPlaceholderAndFileSentences(
+        _ text: String,
+        activeLocation: String
+    ) -> String {
+        let active = LocationResolver.normalize(activeLocation)
+        let kept = splitSentences(text).filter { sentence in
+            let normalized = sentence.lowercased()
+            for needle in placeholderSentenceNeedles {
+                if normalized.contains(needle) { return false }
+            }
+            if normalized.hasPrefix("imported from ") { return false }
+            let bare = sentence.trimmingCharacters(in: .whitespacesAndNewlines)
+                .trimmingCharacters(in: CharacterSet(charactersIn: ".!?"))
+            if looksLikeImportFileName(bare) { return false }
+            // Drop sentences that only name the active list file / path.
+            if !active.isEmpty,
+               looksLikeImportFileName(activeLocation),
+               LocationResolver.normalize(sentence).contains(active) {
+                return false
+            }
+            return true
+        }
+        return kept.joined(separator: " ")
+    }
+
+    private static func rewritingHeightBandWording(_ text: String) -> String {
+        var result = text
+        let replacements = [
+            ("Typical height band estimated as", "Typical habitat zone estimated as"),
+            ("Estimated height band:", "Estimated habitat zone:"),
+            ("height band not curated", "habitat zone not curated"),
+        ]
+        for (from, to) in replacements {
+            result = result.replacingOccurrences(of: from, with: to, options: [.caseInsensitive])
+        }
+        return result
     }
 
     private static func droppingForeignPlaceSentences(_ text: String, activeLocation: String) -> String {
