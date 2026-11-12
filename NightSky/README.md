@@ -1,6 +1,6 @@
-# Night Sky
+# MyNightSky
 
-An iPhone app for long-exposure night-sky photos. It takes a series of frames at the longest exposure the camera API allows, aligns them, and saves one stacked image.
+MyNightSky is an iPhone app for long-exposure night-sky photos. It takes a series of frames at the longest exposure the camera API allows, aligns them, and saves one stacked image. The Xcode project and scheme stay `NightSky`; the name on the phone is MyNightSky.
 
 This project was written on Linux. The iOS app itself was not compiled here — there is no Xcode, and the Simulator has no camera, so the app will not invent frames. The stacking package was tested on this machine with Swift 6.2.3 (`swift test`, 27 tests).
 
