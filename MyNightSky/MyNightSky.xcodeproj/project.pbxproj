@@ -10,24 +10,24 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B20000000000000000000004 /* NightSky.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NightSky.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B20000000000000000000004 /* MyNightSky.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyNightSky.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		B20000000000000000000005 /* NightSky */ = {
+		B20000000000000000000005 /* MyNightSky */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				B20000000000000000000010 /* Exceptions for "NightSky" folder in "NightSky" target */,
+				B20000000000000000000010 /* Exceptions for "MyNightSky" folder in "MyNightSky" target */,
 			);
-			path = NightSky;
+			path = MyNightSky;
 			sourceTree = "<group>";
 		};
-		B20000000000000000000010 /* Exceptions for "NightSky" folder in "NightSky" target */ = {
+		B20000000000000000000010 /* Exceptions for "MyNightSky" folder in "MyNightSky" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = B20000000000000000000006 /* NightSky */;
+			target = B20000000000000000000006 /* MyNightSky */;
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -46,7 +46,7 @@
 		B20000000000000000000002 = {
 			isa = PBXGroup;
 			children = (
-				B20000000000000000000005 /* NightSky */,
+				B20000000000000000000005 /* MyNightSky */,
 				B20000000000000000000003 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,7 +54,7 @@
 		B20000000000000000000003 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B20000000000000000000004 /* NightSky.app */,
+				B20000000000000000000004 /* MyNightSky.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -62,9 +62,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B20000000000000000000006 /* NightSky */ = {
+		B20000000000000000000006 /* MyNightSky */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B2000000000000000000000B /* Build configuration list for PBXNativeTarget "NightSky" */;
+			buildConfigurationList = B2000000000000000000000B /* Build configuration list for PBXNativeTarget "MyNightSky" */;
 			buildPhases = (
 				B20000000000000000000007 /* Sources */,
 				B20000000000000000000008 /* Frameworks */,
@@ -75,14 +75,14 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				B20000000000000000000005 /* NightSky */,
+				B20000000000000000000005 /* MyNightSky */,
 			);
-			name = NightSky;
+			name = MyNightSky;
 			packageProductDependencies = (
 				B20000000000000000000013 /* NightSkyStack */,
 			);
-			productName = NightSky;
-			productReference = B20000000000000000000004 /* NightSky.app */;
+			productName = MyNightSky;
+			productReference = B20000000000000000000004 /* MyNightSky.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -100,7 +100,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B2000000000000000000000A /* Build configuration list for PBXProject "NightSky" */;
+			buildConfigurationList = B2000000000000000000000A /* Build configuration list for PBXProject "MyNightSky" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -117,7 +117,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B20000000000000000000006 /* NightSky */,
+				B20000000000000000000006 /* MyNightSky */,
 			);
 		};
 /* End PBXProject section */
@@ -202,7 +202,7 @@
 				DEVELOPMENT_TEAM = WS6BHNDZRW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NightSky/Info.plist;
+				INFOPLIST_FILE = MyNightSky/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MyNightSky;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -232,7 +232,7 @@
 				DEVELOPMENT_TEAM = WS6BHNDZRW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NightSky/Info.plist;
+				INFOPLIST_FILE = MyNightSky/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MyNightSky;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -255,7 +255,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B2000000000000000000000A /* Build configuration list for PBXProject "NightSky" */ = {
+		B2000000000000000000000A /* Build configuration list for PBXProject "MyNightSky" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B2000000000000000000000C /* Debug */,
@@ -264,7 +264,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B2000000000000000000000B /* Build configuration list for PBXNativeTarget "NightSky" */ = {
+		B2000000000000000000000B /* Build configuration list for PBXNativeTarget "MyNightSky" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B2000000000000000000000E /* Debug */,
