@@ -98,14 +98,33 @@ actor CommonsPhotoClient {
         role: String,
         avoidTitles: Set<String>
     ) async throws -> Candidate? {
+        let ranked = try await searchCandidates(
+            species: species,
+            role: role,
+            avoidTitles: avoidTitles,
+            limit: 1,
+            earlyExitScore: role == "male" || role == "female" ? 48 : 18
+        )
+        return ranked.first
+    }
+
+    /// Ranked open-licence alternatives for the in-app photo picker.
+    /// Skips `avoidTitles` (usually the current Commons file) so the user sees other options.
+    func searchCandidates(
+        species: SpeciesQuery,
+        role: String,
+        avoidTitles: Set<String>,
+        limit: Int = 8,
+        earlyExitScore: Int? = nil
+    ) async throws -> [Candidate] {
         try Task.checkCancellation()
         let titles = try await candidateTitles(species: species, role: role, avoid: avoidTitles)
-        guard !titles.isEmpty else { return nil }
+        guard !titles.isEmpty else { return [] }
 
-        var best: Candidate?
-        var bestScore = -10_000
+        var scored: [Candidate] = []
         let capped = Array(titles.prefix(72))
         var index = 0
+        let target = max(1, limit)
         while index < capped.count {
             try Task.checkCancellation()
             let end = min(index + 12, capped.count)
@@ -115,17 +134,27 @@ actor CommonsPhotoClient {
             for title in chunk {
                 guard var item = info[title] else { continue }
                 guard let score = scoreCandidate(species: species, role: role, item: item) else { continue }
+                guard score >= 8 else { continue }
                 item.score = score
-                if score > bestScore {
-                    bestScore = score
-                    best = item
-                }
+                scored.append(item)
             }
-            if role == "male" || role == "female", bestScore >= 48 { break }
-            if role == "either" || role == "unsexed", bestScore >= 18 { break }
+            if let earlyExitScore,
+               scored.contains(where: { $0.score >= earlyExitScore }),
+               scored.count >= target {
+                break
+            }
+            // Enough strong hits for a picker without scraping the whole category.
+            if earlyExitScore == nil, scored.count >= target * 3 {
+                break
+            }
         }
-        guard let best, bestScore >= 8 else { return nil }
-        return best
+        return scored
+            .sorted { lhs, rhs in
+                if lhs.score != rhs.score { return lhs.score > rhs.score }
+                return lhs.width > rhs.width
+            }
+            .prefix(target)
+            .map { $0 }
     }
 
     func downloadJPEG(from url: URL, maxPixel: CGFloat = 1000) async throws -> (Data, Int, Int) {
