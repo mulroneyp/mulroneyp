@@ -15,6 +15,8 @@ public struct SeriesTimeline: Equatable, Sendable {
     public static let minimumFrameCount = 2
     public static let maximumFrameCount = 30
     public static let countdownSeconds = 10
+    /// Pause after each frame except the last. There is no pause before the first frame.
+    public static let interFrameGap: TimeInterval = 5
 
     public private(set) var phase: SeriesPhase
     public let frameCount: Int
@@ -23,6 +25,8 @@ public struct SeriesTimeline: Equatable, Sendable {
     /// Passed in from AVFoundation. This type does not choose a shutter speed.
     public var exposureDuration: TimeInterval?
     public private(set) var captureStartedAt: Date?
+    /// Set when a frame has finished and another frame still has to be taken.
+    private var gapStartedAt: Date?
 
     public init(frameCount: Int, countdownSeconds: Int = SeriesTimeline.countdownSeconds) {
         self.frameCount = min(max(frameCount, Self.minimumFrameCount), Self.maximumFrameCount)
@@ -46,8 +50,14 @@ public struct SeriesTimeline: Equatable, Sendable {
         return max(0, total - done)
     }
 
+    /// True during the 5 second pause between frames. False after the last frame.
+    public var isWaitingBetweenFrames: Bool {
+        gapStartedAt != nil
+    }
+
     public mutating func startCountdown() {
         captureStartedAt = nil
+        gapStartedAt = nil
         phase = .countdown(secondsRemaining: countdownSeconds)
     }
 
@@ -75,15 +85,35 @@ public struct SeriesTimeline: Equatable, Sendable {
         return max(0, now.timeIntervalSince(captureStartedAt))
     }
 
-    /// Remaining capture time from the camera-reported exposure and frames still to take.
-    public var estimatedTimeRemaining: TimeInterval? {
-        guard exposureMayBegin, let exposureDuration, exposureDuration > 0 else { return nil }
-        return exposureDuration * Double(framesRemaining)
+    /// Time left in the current between-frame pause. Nil when a frame is being exposed.
+    public func gapTimeRemaining(at now: Date) -> TimeInterval? {
+        guard let gapStartedAt else { return nil }
+        let left = Self.interFrameGap - now.timeIntervalSince(gapStartedAt)
+        guard left > 0 else { return nil }
+        return left
     }
 
-    public mutating func noteFrameCaptured() {
+    /// Remaining time for exposures still to take, plus the pauses between them.
+    /// The pause before a later frame is included. There is no pause after the last frame.
+    public func estimatedTimeRemaining(at now: Date) -> TimeInterval? {
+        guard exposureMayBegin, let exposureDuration, exposureDuration > 0 else { return nil }
+        let frames = framesRemaining
+        guard frames > 0 else { return nil }
+        let futureGaps = TimeInterval(frames - 1) * Self.interFrameGap
+        let exposureTime = TimeInterval(frames) * exposureDuration
+        let currentGapLeft = gapTimeRemaining(at: now) ?? 0
+        return currentGapLeft + exposureTime + futureGaps
+    }
+
+    public mutating func noteFrameCaptured(at date: Date = Date()) {
         guard case .capturing(let done, let total) = phase else { return }
-        phase = .capturing(framesCompleted: min(total, done + 1), frameCount: total)
+        let next = min(total, done + 1)
+        phase = .capturing(framesCompleted: next, frameCount: total)
+        gapStartedAt = next < total ? date : nil
+    }
+
+    public mutating func noteGapFinished() {
+        gapStartedAt = nil
     }
 
     @discardableResult
@@ -105,5 +135,6 @@ public struct SeriesTimeline: Equatable, Sendable {
         phase = .ready
         exposureDuration = nil
         captureStartedAt = nil
+        gapStartedAt = nil
     }
 }

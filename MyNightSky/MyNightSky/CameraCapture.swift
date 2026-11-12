@@ -34,6 +34,9 @@ final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate {
     private let stateLock = NSLock()
     private var device: AVCaptureDevice?
     private var photoContinuation: CheckedContinuation<Data, Error>?
+    /// Filled by didFinishProcessingPhoto. Delivered only from didFinishCaptureFor,
+    /// so the next capturePhoto cannot start while this one is still in flight.
+    private var processedPhoto: Result<Data, Error>?
 
     func authorize() async throws {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
@@ -64,7 +67,8 @@ final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate {
         }
     }
 
-    /// Locks focus near infinity and applies the active format's maximum exposure.
+    /// Locks the lens at 1.0 when the camera supports it, then applies the
+    /// active format's maximum exposure. The lock is left in place for the series.
     func lockLongestExposure() async throws -> TimeInterval {
         try await withCheckedThrowingContinuation { continuation in
             sessionQueue.async {
@@ -83,6 +87,7 @@ final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate {
                     return
                 }
                 self.photoContinuation = continuation
+                self.processedPhoto = nil
                 self.stateLock.unlock()
                 self.photoOutput.capturePhoto(with: self.makePhotoSettings(), delegate: self)
                 self.sessionQueue.asyncAfter(deadline: .now() + 30) {
@@ -120,14 +125,14 @@ final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate {
         error: Error?
     ) {
         if let error {
-            finishPhoto(.failure(error))
+            storeProcessed(.failure(error))
             return
         }
         guard let data = photo.fileDataRepresentation() else {
-            finishPhoto(.failure(CameraError.noImage))
+            storeProcessed(.failure(CameraError.noImage))
             return
         }
-        finishPhoto(.success(data))
+        storeProcessed(.success(data))
     }
 
     func photoOutput(
@@ -135,15 +140,43 @@ final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate {
         didFinishCaptureFor resolvedSettings: AVCaptureResolvedPhotoSettings,
         error: Error?
     ) {
+        // Starting another capturePhoto before this callback is what makes the
+        // next frame fail with "The operation could not be completed."
         if let error {
+            _ = takeProcessed()
             finishPhoto(.failure(error))
+            return
         }
+        switch takeProcessed() {
+        case .success(let data):
+            finishPhoto(.success(data))
+        case .failure(let error):
+            finishPhoto(.failure(error))
+        case nil:
+            finishPhoto(.failure(CameraError.noImage))
+        }
+    }
+
+    private func storeProcessed(_ result: Result<Data, Error>) {
+        stateLock.lock()
+        defer { stateLock.unlock() }
+        guard photoContinuation != nil else { return }
+        processedPhoto = result
+    }
+
+    private func takeProcessed() -> Result<Data, Error>? {
+        stateLock.lock()
+        let result = processedPhoto
+        processedPhoto = nil
+        stateLock.unlock()
+        return result
     }
 
     private func finishPhoto(_ result: Result<Data, Error>) {
         stateLock.lock()
         let continuation = photoContinuation
         photoContinuation = nil
+        processedPhoto = nil
         stateLock.unlock()
         continuation?.resume(with: result)
     }
@@ -181,10 +214,12 @@ final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate {
             if let slowest = format.videoSupportedFrameRateRanges.max(by: {
                 CMTimeCompare($0.maxFrameDuration, $1.maxFrameDuration) < 0
             }) {
-                // Raise the maximum frame duration before the minimum. The other
-                // order traps when the new minimum is longer than the old maximum.
+                // Allow the long exposure by raising the maximum frame duration,
+                // but do not pin the camera at that slow rate. A locked 1 fps
+                // rate makes AVCapturePhotoOutput fail the next still with
+                // "The operation could not be completed."
                 device.activeVideoMaxFrameDuration = slowest.maxFrameDuration
-                device.activeVideoMinFrameDuration = slowest.maxFrameDuration
+                device.activeVideoMinFrameDuration = slowest.minFrameDuration
             }
             if device.isLowLightBoostSupported {
                 device.automaticallyEnablesLowLightBoostWhenAvailable = false
@@ -242,11 +277,42 @@ final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate {
         }
 
         if device.isLockingFocusWithCustomLensPositionSupported {
-            // 1.0 is the far end of the lens range (infinity), which is what stars need.
-            device.setFocusModeLocked(lensPosition: 1.0, completionHandler: nil)
-        } else if device.isFocusModeSupported(.locked) {
-            device.focusMode = .locked
+            // 1.0 is infinity. Leave this lock in place for every frame in the series.
+            let gate = NSLock()
+            var started = false
+            let startExposure = { [weak self] in
+                gate.lock()
+                let shouldStart = !started
+                started = true
+                gate.unlock()
+                guard shouldStart, let self else {
+                    if !shouldStart { return }
+                    device.unlockForConfiguration()
+                    completion(.failure(CameraError.configurationFailed("The camera went away.")))
+                    return
+                }
+                self.sessionQueue.async {
+                    self.applyExposure(on: device, completion: completion)
+                }
+            }
+            device.setFocusModeLocked(lensPosition: 1.0) { _ in
+                startExposure()
+            }
+            // If the lens never reports that it locked, still take the series
+            // at the longest exposure. Do not fail the capture for that.
+            sessionQueue.asyncAfter(deadline: .now() + 3) {
+                startExposure()
+            }
+        } else {
+            // This camera cannot lock the lens at 1.0. Still use the longest exposure.
+            applyExposure(on: device, completion: completion)
         }
+    }
+
+    private func applyExposure(
+        on device: AVCaptureDevice,
+        completion: @escaping (Result<TimeInterval, Error>) -> Void
+    ) {
         if device.isWhiteBalanceModeSupported(.locked) {
             device.setWhiteBalanceModeLocked(with: clampedGains(device), completionHandler: nil)
         }
@@ -269,9 +335,6 @@ final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate {
             completion(result)
         }
 
-        sessionQueue.asyncAfter(deadline: .now() + 6) {
-            complete(.success(duration.seconds))
-        }
         device.setExposureModeCustom(duration: duration, iso: iso) { [weak self] _ in
             device.unlockForConfiguration()
             guard let self else {
@@ -299,12 +362,9 @@ final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate {
     }
 
     private func makePhotoSettings() -> AVCapturePhotoSettings {
-        let settings: AVCapturePhotoSettings
-        if photoOutput.availablePhotoCodecTypes.contains(.jpeg) {
-            settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
-        } else {
-            settings = AVCapturePhotoSettings()
-        }
+        // A JPEG format dictionary plus maxPhotoDimensions fails on device with
+        // AVFoundationErrorDomain -11800, "The operation could not be completed."
+        let settings = AVCapturePhotoSettings()
         if photoOutput.supportedFlashModes.contains(.off) {
             settings.flashMode = .off
         }

@@ -129,9 +129,14 @@ final class NightCaptureModel: ObservableObject {
             captured.reserveCapacity(timeline.frameCount)
             while timeline.framesRemaining > 0 {
                 try Task.checkCancellation()
+                if timeline.isWaitingBetweenFrames {
+                    try await Task.sleep(nanoseconds: UInt64(SeriesTimeline.interFrameGap * 1_000_000_000))
+                    try Task.checkCancellation()
+                    timeline.noteGapFinished()
+                }
                 let frame = try await camera.captureFrame(maxEdge: StackTuning.workingMaxEdge)
                 captured.append(frame)
-                timeline.noteFrameCaptured()
+                timeline.noteFrameCaptured(at: Date())
             }
 
             await camera.stop()
@@ -160,15 +165,27 @@ final class NightCaptureModel: ObservableObject {
             case .noCamera:
                 failure = .noCamera
             default:
-                failure = .message(error.localizedDescription)
+                failure = .message(Self.failureText(error))
             }
-            timeline.fail(error.localizedDescription)
+            timeline.fail(Self.failureText(error))
         } catch {
             await camera.stop()
             preview = nil
-            failure = .message(error.localizedDescription)
-            timeline.fail(error.localizedDescription)
+            let message = Self.failureText(error)
+            failure = .message(message)
+            timeline.fail(message)
         }
+    }
+
+    /// AVFoundation's generic failure is "The operation could not be completed."
+    /// Keep the domain and code so a later failure is not just that sentence.
+    private static func failureText(_ error: Error) -> String {
+        let text = error.localizedDescription
+        let generic = text.range(of: "could not be completed", options: .caseInsensitive) != nil
+            || text.range(of: "couldn’t be completed", options: .caseInsensitive) != nil
+        guard generic else { return text }
+        let ns = error as NSError
+        return "\(text) (\(ns.domain) \(ns.code))"
     }
 
     private func startClock() {
