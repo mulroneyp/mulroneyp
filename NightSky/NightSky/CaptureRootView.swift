@@ -42,7 +42,7 @@ private struct ReadyView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 28) {
-                Text("Night Sky")
+                Text("MyNightSky")
                     .font(.largeTitle.weight(.semibold))
                     .foregroundStyle(NightColor.text)
                 SetupInstruction()

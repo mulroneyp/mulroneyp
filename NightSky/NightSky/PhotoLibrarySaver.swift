@@ -8,7 +8,7 @@ enum PhotoSaveError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .permissionDenied:
-            return "Photo access is off. Allow Night Sky to add photos in Settings."
+            return "Photo access is off. Allow MyNightSky to add photos in Settings."
         case .encodeFailed:
             return "The stacked photo could not be encoded."
         }

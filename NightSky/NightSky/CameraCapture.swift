@@ -14,7 +14,7 @@ enum CameraError: LocalizedError {
         case .permissionDenied:
             return "Camera access is off. Enable it in Settings to capture the sky."
         case .noCamera:
-            return "No camera is available. Night Sky needs a physical iPhone. The Simulator has no camera and cannot capture frames."
+            return "No camera is available. MyNightSky needs a physical iPhone. The Simulator has no camera and cannot capture frames."
         case .noFormat:
             return "This camera has no format that supports a manual exposure."
         case .noImage:
