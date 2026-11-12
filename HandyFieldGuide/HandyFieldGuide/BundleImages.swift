@@ -6,6 +6,13 @@ enum BundleImages {
     private static let fullCache = NSCache<NSString, UIImage>()
     private static let thumbCache = NSCache<NSString, UIImage>()
 
+    /// Drops in-memory decodes when a cached-images file is replaced on disk.
+    static func invalidate(path relativePath: String) {
+        fullCache.removeObject(forKey: relativePath as NSString)
+        // Thumb keys are "path#size"; NSCache cannot enumerate, and replacements are rare.
+        thumbCache.removeAllObjects()
+    }
+
     /// Full-resolution decode for detail / zoom. Cached by path.
     static func image(for relativePath: String) -> UIImage? {
         let key = relativePath as NSString

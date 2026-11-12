@@ -7,6 +7,7 @@ struct BirdDetailView: View {
     var place: ResolvedPlace
 
     @State private var attributionPhoto: Photo?
+    @State private var choosePhotoRequest: ChooseSpeciesPhotoRequest?
 
     var body: some View {
         ScrollView {
@@ -77,16 +78,38 @@ struct BirdDetailView: View {
                         .fixedSize(horizontal: false, vertical: true)
                 }
 
-                if !displayPhotos.isEmpty {
+                if !displayPhotos.isEmpty || canOfferFindPhoto {
                     sectionLabel("Photos")
                 }
 
                 photoGallery
 
+                if displayPhotos.isEmpty, canOfferFindPhoto {
+                    Button {
+                        choosePhotoRequest = makeChooseRequest(role: defaultFindRole, currentFileTitle: "")
+                    } label: {
+                        Text("Find a photo")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(GuideChipStyle(selected: false))
+                    .accessibilityHint("Searches Wikimedia Commons for an open-licence photo")
+                }
+
                 if species.dimorphic && !hasMaleAndFemalePhotos {
                     Text("An openly licensed male or female photograph is still missing for this species. The app shows what is available and does not invent a second image.")
                         .font(.footnote)
                         .foregroundStyle(GuideColor.rust)
+                    if canOfferFindPhoto {
+                        ForEach(missingDimorphicRoles, id: \.self) { role in
+                            Button {
+                                choosePhotoRequest = makeChooseRequest(role: role, currentFileTitle: "")
+                            } label: {
+                                Text(role == "male" ? "Find male photo" : "Find female photo")
+                                    .frame(maxWidth: .infinity)
+                            }
+                            .buttonStyle(GuideChipStyle(selected: false))
+                        }
+                    }
                 }
             }
             .padding(20)
@@ -99,6 +122,10 @@ struct BirdDetailView: View {
         .sheet(item: $attributionPhoto) { photo in
             PhotoAttributionSheet(photo: photo)
                 .presentationDetents([.medium, .large])
+        }
+        .sheet(item: $choosePhotoRequest) { request in
+            ChooseSpeciesPhotoSheet(request: request)
+                .environmentObject(model)
         }
     }
 
@@ -147,9 +174,17 @@ struct BirdDetailView: View {
             .padding(.horizontal, 10)
             .padding(.top, 10)
 
-            ZoomablePhoto(path: photo.src, alt: photo.alt, label: photoAccessibilityLabel(photo))
+            ZoomablePhoto(
+                path: photo.src,
+                alt: photo.alt,
+                label: photoAccessibilityLabel(photo),
+                cacheRevision: model.photoCache.revision,
+                onChooseDifferentPhoto: canOfferFindPhoto ? {
+                    choosePhotoRequest = makeChooseRequest(role: photo.role, currentFileTitle: photo.file)
+                } : nil
+            )
 
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 8) {
                 if showsPhotoRoleLabel(photo) {
                     Text(photoDisplayTitle(photo))
                         .font(.system(.title3, design: .serif))
@@ -157,6 +192,20 @@ struct BirdDetailView: View {
                 Text("Pinch or double-tap to zoom; drag to pan. Long-press for a full-screen view.")
                     .font(.caption)
                     .foregroundStyle(GuideColor.muted)
+                if canOfferFindPhoto {
+                    Button {
+                        choosePhotoRequest = makeChooseRequest(role: photo.role, currentFileTitle: photo.file)
+                    } label: {
+                        Text(choosePhotoButtonTitle(for: photo.role))
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(GuideColor.rust)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.vertical, 6)
+                            .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityHint("Searches Wikimedia Commons for another open-licence photo")
+                }
             }
             .padding(10)
         }
@@ -165,6 +214,46 @@ struct BirdDetailView: View {
             RoundedRectangle(cornerRadius: 2)
                 .stroke(GuideColor.line, lineWidth: 1)
         }
+    }
+
+    private var canOfferFindPhoto: Bool {
+        // Slash / provisional taxa are not single species accounts.
+        !species.tags.contains("flagged-taxon")
+    }
+
+    private var defaultFindRole: String {
+        species.dimorphic ? "male" : "either"
+    }
+
+    private var missingDimorphicRoles: [String] {
+        guard species.dimorphic else { return [] }
+        let have = Set(displayPhotos.map(\.role))
+        var missing: [String] = []
+        if !have.contains("male") { missing.append("male") }
+        if !have.contains("female") { missing.append("female") }
+        return missing
+    }
+
+    private func choosePhotoButtonTitle(for role: String) -> String {
+        switch role {
+        case "male": return "Find another male photo"
+        case "female": return "Find another female photo"
+        default: return "Find another photo"
+        }
+    }
+
+    private func makeChooseRequest(role: String, currentFileTitle: String) -> ChooseSpeciesPhotoRequest {
+        ChooseSpeciesPhotoRequest(
+            speciesId: species.id,
+            commonName: species.commonName,
+            scientificName: species.scientificName,
+            alsoCalled: species.alsoCalled,
+            alsoScientific: species.alsoScientific,
+            aliases: species.aliases,
+            dimorphic: species.dimorphic,
+            role: role,
+            currentFileTitle: currentFileTitle
+        )
     }
 
     private func stratum(_ id: String) -> StratumInfo? {

@@ -6,11 +6,16 @@ struct ZoomablePhoto: View {
     var path: String
     var alt: String
     var label: String
+    /// Bumps when the on-device photo cache changes so replacements reload.
+    var cacheRevision: Int = 0
+    var onChooseDifferentPhoto: (() -> Void)? = nil
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var showingViewer = false
     @State private var image: UIImage?
     @State private var loadFailed = false
+
+    private var loadToken: String { "\(path)#\(cacheRevision)" }
 
     var body: some View {
         Group {
@@ -50,7 +55,7 @@ struct ZoomablePhoto: View {
                     .overlay { ProgressView() }
             }
         }
-        .task(id: path) {
+        .task(id: loadToken) {
             loadFailed = false
             image = nil
             let path = path
@@ -65,9 +70,21 @@ struct ZoomablePhoto: View {
         }
         .fullScreenCover(isPresented: $showingViewer) {
             if let image {
-                ZoomablePhotoViewer(image: image, title: label, alt: alt) {
-                    showingViewer = false
-                }
+                ZoomablePhotoViewer(
+                    image: image,
+                    title: label,
+                    alt: alt,
+                    onChooseDifferentPhoto: onChooseDifferentPhoto.map { action in
+                        {
+                            showingViewer = false
+                            // Let the cover dismiss before presenting the picker sheet.
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                                action()
+                            }
+                        }
+                    },
+                    onClose: { showingViewer = false }
+                )
             }
         }
     }
@@ -86,6 +103,7 @@ struct ZoomablePhotoViewer: View {
     var image: UIImage
     var title: String
     var alt: String
+    var onChooseDifferentPhoto: (() -> Void)? = nil
     var onClose: () -> Void
 
     var body: some View {
@@ -100,6 +118,11 @@ struct ZoomablePhotoViewer: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Close", action: onClose)
+                }
+                if let onChooseDifferentPhoto {
+                    ToolbarItem(placement: .primaryAction) {
+                        Button("Find another", action: onChooseDifferentPhoto)
+                    }
                 }
             }
             .toolbarBackground(.visible, for: .navigationBar)

@@ -308,6 +308,8 @@ final class GuideModel: ObservableObject {
         var monthIndex: Int
         var includeFlagged: Bool
         var query: String
+        /// Ensures a rebuilt coverage after the user replaces a cached photo.
+        var photoRevision: Int
     }
 
     private struct PlaceCache {
@@ -329,7 +331,8 @@ final class GuideModel: ObservableObject {
             taxonCount: imported.species.count,
             monthIndex: selectedMonthIndex,
             includeFlagged: showFlaggedTaxa,
-            query: locationQuery
+            query: locationQuery,
+            photoRevision: photoCache.revision
         )
     }
 

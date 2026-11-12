@@ -82,23 +82,40 @@ final class PhotoCacheStore: ObservableObject {
         }
     }
 
-    /// Fills empty / incomplete photo arrays from the on-device cache only.
+    /// Applies on-device cache photos, preferring them over bundled defaults for the same role
+    /// (so a user-chosen replacement sticks after the catalog rebuilds).
     func applyCachedPhotos(to species: inout Species) {
         guard let cached = entry(forSpeciesId: species.id) ?? entry(forCommonName: species.commonName),
               !cached.photos.isEmpty else {
             return
         }
+        let usable = cached.photos.filter { relativePathExists($0.src) }
+        guard !usable.isEmpty else { return }
+
         if species.photos.isEmpty {
-            species.photos = cached.photos
+            species.photos = usable
             return
         }
-        guard species.dimorphic else { return }
-        var merged = species.photos
-        let have = Set(merged.map(\.role))
-        for photo in cached.photos where !have.contains(photo.role) {
-            merged.append(photo)
+
+        var byRole = Dictionary(uniqueKeysWithValues: species.photos.map { ($0.role, $0) })
+        for photo in usable {
+            byRole[photo.role] = photo
         }
-        species.photos = merged
+        let order = ["male": 0, "female": 1, "either": 2, "unsexed": 3, "illustration": 4]
+        let merged = Array(byRole.values).sorted {
+            (order[$0.role] ?? 9, $0.label) < (order[$1.role] ?? 9, $1.label)
+        }
+
+        if species.dimorphic {
+            species.photos = merged
+            return
+        }
+
+        // Monomorphic: one photo. Prefer any cached role over the bundled default.
+        if let preferred = usable.first(where: { $0.role == "either" || $0.role == "unsexed" })
+            ?? usable.first {
+            species.photos = [preferred]
+        }
     }
 
     @discardableResult
@@ -139,18 +156,27 @@ final class PhotoCacheStore: ObservableObject {
     }
 
     /// Writes JPEG bytes under Documents and returns a `cached-images/` relative path.
-    func writeImageData(_ data: Data, speciesId: String, role: String) throws -> String {
+    /// Pass `token` when replacing an existing photo so the relative path changes and UI caches refresh.
+    func writeImageData(_ data: Data, speciesId: String, role: String, token: String? = nil) throws -> String {
         ensureDirectory()
         let filename: String
+        let suffix = token.map { "-\($0)" } ?? ""
         switch role {
         case "male", "female":
-            filename = "\(speciesId)-\(role).jpg"
+            filename = "\(speciesId)-\(role)\(suffix).jpg"
         default:
-            filename = "\(speciesId).jpg"
+            filename = "\(speciesId)\(suffix).jpg"
         }
         let url = rootDirectory.appendingPathComponent(filename)
         try data.write(to: url, options: [.atomic])
         return Self.pathPrefix + filename
+    }
+
+    /// Removes a previous on-disk JPEG for a role when the relative path changes after a replacement.
+    func removeImageFile(atRelativePath path: String) {
+        guard let url = fileURL(forRelativePath: path) else { return }
+        try? FileManager.default.removeItem(at: url)
+        BundleImages.invalidate(path: path)
     }
 
     func relativePathExists(_ path: String) -> Bool {
