@@ -106,8 +106,15 @@ final class NightCaptureModel: ObservableObject {
             try Task.checkCancellation()
             try camera.ensureRearCamera()
 
-            timeline = SeriesTimeline(frameCount: frameCount)
-            timeline.startCountdown()
+            // Start the session before the countdown. Doing it afterwards left the
+            // capturing screen's big timer running for about as long as the countdown
+            // before the shutter opened, which is the second countdown on device.
+            try await camera.prepareSession()
+            try Task.checkCancellation()
+
+            var series = SeriesTimeline(frameCount: frameCount)
+            series.startCountdown()
+            timeline = series
             isStarting = false
 
             while case .countdown = timeline.phase {
@@ -116,14 +123,12 @@ final class NightCaptureModel: ObservableObject {
                 _ = timeline.tickCountdown()
             }
 
-            // The shutter series stays closed until every countdown second has elapsed.
+            // The long exposure stays closed until every countdown second has elapsed.
             guard timeline.exposureMayBegin else { return }
 
-            timeline.noteCaptureStarted(at: Date())
-            let reported = try await camera.startSession()
-            timeline.exposureDuration = reported
-            let locked = try await camera.lockLongestExposure()
+            let locked = try await camera.beginLongExposure()
             timeline.exposureDuration = locked
+            timeline.noteCaptureStarted(at: Date())
 
             var captured: [FrameBuffer] = []
             captured.reserveCapacity(timeline.frameCount)
