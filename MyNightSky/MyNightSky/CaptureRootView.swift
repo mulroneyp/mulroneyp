@@ -59,7 +59,7 @@ private struct ReadyView: View {
                             .accessibilityLabel("\(model.frameCount) frames")
                         countButton(title: "+", delta: 1)
                     }
-                    Text("Default is 10. Each frame uses the longest exposure this camera allows.")
+                    Text("Default is 10. Each frame uses the longest exposure this camera allows. The camera waits 5 seconds between frames.")
                         .font(.body)
                         .foregroundStyle(NightColor.muted)
                         .fixedSize(horizontal: false, vertical: true)
@@ -173,9 +173,12 @@ private struct CapturingView: View {
     private var statusLine: some View {
         if model.timeline.exposureDuration == nil {
             Text("Starting camera")
-        } else if done == 0 {
-            Text("Setting the longest exposure")
-        } else if let remaining = model.timeline.estimatedTimeRemaining {
+        } else if let gap = model.timeline.gapTimeRemaining(at: model.now) {
+            Text("Next frame in \(nightSeconds(gap))")
+            if let remaining = model.timeline.estimatedTimeRemaining(at: model.now) {
+                Text("About \(nightSeconds(remaining)) left")
+            }
+        } else if let remaining = model.timeline.estimatedTimeRemaining(at: model.now) {
             Text("About \(nightSeconds(remaining)) left")
         } else {
             Text("Hold still")
