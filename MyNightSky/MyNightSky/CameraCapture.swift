@@ -1,5 +1,4 @@
 import AVFoundation
-import CoreVideo
 import Foundation
 import NightSkyStack
 
@@ -26,38 +25,29 @@ enum CameraError: LocalizedError {
     }
 }
 
-/// Rear-camera frames at the active format's longest exposure.
+/// Rear-camera stills at the active format's longest exposure.
 ///
-/// Stills go through `AVCaptureVideoDataOutput`, not `AVCapturePhotoOutput`.
-/// The photo output failed on device with AVFoundationErrorDomain -11800
-/// ("The operation could not be completed") after the shutter fired.
-final class CameraCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
+/// The earlier still path failed on device with AVFoundationErrorDomain -11800
+/// ("The operation could not be completed") after the first photo. The photo
+/// output's default settings keep still-image stabilization on and only prepare
+/// that pipeline. The next still then fails inside the photo output. This class
+/// turns stabilization off, prepares matching settings once, and waits until
+/// `captureReadiness` is `.ready` before every `capturePhoto`.
+final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate {
     private let session = AVCaptureSession()
-    private let videoOutput = AVCaptureVideoDataOutput()
+    private let photoOutput = AVCapturePhotoOutput()
     private let sessionQueue = DispatchQueue(label: "nightsky.camera")
-    private let videoQueue = DispatchQueue(label: "nightsky.frames")
     private let stateLock = NSLock()
     private var device: AVCaptureDevice?
-    private var exposureReady = false
-    private var buffersToDrop = 0
     private var exposureSeconds: TimeInterval = 1
-    private var pendingFrame: PendingFrame?
+    private var settingsTemplate: AVCapturePhotoSettings?
+    private var pendingStill: PendingStill?
+    private var processedPhoto: Result<Data, Error>?
+    private var nextStillID = 0
 
-    private struct PendingFrame {
+    private struct PendingStill {
         let id: Int
-        let maxEdge: Int
-        let continuation: CheckedContinuation<FrameBuffer, Error>
-    }
-
-    private var nextFrameID = 0
-
-    override init() {
-        super.init()
-        videoOutput.alwaysDiscardsLateVideoFrames = false
-        videoOutput.videoSettings = [
-            kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA
-        ]
-        videoOutput.setSampleBufferDelegate(self, queue: videoQueue)
+        let continuation: CheckedContinuation<Data, Error>
     }
 
     func authorize() async throws {
@@ -94,8 +84,8 @@ final class CameraCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
         }
     }
 
-    /// Switches the running session to the format's longest exposure.
-    /// The first saved frame is taken after this returns.
+    /// Switches the running session to the format's longest exposure and prepares
+    /// the still pipeline. The first photo is taken after this returns.
     func beginLongExposure() async throws -> TimeInterval {
         try await withCheckedThrowingContinuation { continuation in
             sessionQueue.async {
@@ -105,42 +95,18 @@ final class CameraCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
     }
 
     func captureFrame(maxEdge: Int) async throws -> FrameBuffer {
-        try await withCheckedThrowingContinuation { continuation in
+        let data: Data = try await withCheckedThrowingContinuation { continuation in
             sessionQueue.async {
-                self.stateLock.lock()
-                if self.pendingFrame != nil {
-                    self.stateLock.unlock()
-                    continuation.resume(throwing: CameraError.configurationFailed("A capture is already in progress."))
-                    return
-                }
-                self.nextFrameID += 1
-                let frameID = self.nextFrameID
-                self.pendingFrame = PendingFrame(
-                    id: frameID,
-                    maxEdge: maxEdge,
-                    continuation: continuation
-                )
-                let timeout = self.exposureSeconds + 8
-                self.stateLock.unlock()
-                self.sessionQueue.asyncAfter(deadline: .now() + timeout) {
-                    self.failPending(
-                        id: frameID,
-                        CameraError.configurationFailed("The camera did not return a frame.")
-                    )
-                }
+                self.beginStill(continuation: continuation)
             }
         }
+        return try ImageEncoding.frameBuffer(data: data, maxEdge: maxEdge)
     }
 
     func stop() async {
         await withCheckedContinuation { continuation in
             sessionQueue.async {
-                self.stateLock.lock()
-                self.exposureReady = false
-                let pending = self.pendingFrame
-                self.pendingFrame = nil
-                self.stateLock.unlock()
-                pending?.continuation.resume(throwing: CancellationError())
+                self.finishStill(.failure(CancellationError()))
                 if self.session.isRunning {
                     self.session.stopRunning()
                 }
@@ -148,71 +114,142 @@ final class CameraCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
                 for input in self.session.inputs {
                     self.session.removeInput(input)
                 }
-                if self.session.outputs.contains(where: { $0 === self.videoOutput }) {
-                    self.session.removeOutput(self.videoOutput)
+                if self.session.outputs.contains(where: { $0 === self.photoOutput }) {
+                    self.session.removeOutput(self.photoOutput)
                 }
                 self.session.commitConfiguration()
                 self.device = nil
+                self.settingsTemplate = nil
                 continuation.resume()
             }
         }
     }
 
-    func captureOutput(
-        _ output: AVCaptureOutput,
-        didOutput sampleBuffer: CMSampleBuffer,
-        from connection: AVCaptureConnection
+    func photoOutput(
+        _ output: AVCapturePhotoOutput,
+        didFinishProcessingPhoto photo: AVCapturePhoto,
+        error: Error?
     ) {
-        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
-        stateLock.lock()
-        guard exposureReady else {
-            stateLock.unlock()
+        if let error {
+            storeProcessed(.failure(error))
             return
         }
-        if buffersToDrop > 0 {
-            buffersToDrop -= 1
-            stateLock.unlock()
+        guard let data = photo.fileDataRepresentation() else {
+            storeProcessed(.failure(CameraError.noImage))
             return
         }
-        guard let pending = pendingFrame else {
-            stateLock.unlock()
-            return
-        }
-        pendingFrame = nil
-        stateLock.unlock()
+        storeProcessed(.success(data))
+    }
 
-        let rotation = Int(connection.videoRotationAngle.rounded())
-        let mirrored = connection.isVideoMirrored
-        do {
-            let frame = try ImageEncoding.frameBuffer(
-                from: pixelBuffer,
-                maxEdge: pending.maxEdge,
-                rotationDegrees: rotation,
-                mirrored: mirrored
-            )
-            pending.continuation.resume(returning: frame)
-        } catch {
-            pending.continuation.resume(throwing: error)
+    func photoOutput(
+        _ output: AVCapturePhotoOutput,
+        didFinishCaptureFor resolvedSettings: AVCaptureResolvedPhotoSettings,
+        error: Error?
+    ) {
+        if let error {
+            _ = takeProcessed()
+            finishStill(.failure(error))
+            return
+        }
+        switch takeProcessed() {
+        case .success(let data):
+            finishStill(.success(data))
+        case .failure(let error):
+            finishStill(.failure(error))
+        case nil:
+            finishStill(.failure(CameraError.noImage))
         }
     }
 
-    private func failPending(id: Int, _ error: Error) {
+    private func beginStill(continuation: CheckedContinuation<Data, Error>) {
         stateLock.lock()
-        guard let pending = pendingFrame, pending.id == id else {
+        if pendingStill != nil {
+            stateLock.unlock()
+            continuation.resume(throwing: CameraError.configurationFailed("A capture is already in progress."))
+            return
+        }
+        nextStillID += 1
+        let stillID = nextStillID
+        pendingStill = PendingStill(id: stillID, continuation: continuation)
+        processedPhoto = nil
+        stateLock.unlock()
+
+        let timeout = exposureSeconds + 20
+        sessionQueue.asyncAfter(deadline: .now() + timeout) {
+            self.failStill(id: stillID, CameraError.configurationFailed("The camera did not return a frame."))
+        }
+        waitUntilCaptureReady(id: stillID, attempts: 200)
+    }
+
+    private func waitUntilCaptureReady(id: Int, attempts: Int) {
+        stateLock.lock()
+        let live = pendingStill?.id == id
+        stateLock.unlock()
+        guard live else { return }
+        if photoOutput.captureReadiness == .ready || attempts <= 0 {
+            if photoOutput.captureReadiness == .ready {
+                shoot(id: id)
+            } else {
+                failStill(id: id, CameraError.configurationFailed("The camera was not ready for the next still."))
+            }
+            return
+        }
+        sessionQueue.asyncAfter(deadline: .now() + 0.05) {
+            self.waitUntilCaptureReady(id: id, attempts: attempts - 1)
+        }
+    }
+
+    private func shoot(id: Int) {
+        stateLock.lock()
+        let live = pendingStill?.id == id
+        stateLock.unlock()
+        guard live else { return }
+        let settings = AVCapturePhotoSettings(from: settingsTemplate ?? makeTemplateSettings())
+        photoOutput.capturePhoto(with: settings, delegate: self)
+    }
+
+    private func failStill(id: Int, _ error: Error) {
+        stateLock.lock()
+        guard let pending = pendingStill, pending.id == id else {
             stateLock.unlock()
             return
         }
-        pendingFrame = nil
+        pendingStill = nil
+        processedPhoto = nil
         stateLock.unlock()
         pending.continuation.resume(throwing: error)
     }
 
+    private func finishStill(_ result: Result<Data, Error>) {
+        stateLock.lock()
+        let pending = pendingStill
+        pendingStill = nil
+        processedPhoto = nil
+        stateLock.unlock()
+        pending?.continuation.resume(with: result)
+    }
+
+    private func storeProcessed(_ result: Result<Data, Error>) {
+        stateLock.lock()
+        defer { stateLock.unlock() }
+        guard pendingStill != nil else { return }
+        processedPhoto = result
+    }
+
+    private func takeProcessed() -> Result<Data, Error>? {
+        stateLock.lock()
+        let result = processedPhoto
+        processedPhoto = nil
+        stateLock.unlock()
+        return result
+    }
+
     private func configureAndStart() throws {
         stateLock.lock()
-        exposureReady = false
-        buffersToDrop = 0
-        pendingFrame = nil
+        pendingStill = nil
+        processedPhoto = nil
         stateLock.unlock()
+        settingsTemplate = nil
 
         if session.isRunning {
             session.stopRunning()
@@ -229,8 +266,8 @@ final class CameraCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
         for input in session.inputs {
             session.removeInput(input)
         }
-        if session.outputs.contains(where: { $0 === videoOutput }) {
-            session.removeOutput(videoOutput)
+        if session.outputs.contains(where: { $0 === photoOutput }) {
+            session.removeOutput(photoOutput)
         }
 
         guard let device = rearCamera() else {
@@ -245,6 +282,7 @@ final class CameraCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
         }
         session.addInput(input)
 
+        let format: AVCaptureDevice.Format
         do {
             try device.lockForConfiguration()
         } catch {
@@ -252,7 +290,7 @@ final class CameraCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
             throw CameraError.configurationFailed(error.localizedDescription)
         }
         do {
-            let format = try bestFormat(on: device)
+            format = try bestFormat(on: device)
             device.activeFormat = format
             setLockedFrameDuration(warmupDuration(for: format), on: device)
             if device.isLowLightBoostSupported {
@@ -271,17 +309,22 @@ final class CameraCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
             throw error
         }
 
-        guard session.canAddOutput(videoOutput) else {
+        guard session.canAddOutput(photoOutput) else {
             commit()
-            throw CameraError.configurationFailed("Could not use the camera output.")
+            throw CameraError.configurationFailed("Could not use the photo output.")
         }
-        session.addOutput(videoOutput)
-        if !videoOutput.availableVideoPixelFormatTypes.isEmpty
-            && !videoOutput.availableVideoPixelFormatTypes.contains(kCVPixelFormatType_32BGRA) {
-            commit()
-            throw CameraError.configurationFailed("This camera cannot deliver frames this app can read.")
+        session.addOutput(photoOutput)
+        photoOutput.maxPhotoQualityPrioritization = .speed
+        if photoOutput.isFastCapturePrioritizationSupported {
+            photoOutput.isFastCapturePrioritizationEnabled = false
         }
-        if let connection = videoOutput.connection(with: .video),
+        if photoOutput.isResponsiveCaptureSupported {
+            photoOutput.isResponsiveCaptureEnabled = false
+        }
+        if let dimensions = choosePhotoDimensions(format.supportedMaxPhotoDimensions) {
+            photoOutput.maxPhotoDimensions = dimensions
+        }
+        if let connection = photoOutput.connection(with: .video),
            connection.isVideoStabilizationSupported {
             connection.preferredVideoStabilizationMode = .off
         }
@@ -310,6 +353,16 @@ final class CameraCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
             device.activeVideoMaxFrameDuration = duration
             device.activeVideoMinFrameDuration = duration
         }
+    }
+
+    /// Let the shutter be as long as `duration` without locking the camera at that
+    /// slow rate. A frame rate locked near 1 fps makes the next still fail with -11800.
+    private func allowLongExposure(_ duration: CMTime, on device: AVCaptureDevice) {
+        let currentMin = device.activeVideoMinFrameDuration
+        if currentMin.isValid && CMTimeCompare(currentMin, duration) > 0 {
+            device.activeVideoMinFrameDuration = duration
+        }
+        device.activeVideoMaxFrameDuration = duration
     }
 
     private func lockFocusAtInfinity(completion: @escaping (Result<Void, Error>) -> Void) {
@@ -353,11 +406,6 @@ final class CameraCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
             completion(.failure(CameraError.noCamera))
             return
         }
-        stateLock.lock()
-        exposureReady = false
-        buffersToDrop = 0
-        stateLock.unlock()
-
         do {
             try device.lockForConfiguration()
         } catch {
@@ -376,7 +424,7 @@ final class CameraCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
             completion(.failure(CameraError.noFormat))
             return
         }
-        setLockedFrameDuration(duration, on: device)
+        allowLongExposure(duration, on: device)
 
         let continueExposure = { [weak self] in
             guard let self else {
@@ -426,17 +474,25 @@ final class CameraCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
             gate.unlock()
             guard go else { return }
             device.unlockForConfiguration()
-            if case .success(let seconds) = result {
-                self.markExposureReady(seconds)
+            guard case .success(let seconds) = result else {
+                completion(result)
+                return
             }
-            completion(result)
+            self.exposureSeconds = seconds
+            self.prepareStills { prepareResult in
+                switch prepareResult {
+                case .success:
+                    completion(.success(seconds))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
         }
 
         let startExposure = { [weak self] in
             gate.lock()
             let alreadyFinished = finished
             gate.unlock()
-            // The timeout may already have unlocked the device. Do not touch it then.
             if alreadyFinished { return }
             guard let self else {
                 finish(.failure(CameraError.noCamera))
@@ -466,12 +522,38 @@ final class CameraCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
         }
     }
 
-    private func markExposureReady(_ seconds: TimeInterval) {
-        stateLock.lock()
-        exposureSeconds = seconds
-        buffersToDrop = 1
-        exposureReady = true
-        stateLock.unlock()
+    /// The photo output's default prepared settings enable still-image stabilization.
+    /// That pipeline is what fails the next still with -11800 after a manual exposure.
+    private func prepareStills(completion: @escaping (Result<Void, Error>) -> Void) {
+        let template = makeTemplateSettings()
+        settingsTemplate = template
+        photoOutput.setPreparedPhotoSettingsArray([template]) { prepared, error in
+            self.sessionQueue.async {
+                if let error {
+                    completion(.failure(CameraError.configurationFailed(error.localizedDescription)))
+                    return
+                }
+                guard prepared else {
+                    completion(.failure(CameraError.configurationFailed("The camera could not prepare a still.")))
+                    return
+                }
+                completion(.success(()))
+            }
+        }
+    }
+
+    private func makeTemplateSettings() -> AVCapturePhotoSettings {
+        let settings = AVCapturePhotoSettings()
+        if photoOutput.supportedFlashModes.contains(.off) {
+            settings.flashMode = .off
+        }
+        settings.photoQualityPrioritization = .speed
+        // Default is true on devices that support it. Left on, it overrides the
+        // manual exposure and the next still fails with "The operation could not be completed."
+        if photoOutput.isStillImageStabilizationSupported {
+            settings.isAutoStillImageStabilizationEnabled = false
+        }
+        return settings
     }
 
     private func waitUntilExposureSettles(
@@ -488,7 +570,6 @@ final class CameraCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
         }
     }
 
-    /// Longest exposure the format can deliver. Frame duration can cap the format maximum.
     private func longestExposure(for format: AVCaptureDevice.Format) -> CMTime {
         var duration = format.maxExposureDuration
         if let slowest = format.videoSupportedFrameRateRanges.max(by: {
@@ -535,19 +616,40 @@ final class CameraCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
                 && format.maxExposureDuration.seconds > 0
                 && !format.videoSupportedFrameRateRanges.isEmpty
         }
-        guard let best = usable.max(by: { lhs, rhs in
-            let order = CMTimeCompare(longestExposure(for: lhs), longestExposure(for: rhs))
+        let withStills = usable.filter { !$0.supportedMaxPhotoDimensions.isEmpty }
+        let pool = withStills.isEmpty ? usable : withStills
+        guard let best = pool.max(by: { lhs, rhs in
+            let order = CMTimeCompare(self.longestExposure(for: lhs), self.longestExposure(for: rhs))
             if order != 0 { return order < 0 }
-            return videoPixels(lhs) < videoPixels(rhs)
+            let stillOrder = self.stillPixels(lhs) - self.stillPixels(rhs)
+            if stillOrder != 0 { return stillOrder < 0 }
+            return self.videoPixels(lhs) < self.videoPixels(rhs)
         }) else {
             throw CameraError.noFormat
         }
         return best
     }
 
+    private func stillPixels(_ format: AVCaptureDevice.Format) -> Int {
+        format.supportedMaxPhotoDimensions.reduce(0) { partial, dims in
+            max(partial, Int(dims.width) * Int(dims.height))
+        }
+    }
+
     private func videoPixels(_ format: AVCaptureDevice.Format) -> Int {
         let dims = CMVideoFormatDescriptionGetDimensions(format.formatDescription)
         return Int(dims.width) * Int(dims.height)
+    }
+
+    private func choosePhotoDimensions(_ supported: [CMVideoDimensions]) -> CMVideoDimensions? {
+        let valid = supported.filter { $0.width > 0 && $0.height > 0 }
+        guard !valid.isEmpty else { return nil }
+        let target = 2000
+        let adequate = valid.filter { max(Int($0.width), Int($0.height)) >= 1280 }
+        let pool = adequate.isEmpty ? valid : adequate
+        return pool.min { lhs, rhs in
+            abs(max(Int(lhs.width), Int(lhs.height)) - target) < abs(max(Int(rhs.width), Int(rhs.height)) - target)
+        }
     }
 
     private func chosenISO(on device: AVCaptureDevice) -> Float {
