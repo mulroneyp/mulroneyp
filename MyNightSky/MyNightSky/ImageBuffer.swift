@@ -1,3 +1,4 @@
+import CoreVideo
 import NightSkyStack
 import UIKit
 
@@ -6,6 +7,74 @@ enum ImageEncoding {
     static func frameBuffer(data: Data, maxEdge: Int) throws -> FrameBuffer {
         guard let image = UIImage(data: data) else { throw CameraError.noImage }
         return try frameBuffer(from: image, maxEdge: maxEdge)
+    }
+
+    /// Copy a BGRA video frame, rotate it for display, and shrink the long edge.
+    static func frameBuffer(
+        from pixelBuffer: CVPixelBuffer,
+        maxEdge: Int,
+        rotationDegrees: Int,
+        mirrored: Bool = false
+    ) throws -> FrameBuffer {
+        guard CVPixelBufferGetPixelFormatType(pixelBuffer) == kCVPixelFormatType_32BGRA,
+              CVPixelBufferIsPlanar(pixelBuffer) == false
+        else { throw CameraError.noImage }
+        guard CVPixelBufferLockBaseAddress(pixelBuffer, .readOnly) == kCVReturnSuccess else {
+            throw CameraError.noImage
+        }
+        defer { CVPixelBufferUnlockBaseAddress(pixelBuffer, .readOnly) }
+        guard let base = CVPixelBufferGetBaseAddress(pixelBuffer) else { throw CameraError.noImage }
+
+        let srcW = CVPixelBufferGetWidth(pixelBuffer)
+        let srcH = CVPixelBufferGetHeight(pixelBuffer)
+        let bytesPerRow = CVPixelBufferGetBytesPerRow(pixelBuffer)
+        guard srcW > 0, srcH > 0, bytesPerRow >= srcW * 4 else { throw CameraError.noImage }
+
+        let rotated = FrameOrientation.size(width: srcW, height: srcH, clockwise: rotationDegrees)
+        let longest = max(rotated.width, rotated.height)
+        let limit = max(1, maxEdge)
+        let scale = longest > limit ? Double(limit) / Double(longest) : 1
+        let outW = max(1, Int((Double(rotated.width) * scale).rounded()))
+        let outH = max(1, Int((Double(rotated.height) * scale).rounded()))
+        let pixels = base.assumingMemoryBound(to: UInt8.self)
+        var rgb = [UInt8](repeating: 0, count: outW * outH * 3)
+
+        for oy in 0..<outH {
+            let ry0 = oy * rotated.height / outH
+            let ry1 = max(ry0 + 1, (oy + 1) * rotated.height / outH)
+            for ox in 0..<outW {
+                let rx0 = ox * rotated.width / outW
+                let rx1 = max(rx0 + 1, (ox + 1) * rotated.width / outW)
+                var sr = 0
+                var sg = 0
+                var sb = 0
+                var n = 0
+                for ry in ry0..<ry1 {
+                    for rx in rx0..<rx1 {
+                        let flippedX = mirrored ? (rotated.width - 1 - rx) : rx
+                        let source = FrameOrientation.source(
+                            x: flippedX,
+                            y: ry,
+                            width: srcW,
+                            height: srcH,
+                            clockwise: rotationDegrees
+                        )
+                        let sx = min(max(source.x, 0), srcW - 1)
+                        let sy = min(max(source.y, 0), srcH - 1)
+                        let offset = sy * bytesPerRow + sx * 4
+                        sb += Int(pixels[offset])
+                        sg += Int(pixels[offset + 1])
+                        sr += Int(pixels[offset + 2])
+                        n += 1
+                    }
+                }
+                let dest = (oy * outW + ox) * 3
+                rgb[dest] = UInt8(sr / n)
+                rgb[dest + 1] = UInt8(sg / n)
+                rgb[dest + 2] = UInt8(sb / n)
+            }
+        }
+        return try FrameBuffer.make(width: outW, height: outH, pixels: rgb)
     }
 
     static func frameBuffer(from image: UIImage, maxEdge: Int) throws -> FrameBuffer {

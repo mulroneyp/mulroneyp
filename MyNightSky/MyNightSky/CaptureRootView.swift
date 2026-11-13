@@ -136,11 +136,18 @@ private struct CapturingView: View {
                 Text("Capturing")
                     .font(.title.weight(.semibold))
                     .foregroundStyle(NightColor.text)
-                Text(nightClock(model.timeline.elapsed(at: model.now)))
-                    .font(.system(size: 88, weight: .semibold, design: .rounded))
-                    .foregroundStyle(NightColor.text)
-                    .minimumScaleFactor(0.5)
-                    .accessibilityLabel("Elapsed \(nightClock(model.timeline.elapsed(at: model.now)))")
+                if model.timeline.captureStartedAt == nil {
+                    Text("Starting exposure")
+                        .font(.system(size: 44, weight: .semibold, design: .rounded))
+                        .foregroundStyle(NightColor.text)
+                        .minimumScaleFactor(0.5)
+                } else {
+                    Text(nightClock(model.timeline.elapsed(at: model.now)))
+                        .font(.system(size: 88, weight: .semibold, design: .rounded))
+                        .foregroundStyle(NightColor.text)
+                        .minimumScaleFactor(0.5)
+                        .accessibilityLabel("Elapsed \(nightClock(model.timeline.elapsed(at: model.now)))")
+                }
                 VStack(alignment: .leading, spacing: 6) {
                     Text("\(model.timeline.framesRemaining) \(model.timeline.framesRemaining == 1 ? "frame" : "frames") left")
                         .font(.title.weight(.semibold))
@@ -172,7 +179,7 @@ private struct CapturingView: View {
     @ViewBuilder
     private var statusLine: some View {
         if model.timeline.exposureDuration == nil {
-            Text("Starting camera")
+            Text("Setting the longest exposure")
         } else if let gap = model.timeline.gapTimeRemaining(at: model.now) {
             Text("Next frame in \(nightSeconds(gap))")
             if let remaining = model.timeline.estimatedTimeRemaining(at: model.now) {

@@ -1,4 +1,5 @@
 import AVFoundation
+import CoreVideo
 import Foundation
 import NightSkyStack
 
@@ -25,18 +26,39 @@ enum CameraError: LocalizedError {
     }
 }
 
-/// Rear-camera stills. The shutter speed is `activeFormat.maxExposureDuration`
-/// (clamped to the frame duration that format allows). It is never a fixed constant.
-final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate {
+/// Rear-camera frames at the active format's longest exposure.
+///
+/// Stills go through `AVCaptureVideoDataOutput`, not `AVCapturePhotoOutput`.
+/// The photo output failed on device with AVFoundationErrorDomain -11800
+/// ("The operation could not be completed") after the shutter fired.
+final class CameraCapture: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     private let session = AVCaptureSession()
-    private let photoOutput = AVCapturePhotoOutput()
+    private let videoOutput = AVCaptureVideoDataOutput()
     private let sessionQueue = DispatchQueue(label: "nightsky.camera")
+    private let videoQueue = DispatchQueue(label: "nightsky.frames")
     private let stateLock = NSLock()
     private var device: AVCaptureDevice?
-    private var photoContinuation: CheckedContinuation<Data, Error>?
-    /// Filled by didFinishProcessingPhoto. Delivered only from didFinishCaptureFor,
-    /// so the next capturePhoto cannot start while this one is still in flight.
-    private var processedPhoto: Result<Data, Error>?
+    private var exposureReady = false
+    private var buffersToDrop = 0
+    private var exposureSeconds: TimeInterval = 1
+    private var pendingFrame: PendingFrame?
+
+    private struct PendingFrame {
+        let id: Int
+        let maxEdge: Int
+        let continuation: CheckedContinuation<FrameBuffer, Error>
+    }
+
+    private var nextFrameID = 0
+
+    override init() {
+        super.init()
+        videoOutput.alwaysDiscardsLateVideoFrames = false
+        videoOutput.videoSettings = [
+            kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA
+        ]
+        videoOutput.setSampleBufferDelegate(self, queue: videoQueue)
+    }
 
     func authorize() async throws {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
@@ -54,12 +76,17 @@ final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate {
         guard rearCamera() != nil else { throw CameraError.noCamera }
     }
 
-    /// Selects the longest-exposure format and starts the session. Does not take a photo.
-    func startSession() async throws -> TimeInterval {
-        try await withCheckedThrowingContinuation { continuation in
+    /// Opens the rear camera at a normal frame rate and locks focus at infinity
+    /// when the lens supports it. Call this before the countdown. It does not
+    /// start the long exposure.
+    func prepareSession() async throws {
+        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
             sessionQueue.async {
                 do {
-                    continuation.resume(returning: try self.configureAndStart())
+                    try self.configureAndStart()
+                    self.lockFocusAtInfinity { result in
+                        continuation.resume(with: result)
+                    }
                 } catch {
                     continuation.resume(throwing: error)
                 }
@@ -67,50 +94,62 @@ final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate {
         }
     }
 
-    /// Locks the lens at 1.0 when the camera supports it, then applies the
-    /// active format's maximum exposure. The lock is left in place for the series.
-    func lockLongestExposure() async throws -> TimeInterval {
+    /// Switches the running session to the format's longest exposure.
+    /// The first saved frame is taken after this returns.
+    func beginLongExposure() async throws -> TimeInterval {
         try await withCheckedThrowingContinuation { continuation in
             sessionQueue.async {
-                self.applyLongestExposure(completion: continuation.resume(with:))
+                self.applyLongExposure(completion: continuation.resume(with:))
             }
         }
     }
 
     func captureFrame(maxEdge: Int) async throws -> FrameBuffer {
-        let data: Data = try await withCheckedThrowingContinuation { continuation in
+        try await withCheckedThrowingContinuation { continuation in
             sessionQueue.async {
                 self.stateLock.lock()
-                if self.photoContinuation != nil {
+                if self.pendingFrame != nil {
                     self.stateLock.unlock()
                     continuation.resume(throwing: CameraError.configurationFailed("A capture is already in progress."))
                     return
                 }
-                self.photoContinuation = continuation
-                self.processedPhoto = nil
+                self.nextFrameID += 1
+                let frameID = self.nextFrameID
+                self.pendingFrame = PendingFrame(
+                    id: frameID,
+                    maxEdge: maxEdge,
+                    continuation: continuation
+                )
+                let timeout = self.exposureSeconds + 8
                 self.stateLock.unlock()
-                self.photoOutput.capturePhoto(with: self.makePhotoSettings(), delegate: self)
-                self.sessionQueue.asyncAfter(deadline: .now() + 30) {
-                    self.finishPhoto(.failure(CameraError.configurationFailed("The camera did not return a frame.")))
+                self.sessionQueue.asyncAfter(deadline: .now() + timeout) {
+                    self.failPending(
+                        id: frameID,
+                        CameraError.configurationFailed("The camera did not return a frame.")
+                    )
                 }
             }
         }
-        return try ImageEncoding.frameBuffer(data: data, maxEdge: maxEdge)
     }
 
     func stop() async {
         await withCheckedContinuation { continuation in
             sessionQueue.async {
+                self.stateLock.lock()
+                self.exposureReady = false
+                let pending = self.pendingFrame
+                self.pendingFrame = nil
+                self.stateLock.unlock()
+                pending?.continuation.resume(throwing: CancellationError())
                 if self.session.isRunning {
                     self.session.stopRunning()
                 }
-                self.finishPhoto(.failure(CancellationError()))
                 self.session.beginConfiguration()
                 for input in self.session.inputs {
                     self.session.removeInput(input)
                 }
-                if self.session.outputs.contains(where: { $0 === self.photoOutput }) {
-                    self.session.removeOutput(self.photoOutput)
+                if self.session.outputs.contains(where: { $0 === self.videoOutput }) {
+                    self.session.removeOutput(self.videoOutput)
                 }
                 self.session.commitConfiguration()
                 self.device = nil
@@ -119,73 +158,65 @@ final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate {
         }
     }
 
-    func photoOutput(
-        _ output: AVCapturePhotoOutput,
-        didFinishProcessingPhoto photo: AVCapturePhoto,
-        error: Error?
+    func captureOutput(
+        _ output: AVCaptureOutput,
+        didOutput sampleBuffer: CMSampleBuffer,
+        from connection: AVCaptureConnection
     ) {
-        if let error {
-            storeProcessed(.failure(error))
-            return
-        }
-        guard let data = photo.fileDataRepresentation() else {
-            storeProcessed(.failure(CameraError.noImage))
-            return
-        }
-        storeProcessed(.success(data))
-    }
-
-    func photoOutput(
-        _ output: AVCapturePhotoOutput,
-        didFinishCaptureFor resolvedSettings: AVCaptureResolvedPhotoSettings,
-        error: Error?
-    ) {
-        // Starting another capturePhoto before this callback is what makes the
-        // next frame fail with "The operation could not be completed."
-        if let error {
-            _ = takeProcessed()
-            finishPhoto(.failure(error))
-            return
-        }
-        switch takeProcessed() {
-        case .success(let data):
-            finishPhoto(.success(data))
-        case .failure(let error):
-            finishPhoto(.failure(error))
-        case nil:
-            finishPhoto(.failure(CameraError.noImage))
-        }
-    }
-
-    private func storeProcessed(_ result: Result<Data, Error>) {
+        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
         stateLock.lock()
-        defer { stateLock.unlock() }
-        guard photoContinuation != nil else { return }
-        processedPhoto = result
-    }
-
-    private func takeProcessed() -> Result<Data, Error>? {
-        stateLock.lock()
-        let result = processedPhoto
-        processedPhoto = nil
+        guard exposureReady else {
+            stateLock.unlock()
+            return
+        }
+        if buffersToDrop > 0 {
+            buffersToDrop -= 1
+            stateLock.unlock()
+            return
+        }
+        guard let pending = pendingFrame else {
+            stateLock.unlock()
+            return
+        }
+        pendingFrame = nil
         stateLock.unlock()
-        return result
+
+        let rotation = Int(connection.videoRotationAngle.rounded())
+        let mirrored = connection.isVideoMirrored
+        do {
+            let frame = try ImageEncoding.frameBuffer(
+                from: pixelBuffer,
+                maxEdge: pending.maxEdge,
+                rotationDegrees: rotation,
+                mirrored: mirrored
+            )
+            pending.continuation.resume(returning: frame)
+        } catch {
+            pending.continuation.resume(throwing: error)
+        }
     }
 
-    private func finishPhoto(_ result: Result<Data, Error>) {
+    private func failPending(id: Int, _ error: Error) {
         stateLock.lock()
-        let continuation = photoContinuation
-        photoContinuation = nil
-        processedPhoto = nil
+        guard let pending = pendingFrame, pending.id == id else {
+            stateLock.unlock()
+            return
+        }
+        pendingFrame = nil
         stateLock.unlock()
-        continuation?.resume(with: result)
+        pending.continuation.resume(throwing: error)
     }
 
-    private func configureAndStart() throws -> TimeInterval {
-        guard let device = rearCamera() else { throw CameraError.noCamera }
-        self.device = device
-        let input = try AVCaptureDeviceInput(device: device)
+    private func configureAndStart() throws {
+        stateLock.lock()
+        exposureReady = false
+        buffersToDrop = 0
+        pendingFrame = nil
+        stateLock.unlock()
 
+        if session.isRunning {
+            session.stopRunning()
+        }
         session.beginConfiguration()
         var didCommit = false
         func commit() {
@@ -195,13 +226,25 @@ final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate {
             }
         }
 
+        for input in session.inputs {
+            session.removeInput(input)
+        }
+        if session.outputs.contains(where: { $0 === videoOutput }) {
+            session.removeOutput(videoOutput)
+        }
+
+        guard let device = rearCamera() else {
+            commit()
+            throw CameraError.noCamera
+        }
+        self.device = device
+        let input = try AVCaptureDeviceInput(device: device)
         guard session.canAddInput(input) else {
             commit()
             throw CameraError.configurationFailed("Could not use the rear camera.")
         }
         session.addInput(input)
 
-        let format: AVCaptureDevice.Format
         do {
             try device.lockForConfiguration()
         } catch {
@@ -209,18 +252,9 @@ final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate {
             throw CameraError.configurationFailed(error.localizedDescription)
         }
         do {
-            format = try bestFormat(on: device)
+            let format = try bestFormat(on: device)
             device.activeFormat = format
-            if let slowest = format.videoSupportedFrameRateRanges.max(by: {
-                CMTimeCompare($0.maxFrameDuration, $1.maxFrameDuration) < 0
-            }) {
-                // Allow the long exposure by raising the maximum frame duration,
-                // but do not pin the camera at that slow rate. A locked 1 fps
-                // rate makes AVCapturePhotoOutput fail the next still with
-                // "The operation could not be completed."
-                device.activeVideoMaxFrameDuration = slowest.maxFrameDuration
-                device.activeVideoMinFrameDuration = slowest.minFrameDuration
-            }
+            setLockedFrameDuration(warmupDuration(for: format), on: device)
             if device.isLowLightBoostSupported {
                 device.automaticallyEnablesLowLightBoostWhenAvailable = false
             }
@@ -237,33 +271,93 @@ final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate {
             throw error
         }
 
-        guard session.canAddOutput(photoOutput) else {
+        guard session.canAddOutput(videoOutput) else {
             commit()
-            throw CameraError.configurationFailed("Could not use the photo output.")
+            throw CameraError.configurationFailed("Could not use the camera output.")
         }
-        session.addOutput(photoOutput)
-        photoOutput.maxPhotoQualityPrioritization = .speed
-        if let dimensions = choosePhotoDimensions(format.supportedMaxPhotoDimensions) {
-            photoOutput.maxPhotoDimensions = dimensions
+        session.addOutput(videoOutput)
+        if !videoOutput.availableVideoPixelFormatTypes.isEmpty
+            && !videoOutput.availableVideoPixelFormatTypes.contains(kCVPixelFormatType_32BGRA) {
+            commit()
+            throw CameraError.configurationFailed("This camera cannot deliver frames this app can read.")
+        }
+        if let connection = videoOutput.connection(with: .video),
+           connection.isVideoStabilizationSupported {
+            connection.preferredVideoStabilizationMode = .off
         }
 
         commit()
         if !session.isRunning {
             session.startRunning()
         }
-
-        let duration = longestUsableExposure(on: device)
-        guard duration.isValid, duration.seconds.isFinite, duration.seconds > 0 else {
-            throw CameraError.noFormat
+        guard session.isRunning else {
+            throw CameraError.configurationFailed("The camera did not start.")
         }
-        return duration.seconds
     }
 
-    private func applyLongestExposure(completion: @escaping (Result<TimeInterval, Error>) -> Void) {
+    /// Raise the maximum before the minimum when the new duration is longer,
+    /// and lower the minimum first when it is shorter. The other order throws.
+    private func setLockedFrameDuration(_ duration: CMTime, on device: AVCaptureDevice) {
+        let currentMin = device.activeVideoMinFrameDuration
+        let currentMax = device.activeVideoMaxFrameDuration
+        if CMTimeCompare(duration, currentMax) > 0 {
+            device.activeVideoMaxFrameDuration = duration
+            device.activeVideoMinFrameDuration = duration
+        } else if currentMin.isValid && CMTimeCompare(duration, currentMin) < 0 {
+            device.activeVideoMinFrameDuration = duration
+            device.activeVideoMaxFrameDuration = duration
+        } else {
+            device.activeVideoMaxFrameDuration = duration
+            device.activeVideoMinFrameDuration = duration
+        }
+    }
+
+    private func lockFocusAtInfinity(completion: @escaping (Result<Void, Error>) -> Void) {
         guard let device else {
             completion(.failure(CameraError.noCamera))
             return
         }
+        do {
+            try device.lockForConfiguration()
+        } catch {
+            completion(.failure(CameraError.configurationFailed(error.localizedDescription)))
+            return
+        }
+        guard device.isLockingFocusWithCustomLensPositionSupported else {
+            device.unlockForConfiguration()
+            completion(.success(()))
+            return
+        }
+
+        let gate = NSLock()
+        var finished = false
+        let finish: () -> Void = {
+            gate.lock()
+            let go = !finished
+            finished = true
+            gate.unlock()
+            guard go else { return }
+            device.unlockForConfiguration()
+            completion(.success(()))
+        }
+        device.setFocusModeLocked(lensPosition: 1.0) { _ in
+            self.sessionQueue.async { finish() }
+        }
+        sessionQueue.asyncAfter(deadline: .now() + 3) {
+            finish()
+        }
+    }
+
+    private func applyLongExposure(completion: @escaping (Result<TimeInterval, Error>) -> Void) {
+        guard let device else {
+            completion(.failure(CameraError.noCamera))
+            return
+        }
+        stateLock.lock()
+        exposureReady = false
+        buffersToDrop = 0
+        stateLock.unlock()
+
         do {
             try device.lockForConfiguration()
         } catch {
@@ -276,75 +370,108 @@ final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate {
             return
         }
 
-        if device.isLockingFocusWithCustomLensPositionSupported {
-            // 1.0 is infinity. Leave this lock in place for every frame in the series.
-            let gate = NSLock()
-            var started = false
-            let startExposure = { [weak self] in
-                gate.lock()
-                let shouldStart = !started
-                started = true
-                gate.unlock()
-                guard shouldStart, let self else {
-                    if !shouldStart { return }
-                    device.unlockForConfiguration()
-                    completion(.failure(CameraError.configurationFailed("The camera went away.")))
-                    return
-                }
-                self.sessionQueue.async {
-                    self.applyExposure(on: device, completion: completion)
-                }
-            }
-            device.setFocusModeLocked(lensPosition: 1.0) { _ in
-                startExposure()
-            }
-            // If the lens never reports that it locked, still take the series
-            // at the longest exposure. Do not fail the capture for that.
-            sessionQueue.asyncAfter(deadline: .now() + 3) {
-                startExposure()
-            }
-        } else {
-            // This camera cannot lock the lens at 1.0. Still use the longest exposure.
-            applyExposure(on: device, completion: completion)
-        }
-    }
-
-    private func applyExposure(
-        on device: AVCaptureDevice,
-        completion: @escaping (Result<TimeInterval, Error>) -> Void
-    ) {
-        if device.isWhiteBalanceModeSupported(.locked) {
-            device.setWhiteBalanceModeLocked(with: clampedGains(device), completionHandler: nil)
-        }
-
-        let duration = longestUsableExposure(on: device)
+        let duration = clampedDuration(longestExposure(for: device.activeFormat), on: device.activeFormat)
         guard duration.isValid, duration.seconds.isFinite, duration.seconds > 0 else {
             device.unlockForConfiguration()
             completion(.failure(CameraError.noFormat))
             return
         }
-        let iso = chosenISO(on: device)
+        setLockedFrameDuration(duration, on: device)
+
+        let continueExposure = { [weak self] in
+            guard let self else {
+                device.unlockForConfiguration()
+                completion(.failure(CameraError.noCamera))
+                return
+            }
+            self.applyExposure(on: device, duration: duration, completion: completion)
+        }
+
+        let needsFocus = device.isLockingFocusWithCustomLensPositionSupported
+            && (device.focusMode != .locked || abs(device.lensPosition - 1) > 0.02)
+        guard needsFocus else {
+            continueExposure()
+            return
+        }
 
         let gate = NSLock()
-        var finished = false
-        func complete(_ result: Result<TimeInterval, Error>) {
+        var started = false
+        let start = { [weak self] in
             gate.lock()
-            defer { gate.unlock() }
-            if finished { return }
+            let go = !started
+            started = true
+            gate.unlock()
+            guard go else { return }
+            self?.sessionQueue.async { continueExposure() }
+        }
+        device.setFocusModeLocked(lensPosition: 1.0) { _ in
+            start()
+        }
+        sessionQueue.asyncAfter(deadline: .now() + 3) {
+            start()
+        }
+    }
+
+    private func applyExposure(
+        on device: AVCaptureDevice,
+        duration: CMTime,
+        completion: @escaping (Result<TimeInterval, Error>) -> Void
+    ) {
+        let gate = NSLock()
+        var finished = false
+        let finish: (Result<TimeInterval, Error>) -> Void = { result in
+            gate.lock()
+            let go = !finished
             finished = true
+            gate.unlock()
+            guard go else { return }
+            device.unlockForConfiguration()
+            if case .success(let seconds) = result {
+                self.markExposureReady(seconds)
+            }
             completion(result)
         }
 
-        device.setExposureModeCustom(duration: duration, iso: iso) { [weak self] _ in
-            device.unlockForConfiguration()
+        let startExposure = { [weak self] in
+            gate.lock()
+            let alreadyFinished = finished
+            gate.unlock()
+            // The timeout may already have unlocked the device. Do not touch it then.
+            if alreadyFinished { return }
             guard let self else {
-                complete(.success(duration.seconds))
+                finish(.failure(CameraError.noCamera))
                 return
             }
-            self.waitUntilExposureSettles(device: device, attempts: 40) {
-                complete(.success(duration.seconds))
+            let iso = self.chosenISO(on: device)
+            device.setExposureModeCustom(duration: duration, iso: iso) { _ in
+                self.sessionQueue.async {
+                    self.waitUntilExposureSettles(device: device, attempts: 40) {
+                        finish(.success(duration.seconds))
+                    }
+                }
             }
         }
+
+        let limit = max(8, duration.seconds + 4)
+        sessionQueue.asyncAfter(deadline: .now() + limit) {
+            finish(.failure(CameraError.configurationFailed("The camera did not apply the longest exposure.")))
+        }
+
+        if device.isWhiteBalanceModeSupported(.locked) {
+            device.setWhiteBalanceModeLocked(with: clampedGains(device)) { _ in
+                self.sessionQueue.async { startExposure() }
+            }
+        } else {
+            startExposure()
+        }
+    }
+
+    private func markExposureReady(_ seconds: TimeInterval) {
+        stateLock.lock()
+        exposureSeconds = seconds
+        buffersToDrop = 1
+        exposureReady = true
+        stateLock.unlock()
     }
 
     private func waitUntilExposureSettles(
@@ -361,36 +488,8 @@ final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate {
         }
     }
 
-    private func makePhotoSettings() -> AVCapturePhotoSettings {
-        // A JPEG format dictionary plus maxPhotoDimensions fails on device with
-        // AVFoundationErrorDomain -11800, "The operation could not be completed."
-        let settings = AVCapturePhotoSettings()
-        if photoOutput.supportedFlashModes.contains(.off) {
-            settings.flashMode = .off
-        }
-        let dimensions = photoOutput.maxPhotoDimensions
-        if dimensions.width > 0 && dimensions.height > 0 {
-            settings.maxPhotoDimensions = dimensions
-        }
-        settings.photoQualityPrioritization = .speed
-        return settings
-    }
-
-    /// Longest exposure the active format can deliver. Frame duration can cap the format maximum.
-    private func longestUsableExposure(on device: AVCaptureDevice) -> CMTime {
-        var duration = device.activeFormat.maxExposureDuration
-        let frameCap = device.activeVideoMaxFrameDuration
-        if frameCap.isValid && frameCap.seconds > 0 && CMTimeCompare(duration, frameCap) > 0 {
-            duration = frameCap
-        }
-        let minimum = device.activeFormat.minExposureDuration
-        if minimum.isValid && CMTimeCompare(duration, minimum) < 0 {
-            duration = minimum
-        }
-        return duration
-    }
-
-    private func usableExposure(of format: AVCaptureDevice.Format) -> CMTime {
+    /// Longest exposure the format can deliver. Frame duration can cap the format maximum.
+    private func longestExposure(for format: AVCaptureDevice.Format) -> CMTime {
         var duration = format.maxExposureDuration
         if let slowest = format.videoSupportedFrameRateRanges.max(by: {
             CMTimeCompare($0.maxFrameDuration, $1.maxFrameDuration) < 0
@@ -400,37 +499,55 @@ final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate {
         return duration
     }
 
+    private func clampedDuration(_ duration: CMTime, on format: AVCaptureDevice.Format) -> CMTime {
+        guard let range = format.videoSupportedFrameRateRanges.first(where: {
+            CMTimeCompare($0.minFrameDuration, duration) <= 0
+                && CMTimeCompare(duration, $0.maxFrameDuration) <= 0
+        }) ?? format.videoSupportedFrameRateRanges.max(by: {
+            CMTimeCompare($0.maxFrameDuration, $1.maxFrameDuration) < 0
+        }) else { return duration }
+        var clamped = duration
+        if CMTimeCompare(clamped, range.minFrameDuration) < 0 {
+            clamped = range.minFrameDuration
+        }
+        if CMTimeCompare(clamped, range.maxFrameDuration) > 0 {
+            clamped = range.maxFrameDuration
+        }
+        return clamped
+    }
+
+    private func warmupDuration(for format: AVCaptureDevice.Format) -> CMTime {
+        let fps30 = CMTime(value: 1, timescale: 30)
+        if format.videoSupportedFrameRateRanges.contains(where: {
+            CMTimeCompare($0.minFrameDuration, fps30) <= 0 && CMTimeCompare(fps30, $0.maxFrameDuration) <= 0
+        }) {
+            return fps30
+        }
+        let fastest = format.videoSupportedFrameRateRanges.min {
+            CMTimeCompare($0.minFrameDuration, $1.minFrameDuration) < 0
+        }
+        return fastest?.minFrameDuration ?? fps30
+    }
+
     private func bestFormat(on device: AVCaptureDevice) throws -> AVCaptureDevice.Format {
         let usable = device.formats.filter { format in
-            format.maxExposureDuration.isValid && format.maxExposureDuration.seconds > 0
+            format.maxExposureDuration.isValid
+                && format.maxExposureDuration.seconds > 0
+                && !format.videoSupportedFrameRateRanges.isEmpty
         }
-        let withStills = usable.filter { !$0.supportedMaxPhotoDimensions.isEmpty }
-        let pool = withStills.isEmpty ? usable : withStills
-        guard let best = pool.max(by: { lhs, rhs in
-            let order = CMTimeCompare(usableExposure(of: lhs), usableExposure(of: rhs))
+        guard let best = usable.max(by: { lhs, rhs in
+            let order = CMTimeCompare(longestExposure(for: lhs), longestExposure(for: rhs))
             if order != 0 { return order < 0 }
-            return stillPixels(lhs) < stillPixels(rhs)
+            return videoPixels(lhs) < videoPixels(rhs)
         }) else {
             throw CameraError.noFormat
         }
         return best
     }
 
-    private func stillPixels(_ format: AVCaptureDevice.Format) -> Int {
-        format.supportedMaxPhotoDimensions.reduce(0) { partial, dims in
-            max(partial, Int(dims.width) * Int(dims.height))
-        }
-    }
-
-    private func choosePhotoDimensions(_ supported: [CMVideoDimensions]) -> CMVideoDimensions? {
-        let valid = supported.filter { $0.width > 0 && $0.height > 0 }
-        guard !valid.isEmpty else { return nil }
-        let target = 2000
-        let adequate = valid.filter { max(Int($0.width), Int($0.height)) >= 1280 }
-        let pool = adequate.isEmpty ? valid : adequate
-        return pool.min { lhs, rhs in
-            abs(max(Int(lhs.width), Int(lhs.height)) - target) < abs(max(Int(rhs.width), Int(rhs.height)) - target)
-        }
+    private func videoPixels(_ format: AVCaptureDevice.Format) -> Int {
+        let dims = CMVideoFormatDescriptionGetDimensions(format.formatDescription)
+        return Int(dims.width) * Int(dims.height)
     }
 
     private func chosenISO(on device: AVCaptureDevice) -> Float {
