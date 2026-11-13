@@ -26,7 +26,7 @@ struct EBirdAPIImportSheet: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     Text(
-                        "Search hotspots by name, region, or L-code. Frequency comes from eBird’s bar-chart histogram (48 weekly columns). Nearby hotspots can be merged using the maximum rate per species — never summed."
+                        "Search hotspots by name, region code (CR, US-CA), or L-code. Frequency prefers eBird’s bar-chart histogram (48 weekly columns), with an API species-list fallback if the website blocks the download. Nearby hotspots can be merged using the maximum rate per species — never summed."
                     )
                     .font(.subheadline)
                     .foregroundStyle(GuideColor.muted)

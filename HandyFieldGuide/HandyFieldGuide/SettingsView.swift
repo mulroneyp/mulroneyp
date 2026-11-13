@@ -10,6 +10,7 @@ struct SettingsView: View {
     @State private var keyMessage: String?
     @State private var keyError: String?
     @State private var showingClearConfirm = false
+    @State private var isValidatingKey = false
 
     var body: some View {
         NavigationStack {
@@ -38,20 +39,32 @@ struct SettingsView: View {
                             .foregroundStyle(GuideColor.muted)
                     }
 
-                    SecureField("Paste eBird API key", text: $apiKeyDraft)
+                    // Plain field (not SecureField) so paste from keygen is reliable.
+                    TextField("Paste eBird API key", text: $apiKeyDraft)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
+                        .textContentType(.password)
                         .font(.body.monospaced())
 
-                    Button(keyStored ? "Replace key" : "Save key") {
-                        saveKey()
+                    Button {
+                        Task { await saveKey() }
+                    } label: {
+                        if isValidatingKey {
+                            Text(keyStored ? "Checking key…" : "Saving…")
+                        } else {
+                            Text(keyStored ? "Replace key" : "Save key")
+                        }
                     }
-                    .disabled(apiKeyDraft.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                    .disabled(
+                        isValidatingKey
+                            || EBirdAPIKeyStore.sanitize(apiKeyDraft).isEmpty
+                    )
 
                     if keyStored {
                         Button("Clear key", role: .destructive) {
                             showingClearConfirm = true
                         }
+                        .disabled(isValidatingKey)
                     }
 
                     Link(
@@ -72,7 +85,7 @@ struct SettingsView: View {
                     Text("eBird API")
                 } footer: {
                     Text(
-                        "Required for searching hotspots and importing frequency data over the network. The key is stored in the Keychain on this device only — never in iCloud Birdlists or the project repo. Clear or replace it anytime."
+                        "Required for searching hotspots and importing frequency data over the network. The key is stored in the Keychain on this device only — never in iCloud Birdlists or the project repo. Clear or replace it anytime. Saving checks the key against api.ebird.org."
                     )
                 }
             }
@@ -100,14 +113,42 @@ struct SettingsView: View {
         .presentationDetents([.medium, .large])
     }
 
-    private func saveKey() {
+    @MainActor
+    private func saveKey() async {
         keyError = nil
         keyMessage = nil
+        let sanitized = EBirdAPIKeyStore.sanitize(apiKeyDraft)
+        guard !sanitized.isEmpty else {
+            keyError = EBirdAPIKeyStore.KeyStoreError.empty.localizedDescription
+            return
+        }
+
+        isValidatingKey = true
+        defer { isValidatingKey = false }
+
         do {
-            try EBirdAPIKeyStore.save(apiKeyDraft)
+            try await EBirdAPIClient.shared.validateAPIKey(sanitized)
+            try EBirdAPIKeyStore.save(sanitized)
             keyStored = true
             apiKeyDraft = ""
-            keyMessage = "API key saved securely."
+            keyMessage = "API key saved and verified with eBird."
+        } catch let error as EBirdAPIError {
+            switch error {
+            case .unauthorized:
+                keyError = error.localizedDescription
+            case .network:
+                // Still store so offline paste works; user can retry search later.
+                do {
+                    try EBirdAPIKeyStore.save(sanitized)
+                    keyStored = true
+                    apiKeyDraft = ""
+                    keyMessage = "API key saved. Couldn’t verify online — check your connection."
+                } catch {
+                    keyError = error.localizedDescription
+                }
+            default:
+                keyError = error.localizedDescription
+            }
         } catch {
             keyError = error.localizedDescription
         }

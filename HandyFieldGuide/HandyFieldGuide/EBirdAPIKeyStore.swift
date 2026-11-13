@@ -26,16 +26,16 @@ enum EBirdAPIKeyStore {
               let key = String(data: data, encoding: .utf8) else {
             return nil
         }
-        let trimmed = key.trimmingCharacters(in: .whitespacesAndNewlines)
-        return trimmed.isEmpty ? nil : trimmed
+        let sanitized = sanitize(key)
+        return sanitized.isEmpty ? nil : sanitized
     }
 
     static func save(_ raw: String) throws {
-        let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else {
+        let sanitized = sanitize(raw)
+        guard !sanitized.isEmpty else {
             throw KeyStoreError.empty
         }
-        guard let data = trimmed.data(using: .utf8) else {
+        guard let data = sanitized.data(using: .utf8) else {
             throw KeyStoreError.encoding
         }
         delete()
@@ -61,6 +61,18 @@ enum EBirdAPIKeyStore {
         ]
         let status = SecItemDelete(query as CFDictionary)
         return status == errSecSuccess || status == errSecItemNotFound
+    }
+
+    /// Trims whitespace/newlines and strips invisible / control characters that
+    /// often hitch a ride when pasting from the keygen page.
+    static func sanitize(_ raw: String) -> String {
+        let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+        return String(trimmed.unicodeScalars.filter { scalar in
+            if scalar.value == 0xFEFF { return false } // BOM
+            if CharacterSet.controlCharacters.contains(scalar) { return false }
+            if scalar.properties.isDefaultIgnorableCodePoint { return false }
+            return true
+        })
     }
 
     enum KeyStoreError: LocalizedError {

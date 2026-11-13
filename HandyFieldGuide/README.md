@@ -35,7 +35,11 @@ The Location picker shows **only** places you have imported (or added via the sa
 
 ### Import via eBird API
 
-Use **Add location → Import via eBird API**. Search by hotspot name, region, or L-code; pick a hotspot; optionally merge nearby hotspots (**max** frequency per species, never sum). Frequency uses eBird’s bar-chart histogram download (`/barchartData`, 48 weekly columns) mapped into the same Birdlist shape as `.txt` imports. Hotspot `lat`/`lng` drive the Map link when present. After save, lists live in iCloud Birdlists + the local mirror and work offline; on-import photo fetch fills gaps as with file import.
+Use **Add location → Import via eBird API**. Search by hotspot name, region code (`CR`, `US-CA`), or L-code; pick a hotspot; optionally merge nearby hotspots (**max** frequency per species, never sum).
+
+Place-name search geocodes the query and uses `api.ebird.org` hotspot/geo + region lists. It does **not** call `ref/region/find` (that endpoint returns HTTP 403 even with a valid personal key). The API token is sent only to `api.ebird.org` as `X-eBirdApiToken` — never to the `ebird.org` website histogram host.
+
+Frequency prefers eBird’s bar-chart histogram download (`/barchartData`, 48 weekly columns). If that website endpoint hits a sign-in or bot wall, the app falls back to the official API species list plus monthly historic samples. Hotspot `lat`/`lng` drive the Map link when present. After save, lists live in iCloud Birdlists + the local mirror and work offline; on-import photo fetch fills gaps as with file import.
 
 ### Barchart `.txt` file
 
