@@ -274,9 +274,9 @@ final class GuideModel: ObservableObject {
                 longitude: only.longitude
             )
         } else {
-            let defaultName = displayName?.trimmingCharacters(in: .whitespacesAndNewlines).flatMap {
-                $0.isEmpty ? nil : $0
-            } ?? "\(hotspots[0].locName) area"
+            let defaultName = (displayName?.trimmingCharacters(in: .whitespacesAndNewlines))
+                .flatMap { $0.isEmpty ? nil : $0 }
+                ?? "\(hotspots[0].locName) area"
             let merged = try BirdlistMerger.merge(records: records, displayName: defaultName)
             saved = imports.upsert(merged)
         }
