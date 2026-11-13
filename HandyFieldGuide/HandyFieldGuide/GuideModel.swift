@@ -205,6 +205,94 @@ final class GuideModel: ObservableObject {
         return record
     }
 
+    /// Imports one hotspot (or merges several with max-not-sum) from the eBird API + histogram download.
+    @discardableResult
+    func importEBirdHotspots(
+        _ hotspots: [EBirdHotspot],
+        displayName: String?
+    ) async throws -> ImportedLocationRecord {
+        guard let apiKey = EBirdAPIKeyStore.load() else {
+            throw EBirdAPIError.missingAPIKey
+        }
+        guard !hotspots.isEmpty else {
+            throw EBirdAPIError.notFound
+        }
+
+        let client = EBirdAPIClient.shared
+        var records: [ImportedLocationRecord] = []
+        records.reserveCapacity(hotspots.count)
+
+        for hotspot in hotspots {
+            let parsed = try await client.fetchFrequencyBarchart(
+                locId: hotspot.locId,
+                apiKey: apiKey
+            )
+            let record = ImportedLocationRecord(
+                id: "ebird-\(hotspot.locId)",
+                name: hotspot.locName,
+                ebirdLocationId: hotspot.locId,
+                sourceFileName: parsed.sourceFileName,
+                importedAt: Date(),
+                reportedTaxonCount: parsed.reportedTaxonCount,
+                species: parsed.species.map {
+                    ImportedTaxonRecord(
+                        commonName: $0.commonName,
+                        kind: $0.kind,
+                        monthlyMean: $0.monthlyMean,
+                        monthlyMax: $0.monthlyMax,
+                        weekFrequencies: $0.weekFrequencies
+                    )
+                },
+                latitude: hotspot.lat,
+                longitude: hotspot.lng
+            )
+            records.append(record)
+        }
+
+        let saved: ImportedLocationRecord
+        if records.count == 1 {
+            let only = records[0]
+            let name = displayName?.trimmingCharacters(in: .whitespacesAndNewlines)
+            let parsed = ParsedBarchart(
+                ebirdLocationId: only.ebirdLocationId,
+                sourceFileName: only.sourceFileName,
+                reportedTaxonCount: only.reportedTaxonCount,
+                species: only.species.map {
+                    ParsedBarchartSpecies(
+                        commonName: $0.commonName,
+                        kind: $0.kind,
+                        monthlyMean: $0.monthlyMean,
+                        monthlyMax: $0.monthlyMax,
+                        weekFrequencies: $0.weekFrequencies
+                    )
+                }
+            )
+            saved = imports.upsert(
+                from: parsed,
+                displayName: (name?.isEmpty == false) ? name : only.name,
+                latitude: only.latitude,
+                longitude: only.longitude
+            )
+        } else {
+            let defaultName = displayName?.trimmingCharacters(in: .whitespacesAndNewlines).flatMap {
+                $0.isEmpty ? nil : $0
+            } ?? "\(hotspots[0].locName) area"
+            let merged = try BirdlistMerger.merge(records: records, displayName: defaultName)
+            saved = imports.upsert(merged)
+        }
+
+        invalidatePlaceCache()
+        locationQuery = saved.name
+        let flagged = saved.species.filter { $0.kind != .species }.count
+        if records.count == 1 {
+            importMessage = "Imported \(saved.species.count) taxa for \(saved.name) (\(saved.resolvableCount) species; \(flagged) flagged) via eBird."
+        } else {
+            importMessage = "Merged \(records.count) hotspots into \(saved.name) (\(saved.species.count) taxa; max frequency, not sum)."
+        }
+        startPhotoFetch(for: saved)
+        return saved
+    }
+
     /// Merges two or more saved imports into a new named list. Source lists are kept.
     /// Per-species week/month rates use the **maximum** across sources (never summed).
     @discardableResult

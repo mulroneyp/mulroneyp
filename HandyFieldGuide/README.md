@@ -6,7 +6,7 @@ An iPhone field guide. Open `HandyFieldGuide.xcodeproj` in Xcode, pick the Handy
 
 Location, Month, Zone, and Settings sit in a **bottom toolbar** so the bird list keeps the space above:
 
-1. **Location** — generic bar label (no place name in the toolbar). Menu of **imported** eBird areas only, plus **Manage locations** (rename / delete saved imports) and **Add eBird barchart**. There is no default / curated place list in the menu. With no imports, the home screen prompts you to add a barchart. The active place name stays in the main header.
+1. **Location** — generic bar label (no place name in the toolbar). Menu of **imported** eBird areas only, plus **Manage locations** (rename / delete saved imports) and **Add location** (eBird API hotspot search or barchart `.txt`). Paste a free API key under **Settings → eBird API** (Keychain; never committed). There is no default / curated place list in the menu. With no imports, the home screen prompts you to add a location. The active place name stays in the main header.
 2. **Month** — picker that defaults to the device’s calendar month. The bar shows the month name only (no “Current” / “This month” wording). Imported eBird lists use that month’s frequencies for “likely” birds.
 3. **Zone** — multi-select ground / low / mid / canopy / sky. Birds matching **any** selected zone appear. **Any** clears the filter. Long zone descriptions stay behind a small **i** button.
 4. **Settings** — gear opens scarce / near-zero hide and flagged “sp.” / slash taxa toggles (moved off the main list).
@@ -25,9 +25,21 @@ Species detail shows one badge — **Sexually dimorphic** (“Sexes do not look 
 
 The Location picker shows **only** places you have imported (or added via the sample). Bundled `guide.json` species notes still enrich matching common names on imports, but Monteverde / Melbourne presets are not offered as selectable lists. With no active import, the app shows an empty state and does not invent birds.
 
-## eBird barchart import
+## eBird import (API + barchart file)
 
-Use **Add eBird barchart** (or **Add sample L436229**) to import an eBird Frequency / barchart `.txt` export (tab-separated text).
+### API key
+
+1. Get a free key at [ebird.org/api/keygen](https://ebird.org/api/keygen).
+2. Open **Settings → eBird API**, paste the key, and tap **Save key**.
+3. The key is stored in the device Keychain only (clear / replace anytime). It is never written to Birdlists JSON or the git repo.
+
+### Import via eBird API
+
+Use **Add location → Import via eBird API**. Search by hotspot name, region, or L-code; pick a hotspot; optionally merge nearby hotspots (**max** frequency per species, never sum). Frequency uses eBird’s bar-chart histogram download (`/barchartData`, 48 weekly columns) mapped into the same Birdlist shape as `.txt` imports. Hotspot `lat`/`lng` drive the Map link when present. After save, lists live in iCloud Birdlists + the local mirror and work offline; on-import photo fetch fills gaps as with file import.
+
+### Barchart `.txt` file
+
+Use **Import barchart .txt** (or **Add sample L436229**) for an eBird Frequency / barchart `.txt` export (tab-separated text).
 
 - The app reads the eBird location id from the filename when present (for example `L436229`).
 - Each month aggregates the four week columns as a **mean**.

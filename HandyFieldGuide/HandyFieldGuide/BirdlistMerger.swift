@@ -55,6 +55,11 @@ enum BirdlistMerger {
         let sourceFileLabel = "merged: " + sourceNames.joined(separator: ", ")
         let reported = species.count
 
+        // Prefer coordinates from the first source that has them (caller orders
+        // primary hotspot first for API multi-hotspot imports).
+        let latitude = records.first(where: { $0.latitude != nil })?.latitude
+        let longitude = records.first(where: { $0.longitude != nil })?.longitude
+
         return ImportedLocationRecord(
             id: "merged-\(UUID().uuidString.lowercased())",
             name: name,
@@ -62,7 +67,9 @@ enum BirdlistMerger {
             sourceFileName: sourceFileLabel,
             importedAt: Date(),
             reportedTaxonCount: reported,
-            species: species
+            species: species,
+            latitude: latitude,
+            longitude: longitude
         )
     }
 

@@ -18,6 +18,18 @@ enum PlaceMaps {
     }
 
     static func appleMapsURL(for place: ResolvedPlace) -> URL? {
+        if let imported = place.imported,
+           let lat = imported.latitude,
+           let lng = imported.longitude {
+            var components = URLComponents()
+            components.scheme = "https"
+            components.host = "maps.apple.com"
+            components.queryItems = [
+                URLQueryItem(name: "ll", value: "\(lat),\(lng)"),
+                URLQueryItem(name: "q", value: imported.name),
+            ]
+            return components.url
+        }
         guard let query = searchQuery(for: place)?
             .trimmingCharacters(in: .whitespacesAndNewlines),
               !query.isEmpty

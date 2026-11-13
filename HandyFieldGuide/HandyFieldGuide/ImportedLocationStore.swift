@@ -8,10 +8,17 @@ struct ImportedLocationRecord: Codable, Identifiable, Hashable {
     var importedAt: Date
     var reportedTaxonCount: Int?
     var species: [ImportedTaxonRecord]
+    /// Hotspot coordinates from eBird when known (API import / hotspot info).
+    var latitude: Double? = nil
+    var longitude: Double? = nil
 
     /// True for lists created by merging two or more saved imports.
     var isMerged: Bool {
         id.hasPrefix("merged-")
+    }
+
+    var hasCoordinates: Bool {
+        latitude != nil && longitude != nil
     }
 
     var placeTitle: String {
@@ -148,7 +155,12 @@ final class ImportedLocationStore: ObservableObject {
     }
 
     @discardableResult
-    func upsert(from parsed: ParsedBarchart, displayName: String?) -> ImportedLocationRecord {
+    func upsert(
+        from parsed: ParsedBarchart,
+        displayName: String?,
+        latitude: Double? = nil,
+        longitude: Double? = nil
+    ) -> ImportedLocationRecord {
         let locationId = parsed.ebirdLocationId
         let id = locationId.map { "ebird-\($0)" } ?? "ebird-\(UUID().uuidString.lowercased())"
         let defaultName = locationId ?? parsed.sourceFileName
@@ -168,10 +180,18 @@ final class ImportedLocationStore: ObservableObject {
                     monthlyMax: $0.monthlyMax,
                     weekFrequencies: $0.weekFrequencies
                 )
-            }
+            },
+            latitude: latitude,
+            longitude: longitude
         )
         if let index = locations.firstIndex(where: { $0.id == record.id || ($0.ebirdLocationId != nil && $0.ebirdLocationId == record.ebirdLocationId) }) {
-            locations[index] = record
+            // Keep prior coordinates when a re-import omits them (e.g. `.txt` replace).
+            var merged = record
+            if merged.latitude == nil { merged.latitude = locations[index].latitude }
+            if merged.longitude == nil { merged.longitude = locations[index].longitude }
+            locations[index] = merged
+            persist()
+            return merged
         } else {
             locations.append(record)
         }

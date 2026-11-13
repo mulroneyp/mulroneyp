@@ -4,19 +4,22 @@ import UniformTypeIdentifiers
 struct LocationSheet: View {
     @EnvironmentObject private var model: GuideModel
     @Environment(\.dismiss) private var dismiss
-    @State private var showingImporter: Bool
+    @State private var showingImporter = false
+    @State private var showingAPIImporter = false
     @State private var importError: String?
     @State private var locationPendingRename: ImportedLocationRecord?
     @State private var renameText = ""
     @State private var locationPendingDelete: ImportedLocationRecord?
     @State private var showingMergeLists = false
     @State private var dismissAfterMerge = false
+    @State private var dismissAfterAPIImport = false
 
     private let startInImportMode: Bool
 
     init(startInImportMode: Bool = false) {
         self.startInImportMode = startInImportMode
-        _showingImporter = State(initialValue: startInImportMode)
+        // Prefer the chooser (API vs .txt) — do not auto-open the file picker.
+        _showingImporter = State(initialValue: false)
     }
 
     var body: some View {
@@ -24,7 +27,7 @@ struct LocationSheet: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     Text(startInImportMode
-                         ? "Add a new area from an eBird Frequency / barchart `.txt` export (tab-separated, four week columns per month). The app names the place from the location id in the filename when it can (for example L436229)."
+                         ? "Add a new area via the eBird API (search hotspots, pull frequency) or by importing a Frequency / barchart `.txt` export. Only imported locations appear in the Location menu."
                          : "Rename or delete saved eBird imports. Merge nearby hotspot lists into a new named area. Only imported locations appear in the Location menu.")
                         .font(.subheadline)
                         .foregroundStyle(GuideColor.muted)
@@ -46,15 +49,15 @@ struct LocationSheet: View {
                     if !model.imports.locations.isEmpty {
                         importedSection
                     } else if !startInImportMode {
-                        Text("No saved imports yet. Use Add eBird barchart to import one.")
+                        Text("No saved imports yet. Use Add location to import via eBird API or a barchart .txt.")
                             .font(.subheadline)
                             .foregroundStyle(GuideColor.muted)
 
                         Button {
                             importError = nil
-                            showingImporter = true
+                            showingAPIImporter = true
                         } label: {
-                            Label("Add eBird barchart", systemImage: "plus")
+                            Label("Add location", systemImage: "plus")
                         }
                         .buttonStyle(GuideChipStyle(selected: true))
                     }
@@ -77,6 +80,15 @@ struct LocationSheet: View {
                 allowsMultipleSelection: false
             ) { result in
                 handleImport(result)
+            }
+            .sheet(isPresented: $showingAPIImporter, onDismiss: {
+                if dismissAfterAPIImport {
+                    dismissAfterAPIImport = false
+                    dismiss()
+                }
+            }) {
+                EBirdAPIImportSheet(onImported: { dismissAfterAPIImport = true })
+                    .environmentObject(model)
             }
             .sheet(item: $locationPendingRename) { location in
                 renameSheet(for: location)
@@ -120,10 +132,28 @@ struct LocationSheet: View {
 
     private var importSection: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("EBIRD BARCHART")
+            Text("EBIRD API")
                 .font(.caption.weight(.semibold))
                 .tracking(1.1)
                 .foregroundStyle(GuideColor.muted)
+
+            Button {
+                importError = nil
+                showingAPIImporter = true
+            } label: {
+                Label("Import via eBird API", systemImage: "network")
+            }
+            .buttonStyle(GuideChipStyle(selected: true))
+
+            Text("Paste your free API key in Settings first (ebird.org/api/keygen).")
+                .font(.caption)
+                .foregroundStyle(GuideColor.muted)
+
+            Text("BARCHART FILE")
+                .font(.caption.weight(.semibold))
+                .tracking(1.1)
+                .foregroundStyle(GuideColor.muted)
+                .padding(.top, 6)
 
             Button {
                 importError = nil
