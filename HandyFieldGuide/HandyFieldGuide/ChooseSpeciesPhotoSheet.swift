@@ -1,4 +1,5 @@
 import Network
+import os
 import SwiftUI
 import UIKit
 
@@ -414,13 +415,14 @@ final class ChooseSpeciesPhotoController: ObservableObject {
         await withCheckedContinuation { continuation in
             let monitor = NWPathMonitor()
             let queue = DispatchQueue(label: "handy.choose-photo.path")
-            let lock = NSLock()
-            var resumed = false
+            let resumed = OSAllocatedUnfairLock(initialState: false)
             monitor.pathUpdateHandler = { path in
-                lock.lock()
-                defer { lock.unlock() }
-                guard !resumed else { return }
-                resumed = true
+                let shouldResume = resumed.withLock { didResume -> Bool in
+                    guard !didResume else { return false }
+                    didResume = true
+                    return true
+                }
+                guard shouldResume else { return }
                 monitor.cancel()
                 continuation.resume(returning: path.status == .satisfied)
             }
