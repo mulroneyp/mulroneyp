@@ -155,7 +155,7 @@ struct GuideRootView: View {
             ContentUnavailableView {
                 Label("Handy Field Guide", systemImage: "map")
             } description: {
-                Text("Import an eBird barchart, then pick a bird from the list.")
+                Text("Add a location from eBird, then pick a bird from the list.")
             }
         }
     }
@@ -223,8 +223,8 @@ struct GuideRootView: View {
                     .foregroundStyle(GuideColor.green)
                 Text(
                     model.hasImportedLocations
-                        ? "Choose a saved import from Location, or add another eBird barchart. The guide only shows birds from places you import — it does not invent lists."
-                        : "Add or import an eBird barchart to see birds for a place. Only imported locations appear here — there is no default checklist."
+                        ? "Choose a saved import from Location, or add another via eBird API or barchart. The guide only shows birds from places you import — it does not invent lists."
+                        : "Add a location via eBird API or a barchart .txt to see birds for a place. Only imported locations appear here — there is no default checklist."
                 )
                 .font(.body)
                 .foregroundStyle(GuideColor.ink)
@@ -233,7 +233,7 @@ struct GuideRootView: View {
                 Button {
                     showingAddLocation = true
                 } label: {
-                    Label("Add eBird barchart", systemImage: "plus")
+                    Label("Add location", systemImage: "plus")
                 }
                 .buttonStyle(GuideChipStyle(selected: true))
 

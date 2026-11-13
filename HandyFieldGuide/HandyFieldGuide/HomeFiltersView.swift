@@ -150,14 +150,14 @@ struct HomeFiltersView: View {
             Button {
                 onAddLocation()
             } label: {
-                Label("Add eBird barchart", systemImage: "plus")
+                Label("Add location", systemImage: "plus")
             }
         } label: {
             filterIconColumn(title: "Location", systemImage: "mappin.and.ellipse")
         }
         .accessibilityLabel("Location")
         .accessibilityValue(selectedLocationAccessibilityValue)
-        .accessibilityHint("Choose an imported place, merge lists, manage saved imports, or import an eBird barchart")
+        .accessibilityHint("Choose an imported place, merge lists, manage saved imports, or add a location via eBird API or barchart")
     }
 
     private var monthControl: some View {
