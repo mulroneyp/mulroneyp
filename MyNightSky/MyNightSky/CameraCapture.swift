@@ -29,11 +29,15 @@ enum CameraError: LocalizedError {
 ///
 /// The earlier still path failed on device with AVFoundationErrorDomain -11800
 /// ("The operation could not be completed") after the first photo. The photo
-/// output's default settings keep still-image stabilization on and only prepare
-/// that pipeline. The next still then fails inside the photo output. This class
-/// turns stabilization off, prepares matching settings once, and waits until
-/// `captureReadiness` is `.ready` before every `capturePhoto`.
-final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate {
+/// output's default settings use a fused still pipeline. The next still then
+/// fails inside the photo output. This class keeps quality prioritization at
+/// speed (the supported way to leave that pipeline off), prepares matching
+/// settings once, and waits until `captureReadiness` is `.ready` before every
+/// `capturePhoto`.
+///
+/// Camera work stays on `sessionQueue`, and the still's continuation is guarded
+/// by `stateLock`. The class is Sendable only in that sense.
+final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate, @unchecked Sendable {
     private let session = AVCaptureSession()
     private let photoOutput = AVCapturePhotoOutput()
     private let sessionQueue = DispatchQueue(label: "nightsky.camera")
@@ -89,7 +93,9 @@ final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate {
     func beginLongExposure() async throws -> TimeInterval {
         try await withCheckedThrowingContinuation { continuation in
             sessionQueue.async {
-                self.applyLongExposure(completion: continuation.resume(with:))
+                self.applyLongExposure { result in
+                    continuation.resume(with: result)
+                }
             }
         }
     }
@@ -522,7 +528,7 @@ final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate {
         }
     }
 
-    /// The photo output's default prepared settings enable still-image stabilization.
+    /// The photo output's default prepared settings use the fused still pipeline.
     /// That pipeline is what fails the next still with -11800 after a manual exposure.
     private func prepareStills(completion: @escaping (Result<Void, Error>) -> Void) {
         let template = makeTemplateSettings()
@@ -547,12 +553,10 @@ final class CameraCapture: NSObject, AVCapturePhotoCaptureDelegate {
         if photoOutput.supportedFlashModes.contains(.off) {
             settings.flashMode = .off
         }
+        // Speed is the iOS 13 replacement for disabling still-image stabilization.
+        // Balanced and quality fuse frames and can drop the manual exposure, and
+        // the next still then fails. The output's maximum is also speed.
         settings.photoQualityPrioritization = .speed
-        // Default is true on devices that support it. Left on, it overrides the
-        // manual exposure and the next still fails with "The operation could not be completed."
-        if photoOutput.isStillImageStabilizationSupported {
-            settings.isAutoStillImageStabilizationEnabled = false
-        }
         return settings
     }
 
