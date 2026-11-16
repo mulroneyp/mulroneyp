@@ -19,7 +19,7 @@ Likelihood on rows and detail uses plain wording only (**Near-certain**, **Likel
 
 When curated, a bird shows its **most likely time of day** (dawn / morning / midday / afternoon / dusk / night) on list rows and on the detail screen. These are broad field periods from typical habits, not clock times. If time-of-day is unknown, the section is omitted entirely — never invented from monthly eBird columns.
 
-Species detail shows one badge — **Sexually dimorphic** (“Sexes do not look alike”) or **Not sexually dimorphic** (“Sexes look alike”) — instead of a Sexes paragraph. Photographs support **pinch to zoom**, **drag to pan**, double-tap zoom, and long-press for a full-screen viewer. Dimorphic species keep labeled **Male** / **Female** photos when openly licensed Commons images exist; monomorphic species show one photo. A compact **Photo Attr** badge opens photographer, licence, and source (required attribution stays available, just not inline under every image).
+Species detail shows one badge — **Sexually dimorphic** (“Sexes do not look alike”) or **Not sexually dimorphic** (“Sexes look alike”) — instead of a Sexes paragraph. Photographs support **pinch to zoom**, **drag to pan**, double-tap zoom, and long-press for a full-screen viewer. Dimorphic species keep labeled **Male** / **Female** photos when openly licensed Commons images exist; monomorphic species show one photo. A compact **Photo Attr** badge opens photographer, licence, and source (required attribution stays available, just not inline under every image). Under each photo, **Find another photo** (or **Find another male/female photo**) opens a Wikimedia Commons picker for another open-licence image; the full-screen viewer also offers **Find another**. Chosen photos replace the on-device cache for that species/role and update Photo Attr.
 
 ## Locations
 
@@ -71,6 +71,8 @@ python3 scripts/enrich_ebird_supplemental.py
 Photos live in `HandyFieldGuide/Resources/images`. Credits are in `HandyFieldGuide/Resources/guide.json`, `HandyFieldGuide/Resources/ebird_supplemental.json`, and under each photo. Licences are public domain, CC0, CC BY, CC BY-SA, or GFDL only — never NC/ND or other non-open licences.
 
 After an eBird barchart import, the app looks up open-licence Wikimedia Commons photos for species that still lack a local image. Downloads are cached under the app Documents folder (`species-photos/`, keyed by species id) and reused across locations. A progress sheet shows count done / total, percent, and an updating time-remaining estimate; cancel stops further network work without undoing the import. Dimorphic species try male + female and fall back to a single photo when only one open-licence image is found. Bundled / offline photos stay preferred; new fetches fill gaps only. Network failures are partial and non-blocking (timeouts + Commons rate limiting).
+
+On bird detail, **Find another photo** (Commons search, not Macaulay) lets you replace a poor image: the sheet ranks open-licence candidates, you pick one, and the JPEG plus attribution land in `species-photos` and prefer over the bundled default for that role thereafter. Missing-photo species get **Find a photo** / **Find male photo** / **Find female photo** chips instead.
 
 Commons search for gaps (especially dimorphic male/female pairs) uses a **wide query set**: common name, scientific name, alternate names, and sex keywords (including ♂/♀ and Spanish/German labels), plus Commons categories, with a higher result limit. Rebuild helpers:
 

@@ -193,17 +193,14 @@ struct BirdDetailView: View {
                     .font(.caption)
                     .foregroundStyle(GuideColor.muted)
                 if canOfferFindPhoto {
+                    // Chip matches empty-state “Find a photo” so the replace action is obvious on detail.
                     Button {
                         choosePhotoRequest = makeChooseRequest(role: photo.role, currentFileTitle: photo.file)
                     } label: {
                         Text(choosePhotoButtonTitle(for: photo.role))
-                            .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(GuideColor.rust)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.vertical, 6)
-                            .contentShape(Rectangle())
+                            .frame(maxWidth: .infinity)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(GuideChipStyle(selected: false))
                     .accessibilityHint("Searches Wikimedia Commons for another open-licence photo")
                 }
             }
