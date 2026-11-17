@@ -68,6 +68,80 @@ struct Species: Decodable, Identifiable {
     var sexes: String
     var stratumNote: String
     var photos: [Photo]
+    /// Total length in centimetres, one value or a [min, max] range.
+    /// Empty when no published length was available — the UI leaves size blank.
+    var lengthCm: [Double]
+
+    init(
+        id: String,
+        commonName: String,
+        scientificName: String,
+        aliases: [String],
+        alsoCalled: [String],
+        alsoScientific: [String],
+        tags: [String],
+        dimorphic: Bool,
+        origin: String,
+        status: String,
+        group: String,
+        strata: [String],
+        activeTimes: [String],
+        summary: String,
+        habitat: String,
+        sexes: String,
+        stratumNote: String,
+        photos: [Photo],
+        lengthCm: [Double] = []
+    ) {
+        self.id = id
+        self.commonName = commonName
+        self.scientificName = scientificName
+        self.aliases = aliases
+        self.alsoCalled = alsoCalled
+        self.alsoScientific = alsoScientific
+        self.tags = tags
+        self.dimorphic = dimorphic
+        self.origin = origin
+        self.status = status
+        self.group = group
+        self.strata = strata
+        self.activeTimes = activeTimes
+        self.summary = summary
+        self.habitat = habitat
+        self.sexes = sexes
+        self.stratumNote = stratumNote
+        self.photos = photos
+        self.lengthCm = lengthCm
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        commonName = try container.decode(String.self, forKey: .commonName)
+        scientificName = try container.decode(String.self, forKey: .scientificName)
+        aliases = try container.decode([String].self, forKey: .aliases)
+        alsoCalled = try container.decode([String].self, forKey: .alsoCalled)
+        alsoScientific = try container.decode([String].self, forKey: .alsoScientific)
+        tags = try container.decode([String].self, forKey: .tags)
+        dimorphic = try container.decode(Bool.self, forKey: .dimorphic)
+        origin = try container.decode(String.self, forKey: .origin)
+        status = try container.decode(String.self, forKey: .status)
+        group = try container.decode(String.self, forKey: .group)
+        strata = try container.decode([String].self, forKey: .strata)
+        activeTimes = try container.decodeIfPresent([String].self, forKey: .activeTimes) ?? []
+        summary = try container.decode(String.self, forKey: .summary)
+        habitat = try container.decode(String.self, forKey: .habitat)
+        sexes = try container.decode(String.self, forKey: .sexes)
+        stratumNote = try container.decode(String.self, forKey: .stratumNote)
+        photos = try container.decode([Photo].self, forKey: .photos)
+        lengthCm = try container.decodeIfPresent([Double].self, forKey: .lengthCm) ?? []
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case id, commonName, scientificName, aliases, alsoCalled, alsoScientific, tags
+        case dimorphic, origin, status, group, strata, activeTimes, summary, habitat
+        case sexes, stratumNote, photos, lengthCm
+    }
 }
 
 struct Photo: Codable, Identifiable, Hashable {

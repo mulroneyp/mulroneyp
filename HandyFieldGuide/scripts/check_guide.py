@@ -65,6 +65,15 @@ def main() -> None:
                 errors.append(f"missing activeTimes {coverage['id']} {species['commonName']}")
             elif any(item not in allowed_times for item in times):
                 errors.append(f"bad activeTimes {species['commonName']} {times}")
+            length = species.get("lengthCm")
+            if length is not None:
+                if (
+                    not isinstance(length, list)
+                    or not 1 <= len(length) <= 2
+                    or any(not isinstance(item, (int, float)) or item < 5 or item > 280 for item in length)
+                    or (len(length) == 2 and length[1] < length[0])
+                ):
+                    errors.append(f"bad lengthCm {species['commonName']} {length}")
             for band in species.get("strata", []):
                 if band not in stratum_ids:
                     errors.append(f"unknown stratum {species['commonName']} {band}")
@@ -101,6 +110,15 @@ def main() -> None:
         supplemental = json.loads(supplemental_path.read_text(encoding="utf-8"))
         supplemental_count = len(supplemental)
         for species in supplemental:
+            length = species.get("lengthCm")
+            if length is not None:
+                if (
+                    not isinstance(length, list)
+                    or not 1 <= len(length) <= 2
+                    or any(not isinstance(item, (int, float)) or item < 5 or item > 280 for item in length)
+                    or (len(length) == 2 and length[1] < length[0])
+                ):
+                    errors.append(f"bad lengthCm supplemental {species['commonName']} {length}")
             for photo in species.get("photos") or []:
                 used.add(Path(photo["src"]).name)
                 if not license_ok(photo.get("license", "")):

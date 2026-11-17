@@ -516,6 +516,11 @@ private struct BirdRow: View {
                 Text(species.scientificName)
                     .font(.subheadline.italic())
                     .foregroundStyle(GuideColor.muted)
+                if BirdSize.hasLength(species) {
+                    Text(BirdSize.line(for: species))
+                        .font(.caption)
+                        .foregroundStyle(GuideColor.muted)
+                }
                 Text(species.summary)
                     .font(.subheadline)
                     .foregroundStyle(GuideColor.ink)
