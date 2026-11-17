@@ -19,6 +19,10 @@
       "low"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      78,
+      100
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -59,6 +63,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      19
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -111,6 +118,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      23,
+      25.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -170,6 +181,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      11.5,
+      13
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -249,6 +264,9 @@
       "low"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      16.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -289,6 +307,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      6.3,
+      7.7
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -329,6 +351,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      11.5,
+      12.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -369,6 +395,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      9
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -408,6 +437,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      18,
+      19
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -448,6 +481,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      11
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -553,6 +589,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      10,
+      11
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -633,6 +673,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      14,
+      15
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -673,6 +717,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      19,
+      21
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -712,6 +760,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      12,
+      14
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -764,6 +816,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      8,
+      10
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -804,6 +860,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      9,
+      10
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -865,6 +925,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      23,
+      25
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -918,6 +982,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      8.8,
+      10.2
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -958,6 +1026,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      9,
+      10
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -1010,6 +1082,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      18,
+      22
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -1050,6 +1126,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      9.5,
+      10
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -1130,6 +1210,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      12.6,
+      15.6
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -1169,6 +1253,9 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      13
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -1211,6 +1298,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      12.5,
+      15
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Openly licensed male photograph bundled; a clearly labeled female image was not found on Wikimedia Commons under an open licence.",
@@ -1250,6 +1341,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      11.6
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -1343,6 +1437,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      18.5,
+      21
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Openly licensed male photograph bundled; a clearly labeled female image was not found on Wikimedia Commons under an open licence.",
@@ -1382,6 +1480,10 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      50,
+      65
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -1421,6 +1523,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      18
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -1474,6 +1579,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      7,
+      9
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -1527,6 +1636,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      11,
+      12
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -1567,6 +1680,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      30,
+      35.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -1620,6 +1737,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      13,
+      15
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -1660,6 +1781,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      12,
+      13
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -1738,6 +1863,10 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      45,
+      56
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -1778,6 +1907,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      12
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -1817,6 +1949,10 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      13,
+      15
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -1857,6 +1993,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      13,
+      15
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -1910,6 +2050,10 @@
       "low"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      46,
+      56
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -1950,6 +2094,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      12,
+      14
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -1990,6 +2138,10 @@
       "low"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      15,
+      16.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -2030,6 +2182,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      18,
+      20
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -2070,6 +2226,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      20
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -2122,6 +2281,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      10,
+      18
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -2214,6 +2377,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      10,
+      11
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -2253,6 +2420,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      13
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -2305,6 +2475,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      15,
+      17
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -2344,6 +2518,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      10.3,
+      12.1
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -2383,6 +2561,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      40.5,
+      50
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -2423,6 +2605,9 @@
       "low"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      26.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -2462,6 +2647,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      12.5,
+      14
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -2541,6 +2730,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      13
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -2580,6 +2772,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      18
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Openly licensed male photograph bundled; a clearly labeled female image was not found on Wikimedia Commons under an open licence.",
@@ -2698,6 +2893,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      19.5,
+      21
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -2738,6 +2937,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      10,
+      11
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Openly licensed male photograph bundled; a clearly labeled female image was not found on Wikimedia Commons under an open licence.",
@@ -2778,6 +2981,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      15
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -2817,6 +3023,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      35
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -2856,6 +3065,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      10.7,
+      12.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -2898,6 +3111,10 @@
     "activeTimes": [
       "dusk",
       "night"
+    ],
+    "lengthCm": [
+      22.1,
+      28
     ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
@@ -3020,6 +3237,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      25,
+      29
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -3060,6 +3281,10 @@
       "low"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      8.7,
+      10.9
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -3112,6 +3337,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      6.5,
+      7
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -3151,6 +3380,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      16.5,
+      20.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -3190,6 +3423,10 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      11,
+      12
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -3229,6 +3466,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      25
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -3268,6 +3508,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      18,
+      21
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -3320,6 +3564,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      19,
+      20.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -3491,6 +3739,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      20
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -3571,6 +3822,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      16,
+      19
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -3623,6 +3878,10 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      34,
+      45
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -3662,6 +3921,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      25.5,
+      28
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -3702,6 +3965,10 @@
       "low"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      80,
+      104
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -3749,6 +4016,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      8,
+      11
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -3788,6 +4059,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      11,
+      12
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -3828,6 +4103,10 @@
       "low"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      22.5,
+      28
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -3867,6 +4146,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      38,
+      41
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -3906,6 +4189,10 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      10.7,
+      11.2
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -3946,6 +4233,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      21,
+      25.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -3986,6 +4277,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      23,
+      26
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -4039,6 +4334,9 @@
       "low"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      80
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -4119,6 +4417,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      9
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Openly licensed male photograph bundled; a clearly labeled female image was not found on Wikimedia Commons under an open licence.",
@@ -4158,6 +4459,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      9,
+      11
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -4198,6 +4503,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      36,
+      38
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -4237,6 +4546,9 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      10.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -4276,6 +4588,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      15.5,
+      16.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -4315,6 +4631,10 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      23,
+      30
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -4354,6 +4674,10 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      29,
+      35
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -4393,6 +4717,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      12,
+      15
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -4446,6 +4774,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      14,
+      15
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -4565,6 +4897,10 @@
       "low"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      58.4,
+      63.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -4604,6 +4940,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      15,
+      18.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -4644,6 +4984,10 @@
       "low"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      22,
+      26.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -4684,6 +5028,10 @@
       "low"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      13.5,
+      15
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -4723,6 +5071,10 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      22,
+      31
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -4763,6 +5115,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      8,
+      10.2
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -4841,6 +5197,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      17,
+      18
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -4880,6 +5240,10 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      17,
+      18
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -4919,6 +5283,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      23,
+      25.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -4959,6 +5327,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      17,
+      21
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -4998,6 +5370,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      19,
+      20
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -5038,6 +5414,9 @@
       "low"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      17
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -5078,6 +5457,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      14,
+      15
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -5130,6 +5513,10 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      46,
+      58
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -5210,6 +5597,9 @@
       "low"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      34
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -5249,6 +5639,10 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      14,
+      16
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -5288,6 +5682,10 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      17,
+      19
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -5368,6 +5766,10 @@
       "low"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      91,
+      137
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -5407,6 +5809,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      22,
+      24
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -5447,6 +5853,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      12.5,
+      14
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -5486,6 +5896,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      30
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -5526,6 +5939,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      9,
+      10
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -5565,6 +5982,10 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      45,
+      65
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -5604,6 +6025,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      9.5,
+      13
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -5683,6 +6108,10 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      40,
+      45
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -5730,6 +6159,9 @@
       "low"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      11
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -5782,6 +6214,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      14
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -5822,6 +6257,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      13,
+      14
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -5914,6 +6353,10 @@
       "low"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      17,
+      18
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -5993,6 +6436,9 @@
       "low"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      18
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -6032,6 +6478,10 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      46,
+      56
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -6071,6 +6521,10 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      56,
+      64
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -6110,6 +6564,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      19,
+      23
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -6162,6 +6620,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      20.5,
+      21.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -6202,6 +6664,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      19,
+      22.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -6280,6 +6746,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      21.5,
+      26
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -6320,6 +6790,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      11.5,
+      14
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -6359,6 +6833,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      17,
+      24
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -6411,6 +6889,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      64
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -6490,6 +6971,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      18,
+      20
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -6529,6 +7014,10 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      12,
+      13
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -6569,6 +7058,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      30
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -6621,6 +7113,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      75,
+      95
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -6700,6 +7196,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      27
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -6739,6 +7238,10 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      12.7,
+      13
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -6778,6 +7281,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      10,
+      11
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -6817,6 +7324,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      50,
+      66
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -6857,6 +7368,10 @@
       "low"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      15,
+      19
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -6896,6 +7411,10 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      16,
+      18
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -6935,6 +7454,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      16,
+      19.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -7015,6 +7538,10 @@
       "low"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      71,
+      84
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -7070,6 +7597,10 @@
       "dusk",
       "night"
     ],
+    "lengthCm": [
+      48,
+      60
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -7109,6 +7640,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      10,
+      11
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -7148,6 +7683,10 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      31,
+      39
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -7226,6 +7765,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      20,
+      25
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -7266,6 +7809,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      10,
+      11.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -7305,6 +7852,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      12,
+      15
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -7383,6 +7934,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      29,
+      34
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Openly licensed female photograph bundled; a clearly labeled male image was not found on Wikimedia Commons under an open licence.",
@@ -7423,6 +7978,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      18.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -7476,6 +8034,10 @@
       "low"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      47,
+      56
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -7528,6 +8090,10 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      12,
+      14
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -7567,6 +8133,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      32,
+      38
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -7607,6 +8177,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      14,
+      15.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -7647,6 +8221,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      9,
+      10
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -7686,6 +8264,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      20,
+      23
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -7726,6 +8308,10 @@
       "low"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      25,
+      27
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -7766,6 +8352,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      15,
+      16.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -7805,6 +8395,10 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      50,
+      68
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -7845,6 +8439,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      17,
+      20
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Openly licensed male photograph bundled; a clearly labeled female image was not found on Wikimedia Commons under an open licence.",
@@ -7884,6 +8482,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      18.5,
+      20
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -7937,6 +8539,10 @@
       "low"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      45,
+      51
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -7976,6 +8582,10 @@
       "sky"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      21,
+      25
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as sky.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -8016,6 +8626,10 @@
       "low"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      7.5,
+      9.3
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as ground, low.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -8056,6 +8670,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      9.5,
+      11.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as canopy, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -8095,6 +8713,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      8.5,
+      10
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -8135,6 +8757,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      10,
+      12.5
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -8188,6 +8814,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      15,
+      17
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -8228,6 +8858,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      8,
+      9
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -8268,6 +8902,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      20
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -8308,6 +8945,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      14.5,
+      17
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as low, mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -8425,6 +9066,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      18,
+      22
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -8477,6 +9122,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      13
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -8529,6 +9177,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      11
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -8581,6 +9232,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      13,
+      14
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Male and female photographs are shown when openly licensed images were found.",
@@ -8637,6 +9292,9 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      20
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",
@@ -8682,6 +9340,10 @@
       "mid"
     ],
     "activeTimes": [],
+    "lengthCm": [
+      15,
+      17
+    ],
     "summary": "High-frequency species on the imported eBird barchart; field notes are a short placeholder.",
     "habitat": "Typical habitat zone estimated as mid.",
     "sexes": "Sexes look alike, or are not separated in the bundled photograph set.",

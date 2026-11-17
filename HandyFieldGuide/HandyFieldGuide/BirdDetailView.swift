@@ -31,6 +31,13 @@ struct BirdDetailView: View {
                         .foregroundStyle(GuideColor.muted)
                 }
 
+                if BirdSize.hasLength(species) {
+                    sectionLabel("Size")
+                    Text(BirdSize.line(for: species))
+                        .fixedSize(horizontal: false, vertical: true)
+                    BirdSizeScale(lengthCm: species.lengthCm)
+                }
+
                 let habitatText = place.habitat(for: species)
                     .trimmingCharacters(in: .whitespacesAndNewlines)
                 let stratumNote = species.stratumNote

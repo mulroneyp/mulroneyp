@@ -328,6 +328,8 @@ def main() -> int:
             failed.append(common)
             continue
         stub = make_stub(common, scientific, photos)
+        if prior and prior.get("lengthCm"):
+            stub["lengthCm"] = prior["lengthCm"]
         if prior and prior.get("photos"):
             if len(photos) > len(prior.get("photos") or []):
                 upgraded += 1
