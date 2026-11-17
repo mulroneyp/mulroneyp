@@ -12,12 +12,12 @@ enum BirdSize {
 
     /// Familiar birds on one scale, smallest to largest.
     /// Lengths are published midpoints: house sparrow 16 cm (typical; range 14–18),
-    /// American robin 23–28, rock dove 30–35, American crow 40–53, mallard 50–65,
+    /// Common / Indian myna 23–26, rock dove 30–35, American crow 40–53, mallard 50–65,
     /// great blue heron head-to-tail 91–137. The ostrich mark is male standing height
     /// 2.1–2.75 m, the figure used for that bird. Every species mark uses total length.
     static let anchors: [Anchor] = [
         Anchor(id: "sparrow", label: "Sparrow", lengthCm: 16, glyph: .sparrow),
-        Anchor(id: "robin", label: "Robin", lengthCm: 25.5, glyph: .robin),
+        Anchor(id: "myna", label: "Myna", lengthCm: 24.5, glyph: .myna),
         Anchor(id: "pigeon", label: "Pigeon", lengthCm: 32.5, glyph: .pigeon),
         Anchor(id: "crow", label: "Crow", lengthCm: 46.5, glyph: .crow),
         Anchor(id: "duck", label: "Duck", lengthCm: 57.5, glyph: .duck),
@@ -101,7 +101,7 @@ enum BirdSize {
     static func glyphHeight(_ anchor: Anchor) -> CGFloat {
         switch anchor.id {
         case "sparrow": return 18
-        case "robin": return 24
+        case "myna": return 24
         case "pigeon": return 28
         case "crow": return 34
         case "duck": return 38
@@ -218,7 +218,7 @@ struct BirdSizeScale: View {
 
 struct BirdGlyph: Shape {
     enum Kind {
-        case sparrow, robin, pigeon, crow, duck, heron, ostrich
+        case sparrow, myna, pigeon, crow, duck, heron, ostrich
     }
 
     var kind: Kind
@@ -246,8 +246,8 @@ struct BirdGlyph: Shape {
         }
 
         switch kind {
-        case .sparrow, .robin, .crow:
-            let bulk: CGFloat = kind == .crow ? 1.12 : (kind == .robin ? 1.05 : 1)
+        case .sparrow, .myna, .crow:
+            let bulk: CGFloat = kind == .crow ? 1.12 : (kind == .myna ? 1.05 : 1)
             poly([(0.04, 0.46), (0.32, 0.40), (0.30, 0.58)])
             ellipse(cx: 0.42, cy: 0.50, rx: 0.20 * bulk, ry: 0.15 * bulk)
             ellipse(cx: 0.64, cy: 0.40, rx: 0.11 * bulk, ry: 0.11 * bulk)
