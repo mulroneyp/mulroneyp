@@ -632,7 +632,11 @@
               "file": "File:Belize-1164 - Brown Jay (2214366376).jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            38.0,
+            43.0
+          ]
         },
         {
           "id": "great-kiskadee",
@@ -1425,7 +1429,11 @@
               "file": "File:Emerald tanager (02512).jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            12.0,
+            13.0
+          ]
         },
         {
           "id": "crimson-collared-tanager",
@@ -1735,7 +1743,11 @@
               "file": "File:Yellow-throated Euphonia-female.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            10.0,
+            11.0
+          ]
         },
         {
           "id": "elegant-euphonia",
@@ -2118,7 +2130,11 @@
               "file": "File:Cyanocompsa cyanoides - female.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            15.0,
+            17.0
+          ]
         },
         {
           "id": "orange-billed-sparrow",
@@ -2522,7 +2538,11 @@
               "file": "File:Eubucco bourcierii Torito cabecirrojo Red-headed Barbet (female) (11894822504).jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            14.0,
+            16.0
+          ]
         },
         {
           "id": "collared-trogon",
@@ -3209,7 +3229,11 @@
               "file": "File:050305 Brown Violet-ear crop.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            11.0,
+            12.0
+          ]
         },
         {
           "id": "green-thorntail",
@@ -4245,7 +4269,11 @@
               "file": "File:Basileuterus culicivorus - Daniel S. Katz - 476751181.jpeg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            12.0,
+            13.0
+          ]
         },
         {
           "id": "tropical-parula",
@@ -4370,7 +4398,11 @@
               "file": "File:Patagioenas subvinacea Paloma colorada Ruddy Pigeon (18614786685).jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            30.0,
+            34.0
+          ]
         },
         {
           "id": "white-tipped-dove",
@@ -4626,7 +4658,11 @@
               "file": "File:Xenops minutus (14964890469).jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            11.0,
+            12.5
+          ]
         },
         {
           "id": "spotted-woodcreeper",
@@ -4890,6 +4926,10 @@
             "morning",
             "midday",
             "afternoon"
+          ],
+          "lengthCm": [
+            39.0,
+            45.0
           ]
         },
         {
@@ -5327,7 +5367,11 @@
               "file": "File:Female or immature Canada warbler (46888).jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            12.0,
+            14.0
+          ]
         },
         {
           "id": "townsends-warbler",
@@ -5367,7 +5411,11 @@
               "file": "File:Backyard Townsend's Warbler (15120259633).jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            12.0,
+            13.0
+          ]
         },
         {
           "id": "blackburnian-warbler",
@@ -5966,7 +6014,11 @@
               "file": "File:Mourning Warbler - female.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            12.0,
+            14.0
+          ]
         },
         {
           "id": "bare-necked-umbrellabird",
@@ -6159,7 +6211,11 @@
               "file": "File:075 Sunbittern in Encontro das Águas State Park Photo by Giles Laurent.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            46.0,
+            50.0
+          ]
         },
         {
           "id": "thicket-antpitta",
@@ -6369,7 +6425,11 @@
               "file": "File:Odontophorus leucolaemus 31365857.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            24.0,
+            26.0
+          ]
         },
         {
           "id": "white-tipped-sicklebill",
@@ -6452,7 +6512,11 @@
               "file": "File:Doryfera ludovicae 1902.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            11.0,
+            13.0
+          ]
         },
         {
           "id": "purple-throated-mountain-gem",
@@ -7139,7 +7203,11 @@
               "file": "File:Microcerculus philomela 1902.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            10.0,
+            11.5
+          ]
         },
         {
           "id": "buffy-tuftedcheek",
@@ -7267,7 +7335,11 @@
               "file": "File:Bangsia arcaei -Costa Rica-8.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            15.0,
+            16.0
+          ]
         },
         {
           "id": "spangle-cheeked-tanager",
@@ -7634,6 +7706,10 @@
           "activeTimes": [
             "dusk",
             "night"
+          ],
+          "lengthCm": [
+            38.0,
+            43.0
           ]
         },
         {
@@ -7732,6 +7808,10 @@
             "morning",
             "midday",
             "afternoon"
+          ],
+          "lengthCm": [
+            71.0,
+            81.0
           ]
         },
         {
@@ -8000,7 +8080,11 @@
               "file": "File:Oxyruncus cristatus - Daniel S. Katz - 476753642.jpeg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            16.0,
+            18.0
+          ]
         },
         {
           "id": "black-and-yellow-tanager",
@@ -8620,7 +8704,11 @@
               "file": "File:Australian Wood Duck female RWD.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            44.0,
+            50.0
+          ]
         },
         {
           "id": "pacific-black-duck",
@@ -8659,7 +8747,11 @@
               "file": "File:Pacific black duck (Anas superciliosa) male swimming Sydney.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            54.0,
+            61.0
+          ]
         },
         {
           "id": "grey-teal",
@@ -8699,7 +8791,11 @@
               "file": "File:Grey teal (Anas gracilis) Adelaide.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            40.0,
+            46.0
+          ]
         },
         {
           "id": "chestnut-teal",
@@ -8752,7 +8848,11 @@
               "file": "File:Anas castanea Coolart Wetlands 2.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            38.0,
+            48.0
+          ]
         },
         {
           "id": "hardhead",
@@ -8804,7 +8904,11 @@
               "file": "File:Aythya australis female - Hurstville Golf Course.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            45.0,
+            60.0
+          ]
         },
         {
           "id": "australasian-grebe",
@@ -8944,7 +9048,11 @@
               "file": "File:Little pied cormorant (Microcarbo melanoleucos) Freycinet.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            55.0,
+            65.0
+          ]
         },
         {
           "id": "little-black-cormorant",
@@ -9027,7 +9135,11 @@
               "file": "File:Pelecanus conspicillatus4.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            160.0,
+            180.0
+          ]
         },
         {
           "id": "australian-white-ibis",
@@ -9152,7 +9264,11 @@
               "file": "File:Platalea regia in flight - Sydney Olympic Park.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            74.0,
+            81.0
+          ]
         },
         {
           "id": "white-faced-heron",
@@ -9192,7 +9308,11 @@
               "file": "File:Egretta novaehollandiae Tasmania 1.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            66.0,
+            70.0
+          ]
         },
         {
           "id": "nankeen-night-heron",
@@ -9283,7 +9403,11 @@
               "file": "File:Purple Swamp Hen Wollongong.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            44.0,
+            48.0
+          ]
         },
         {
           "id": "dusky-moorhen",
@@ -9416,6 +9540,10 @@
             "morning",
             "midday",
             "afternoon"
+          ],
+          "lengthCm": [
+            40.0,
+            45.0
           ]
         },
         {
@@ -9554,7 +9682,11 @@
               "file": "File:Haematopus longirostris - Austins Ferry.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            48.0,
+            52.0
+          ]
         },
         {
           "id": "little-penguin",
@@ -9596,6 +9728,10 @@
           "activeTimes": [
             "dusk",
             "night"
+          ],
+          "lengthCm": [
+            30.0,
+            33.0
           ]
         },
         {
@@ -9948,7 +10084,11 @@
               "file": "File:Cacatua tenuirostris -Melbourne -many feeding-8.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            37.0,
+            41.0
+          ]
         },
         {
           "id": "little-corella",
@@ -10451,7 +10591,11 @@
               "file": "File:Silvereye.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            11.0,
+            13.0
+          ]
         },
         {
           "id": "red-browed-finch",
@@ -10490,7 +10634,11 @@
               "file": "File:Red-browed Finch - Penrith.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            11.0,
+            12.0
+          ]
         },
         {
           "id": "welcome-swallow",
@@ -10824,6 +10972,10 @@
           "activeTimes": [
             "dawn",
             "morning"
+          ],
+          "lengthCm": [
+            40.0,
+            47.0
           ]
         },
         {
@@ -10909,7 +11061,11 @@
               "file": "File:Coracina novaehollandiae.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            32.0,
+            35.0
+          ]
         },
         {
           "id": "crested-pigeon",
@@ -11328,7 +11484,11 @@
               "file": "File:Anthochaera chrysoptera 4.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            27.0,
+            35.0
+          ]
         },
         {
           "id": "gang-gang-cockatoo",
@@ -11536,7 +11696,11 @@
               "file": "File:Australian King-Parrot (Alisterus scapularis) female (31233341392).jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            40.0,
+            43.0
+          ]
         },
         {
           "id": "spotted-pardalote",
@@ -11769,7 +11933,11 @@
               "file": "File:Eopsaltria australis - Mogo Campground.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            15.0,
+            16.0
+          ]
         },
         {
           "id": "grey-fantail",
@@ -11908,7 +12076,11 @@
               "file": "File:Pachycephala pectoralis female.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            16.0,
+            18.0
+          ]
         },
         {
           "id": "rufous-whistler",
@@ -11959,7 +12131,11 @@
               "file": "File:Pachycephala rufiventris female - Glen Davis.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            16.0,
+            18.0
+          ]
         },
         {
           "id": "pied-currawong",
@@ -12054,7 +12230,11 @@
               "file": "File:Scarlet Robin female - Blackheath.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            12.0,
+            14.0
+          ]
         },
         {
           "id": "white-plumed-honeyeater",
@@ -12093,7 +12273,11 @@
               "file": "File:Ptilotula penicillata - Glen Davis.jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            15.0,
+            19.0
+          ]
         }
       ]
     }
