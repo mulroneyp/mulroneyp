@@ -68,6 +68,14 @@ Rebuild the supplemental Commons catalog (optional, network):
 python3 scripts/enrich_ebird_supplemental.py
 ```
 
+Fill published total-length ranges for guide / supplemental gaps and scarce import taxa (optional, network; Wikipedia):
+
+```bash
+python3 scripts/fill_bird_lengths.py
+```
+
+Resplendent Quetzal stays blank on purpose (body vs plume streamers). Hybrid / slash forms are not given a single-species length. Scarce names without a clear species page also stay blank.
+
 ## Photos
 
 Photos live in `HandyFieldGuide/Resources/images`. Credits are in `HandyFieldGuide/Resources/guide.json`, `HandyFieldGuide/Resources/ebird_supplemental.json`, and under each photo. Licences are public domain, CC0, CC BY, CC BY-SA, or GFDL only — never NC/ND or other non-open licences.
