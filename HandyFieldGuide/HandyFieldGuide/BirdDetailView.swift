@@ -352,20 +352,44 @@ struct BirdDetailView: View {
             .padding(.top, 8)
     }
 
-    /// When collapsed: habitat zones if known, otherwise a short habitat lead.
+    /// When collapsed: short where-to-find lead (not under the name) plus habitat zones.
     private func whereCollapsedSummary(habitatText: String, knownStrata: [StratumInfo]) -> String {
-        if !knownStrata.isEmpty {
-            let zones = knownStrata.map(\.label).joined(separator: " · ")
-            return "Habitat zones: \(zones)"
+        let lead = habitatLeadForPeek(habitatText)
+        let zones: String = {
+            guard !knownStrata.isEmpty else { return "" }
+            return "Habitat zones: " + knownStrata.map(\.label).joined(separator: " · ")
+        }()
+        switch (lead.isEmpty, zones.isEmpty) {
+        case (false, false): return "\(lead) \(zones)"
+        case (false, true): return lead
+        case (true, false): return zones
+        case (true, true): return ""
         }
-        guard !habitatText.isEmpty else { return "" }
-        if let end = habitatText.firstIndex(where: { ".!?".contains($0) }) {
-            let sentence = String(habitatText[...end]).trimmingCharacters(in: .whitespacesAndNewlines)
-            if sentence.count <= 90 { return sentence }
+    }
+
+    /// First useful habitat sentence, skipping bundled place-claim leads.
+    private func habitatLeadForPeek(_ habitatText: String) -> String {
+        var text = habitatText.trimmingCharacters(in: .whitespacesAndNewlines)
+        let placeClaimLeads = [
+            "Children's Eternal Rainforest, on the San Gerardo list for mid-late November.",
+            "Children's Eternal Rainforest.",
+            "Seen on complete checklists for the imported eBird location.",
+        ]
+        for lead in placeClaimLeads {
+            if text.lowercased().hasPrefix(lead.lowercased()) {
+                text = String(text.dropFirst(lead.count)).trimmingCharacters(in: .whitespacesAndNewlines)
+            }
         }
-        if habitatText.count <= 90 { return habitatText }
-        let idx = habitatText.index(habitatText.startIndex, offsetBy: 87)
-        return String(habitatText[..<idx]).trimmingCharacters(in: .whitespacesAndNewlines) + "…"
+        guard !text.isEmpty else { return "" }
+        let sentence: String
+        if let end = text.firstIndex(where: { ".!?".contains($0) }) {
+            sentence = String(text[...end]).trimmingCharacters(in: .whitespacesAndNewlines)
+        } else {
+            sentence = text
+        }
+        if sentence.count <= 100 { return sentence }
+        let idx = sentence.index(sentence.startIndex, offsetBy: 97)
+        return String(sentence[..<idx]).trimmingCharacters(in: .whitespacesAndNewlines) + "…"
     }
 
     private var displayPhotos: [Photo] {
