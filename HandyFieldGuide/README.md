@@ -4,13 +4,13 @@ An iPhone field guide. Open `HandyFieldGuide.xcodeproj` in Xcode, pick the Handy
 
 ## Home filters
 
-Location, Month, and Settings sit in a **bottom toolbar** so the bird list keeps the space above:
+The app title **Handy Field Guide** sits at the top of the home screen (inline navigation title). Directly under it: **Location**, **Month**, and a **Settings** gear — there is no bottom menu bar.
 
-1. **Location** — generic bar label (no place name in the toolbar). Menu of **imported** eBird areas only, plus **Manage locations** (rename / delete saved imports) and **Add location** (eBird API hotspot search or barchart `.txt`). Paste a free API key under **Settings → eBird API** (Keychain; never committed). There is no default / curated place list in the menu. With no imports, the home screen prompts you to add a location. The active place name stays in the main header.
-2. **Month** — picker that defaults to the device’s calendar month. The bar shows the month name only (no “Current” / “This month” wording). Imported eBird lists use that month’s frequencies for “likely” birds.
-3. **Settings** — gear opens scarce / near-zero hide and flagged “sp.” / slash taxa toggles (moved off the main list).
+1. **Location** — generic control label (no place name in the control). Menu of **imported** eBird areas only, plus **Manage locations** (rename / delete saved imports) and **Add location** (eBird API hotspot search or barchart `.txt`). Paste a free API key under **Settings → eBird API** (Keychain; never committed). There is no default / curated place list in the menu. With no imports, the home screen prompts you to add a location. The active place name stays in the list header.
+2. **Month** — picker that defaults to the device’s calendar month. The control shows the month name only (no “Current” / “This month” wording). Imported eBird lists use that month’s frequencies for “likely” birds.
+3. **Settings** — gear in the same top row opens scarce / near-zero hide, flagged “sp.” / slash taxa toggles, and the eBird API key.
 
-There is **no Zone control** in the bottom bar. Habitat zones (ground / low / mid / canopy / sky) still appear as labels on list rows and on bird detail; the home list is not filtered by zone.
+There is **no Zone control** on the home screen. Habitat zones (ground / low / mid / canopy / sky) still appear as labels on list rows and on bird detail; the home list is not filtered by zone.
 
 Above the bird list for an active import, the **location name** is shown with a **Map** control (opens Apple Maps using a renamed title or a known eBird hotspot name for sample L-codes) and a small **i** that reveals the long coverage prose in a sheet.
 

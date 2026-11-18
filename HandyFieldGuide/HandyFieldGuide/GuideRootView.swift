@@ -12,12 +12,22 @@ struct GuideRootView: View {
     /// iPad split selection — drives the detail column.
     @State private var selectedSpeciesId: String?
     @FocusState private var isSearchFocused: Bool
-    /// Local draft so keystrokes do not republish GuideModel / rebuild the bottom bar every character.
+    /// Local draft so keystrokes do not republish GuideModel / rebuild the top filters every character.
     @State private var searchDraft = ""
     @State private var searchDebounceTask: Task<Void, Never>?
 
     private var usesSplitNavigation: Bool {
         horizontalSizeClass == .regular
+    }
+
+    /// Location / Month / Settings gear under the nav title (not a bottom bar).
+    private var homeTopFilters: some View {
+        HomeFiltersView(
+            onAddLocation: { showingAddLocation = true },
+            onManageLocations: { showingManageLocations = true },
+            onMergeLists: { showingMergeLists = true }
+        )
+        .simultaneousGesture(TapGesture().onEnded(dismissSearchKeyboard))
     }
 
     var body: some View {
@@ -80,7 +90,8 @@ struct GuideRootView: View {
             sidebarContent
                 .guideBackground()
                 .navigationTitle("Handy Field Guide")
-                .navigationBarTitleDisplayMode(.large)
+                // Inline keeps the title under the status bar — as high as the system chrome allows.
+                .navigationBarTitleDisplayMode(.inline)
                 .navigationDestination(for: String.self) { speciesId in
                     if let place = model.place,
                        let species = place.coverage.species.first(where: { $0.id == speciesId }) {
@@ -105,7 +116,7 @@ struct GuideRootView: View {
                 sidebarContent
                     .guideBackground()
                     .navigationTitle("Handy Field Guide")
-                    .navigationBarTitleDisplayMode(.large)
+                    .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItemGroup(placement: .keyboard) {
                             Spacer()
@@ -251,12 +262,8 @@ struct GuideRootView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             Spacer(minLength: 0)
         }
-        .safeAreaInset(edge: .bottom, spacing: 0) {
-            HomeFiltersView(
-                onAddLocation: { showingAddLocation = true },
-                onManageLocations: { showingManageLocations = true },
-                onMergeLists: { showingMergeLists = true }
-            )
+        .safeAreaInset(edge: .top, spacing: 0) {
+            homeTopFilters
         }
     }
 
@@ -334,14 +341,8 @@ struct GuideRootView: View {
             .frame(maxWidth: .infinity)
         }
         .scrollDismissesKeyboard(.interactively)
-        .safeAreaInset(edge: .bottom, spacing: 0) {
-            HomeFiltersView(
-                onAddLocation: { showingAddLocation = true },
-                onManageLocations: { showingManageLocations = true },
-                onMergeLists: { showingMergeLists = true }
-            )
-            // Tapping the bottom filter bar should hide the keyboard without blocking menus.
-            .simultaneousGesture(TapGesture().onEnded(dismissSearchKeyboard))
+        .safeAreaInset(edge: .top, spacing: 0) {
+            homeTopFilters
         }
     }
 

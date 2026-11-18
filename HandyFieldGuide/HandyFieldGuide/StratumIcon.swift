@@ -119,7 +119,7 @@ struct StratumLegend: View {
 
     var body: some View {
         // Kept for detail / info sheets. Habitat-zone icons on list rows and detail
-        // stay; the bottom bar no longer offers a Zone filter.
+        // stay; the home screen no longer offers a Zone filter.
         LazyVGrid(columns: [GridItem(.flexible(), spacing: 8), GridItem(.flexible(), spacing: 8)], spacing: 8) {
             ForEach(strata) { item in
                 HStack(alignment: .top, spacing: 8) {
