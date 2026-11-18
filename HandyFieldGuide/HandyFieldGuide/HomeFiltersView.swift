@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Bottom toolbar for Location, Month, and Settings — keeps the bird list above.
+/// Top home controls under the app title: Location, Month, and a Settings gear.
 struct HomeFiltersView: View {
     @EnvironmentObject private var model: GuideModel
     var onAddLocation: () -> Void
@@ -15,7 +15,7 @@ struct HomeFiltersView: View {
         }
     }
 
-    /// For VoiceOver only — the bar label stays generic “Location”.
+    /// For VoiceOver only — the control label stays generic “Location”.
     private var selectedLocationAccessibilityValue: String {
         if let match = matchingImportedOption {
             return match.title
@@ -40,38 +40,34 @@ struct HomeFiltersView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            Divider()
             HStack(spacing: 0) {
                 locationControl
-                barDivider
+                controlDivider
                 monthControl
-                barDivider
+                controlDivider
                 settingsControl
             }
             .padding(.horizontal, 4)
-            .padding(.top, 8)
-            .padding(.bottom, 6)
-            // On iPad the sidebar can be wide; keep the three controls clustered rather than stretched.
+            .padding(.top, 6)
+            .padding(.bottom, 8)
+            // On iPad the sidebar can be wide; keep the controls clustered rather than stretched.
             .frame(maxWidth: 560)
             .frame(maxWidth: .infinity)
-        }
-        // safeAreaInset proposes the full container height. Without fixedSize, this
-        // VStack expands to that proposal: layout still uses the ideal bar height, but
-        // hit-testing covers the bird list (and can block detail after push). Keep the
-        // material only on the bar + home indicator, not a full-screen layer.
-        .fixedSize(horizontal: false, vertical: true)
-        .background {
+
             Rectangle()
-                .fill(.bar)
-                .ignoresSafeArea(edges: .bottom)
+                .fill(GuideColor.line)
+                .frame(height: 1)
+                .accessibilityHidden(true)
         }
+        .fixedSize(horizontal: false, vertical: true)
+        .background(GuideColor.paper)
         .sheet(isPresented: $showingSettings) {
             SettingsView()
                 .environmentObject(model)
         }
     }
 
-    private var barDivider: some View {
+    private var controlDivider: some View {
         // Capsule + fixed frame avoids a greedy Shape stretching with the HStack proposal.
         Capsule()
             .fill(GuideColor.line)
@@ -141,28 +137,15 @@ struct HomeFiltersView: View {
         Button {
             showingSettings = true
         } label: {
-            VStack(spacing: 2) {
-                Text("SETTINGS")
-                    .font(.caption2.weight(.semibold))
-                    .tracking(0.8)
-                    .foregroundStyle(GuideColor.muted)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.7)
-                Image(systemName: "gearshape")
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(GuideColor.ink)
-                    .frame(height: 20)
-                // Match the chevron row height of other columns so the bar stays level.
-                Color.clear
-                    .frame(height: 11)
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 4)
-            .contentShape(Rectangle())
+            Image(systemName: "gearshape")
+                .font(.body.weight(.semibold))
+                .foregroundStyle(GuideColor.green)
+                .frame(width: 44, height: 44)
+                .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .accessibilityLabel("Settings")
-        .accessibilityHint("Scarce birds and flagged taxa filters")
+        .accessibilityHint("Scarce birds, flagged taxa, and eBird API key")
     }
 
     private func filterColumn(title: String, value: String) -> some View {
@@ -185,7 +168,7 @@ struct HomeFiltersView: View {
         .contentShape(Rectangle())
     }
 
-    /// Generic Location (or similar) column — no place name in the bar.
+    /// Generic Location column — no place name in the control.
     private func filterIconColumn(title: String, systemImage: String) -> some View {
         VStack(spacing: 2) {
             Text(title.uppercased())
