@@ -1,14 +1,12 @@
 import SwiftUI
 
-/// Bottom toolbar for Location, Month, Zone, and Settings — keeps the bird list above.
+/// Bottom toolbar for Location, Month, and Settings — keeps the bird list above.
 struct HomeFiltersView: View {
     @EnvironmentObject private var model: GuideModel
-    var guide: GuideFile
     var onAddLocation: () -> Void
     var onManageLocations: () -> Void
     var onMergeLists: () -> Void
 
-    @State private var showingZoneInfo = false
     @State private var showingSettings = false
 
     private var importedLocationOptions: [LocationOption] {
@@ -40,20 +38,6 @@ struct HomeFiltersView: View {
         }
     }
 
-    private var selectedZoneTitle: String {
-        let selected = guide.strata.filter { model.selectedStrata.contains($0.id) }
-        switch selected.count {
-        case 0:
-            return "Any"
-        case 1:
-            return selected[0].label
-        case 2:
-            return "\(selected[0].label) + \(selected[1].label)"
-        default:
-            return "\(selected.count) zones"
-        }
-    }
-
     var body: some View {
         VStack(spacing: 0) {
             Divider()
@@ -62,14 +46,12 @@ struct HomeFiltersView: View {
                 barDivider
                 monthControl
                 barDivider
-                zoneControl
-                barDivider
                 settingsControl
             }
             .padding(.horizontal, 4)
             .padding(.top, 8)
             .padding(.bottom, 6)
-            // On iPad the sidebar can be wide; keep the four controls clustered rather than stretched.
+            // On iPad the sidebar can be wide; keep the three controls clustered rather than stretched.
             .frame(maxWidth: 560)
             .frame(maxWidth: .infinity)
         }
@@ -82,33 +64,6 @@ struct HomeFiltersView: View {
             Rectangle()
                 .fill(.bar)
                 .ignoresSafeArea(edges: .bottom)
-        }
-        .sheet(isPresented: $showingZoneInfo) {
-            NavigationStack {
-                List {
-                    ForEach(guide.strata) { item in
-                        HStack(alignment: .top, spacing: 12) {
-                            StratumIcon(id: item.id, size: 36)
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(item.label).font(.headline)
-                                Text(item.hint)
-                                    .font(.subheadline)
-                                    .foregroundStyle(GuideColor.muted)
-                            }
-                        }
-                        .padding(.vertical, 4)
-                    }
-                }
-                .guideBackground()
-                .navigationTitle("Zones")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Done") { showingZoneInfo = false }
-                    }
-                }
-            }
-            .presentationDetents([.medium, .large])
         }
         .sheet(isPresented: $showingSettings) {
             SettingsView()
@@ -180,47 +135,6 @@ struct HomeFiltersView: View {
             filterColumn(title: "Month", value: model.selectedMonthName)
         }
         .accessibilityHint("Imported lists use this month’s eBird frequencies")
-    }
-
-    private var zoneControl: some View {
-        HStack(spacing: 0) {
-            Menu {
-                Button {
-                    model.clearStrata()
-                } label: {
-                    if model.selectedStrata.isEmpty {
-                        Label("Any", systemImage: "checkmark")
-                    } else {
-                        Text("Any")
-                    }
-                }
-                ForEach(guide.strata) { item in
-                    Button {
-                        model.toggleStratum(item.id)
-                    } label: {
-                        if model.selectedStrata.contains(item.id) {
-                            Label(item.label, systemImage: "checkmark")
-                        } else {
-                            Text(item.label)
-                        }
-                    }
-                }
-            } label: {
-                filterColumn(title: "Zone", value: selectedZoneTitle)
-            }
-            .menuActionDismissBehavior(.disabled)
-            .accessibilityHint("Select one or more habitat zones, including Sky. Any clears the filter.")
-
-            Button {
-                showingZoneInfo = true
-            } label: {
-                Image(systemName: "info.circle")
-                    .font(.body.weight(.semibold))
-                    .frame(width: 36, height: 44)
-            }
-            .accessibilityLabel("Zone descriptions")
-            .foregroundStyle(GuideColor.green)
-        }
     }
 
     private var settingsControl: some View {

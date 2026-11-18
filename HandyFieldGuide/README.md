@@ -4,14 +4,15 @@ An iPhone field guide. Open `HandyFieldGuide.xcodeproj` in Xcode, pick the Handy
 
 ## Home filters
 
-Location, Month, Zone, and Settings sit in a **bottom toolbar** so the bird list keeps the space above:
+Location, Month, and Settings sit in a **bottom toolbar** so the bird list keeps the space above:
 
 1. **Location** — generic bar label (no place name in the toolbar). Menu of **imported** eBird areas only, plus **Manage locations** (rename / delete saved imports) and **Add location** (eBird API hotspot search or barchart `.txt`). Paste a free API key under **Settings → eBird API** (Keychain; never committed). There is no default / curated place list in the menu. With no imports, the home screen prompts you to add a location. The active place name stays in the main header.
 2. **Month** — picker that defaults to the device’s calendar month. The bar shows the month name only (no “Current” / “This month” wording). Imported eBird lists use that month’s frequencies for “likely” birds.
-3. **Zone** — multi-select ground / low / mid / canopy / sky. Birds matching **any** selected zone appear. **Any** clears the filter. Long zone descriptions stay behind a small **i** button.
-4. **Settings** — gear opens scarce / near-zero hide and flagged “sp.” / slash taxa toggles (moved off the main list).
+3. **Settings** — gear opens scarce / near-zero hide and flagged “sp.” / slash taxa toggles (moved off the main list).
 
-Above the bird list for an active import, the **location name** is shown with a **Map** control (opens Apple Maps using a renamed title or a known eBird hotspot name for sample L-codes) and a small **i** that reveals the long coverage prose in a sheet, matching the Zone info pattern.
+There is **no Zone control** in the bottom bar. Habitat zones (ground / low / mid / canopy / sky) still appear as labels on list rows and on bird detail; the home list is not filtered by zone.
+
+Above the bird list for an active import, the **location name** is shown with a **Map** control (opens Apple Maps using a renamed title or a known eBird hotspot name for sample L-codes) and a small **i** that reveals the long coverage prose in a sheet.
 
 **Sky** is for birds typically seen overhead (flying, soaring, or hawking), separate from canopy perches.
 

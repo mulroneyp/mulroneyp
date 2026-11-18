@@ -13,8 +13,6 @@ final class GuideModel: ObservableObject {
     }
     /// Debounced search query used for filtering. Typing updates this after a short delay.
     @Published var searchText = ""
-    /// Selected habitat zones. Empty means Any (no zone filter). Matching is OR across selections.
-    @Published var selectedStrata: Set<String> = []
     /// 0 = January … 11 = December. Defaults to the device’s current month.
     @Published var selectedMonthIndex: Int
     @Published var hideNearZero = true
@@ -124,22 +122,6 @@ final class GuideModel: ObservableObject {
         guide?.strata.first { $0.id == id }
     }
 
-    var isFilteringByZone: Bool {
-        !selectedStrata.isEmpty
-    }
-
-    func toggleStratum(_ id: String) {
-        if selectedStrata.contains(id) {
-            selectedStrata.remove(id)
-        } else {
-            selectedStrata.insert(id)
-        }
-    }
-
-    func clearStrata() {
-        selectedStrata = []
-    }
-
     func groupLabel(_ id: String, coverage: Coverage) -> String {
         coverage.groups.first { $0.id == id }?.label ?? id
     }
@@ -157,13 +139,10 @@ final class GuideModel: ObservableObject {
         let frequencies = cache?.frequencies ?? [:]
         let haystacks = cache?.searchHaystacks ?? [:]
         let hideNearZero = hideNearZero
-        let selectedStrata = selectedStrata
-        let filteringByZone = isFilteringByZone
 
         return place.coverage.species.filter { species in
-            if filteringByZone && !species.strata.contains(where: { selectedStrata.contains($0) }) {
-                return false
-            }
+            // Habitat zones remain on each species for list/detail labels; the list is not
+            // filtered by zone (bottom-bar Zone control removed).
             if place.imported != nil, hideNearZero {
                 let key = SpeciesCatalog.normalize(species.commonName)
                 if let frequency = frequencies[key],

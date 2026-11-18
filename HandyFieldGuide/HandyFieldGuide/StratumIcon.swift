@@ -118,8 +118,8 @@ struct StratumLegend: View {
     var strata: [StratumInfo]
 
     var body: some View {
-        // Kept for detail / info sheets. The home screen suppresses these long
-        // descriptions and opens them from the Zone “i” button instead.
+        // Kept for detail / info sheets. Habitat-zone icons on list rows and detail
+        // stay; the bottom bar no longer offers a Zone filter.
         LazyVGrid(columns: [GridItem(.flexible(), spacing: 8), GridItem(.flexible(), spacing: 8)], spacing: 8) {
             ForEach(strata) { item in
                 HStack(alignment: .top, spacing: 8) {
