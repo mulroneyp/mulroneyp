@@ -51,8 +51,8 @@ struct HomeFiltersView: View {
     }
 
     /// Same reserved width on both rows for Map vs i+gear so the value pills match exactly.
-    /// Fits two 36pt icon buttons (i + gear) or the Map chip.
-    private let trailingActionsWidth: CGFloat = 80
+    /// Wide enough for icon + the word “Map” (never icon-only) and for two 36pt icon buttons (i + gear).
+    private let trailingActionsWidth: CGFloat = 96
 
     var body: some View {
         VStack(spacing: 0) {
@@ -226,19 +226,23 @@ struct HomeFiltersView: View {
         Button {
             openURL(url)
         } label: {
-            Label("Map", systemImage: "map")
-                .font(.subheadline.weight(.semibold))
-                .lineLimit(1)
-                .minimumScaleFactor(0.75)
-                .padding(.horizontal, 8)
-                .padding(.vertical, 8)
-                // Fill the fixed trailing slot so Map cannot widen past i+gear’s reserved width.
-                .frame(maxWidth: .infinity, minHeight: 44)
-                .background(GuideColor.green.opacity(0.10))
-                .overlay {
-                    RoundedRectangle(cornerRadius: 2)
-                        .stroke(GuideColor.green.opacity(0.35), lineWidth: 1)
-                }
+            // Explicit HStack (not Label): Label can collapse to icon-only in a tight trailing slot.
+            HStack(spacing: 4) {
+                Image(systemName: "map")
+                Text("Map")
+                    .lineLimit(1)
+                    .fixedSize(horizontal: true, vertical: false)
+            }
+            .font(.subheadline.weight(.semibold))
+            .padding(.horizontal, 8)
+            .padding(.vertical, 8)
+            // Fill the fixed trailing slot so Map cannot widen past i+gear’s reserved width.
+            .frame(maxWidth: .infinity, minHeight: 44)
+            .background(GuideColor.green.opacity(0.10))
+            .overlay {
+                RoundedRectangle(cornerRadius: 2)
+                    .stroke(GuideColor.green.opacity(0.35), lineWidth: 1)
+            }
         }
         .foregroundStyle(GuideColor.green)
         .accessibilityLabel("Open \(place.displayName) in Maps")
