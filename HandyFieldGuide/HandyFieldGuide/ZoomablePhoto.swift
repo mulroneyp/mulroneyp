@@ -125,30 +125,32 @@ struct ZoomablePhotoViewer: View {
     private var fullscreenPhotoChrome: some View {
         ZStack {
             HStack(spacing: 10) {
-                Button("Close", action: onClose)
-                    .buttonStyle(FullscreenPhotoChromeButtonStyle())
+                Button(action: onClose) {
+                    FullscreenPhotoChromeCapsule(title: "Close")
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Close")
 
                 Spacer(minLength: 8)
 
                 if let onChooseDifferentPhoto {
-                    Button("Find another", action: onChooseDifferentPhoto)
-                        .buttonStyle(FullscreenPhotoChromeButtonStyle())
-                        .accessibilityLabel("Find another photo")
+                    Button(action: onChooseDifferentPhoto) {
+                        FullscreenPhotoChromeCapsule(title: "Find another")
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("Find another photo")
                 }
             }
 
-            Text(title)
-                .font(.subheadline.weight(.bold))
-                .foregroundStyle(.white)
+            FullscreenPhotoChromeCapsule(title: title, horizontalPadding: 12, verticalPadding: 8)
                 .lineLimit(1)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 8)
-                .background(FullscreenPhotoChrome.solidFill, in: Capsule())
-                .shadow(color: .black.opacity(0.55), radius: 4, y: 2)
                 .padding(.horizontal, 118)
                 .allowsHitTesting(false)
                 .accessibilityAddTraits(.isHeader)
         }
+        // Override inherited guide ink + app green tint for this chrome only.
+        .tint(FullscreenPhotoChrome.label)
+        .environment(\.colorScheme, .dark)
         .padding(.horizontal, 12)
         .padding(.top, 10)
         .padding(.bottom, 28)
@@ -175,23 +177,28 @@ struct ZoomablePhotoViewer: View {
 private enum FullscreenPhotoChrome {
     /// Solid dark fill — do not use ultraThinMaterial; it disappears on bright photos.
     static let solidFill = Color.black.opacity(0.82)
+    /// Absolute white — app `.tint(GuideColor.green)` / guide ink were painting button labels nearly black.
+    static let label = Color.white
 }
 
-/// Solid dark capsule with bold white text — readable on white birds and dark foliage.
-private struct FullscreenPhotoChromeButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
+/// Dark capsule + forced white label. Used inside `.buttonStyle(.plain)` so tint cannot recolor text.
+private struct FullscreenPhotoChromeCapsule: View {
+    var title: String
+    var horizontalPadding: CGFloat = 14
+    var verticalPadding: CGFloat = 10
+
+    var body: some View {
+        Text(title)
             .font(.subheadline.weight(.bold))
-            .foregroundStyle(.white)
-            .padding(.horizontal, 14)
-            .padding(.vertical, 10)
+            .foregroundStyle(FullscreenPhotoChrome.label)
+            .padding(.horizontal, horizontalPadding)
+            .padding(.vertical, verticalPadding)
             .background(FullscreenPhotoChrome.solidFill, in: Capsule())
             .overlay {
                 Capsule()
                     .strokeBorder(Color.white.opacity(0.55), lineWidth: 1)
             }
             .shadow(color: .black.opacity(0.6), radius: 4, y: 2)
-            .opacity(configuration.isPressed ? 0.78 : 1)
     }
 }
 
