@@ -20,7 +20,7 @@ struct GuideRootView: View {
         horizontalSizeClass == .regular
     }
 
-    /// Location / Month / Settings gear under the nav title (not a bottom bar).
+    /// Location + Month value buttons under the nav title (not a bottom bar; Settings gear lives under the location-header info button).
     private var homeTopFilters: some View {
         HomeFiltersView(
             onAddLocation: { showingAddLocation = true },
@@ -256,6 +256,9 @@ struct GuideRootView: View {
                     }
                     .buttonStyle(GuideChipStyle(selected: false))
                 }
+
+                // No location header (i) yet — keep Settings reachable for the eBird API key.
+                EmptyStateSettingsButton()
             }
             .padding(20)
             .frame(maxWidth: contentMaxWidth, alignment: .leading)
@@ -352,10 +355,12 @@ struct GuideRootView: View {
     }
 }
 
-/// Compact place chrome: name + Maps link + “i” for the long coverage prose.
+/// Compact place chrome: name + Maps link + “i” for the long coverage prose, with Settings gear under the info button.
 private struct LocationHeader: View {
     var place: ResolvedPlace
+    @EnvironmentObject private var model: GuideModel
     @State private var showingInfo = false
+    @State private var showingSettings = false
     @Environment(\.openURL) private var openURL
 
     private var showsPlaceTitleSubtitle: Bool {
@@ -365,7 +370,7 @@ private struct LocationHeader: View {
     }
 
     var body: some View {
-        HStack(alignment: .center, spacing: 8) {
+        HStack(alignment: .top, spacing: 8) {
             VStack(alignment: .leading, spacing: 2) {
                 Text(place.displayName)
                     .font(.system(.title2, design: .serif))
@@ -399,15 +404,30 @@ private struct LocationHeader: View {
                 .accessibilityHint(PlaceMaps.searchQuery(for: place).map { "Searches Maps for \($0)" } ?? "")
             }
 
-            Button {
-                showingInfo = true
-            } label: {
-                Image(systemName: "info.circle")
-                    .font(.body.weight(.semibold))
-                    .frame(width: 36, height: 44)
+            VStack(spacing: 2) {
+                Button {
+                    showingInfo = true
+                } label: {
+                    Image(systemName: "info.circle")
+                        .font(.body.weight(.semibold))
+                        .frame(width: 36, height: 36)
+                        .contentShape(Rectangle())
+                }
+                .accessibilityLabel("Location details")
+                .foregroundStyle(GuideColor.green)
+
+                Button {
+                    showingSettings = true
+                } label: {
+                    Image(systemName: "gearshape")
+                        .font(.body.weight(.semibold))
+                        .frame(width: 36, height: 36)
+                        .contentShape(Rectangle())
+                }
+                .accessibilityLabel("Settings")
+                .accessibilityHint("Scarce birds, flagged taxa, and eBird API key")
+                .foregroundStyle(GuideColor.green)
             }
-            .accessibilityLabel("Location details")
-            .foregroundStyle(GuideColor.green)
         }
         .sheet(isPresented: $showingInfo) {
             NavigationStack {
@@ -453,6 +473,30 @@ private struct LocationHeader: View {
                 }
             }
             .presentationDetents([.medium, .large])
+        }
+        .sheet(isPresented: $showingSettings) {
+            SettingsView()
+                .environmentObject(model)
+        }
+    }
+}
+
+/// Settings entry for the empty home state (no location header / info button yet).
+private struct EmptyStateSettingsButton: View {
+    @EnvironmentObject private var model: GuideModel
+    @State private var showingSettings = false
+
+    var body: some View {
+        Button {
+            showingSettings = true
+        } label: {
+            Label("Settings", systemImage: "gearshape")
+        }
+        .buttonStyle(GuideChipStyle(selected: false))
+        .accessibilityHint("Scarce birds, flagged taxa, and eBird API key")
+        .sheet(isPresented: $showingSettings) {
+            SettingsView()
+                .environmentObject(model)
         }
     }
 }
