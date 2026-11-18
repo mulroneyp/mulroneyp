@@ -83,7 +83,9 @@ struct HomeFiltersView: View {
     }
 
     private var locationRow: some View {
-        HStack(alignment: .center, spacing: 12) {
+        // Top-align so Map stays with the top of the Location pill when the name wraps to two lines
+        // (center would float Map mid-pill). Equal-width pills + always-show “Map” unchanged.
+        HStack(alignment: .top, spacing: 12) {
             locationControl
                 .frame(maxWidth: .infinity, alignment: .leading)
             trailingActionsSlot {
