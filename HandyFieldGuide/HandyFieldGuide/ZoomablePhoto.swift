@@ -107,27 +107,98 @@ struct ZoomablePhotoViewer: View {
     var onClose: () -> Void
 
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color.black.ignoresSafeArea()
-                ZoomableScrollImage(image: image, accessibilityLabel: alt, maximumZoom: 8)
-                    .ignoresSafeArea()
+        ZStack {
+            Color.black.ignoresSafeArea()
+            ZoomableScrollImage(image: image, accessibilityLabel: alt, maximumZoom: 8)
+                .ignoresSafeArea()
+
+            // Overlay (not safeAreaInset) so the photo still runs under the
+            // translucent scrim. The VStack itself stays within the safe area;
+            // only the gradient background extends into the status-bar region.
+            VStack(spacing: 0) {
+                fullscreenPhotoChrome
+                Spacer(minLength: 0)
             }
-            .navigationTitle(title)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Close", action: onClose)
-                }
-                if let onChooseDifferentPhoto {
-                    ToolbarItem(placement: .primaryAction) {
-                        Button("Find another", action: onChooseDifferentPhoto)
-                    }
-                }
-            }
-            .toolbarBackground(.visible, for: .navigationBar)
-            .toolbarColorScheme(.dark, for: .navigationBar)
         }
+    }
+
+    private var fullscreenPhotoChrome: some View {
+        ZStack {
+            HStack(spacing: 10) {
+                Button(action: onClose) {
+                    FullscreenPhotoChromeCapsule(title: "Close")
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Close")
+
+                Spacer(minLength: 8)
+
+                if let onChooseDifferentPhoto {
+                    Button(action: onChooseDifferentPhoto) {
+                        FullscreenPhotoChromeCapsule(title: "Find another")
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("Find another photo")
+                }
+            }
+
+            FullscreenPhotoChromeCapsule(title: title, horizontalPadding: 12, verticalPadding: 8)
+                .lineLimit(1)
+                .padding(.horizontal, 118)
+                .allowsHitTesting(false)
+                .accessibilityAddTraits(.isHeader)
+        }
+        // Override inherited guide ink + app green tint for this chrome only.
+        .tint(FullscreenPhotoChrome.label)
+        .environment(\.colorScheme, .dark)
+        .padding(.horizontal, 12)
+        .padding(.top, 10)
+        .padding(.bottom, 28)
+        .frame(maxWidth: .infinity)
+        .background {
+            // Tall near-opaque top band so white plumage / sky cannot wash out labels.
+            LinearGradient(
+                stops: [
+                    .init(color: Color.black.opacity(0.92), location: 0),
+                    .init(color: Color.black.opacity(0.78), location: 0.45),
+                    .init(color: Color.black.opacity(0.35), location: 0.78),
+                    .init(color: Color.black.opacity(0), location: 1)
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .frame(maxHeight: 160)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .ignoresSafeArea(edges: .top)
+        }
+    }
+}
+
+private enum FullscreenPhotoChrome {
+    /// Solid dark fill — do not use ultraThinMaterial; it disappears on bright photos.
+    static let solidFill = Color.black.opacity(0.82)
+    /// Absolute white — app `.tint(GuideColor.green)` / guide ink were painting button labels nearly black.
+    static let label = Color.white
+}
+
+/// Dark capsule + forced white label. Used inside `.buttonStyle(.plain)` so tint cannot recolor text.
+private struct FullscreenPhotoChromeCapsule: View {
+    var title: String
+    var horizontalPadding: CGFloat = 14
+    var verticalPadding: CGFloat = 10
+
+    var body: some View {
+        Text(title)
+            .font(.subheadline.weight(.bold))
+            .foregroundStyle(FullscreenPhotoChrome.label)
+            .padding(.horizontal, horizontalPadding)
+            .padding(.vertical, verticalPadding)
+            .background(FullscreenPhotoChrome.solidFill, in: Capsule())
+            .overlay {
+                Capsule()
+                    .strokeBorder(Color.white.opacity(0.55), lineWidth: 1)
+            }
+            .shadow(color: .black.opacity(0.6), radius: 4, y: 2)
     }
 }
 
