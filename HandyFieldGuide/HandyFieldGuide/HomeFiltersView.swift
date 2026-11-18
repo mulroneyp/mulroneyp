@@ -1,13 +1,11 @@
 import SwiftUI
 
-/// Top home controls under the app title: Location, Month, and a Settings gear.
+/// Top home controls under the app title: Location and Month value buttons (no Settings gear here).
 struct HomeFiltersView: View {
     @EnvironmentObject private var model: GuideModel
     var onAddLocation: () -> Void
     var onManageLocations: () -> Void
     var onMergeLists: () -> Void
-
-    @State private var showingSettings = false
 
     private var importedLocationOptions: [LocationOption] {
         model.imports.locations.map {
@@ -15,16 +13,16 @@ struct HomeFiltersView: View {
         }
     }
 
-    /// For VoiceOver only — the control label stays generic “Location”.
-    private var selectedLocationAccessibilityValue: String {
+    /// Place name next to the Location button, or “Choose Location” when none is active.
+    private var selectedLocationDisplayName: String {
         if let match = matchingImportedOption {
             return match.title
         }
         if importedLocationOptions.isEmpty {
-            return "No location yet"
+            return "Choose Location"
         }
         let current = model.locationQuery.trimmingCharacters(in: .whitespacesAndNewlines)
-        return current.isEmpty ? "No location selected" : current
+        return current.isEmpty ? "Choose Location" : current
     }
 
     /// Match once per body pass instead of re-normalizing in several controls.
@@ -40,19 +38,15 @@ struct HomeFiltersView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            HStack(spacing: 0) {
-                locationControl
-                controlDivider
-                monthControl
-                controlDivider
-                settingsControl
+            VStack(alignment: .leading, spacing: 10) {
+                locationRow
+                monthRow
             }
-            .padding(.horizontal, 4)
-            .padding(.top, 6)
-            .padding(.bottom, 8)
-            // On iPad the sidebar can be wide; keep the controls clustered rather than stretched.
-            .frame(maxWidth: 560)
-            .frame(maxWidth: .infinity)
+            .padding(.horizontal, 16)
+            .padding(.top, 8)
+            .padding(.bottom, 10)
+            .frame(maxWidth: 560, alignment: .leading)
+            .frame(maxWidth: .infinity, alignment: .leading)
 
             Rectangle()
                 .fill(GuideColor.line)
@@ -61,19 +55,34 @@ struct HomeFiltersView: View {
         }
         .fixedSize(horizontal: false, vertical: true)
         .background(GuideColor.paper)
-        .sheet(isPresented: $showingSettings) {
-            SettingsView()
-                .environmentObject(model)
-        }
     }
 
-    private var controlDivider: some View {
-        // Capsule + fixed frame avoids a greedy Shape stretching with the HStack proposal.
-        Capsule()
-            .fill(GuideColor.line)
-            .frame(width: 1, height: 36)
-            .padding(.vertical, 4)
-            .accessibilityHidden(true)
+    private var locationRow: some View {
+        HStack(alignment: .center, spacing: 12) {
+            locationControl
+            Text(selectedLocationDisplayName)
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(GuideColor.ink)
+                .lineLimit(2)
+                .minimumScaleFactor(0.8)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .accessibilityHidden(true)
+        }
+        .accessibilityElement(children: .combine)
+    }
+
+    private var monthRow: some View {
+        HStack(alignment: .center, spacing: 12) {
+            monthControl
+            Text(model.selectedMonthName)
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(GuideColor.ink)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .accessibilityHidden(true)
+        }
+        .accessibilityElement(children: .combine)
     }
 
     private var locationControl: some View {
@@ -104,10 +113,10 @@ struct HomeFiltersView: View {
                 Label("Add location", systemImage: "plus")
             }
         } label: {
-            filterIconColumn(title: "Location", systemImage: "mappin.and.ellipse")
+            filterButtonLabel(title: "Location")
         }
         .accessibilityLabel("Location")
-        .accessibilityValue(selectedLocationAccessibilityValue)
+        .accessibilityValue(selectedLocationDisplayName)
         .accessibilityHint("Choose an imported place, merge lists, manage saved imports, or add a location via eBird API or barchart")
     }
 
@@ -128,63 +137,29 @@ struct HomeFiltersView: View {
                 }
             }
         } label: {
-            filterColumn(title: "Month", value: model.selectedMonthName)
+            filterButtonLabel(title: "Month")
         }
+        .accessibilityLabel("Month")
+        .accessibilityValue(model.selectedMonthName)
         .accessibilityHint("Imported lists use this month’s eBird frequencies")
     }
 
-    private var settingsControl: some View {
-        Button {
-            showingSettings = true
-        } label: {
-            Image(systemName: "gearshape")
-                .font(.body.weight(.semibold))
-                .foregroundStyle(GuideColor.green)
-                .frame(width: 44, height: 44)
-                .contentShape(Rectangle())
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel("Settings")
-        .accessibilityHint("Scarce birds, flagged taxa, and eBird API key")
-    }
-
-    private func filterColumn(title: String, value: String) -> some View {
-        VStack(spacing: 2) {
-            Text(title.uppercased())
-                .font(.caption2.weight(.semibold))
-                .tracking(0.8)
-                .foregroundStyle(GuideColor.muted)
-            Text(value)
+    private func filterButtonLabel(title: String) -> some View {
+        HStack(spacing: 6) {
+            Text(title)
                 .font(.subheadline.weight(.semibold))
-                .foregroundStyle(GuideColor.ink)
-                .lineLimit(1)
-                .minimumScaleFactor(0.75)
             Image(systemName: "chevron.up.chevron.down")
-                .font(.caption2)
-                .foregroundStyle(GuideColor.muted)
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 4)
-        .contentShape(Rectangle())
-    }
-
-    /// Generic Location column — no place name in the control.
-    private func filterIconColumn(title: String, systemImage: String) -> some View {
-        VStack(spacing: 2) {
-            Text(title.uppercased())
                 .font(.caption2.weight(.semibold))
-                .tracking(0.8)
-                .foregroundStyle(GuideColor.muted)
-            Image(systemName: systemImage)
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(GuideColor.ink)
-                .frame(height: 20)
-            Image(systemName: "chevron.up.chevron.down")
-                .font(.caption2)
-                .foregroundStyle(GuideColor.muted)
         }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 4)
+        .foregroundStyle(GuideColor.green)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 10)
+        .frame(minWidth: 108, minHeight: 44, alignment: .center)
+        .background(GuideColor.green.opacity(0.10))
+        .overlay {
+            RoundedRectangle(cornerRadius: 2)
+                .stroke(GuideColor.green.opacity(0.35), lineWidth: 1)
+        }
         .contentShape(Rectangle())
     }
 
