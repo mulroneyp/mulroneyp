@@ -128,11 +128,11 @@ struct GuideRootView: View {
         if let error = model.loadError {
             Text(error)
                 .padding()
-        } else if let guide = model.guide {
+        } else if model.guide != nil {
             if let place = model.place {
-                list(guide: guide, place: place)
+                list(place: place)
             } else {
-                emptyLocations(guide: guide)
+                emptyLocations()
             }
         } else {
             ProgressView("Loading the guide")
@@ -214,7 +214,7 @@ struct GuideRootView: View {
         }
     }
 
-    private func emptyLocations(guide: GuideFile) -> some View {
+    private func emptyLocations() -> some View {
         VStack(spacing: 0) {
             Spacer(minLength: 0)
             VStack(alignment: .leading, spacing: 16) {
@@ -253,7 +253,6 @@ struct GuideRootView: View {
         }
         .safeAreaInset(edge: .bottom, spacing: 0) {
             HomeFiltersView(
-                guide: guide,
                 onAddLocation: { showingAddLocation = true },
                 onManageLocations: { showingManageLocations = true },
                 onMergeLists: { showingMergeLists = true }
@@ -261,7 +260,7 @@ struct GuideRootView: View {
         }
     }
 
-    private func list(guide: GuideFile, place: ResolvedPlace) -> some View {
+    private func list(place: ResolvedPlace) -> some View {
         let birds = model.sortedForDisplay(model.filteredSpecies(in: place), place: place)
         // LazyVStack keeps off-screen rows (and their photo tasks) from building during scroll.
         return ScrollView {
@@ -337,7 +336,6 @@ struct GuideRootView: View {
         .scrollDismissesKeyboard(.interactively)
         .safeAreaInset(edge: .bottom, spacing: 0) {
             HomeFiltersView(
-                guide: guide,
                 onAddLocation: { showingAddLocation = true },
                 onManageLocations: { showingManageLocations = true },
                 onMergeLists: { showingMergeLists = true }
