@@ -107,27 +107,79 @@ struct ZoomablePhotoViewer: View {
     var onClose: () -> Void
 
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color.black.ignoresSafeArea()
-                ZoomableScrollImage(image: image, accessibilityLabel: alt, maximumZoom: 8)
-                    .ignoresSafeArea()
+        ZStack {
+            Color.black.ignoresSafeArea()
+            ZoomableScrollImage(image: image, accessibilityLabel: alt, maximumZoom: 8)
+                .ignoresSafeArea()
+
+            // Overlay (not safeAreaInset) so the photo still runs under the
+            // translucent scrim. The VStack itself stays within the safe area;
+            // only the gradient background extends into the status-bar region.
+            VStack(spacing: 0) {
+                fullscreenPhotoChrome
+                Spacer(minLength: 0)
             }
-            .navigationTitle(title)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Close", action: onClose)
-                }
-                if let onChooseDifferentPhoto {
-                    ToolbarItem(placement: .primaryAction) {
-                        Button("Find another", action: onChooseDifferentPhoto)
-                    }
-                }
-            }
-            .toolbarBackground(.visible, for: .navigationBar)
-            .toolbarColorScheme(.dark, for: .navigationBar)
         }
+    }
+
+    private var fullscreenPhotoChrome: some View {
+        ZStack {
+            HStack(spacing: 10) {
+                Button("Close", action: onClose)
+                    .buttonStyle(FullscreenPhotoChromeButtonStyle())
+
+                Spacer(minLength: 8)
+
+                if let onChooseDifferentPhoto {
+                    Button("Find another", action: onChooseDifferentPhoto)
+                        .buttonStyle(FullscreenPhotoChromeButtonStyle())
+                        .accessibilityLabel("Find another photo")
+                }
+            }
+
+            Text(title)
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(.white)
+                .shadow(color: .black.opacity(0.65), radius: 2, y: 1)
+                .lineLimit(1)
+                .padding(.horizontal, 108)
+                .allowsHitTesting(false)
+                .accessibilityAddTraits(.isHeader)
+        }
+        .padding(.horizontal, 12)
+        .padding(.top, 8)
+        .padding(.bottom, 14)
+        .frame(maxWidth: .infinity)
+        .background {
+            LinearGradient(
+                colors: [
+                    Color.black.opacity(0.72),
+                    Color.black.opacity(0.38),
+                    Color.black.opacity(0)
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea(edges: .top)
+        }
+    }
+}
+
+/// Capsule control that stays legible on both bright and dark full-screen photos.
+private struct FullscreenPhotoChromeButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.subheadline.weight(.semibold))
+            .foregroundStyle(.white)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
+            .background(.ultraThinMaterial, in: Capsule())
+            .overlay {
+                Capsule()
+                    .strokeBorder(Color.white.opacity(0.35), lineWidth: 0.5)
+            }
+            .shadow(color: .black.opacity(0.45), radius: 3, y: 1)
+            .opacity(configuration.isPressed ? 0.72 : 1)
     }
 }
 
