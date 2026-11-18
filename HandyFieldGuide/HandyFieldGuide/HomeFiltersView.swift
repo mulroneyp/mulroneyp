@@ -52,9 +52,19 @@ struct HomeFiltersView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            VStack(alignment: .leading, spacing: 10) {
-                locationRow
-                monthRow
+            // Grid keeps Location and Month value labels the same width;
+            // trailing column holds Map (row 1) and i/gear (row 2).
+            Grid(alignment: .leading, horizontalSpacing: 12, verticalSpacing: 10) {
+                GridRow(alignment: .center) {
+                    locationControl
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    locationAccessory
+                }
+                GridRow(alignment: .center) {
+                    monthControl
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    monthAccessory
+                }
             }
             .padding(.horizontal, 16)
             .padding(.top, 8)
@@ -78,25 +88,28 @@ struct HomeFiltersView: View {
         }
     }
 
-    private var locationRow: some View {
-        HStack(alignment: .center, spacing: 12) {
-            locationControl
-                .frame(maxWidth: .infinity, alignment: .leading)
-            if let place, let url = PlaceMaps.appleMapsURL(for: place) {
-                mapButton(place: place, url: url)
-            }
+    /// Map on the Location row; empty placeholder when no place so the value column still aligns.
+    @ViewBuilder
+    private var locationAccessory: some View {
+        if let place, let url = PlaceMaps.appleMapsURL(for: place) {
+            mapButton(place: place, url: url)
+                .gridCellAnchor(.trailing)
+        } else {
+            Color.clear
+                .frame(width: 0, height: 44)
+                .accessibilityHidden(true)
         }
     }
 
-    private var monthRow: some View {
-        HStack(alignment: .center, spacing: 8) {
-            monthControl
-                .frame(maxWidth: .infinity, alignment: .leading)
+    /// Info + Settings on the Month row; trailing-aligned within the shared accessory column.
+    private var monthAccessory: some View {
+        HStack(spacing: 0) {
             if place != nil {
                 infoButton
             }
             settingsButton
         }
+        .gridCellAnchor(.trailing)
     }
 
     private var locationControl: some View {
