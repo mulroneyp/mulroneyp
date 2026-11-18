@@ -57,10 +57,15 @@ enum BundleImages {
 
     /// Relative paths written by `PhotoCacheStore` for on-import Commons downloads.
     static let cachedPathPrefix = "cached-images/"
+    /// Relative paths for user Photos-library images on life-list entries.
+    static let lifeListPhotoPathPrefix = LifeListStore.photoPathPrefix
 
     static func url(for relativePath: String) -> URL? {
         if relativePath.hasPrefix(cachedPathPrefix) {
             return cachedFileURL(for: relativePath)
+        }
+        if relativePath.hasPrefix(lifeListPhotoPathPrefix) {
+            return lifeListPhotoFileURL(for: relativePath)
         }
         let file = (relativePath as NSString).lastPathComponent
         let directory = (relativePath as NSString).deletingLastPathComponent
@@ -81,6 +86,16 @@ enum BundleImages {
         let file = String(relativePath.dropFirst(cachedPathPrefix.count))
         let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("species-photos", isDirectory: true)
+            .appendingPathComponent(file)
+        return FileManager.default.fileExists(atPath: url.path) ? url : nil
+    }
+
+    /// Documents/life-list-photos/<file> for Photos-library attachments on the life list.
+    static func lifeListPhotoFileURL(for relativePath: String) -> URL? {
+        guard relativePath.hasPrefix(lifeListPhotoPathPrefix) else { return nil }
+        let file = String(relativePath.dropFirst(lifeListPhotoPathPrefix.count))
+        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent(LifeListStore.photoDirectoryName, isDirectory: true)
             .appendingPathComponent(file)
         return FileManager.default.fileExists(atPath: url.path) ? url : nil
     }

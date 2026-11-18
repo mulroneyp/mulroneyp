@@ -7,6 +7,9 @@ struct GuideRootView: View {
     @State private var showingAddLocation = false
     @State private var showingManageLocations = false
     @State private var showingMergeLists = false
+    @State private var showingLifeList = false
+    @State private var showingInfo = false
+    @State private var showingSettings = false
     /// iPhone push stack — unchanged compact UX.
     @State private var path = NavigationPath()
     /// iPad split selection — drives the detail column.
@@ -20,13 +23,14 @@ struct GuideRootView: View {
         horizontalSizeClass == .regular
     }
 
-    /// Location / Month value labels under the nav title (Map on Location row; info + Settings on Month row).
+    /// Location / Month value labels under the nav title (Map on Location row; Life List under Map).
     private func homeTopFilters(place: ResolvedPlace?) -> some View {
         HomeFiltersView(
             place: place,
             onAddLocation: { showingAddLocation = true },
             onManageLocations: { showingManageLocations = true },
-            onMergeLists: { showingMergeLists = true }
+            onMergeLists: { showingMergeLists = true },
+            onLifeList: { showingLifeList = true }
         )
         .simultaneousGesture(TapGesture().onEnded(dismissSearchKeyboard))
     }
@@ -47,6 +51,17 @@ struct GuideRootView: View {
         }
         .sheet(isPresented: $showingMergeLists) {
             MergeListsSheet()
+        }
+        .sheet(isPresented: $showingLifeList) {
+            LifeListView()
+                .environmentObject(model)
+        }
+        .sheet(isPresented: $showingInfo) {
+            placeInfoSheet
+        }
+        .sheet(isPresented: $showingSettings) {
+            SettingsView()
+                .environmentObject(model)
         }
         .sheet(item: $model.photoFetch, onDismiss: {
             model.clearPhotoFetchIfIdle()
@@ -71,6 +86,15 @@ struct GuideRootView: View {
             if open { dismissSearchKeyboard() }
         }
         .onChange(of: showingMergeLists) { _, open in
+            if open { dismissSearchKeyboard() }
+        }
+        .onChange(of: showingLifeList) { _, open in
+            if open { dismissSearchKeyboard() }
+        }
+        .onChange(of: showingInfo) { _, open in
+            if open { dismissSearchKeyboard() }
+        }
+        .onChange(of: showingSettings) { _, open in
             if open { dismissSearchKeyboard() }
         }
         .onChange(of: horizontalSizeClass) { _, newValue in
@@ -103,6 +127,7 @@ struct GuideRootView: View {
                     }
                 }
                 .toolbar {
+                    titleTrailingToolbar
                     ToolbarItemGroup(placement: .keyboard) {
                         Spacer()
                         Button("Done") { dismissSearchKeyboard() }
@@ -119,6 +144,7 @@ struct GuideRootView: View {
                     .navigationTitle("Handy Field Guide")
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
+                        titleTrailingToolbar
                         ToolbarItemGroup(placement: .keyboard) {
                             Spacer()
                             Button("Done") { dismissSearchKeyboard() }
@@ -133,6 +159,86 @@ struct GuideRootView: View {
             }
         }
         .navigationSplitViewStyle(.balanced)
+    }
+
+    /// Info + Settings on the title row (right-aligned), not on the Month row.
+    @ToolbarContentBuilder
+    private var titleTrailingToolbar: some ToolbarContent {
+        if model.place != nil {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    showingInfo = true
+                } label: {
+                    Image(systemName: "info.circle")
+                }
+                .accessibilityLabel("Location details")
+            }
+        }
+        ToolbarItem(placement: .topBarTrailing) {
+            Button {
+                showingSettings = true
+            } label: {
+                Image(systemName: "gearshape")
+            }
+            .accessibilityLabel("Settings")
+            .accessibilityHint("Scarce birds, flagged taxa, and eBird API key")
+        }
+    }
+
+    private var showsPlaceTitleInInfo: Bool {
+        guard let place = model.place else { return false }
+        let title = place.coverage.placeTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !title.isEmpty else { return false }
+        return LocationResolver.normalize(title) != LocationResolver.normalize(place.displayName)
+    }
+
+    @ViewBuilder
+    private var placeInfoSheet: some View {
+        if let place = model.place {
+            NavigationStack {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 16) {
+                        Text(place.displayName)
+                            .font(.system(.title2, design: .serif))
+                            .foregroundStyle(GuideColor.green)
+                        if showsPlaceTitleInInfo {
+                            Text(place.coverage.placeTitle)
+                                .font(.subheadline)
+                                .foregroundStyle(GuideColor.muted)
+                        }
+                        Text(place.coverage.summary)
+                            .font(.body)
+                            .foregroundStyle(GuideColor.ink)
+                            .fixedSize(horizontal: false, vertical: true)
+                        if let lead = place.district?.lead.trimmingCharacters(in: .whitespacesAndNewlines),
+                           !lead.isEmpty {
+                            Text(lead)
+                                .font(.body)
+                                .foregroundStyle(GuideColor.ink)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                        if let sample = place.coverage.sampleNote?.trimmingCharacters(in: .whitespacesAndNewlines),
+                           !sample.isEmpty {
+                            Text(sample)
+                                .font(.subheadline)
+                                .foregroundStyle(GuideColor.muted)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(20)
+                }
+                .guideBackground()
+                .navigationTitle("About this place")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Done") { showingInfo = false }
+                    }
+                }
+            }
+            .presentationDetents([.medium, .large])
+        }
     }
 
     @ViewBuilder

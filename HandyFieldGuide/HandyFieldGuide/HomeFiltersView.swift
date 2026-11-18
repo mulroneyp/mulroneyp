@@ -1,7 +1,8 @@
 import SwiftUI
 
 /// Top home controls under the app title: value labels for Location and Month
-/// (tappable pickers), with Map on the Location row and info + Settings on the Month row.
+/// (tappable pickers), with Map on the Location row and Life List under Map.
+/// Info (i) and Settings gear live on the navigation title row (see GuideRootView).
 struct HomeFiltersView: View {
     @EnvironmentObject private var model: GuideModel
     /// Active place when a list is open; nil on the empty home state.
@@ -9,9 +10,8 @@ struct HomeFiltersView: View {
     var onAddLocation: () -> Void
     var onManageLocations: () -> Void
     var onMergeLists: () -> Void
+    var onLifeList: () -> Void
 
-    @State private var showingInfo = false
-    @State private var showingSettings = false
     @Environment(\.openURL) private var openURL
 
     private var importedLocationOptions: [LocationOption] {
@@ -43,16 +43,9 @@ struct HomeFiltersView: View {
         }
     }
 
-    private var showsPlaceTitleInInfo: Bool {
-        guard let place else { return false }
-        let title = place.coverage.placeTitle.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !title.isEmpty else { return false }
-        return LocationResolver.normalize(title) != LocationResolver.normalize(place.displayName)
-    }
-
-    /// Same reserved width on both rows for Map vs i+gear so the value pills match exactly.
-    /// Wide enough for icon + the word “Map” (never icon-only) and for two 36pt icon buttons (i + gear).
-    private let trailingActionsWidth: CGFloat = 96
+    /// Same reserved width on both rows for Map vs Life List so the value pills match.
+    /// Wide enough for icon + “Map” / “Life List” labels.
+    private let trailingActionsWidth: CGFloat = 108
 
     var body: some View {
         VStack(spacing: 0) {
@@ -73,18 +66,10 @@ struct HomeFiltersView: View {
         }
         .fixedSize(horizontal: false, vertical: true)
         .background(GuideColor.paper)
-        .sheet(isPresented: $showingInfo) {
-            placeInfoSheet
-        }
-        .sheet(isPresented: $showingSettings) {
-            SettingsView()
-                .environmentObject(model)
-        }
     }
 
     private var locationRow: some View {
-        // Top-align so Map stays with the top of the Location pill when the name wraps to two lines
-        // (center would float Map mid-pill). Equal-width pills + always-show “Map” unchanged.
+        // Top-align so Map stays with the top of the Location pill when the name wraps.
         HStack(alignment: .top, spacing: 12) {
             locationControl
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -101,18 +86,12 @@ struct HomeFiltersView: View {
             monthControl
                 .frame(maxWidth: .infinity, alignment: .leading)
             trailingActionsSlot {
-                HStack(spacing: 0) {
-                    if place != nil {
-                        infoButton
-                    }
-                    settingsButton
-                }
+                lifeListButton
             }
         }
     }
 
-    /// Fixed-width trailing column shared by both rows (Map on Location; i/gear on Month).
-    /// ZStack + clear base so an empty Location trailing slot still reserves width (EmptyView would not).
+    /// Fixed-width trailing column shared by both rows (Map on Location; Life List under Map).
     private func trailingActionsSlot<Content: View>(@ViewBuilder content: () -> Content) -> some View {
         ZStack(alignment: .trailing) {
             Color.clear
@@ -122,7 +101,6 @@ struct HomeFiltersView: View {
     }
 
     private var locationControl: some View {
-        // Menu alone sizes to label ideal width; chrome fills the row so both pills match.
         valueMenuChrome(
             text: selectedLocationDisplayName,
             accessibilityLabel: "Location",
@@ -179,7 +157,6 @@ struct HomeFiltersView: View {
         }
     }
 
-    /// Value pill fills offered width; invisible Menu overlay supplies the picker (avoids Menu content-sizing the chrome).
     private func valueMenuChrome<MenuContent: View>(
         text: String,
         accessibilityLabel: String,
@@ -200,7 +177,6 @@ struct HomeFiltersView: View {
             }
     }
 
-    /// Value-as-label control: shows the selected place/month, not a separate “Location”/“Month” chrome title.
     private func valueLabel(_ text: String) -> some View {
         HStack(spacing: 6) {
             Text(text)
@@ -228,7 +204,6 @@ struct HomeFiltersView: View {
         Button {
             openURL(url)
         } label: {
-            // Explicit HStack (not Label): Label can collapse to icon-only in a tight trailing slot.
             HStack(spacing: 4) {
                 Image(systemName: "map")
                 Text("Map")
@@ -238,7 +213,6 @@ struct HomeFiltersView: View {
             .font(.subheadline.weight(.semibold))
             .padding(.horizontal, 8)
             .padding(.vertical, 8)
-            // Fill the fixed trailing slot so Map cannot widen past i+gear’s reserved width.
             .frame(maxWidth: .infinity, minHeight: 44)
             .background(GuideColor.green.opacity(0.10))
             .overlay {
@@ -251,80 +225,27 @@ struct HomeFiltersView: View {
         .accessibilityHint(PlaceMaps.searchQuery(for: place).map { "Searches Maps for \($0)" } ?? "")
     }
 
-    private var infoButton: some View {
-        Button {
-            showingInfo = true
-        } label: {
-            Image(systemName: "info.circle")
-                .font(.body.weight(.semibold))
-                .frame(width: 36, height: 44)
-                .contentShape(Rectangle())
-        }
-        .accessibilityLabel("Location details")
-        .foregroundStyle(GuideColor.green)
-    }
-
-    private var settingsButton: some View {
-        Button {
-            showingSettings = true
-        } label: {
-            Image(systemName: "gearshape")
-                .font(.body.weight(.semibold))
-                .frame(width: 36, height: 44)
-                .contentShape(Rectangle())
-        }
-        .accessibilityLabel("Settings")
-        .accessibilityHint("Scarce birds, flagged taxa, and eBird API key")
-        .foregroundStyle(GuideColor.green)
-    }
-
-    @ViewBuilder
-    private var placeInfoSheet: some View {
-        if let place {
-            NavigationStack {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 16) {
-                        Text(place.displayName)
-                            .font(.system(.title2, design: .serif))
-                            .foregroundStyle(GuideColor.green)
-                        if showsPlaceTitleInInfo {
-                            Text(place.coverage.placeTitle)
-                                .font(.subheadline)
-                                .foregroundStyle(GuideColor.muted)
-                        }
-                        Text(place.coverage.summary)
-                            .font(.body)
-                            .foregroundStyle(GuideColor.ink)
-                            .fixedSize(horizontal: false, vertical: true)
-                        if let lead = place.district?.lead.trimmingCharacters(in: .whitespacesAndNewlines),
-                           !lead.isEmpty {
-                            Text(lead)
-                                .font(.body)
-                                .foregroundStyle(GuideColor.ink)
-                                .fixedSize(horizontal: false, vertical: true)
-                        }
-                        if let sample = place.coverage.sampleNote?.trimmingCharacters(in: .whitespacesAndNewlines),
-                           !sample.isEmpty {
-                            Text(sample)
-                                .font(.subheadline)
-                                .foregroundStyle(GuideColor.muted)
-                                .fixedSize(horizontal: false, vertical: true)
-                        }
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(20)
-                }
-                .guideBackground()
-                .navigationTitle("About this place")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Done") { showingInfo = false }
-                    }
-                }
+    private var lifeListButton: some View {
+        Button(action: onLifeList) {
+            HStack(spacing: 4) {
+                Image(systemName: "list.bullet.rectangle")
+                Text("Life List")
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
             }
-            .presentationDetents([.medium, .large])
+            .font(.subheadline.weight(.semibold))
+            .padding(.horizontal, 6)
+            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity, minHeight: 44)
+            .background(GuideColor.green.opacity(0.10))
+            .overlay {
+                RoundedRectangle(cornerRadius: 2)
+                    .stroke(GuideColor.green.opacity(0.35), lineWidth: 1)
+            }
         }
+        .foregroundStyle(GuideColor.green)
+        .accessibilityLabel("Life List")
+        .accessibilityHint("Opens your imported eBird life list")
     }
 
     private var locationSelection: Binding<String> {
