@@ -20,9 +20,10 @@ struct GuideRootView: View {
         horizontalSizeClass == .regular
     }
 
-    /// Location + Month value buttons under the nav title (not a bottom bar; Settings gear lives under the location-header info button).
-    private var homeTopFilters: some View {
+    /// Location / Month value labels under the nav title (Map on Location row; info + Settings on Month row).
+    private func homeTopFilters(place: ResolvedPlace?) -> some View {
         HomeFiltersView(
+            place: place,
             onAddLocation: { showingAddLocation = true },
             onManageLocations: { showingManageLocations = true },
             onMergeLists: { showingMergeLists = true }
@@ -256,9 +257,6 @@ struct GuideRootView: View {
                     }
                     .buttonStyle(GuideChipStyle(selected: false))
                 }
-
-                // No location header (i) yet — keep Settings reachable for the eBird API key.
-                EmptyStateSettingsButton()
             }
             .padding(20)
             .frame(maxWidth: contentMaxWidth, alignment: .leading)
@@ -266,7 +264,7 @@ struct GuideRootView: View {
             Spacer(minLength: 0)
         }
         .safeAreaInset(edge: .top, spacing: 0) {
-            homeTopFilters
+            homeTopFilters(place: nil)
         }
     }
 
@@ -275,9 +273,6 @@ struct GuideRootView: View {
         // LazyVStack keeps off-screen rows (and their photo tasks) from building during scroll.
         return ScrollView {
             LazyVStack(alignment: .leading, spacing: 14) {
-                LocationHeader(place: place)
-                    .simultaneousGesture(TapGesture().onEnded(dismissSearchKeyboard))
-
                 if let notice = place.notice {
                     NoticeBox(text: notice, strong: true)
                         .simultaneousGesture(TapGesture().onEnded(dismissSearchKeyboard))
@@ -345,159 +340,13 @@ struct GuideRootView: View {
         }
         .scrollDismissesKeyboard(.interactively)
         .safeAreaInset(edge: .top, spacing: 0) {
-            homeTopFilters
+            homeTopFilters(place: place)
         }
     }
 
     /// Sidebar / phone list stays readable; phone column is already narrow.
     private var contentMaxWidth: CGFloat {
         usesSplitNavigation ? 520 : 720
-    }
-}
-
-/// Compact place chrome: name + Maps link + “i” for the long coverage prose, with Settings gear under the info button.
-private struct LocationHeader: View {
-    var place: ResolvedPlace
-    @EnvironmentObject private var model: GuideModel
-    @State private var showingInfo = false
-    @State private var showingSettings = false
-    @Environment(\.openURL) private var openURL
-
-    private var showsPlaceTitleSubtitle: Bool {
-        let title = place.coverage.placeTitle.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !title.isEmpty else { return false }
-        return LocationResolver.normalize(title) != LocationResolver.normalize(place.displayName)
-    }
-
-    var body: some View {
-        HStack(alignment: .top, spacing: 8) {
-            VStack(alignment: .leading, spacing: 2) {
-                Text(place.displayName)
-                    .font(.system(.title2, design: .serif))
-                    .foregroundStyle(GuideColor.green)
-                    .fixedSize(horizontal: false, vertical: true)
-                if showsPlaceTitleSubtitle {
-                    Text(place.coverage.placeTitle)
-                        .font(.caption)
-                        .foregroundStyle(GuideColor.muted)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-
-            if let url = PlaceMaps.appleMapsURL(for: place) {
-                Button {
-                    openURL(url)
-                } label: {
-                    Label("Map", systemImage: "map")
-                        .font(.subheadline.weight(.semibold))
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 8)
-                        .background(GuideColor.green.opacity(0.10))
-                        .overlay {
-                            RoundedRectangle(cornerRadius: 2)
-                                .stroke(GuideColor.green.opacity(0.35), lineWidth: 1)
-                        }
-                }
-                .foregroundStyle(GuideColor.green)
-                .accessibilityLabel("Open \(place.displayName) in Maps")
-                .accessibilityHint(PlaceMaps.searchQuery(for: place).map { "Searches Maps for \($0)" } ?? "")
-            }
-
-            VStack(spacing: 2) {
-                Button {
-                    showingInfo = true
-                } label: {
-                    Image(systemName: "info.circle")
-                        .font(.body.weight(.semibold))
-                        .frame(width: 36, height: 36)
-                        .contentShape(Rectangle())
-                }
-                .accessibilityLabel("Location details")
-                .foregroundStyle(GuideColor.green)
-
-                Button {
-                    showingSettings = true
-                } label: {
-                    Image(systemName: "gearshape")
-                        .font(.body.weight(.semibold))
-                        .frame(width: 36, height: 36)
-                        .contentShape(Rectangle())
-                }
-                .accessibilityLabel("Settings")
-                .accessibilityHint("Scarce birds, flagged taxa, and eBird API key")
-                .foregroundStyle(GuideColor.green)
-            }
-        }
-        .sheet(isPresented: $showingInfo) {
-            NavigationStack {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 16) {
-                        Text(place.displayName)
-                            .font(.system(.title2, design: .serif))
-                            .foregroundStyle(GuideColor.green)
-                        if showsPlaceTitleSubtitle {
-                            Text(place.coverage.placeTitle)
-                                .font(.subheadline)
-                                .foregroundStyle(GuideColor.muted)
-                        }
-                        Text(place.coverage.summary)
-                            .font(.body)
-                            .foregroundStyle(GuideColor.ink)
-                            .fixedSize(horizontal: false, vertical: true)
-                        if let lead = place.district?.lead.trimmingCharacters(in: .whitespacesAndNewlines),
-                           !lead.isEmpty {
-                            Text(lead)
-                                .font(.body)
-                                .foregroundStyle(GuideColor.ink)
-                                .fixedSize(horizontal: false, vertical: true)
-                        }
-                        if let sample = place.coverage.sampleNote?.trimmingCharacters(in: .whitespacesAndNewlines),
-                           !sample.isEmpty {
-                            Text(sample)
-                                .font(.subheadline)
-                                .foregroundStyle(GuideColor.muted)
-                                .fixedSize(horizontal: false, vertical: true)
-                        }
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(20)
-                }
-                .guideBackground()
-                .navigationTitle("About this place")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Done") { showingInfo = false }
-                    }
-                }
-            }
-            .presentationDetents([.medium, .large])
-        }
-        .sheet(isPresented: $showingSettings) {
-            SettingsView()
-                .environmentObject(model)
-        }
-    }
-}
-
-/// Settings entry for the empty home state (no location header / info button yet).
-private struct EmptyStateSettingsButton: View {
-    @EnvironmentObject private var model: GuideModel
-    @State private var showingSettings = false
-
-    var body: some View {
-        Button {
-            showingSettings = true
-        } label: {
-            Label("Settings", systemImage: "gearshape")
-        }
-        .buttonStyle(GuideChipStyle(selected: false))
-        .accessibilityHint("Scarce birds, flagged taxa, and eBird API key")
-        .sheet(isPresented: $showingSettings) {
-            SettingsView()
-                .environmentObject(model)
-        }
     }
 }
 

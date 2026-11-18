@@ -1,11 +1,18 @@
 import SwiftUI
 
-/// Top home controls under the app title: Location and Month value buttons (no Settings gear here).
+/// Top home controls under the app title: value labels for Location and Month
+/// (tappable pickers), with Map on the Location row and info + Settings on the Month row.
 struct HomeFiltersView: View {
     @EnvironmentObject private var model: GuideModel
+    /// Active place when a list is open; nil on the empty home state.
+    var place: ResolvedPlace?
     var onAddLocation: () -> Void
     var onManageLocations: () -> Void
     var onMergeLists: () -> Void
+
+    @State private var showingInfo = false
+    @State private var showingSettings = false
+    @Environment(\.openURL) private var openURL
 
     private var importedLocationOptions: [LocationOption] {
         model.imports.locations.map {
@@ -13,7 +20,7 @@ struct HomeFiltersView: View {
         }
     }
 
-    /// Place name next to the Location button, or “Choose Location” when none is active.
+    /// Selected place name, or “Choose Location” when none is active.
     private var selectedLocationDisplayName: String {
         if let match = matchingImportedOption {
             return match.title
@@ -36,6 +43,13 @@ struct HomeFiltersView: View {
         }
     }
 
+    private var showsPlaceTitleInInfo: Bool {
+        guard let place else { return false }
+        let title = place.coverage.placeTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !title.isEmpty else { return false }
+        return LocationResolver.normalize(title) != LocationResolver.normalize(place.displayName)
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             VStack(alignment: .leading, spacing: 10) {
@@ -55,34 +69,34 @@ struct HomeFiltersView: View {
         }
         .fixedSize(horizontal: false, vertical: true)
         .background(GuideColor.paper)
+        .sheet(isPresented: $showingInfo) {
+            placeInfoSheet
+        }
+        .sheet(isPresented: $showingSettings) {
+            SettingsView()
+                .environmentObject(model)
+        }
     }
 
     private var locationRow: some View {
         HStack(alignment: .center, spacing: 12) {
             locationControl
-            Text(selectedLocationDisplayName)
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(GuideColor.ink)
-                .lineLimit(2)
-                .minimumScaleFactor(0.8)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .accessibilityHidden(true)
+            if let place, let url = PlaceMaps.appleMapsURL(for: place) {
+                mapButton(place: place, url: url)
+            }
         }
-        .accessibilityElement(children: .combine)
     }
 
     private var monthRow: some View {
-        HStack(alignment: .center, spacing: 12) {
+        HStack(alignment: .center, spacing: 8) {
             monthControl
-            Text(model.selectedMonthName)
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(GuideColor.ink)
-                .lineLimit(1)
-                .minimumScaleFactor(0.8)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .accessibilityHidden(true)
+            if place != nil {
+                infoButton
+            }
+            settingsButton
         }
-        .accessibilityElement(children: .combine)
     }
 
     private var locationControl: some View {
@@ -113,7 +127,7 @@ struct HomeFiltersView: View {
                 Label("Add location", systemImage: "plus")
             }
         } label: {
-            filterButtonLabel(title: "Location")
+            valueLabel(selectedLocationDisplayName)
         }
         .accessibilityLabel("Location")
         .accessibilityValue(selectedLocationDisplayName)
@@ -137,30 +151,131 @@ struct HomeFiltersView: View {
                 }
             }
         } label: {
-            filterButtonLabel(title: "Month")
+            valueLabel(model.selectedMonthName)
         }
         .accessibilityLabel("Month")
         .accessibilityValue(model.selectedMonthName)
         .accessibilityHint("Imported lists use this month’s eBird frequencies")
     }
 
-    private func filterButtonLabel(title: String) -> some View {
+    /// Value-as-label control: shows the selected place/month, not a separate “Location”/“Month” chrome title.
+    private func valueLabel(_ text: String) -> some View {
         HStack(spacing: 6) {
-            Text(title)
+            Text(text)
                 .font(.subheadline.weight(.semibold))
+                .lineLimit(2)
+                .minimumScaleFactor(0.75)
+                .multilineTextAlignment(.leading)
+                .frame(maxWidth: .infinity, alignment: .leading)
             Image(systemName: "chevron.up.chevron.down")
                 .font(.caption2.weight(.semibold))
         }
         .foregroundStyle(GuideColor.green)
         .padding(.horizontal, 12)
         .padding(.vertical, 10)
-        .frame(minWidth: 108, minHeight: 44, alignment: .center)
+        .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
         .background(GuideColor.green.opacity(0.10))
         .overlay {
             RoundedRectangle(cornerRadius: 2)
                 .stroke(GuideColor.green.opacity(0.35), lineWidth: 1)
         }
         .contentShape(Rectangle())
+    }
+
+    private func mapButton(place: ResolvedPlace, url: URL) -> some View {
+        Button {
+            openURL(url)
+        } label: {
+            Label("Map", systemImage: "map")
+                .font(.subheadline.weight(.semibold))
+                .padding(.horizontal, 10)
+                .padding(.vertical, 8)
+                .frame(minHeight: 44)
+                .background(GuideColor.green.opacity(0.10))
+                .overlay {
+                    RoundedRectangle(cornerRadius: 2)
+                        .stroke(GuideColor.green.opacity(0.35), lineWidth: 1)
+                }
+        }
+        .foregroundStyle(GuideColor.green)
+        .accessibilityLabel("Open \(place.displayName) in Maps")
+        .accessibilityHint(PlaceMaps.searchQuery(for: place).map { "Searches Maps for \($0)" } ?? "")
+    }
+
+    private var infoButton: some View {
+        Button {
+            showingInfo = true
+        } label: {
+            Image(systemName: "info.circle")
+                .font(.body.weight(.semibold))
+                .frame(width: 36, height: 44)
+                .contentShape(Rectangle())
+        }
+        .accessibilityLabel("Location details")
+        .foregroundStyle(GuideColor.green)
+    }
+
+    private var settingsButton: some View {
+        Button {
+            showingSettings = true
+        } label: {
+            Image(systemName: "gearshape")
+                .font(.body.weight(.semibold))
+                .frame(width: 36, height: 44)
+                .contentShape(Rectangle())
+        }
+        .accessibilityLabel("Settings")
+        .accessibilityHint("Scarce birds, flagged taxa, and eBird API key")
+        .foregroundStyle(GuideColor.green)
+    }
+
+    @ViewBuilder
+    private var placeInfoSheet: some View {
+        if let place {
+            NavigationStack {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 16) {
+                        Text(place.displayName)
+                            .font(.system(.title2, design: .serif))
+                            .foregroundStyle(GuideColor.green)
+                        if showsPlaceTitleInInfo {
+                            Text(place.coverage.placeTitle)
+                                .font(.subheadline)
+                                .foregroundStyle(GuideColor.muted)
+                        }
+                        Text(place.coverage.summary)
+                            .font(.body)
+                            .foregroundStyle(GuideColor.ink)
+                            .fixedSize(horizontal: false, vertical: true)
+                        if let lead = place.district?.lead.trimmingCharacters(in: .whitespacesAndNewlines),
+                           !lead.isEmpty {
+                            Text(lead)
+                                .font(.body)
+                                .foregroundStyle(GuideColor.ink)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                        if let sample = place.coverage.sampleNote?.trimmingCharacters(in: .whitespacesAndNewlines),
+                           !sample.isEmpty {
+                            Text(sample)
+                                .font(.subheadline)
+                                .foregroundStyle(GuideColor.muted)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(20)
+                }
+                .guideBackground()
+                .navigationTitle("About this place")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Done") { showingInfo = false }
+                    }
+                }
+            }
+            .presentationDetents([.medium, .large])
+        }
     }
 
     private var locationSelection: Binding<String> {
