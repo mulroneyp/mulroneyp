@@ -46,6 +46,7 @@ Frequency prefers eBird’s bar-chart histogram download (`/barchartData`, 48 we
 Use **Import barchart .txt** (or **Add sample L436229**) for an eBird Frequency / barchart `.txt` export (tab-separated text).
 
 - The app reads the eBird location id from the filename when present (for example `L436229`).
+- The saved / displayed list name drops a trailing `.txt` (case-insensitive) when the name comes from the export filename.
 - Each month aggregates the four week columns as a **mean**.
 - “sp.” and slash taxa are parsed, flagged, and hidden from the main list unless you turn them on in **Settings**.
 - Species with selected-month mean frequency below **0.5%** (`0.005`) are hidden by default as scarce / near-zero (toggle in **Settings**).

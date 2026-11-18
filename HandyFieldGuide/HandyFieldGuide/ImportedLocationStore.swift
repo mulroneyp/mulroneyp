@@ -164,7 +164,9 @@ final class ImportedLocationStore: ObservableObject {
         let locationId = parsed.ebirdLocationId
         let id = locationId.map { "ebird-\($0)" } ?? "ebird-\(UUID().uuidString.lowercased())"
         let defaultName = locationId ?? parsed.sourceFileName
-        let name = (displayName?.trimmingCharacters(in: .whitespacesAndNewlines)).flatMap { $0.isEmpty ? nil : $0 } ?? defaultName
+        let rawName = (displayName?.trimmingCharacters(in: .whitespacesAndNewlines)).flatMap { $0.isEmpty ? nil : $0 } ?? defaultName
+        // Saved/displayed list names never keep a trailing `.txt` from the export filename.
+        let name = Self.strippingTxtSuffix(rawName)
         let record = ImportedLocationRecord(
             id: id,
             name: name,
@@ -219,6 +221,18 @@ final class ImportedLocationStore: ObservableObject {
         guard !trimmed.isEmpty else { return }
         locations[index].name = trimmed
         persist()
+    }
+
+    /// Drops a trailing `.txt` (any case) from an imported list’s display name.
+    /// Keeps `sourceFileName` intact; only the user-facing / persisted `name` is cleaned.
+    static func strippingTxtSuffix(_ raw: String) -> String {
+        let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard trimmed.count > 4 else { return trimmed }
+        let suffix = trimmed.suffix(4)
+        guard suffix.lowercased() == ".txt" else { return trimmed }
+        let stripped = String(trimmed.dropLast(4))
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        return stripped.isEmpty ? trimmed : stripped
     }
 
     /// Removes a saved import from the store. Does not delete the sample barchart
