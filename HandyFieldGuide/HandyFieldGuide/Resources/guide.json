@@ -6932,7 +6932,11 @@
               "file": "File:Bicolored Antbird (26829158518).jpg"
             }
           ],
-          "activeTimes": []
+          "activeTimes": [],
+          "lengthCm": [
+            13.5,
+            15.0
+          ]
         },
         {
           "id": "russet-antshrike",

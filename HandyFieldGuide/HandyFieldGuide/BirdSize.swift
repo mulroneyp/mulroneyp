@@ -26,10 +26,12 @@ enum BirdSize {
     ]
 
     static func hasLength(_ species: Species) -> Bool {
-        midpoint(species.lengthCm) != nil
+        // Require a printable length line so the list/detail never show an empty "Length" row.
+        midpoint(species.lengthCm) != nil && !line(for: species.lengthCm).isEmpty
     }
 
     /// One wording for every bird that has a length: "Length 14–18 cm" or "Length 16 cm".
+    /// Empty string when unknown — callers must hide Size / Length via `hasLength`.
     static func line(for species: Species) -> String {
         line(for: species.lengthCm)
     }

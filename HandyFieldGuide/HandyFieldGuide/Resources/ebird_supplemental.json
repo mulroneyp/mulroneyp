@@ -9495,5 +9495,3852 @@
         "file": "File:Tawny-throated Leaftosser (Sclerurus mexicanus) (5771861551).jpg"
       }
     ]
+  },
+  {
+    "id": "lesser-scaup",
+    "commonName": "Lesser Scaup",
+    "scientificName": "Aythya affinis",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      38.0,
+      48.0
+    ]
+  },
+  {
+    "id": "rock-dove",
+    "commonName": "Rock Dove",
+    "scientificName": "Common pigeon",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      30.0,
+      35.0
+    ]
+  },
+  {
+    "id": "violaceous-quail-dove",
+    "commonName": "Violaceous Quail-Dove",
+    "scientificName": "Violaceous quail",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      20.0,
+      23.5
+    ]
+  },
+  {
+    "id": "olive-backed-quail-dove",
+    "commonName": "Olive-backed Quail-Dove",
+    "scientificName": "Leptotrygon veraguensis",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      21.0,
+      24.5
+    ]
+  },
+  {
+    "id": "buff-fronted-quail-dove",
+    "commonName": "Buff-fronted Quail-Dove",
+    "scientificName": "Geotrygon costaricensis",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      24.0,
+      28.0
+    ]
+  },
+  {
+    "id": "chiriqui-quail-dove",
+    "commonName": "Chiriqui Quail-Dove",
+    "scientificName": "Zentrygon chiriquensis",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      27.0,
+      31.0
+    ]
+  },
+  {
+    "id": "mourning-dove",
+    "commonName": "Mourning Dove",
+    "scientificName": "Mourning dove",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      31.0
+    ]
+  },
+  {
+    "id": "short-tailed-nighthawk",
+    "commonName": "Short-tailed Nighthawk",
+    "scientificName": "Lurocalis semitorquatus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "sky"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      19.0,
+      21.0
+    ]
+  },
+  {
+    "id": "chuck-wills-widow",
+    "commonName": "Chuck-will's-widow",
+    "scientificName": "Antrostomus carolinensis",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      28.0,
+      33.0
+    ]
+  },
+  {
+    "id": "spot-fronted-swift",
+    "commonName": "Spot-fronted Swift",
+    "scientificName": "Cypseloides cherriei",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "sky"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      14.0
+    ]
+  },
+  {
+    "id": "chimney-swift",
+    "commonName": "Chimney Swift",
+    "scientificName": "Chaetura pelagica",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "sky"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      27.0,
+      30.0
+    ]
+  },
+  {
+    "id": "uniform-crake",
+    "commonName": "Uniform Crake",
+    "scientificName": "Amaurolimnas concolor",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      20.0,
+      23.0
+    ]
+  },
+  {
+    "id": "american-coot",
+    "commonName": "American Coot",
+    "scientificName": "American coot",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      58.0,
+      71.0
+    ]
+  },
+  {
+    "id": "white-throated-crake",
+    "commonName": "White-throated Crake",
+    "scientificName": "Laterallus albigularis",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      14.0,
+      16.0
+    ]
+  },
+  {
+    "id": "grey-breasted-crake",
+    "commonName": "Grey-breasted Crake",
+    "scientificName": "Laterallus exilis",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      14.0,
+      15.5
+    ]
+  },
+  {
+    "id": "killdeer",
+    "commonName": "Killdeer",
+    "scientificName": "Charadrius vociferus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      20.0,
+      28.0
+    ]
+  },
+  {
+    "id": "collared-plover",
+    "commonName": "Collared Plover",
+    "scientificName": "Charadrius collaris",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      18.0
+    ]
+  },
+  {
+    "id": "wilsons-snipe",
+    "commonName": "Wilson's Snipe",
+    "scientificName": "Gallinago delicata",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      39.0,
+      45.0
+    ]
+  },
+  {
+    "id": "solitary-sandpiper",
+    "commonName": "Solitary Sandpiper",
+    "scientificName": "Solitary sandpiper",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      18.0,
+      23.0
+    ]
+  },
+  {
+    "id": "least-grebe",
+    "commonName": "Least Grebe",
+    "scientificName": "Tachybaptus dominicus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      21.0,
+      27.0
+    ]
+  },
+  {
+    "id": "wood-stork",
+    "commonName": "Wood Stork",
+    "scientificName": "Wood stork",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      83.0,
+      115.0
+    ]
+  },
+  {
+    "id": "magnificent-frigatebird",
+    "commonName": "Magnificent Frigatebird",
+    "scientificName": "Magnificent frigatebird",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "sky"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      89.0,
+      114.0
+    ]
+  },
+  {
+    "id": "american-white-ibis",
+    "commonName": "American White Ibis",
+    "scientificName": "Eudocimus albus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      53.0,
+      70.0
+    ]
+  },
+  {
+    "id": "green-ibis",
+    "commonName": "Green Ibis",
+    "scientificName": "Green ibis",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      45.0,
+      60.0
+    ]
+  },
+  {
+    "id": "roseate-spoonbill",
+    "commonName": "Roseate Spoonbill",
+    "scientificName": "Roseate spoonbills",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      71.0,
+      86.0
+    ]
+  },
+  {
+    "id": "tricolored-heron",
+    "commonName": "Tricolored Heron",
+    "scientificName": "Tricolored heron",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      56.0,
+      76.0
+    ]
+  },
+  {
+    "id": "green-heron",
+    "commonName": "Green Heron",
+    "scientificName": "Green heron",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      44.0
+    ]
+  },
+  {
+    "id": "brown-pelican",
+    "commonName": "Brown Pelican",
+    "scientificName": "Pelecanus occidentalis",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      10.0,
+      25.0
+    ]
+  },
+  {
+    "id": "hook-billed-kite",
+    "commonName": "Hook-billed Kite",
+    "scientificName": "Chondrohierax uncinatus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "sky"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      38.0,
+      42.0
+    ]
+  },
+  {
+    "id": "sharp-shinned-hawk",
+    "commonName": "Sharp-shinned Hawk",
+    "scientificName": "Accipiter striatus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "sky"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      58.0,
+      68.0
+    ]
+  },
+  {
+    "id": "coopers-hawk",
+    "commonName": "Cooper's Hawk",
+    "scientificName": "Accipiter cooperii",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "sky"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      35.0,
+      46.0
+    ]
+  },
+  {
+    "id": "snail-kite",
+    "commonName": "Snail Kite",
+    "scientificName": "Snail kite",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "sky"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      36.0,
+      48.0
+    ]
+  },
+  {
+    "id": "harriss-hawk",
+    "commonName": "Harris's Hawk",
+    "scientificName": "Parabuteo unicinctus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "sky"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      46.0,
+      59.0
+    ]
+  },
+  {
+    "id": "swainsons-hawk",
+    "commonName": "Swainson's Hawk",
+    "scientificName": "Buteo swainsoni",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "sky"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      43.0,
+      56.0
+    ]
+  },
+  {
+    "id": "middle-american-screech-owl",
+    "commonName": "Middle American Screech-Owl",
+    "scientificName": "American screech",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [
+      "dusk",
+      "night"
+    ],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      20.0,
+      23.0
+    ]
+  },
+  {
+    "id": "pacific-screech-owl",
+    "commonName": "Pacific Screech-Owl",
+    "scientificName": "Pacific screech",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [
+      "dusk",
+      "night"
+    ],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      23.0,
+      26.0
+    ]
+  },
+  {
+    "id": "striped-owl",
+    "commonName": "Striped Owl",
+    "scientificName": "Asio clamator",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [
+      "dusk",
+      "night"
+    ],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      30.0,
+      38.0
+    ]
+  },
+  {
+    "id": "black-headed-trogon",
+    "commonName": "Black-headed Trogon",
+    "scientificName": "Trogon melanocephalus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      27.0,
+      28.0
+    ]
+  },
+  {
+    "id": "belted-kingfisher",
+    "commonName": "Belted Kingfisher",
+    "scientificName": "Megaceryle alcyon",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      48.0,
+      58.0
+    ]
+  },
+  {
+    "id": "american-pygmy-kingfisher",
+    "commonName": "American Pygmy Kingfisher",
+    "scientificName": "American pygmy",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      13.0
+    ]
+  },
+  {
+    "id": "pied-puffbird",
+    "commonName": "Pied Puffbird",
+    "scientificName": "Notharchus tectus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      14.0,
+      17.0
+    ]
+  },
+  {
+    "id": "white-whiskered-puffbird",
+    "commonName": "White-whiskered Puffbird",
+    "scientificName": "Malacoptila panamensis",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      18.0
+    ]
+  },
+  {
+    "id": "lanceolated-monklet",
+    "commonName": "Lanceolated Monklet",
+    "scientificName": "Micromonacha lanceolata",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      13.0,
+      15.0
+    ]
+  },
+  {
+    "id": "scarlet-macaw",
+    "commonName": "Scarlet Macaw",
+    "scientificName": "Scarlet macaw",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      84.0
+    ]
+  },
+  {
+    "id": "black-crowned-antshrike",
+    "commonName": "Black-crowned Antshrike",
+    "scientificName": "Thamnophilus atrinucha",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      14.0,
+      15.0
+    ]
+  },
+  {
+    "id": "checker-throated-stipplethroat",
+    "commonName": "Checker-throated Stipplethroat",
+    "scientificName": "Epinecrophylla fulviventris",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      10.0,
+      11.0
+    ]
+  },
+  {
+    "id": "white-flanked-antwren",
+    "commonName": "White-flanked Antwren",
+    "scientificName": "Myrmotherula axillaris",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "songbirds",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      9.0,
+      10.5
+    ]
+  },
+  {
+    "id": "bare-crowned-antbird",
+    "commonName": "Bare-crowned Antbird",
+    "scientificName": "Gymnocichla nudiceps",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      15.0,
+      17.0
+    ]
+  },
+  {
+    "id": "ochre-breasted-antpitta",
+    "commonName": "Ochre-breasted Antpitta",
+    "scientificName": "Grallaricula flavirostris",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      10.0
+    ]
+  },
+  {
+    "id": "silvery-fronted-tapaculo",
+    "commonName": "Silvery-fronted Tapaculo",
+    "scientificName": "Scytalopus argentifrons",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      11.0
+    ]
+  },
+  {
+    "id": "scaly-throated-leaftosser",
+    "commonName": "Scaly-throated Leaftosser",
+    "scientificName": "Sclerurus guatemalensis",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      16.5,
+      18.0
+    ]
+  },
+  {
+    "id": "olivaceous-woodcreeper",
+    "commonName": "Olivaceous Woodcreeper",
+    "scientificName": "Sittasomus griseicapillus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      13.1,
+      19.3
+    ]
+  },
+  {
+    "id": "ruddy-woodcreeper",
+    "commonName": "Ruddy Woodcreeper",
+    "scientificName": "Dendrocincla homochroa",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      17.5,
+      20.5
+    ]
+  },
+  {
+    "id": "black-striped-woodcreeper",
+    "commonName": "Black-striped Woodcreeper",
+    "scientificName": "Xiphorhynchus lachrymosus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      21.5,
+      25.0
+    ]
+  },
+  {
+    "id": "red-faced-spinetail",
+    "commonName": "Red-faced Spinetail",
+    "scientificName": "Cranioleuca erythrops",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      14.0,
+      15.0
+    ]
+  },
+  {
+    "id": "slaty-spinetail",
+    "commonName": "Slaty Spinetail",
+    "scientificName": "Synallaxis brachyura",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      14.0,
+      16.0
+    ]
+  },
+  {
+    "id": "rufous-piha",
+    "commonName": "Rufous Piha",
+    "scientificName": "Piauhau roux",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      22.0,
+      26.0
+    ]
+  },
+  {
+    "id": "tropical-royal-flycatcher",
+    "commonName": "Tropical Royal Flycatcher",
+    "scientificName": "Onychorhynchus coronatus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "flycatchers",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      12.5,
+      18.0
+    ]
+  },
+  {
+    "id": "golden-crowned-spadebill",
+    "commonName": "Golden-crowned Spadebill",
+    "scientificName": "Platyrinchus coronatus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      8.5,
+      9.0
+    ]
+  },
+  {
+    "id": "rufous-browed-tyrannulet",
+    "commonName": "Rufous-browed Tyrannulet",
+    "scientificName": "Phylloscartes superciliaris",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "flycatchers",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      9.5,
+      12.0
+    ]
+  },
+  {
+    "id": "black-capped-pygmy-tyrant",
+    "commonName": "Black-capped Pygmy-Tyrant",
+    "scientificName": "Myiornis atricapillus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "flycatchers",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      6.0,
+      8.0
+    ]
+  },
+  {
+    "id": "northern-bentbill",
+    "commonName": "Northern Bentbill",
+    "scientificName": "Oncostoma cinereigulare",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      9.5,
+      10.5
+    ]
+  },
+  {
+    "id": "eye-ringed-flatbill",
+    "commonName": "Eye-ringed Flatbill",
+    "scientificName": "Rhynchocyclus brevirostris",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      15.0,
+      17.0
+    ]
+  },
+  {
+    "id": "yellow-winged-flatbill",
+    "commonName": "Yellow-winged Flatbill",
+    "scientificName": "Tolmomyias flavotectus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      13.0,
+      13.5
+    ]
+  },
+  {
+    "id": "brown-capped-tyrannulet",
+    "commonName": "Brown-capped Tyrannulet",
+    "scientificName": "Ornithion brunneicapillus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "flycatchers",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      8.0
+    ]
+  },
+  {
+    "id": "northern-beardless-tyrannulet",
+    "commonName": "Northern Beardless-Tyrannulet",
+    "scientificName": "Camptostoma imberbe",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "flycatchers",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      10.2
+    ]
+  },
+  {
+    "id": "mountain-elaenia",
+    "commonName": "Mountain Elaenia",
+    "scientificName": "Elaenia frantzii",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      14.0,
+      15.0
+    ]
+  },
+  {
+    "id": "white-throated-flycatcher",
+    "commonName": "White-throated Flycatcher",
+    "scientificName": "Empidonax albigularis",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "flycatchers",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      12.0,
+      14.0
+    ]
+  },
+  {
+    "id": "streaked-flycatcher",
+    "commonName": "Streaked Flycatcher",
+    "scientificName": "Myiodynastes maculatus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "flycatchers",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      20.5,
+      23.0
+    ]
+  },
+  {
+    "id": "scissor-tailed-flycatcher",
+    "commonName": "Scissor-tailed Flycatcher",
+    "scientificName": "Tyrannus forficatus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "flycatchers",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      38.1
+    ]
+  },
+  {
+    "id": "tree-swallow",
+    "commonName": "Tree Swallow",
+    "scientificName": "Tree swallow",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "sky"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      12.0,
+      14.0
+    ]
+  },
+  {
+    "id": "mangrove-swallow",
+    "commonName": "Mangrove Swallow",
+    "scientificName": "Mangrove swallow",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "sky"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      11.0,
+      12.0
+    ]
+  },
+  {
+    "id": "purple-martin",
+    "commonName": "Purple Martin",
+    "scientificName": "Purple martin",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "sky"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      20.0
+    ]
+  },
+  {
+    "id": "ochraceous-wren",
+    "commonName": "Ochraceous Wren",
+    "scientificName": "Troglodytes ochraceus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "songbirds",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      9.5,
+      10.0
+    ]
+  },
+  {
+    "id": "cabaniss-wren",
+    "commonName": "Cabanis's Wren",
+    "scientificName": "Thryothorus modestus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "songbirds",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      12.5,
+      14.0
+    ]
+  },
+  {
+    "id": "canebrake-wren",
+    "commonName": "Canebrake Wren",
+    "scientificName": "Cantorchilus zeledoni",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "songbirds",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      12.5,
+      14.0
+    ]
+  },
+  {
+    "id": "sooty-faced-finch",
+    "commonName": "Sooty-faced Finch",
+    "scientificName": "Arremon crassirostris",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      15.0,
+      17.0
+    ]
+  },
+  {
+    "id": "eastern-meadowlark",
+    "commonName": "Eastern Meadowlark",
+    "scientificName": "Eastern meadowlark",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "sky"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      35.0,
+      40.0
+    ]
+  },
+  {
+    "id": "red-breasted-meadowlark",
+    "commonName": "Red-breasted Meadowlark",
+    "scientificName": "Sturnella militaris",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      19.0
+    ]
+  },
+  {
+    "id": "blue-winged-warbler",
+    "commonName": "Blue-winged Warbler",
+    "scientificName": "Vermivora cyanoptera",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "warblers",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      11.4,
+      12.7
+    ]
+  },
+  {
+    "id": "macgillivrays-warbler",
+    "commonName": "MacGillivray's Warbler",
+    "scientificName": "Geothlypis tolmiei",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "warblers",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      10.0,
+      15.0
+    ]
+  },
+  {
+    "id": "olive-crowned-yellowthroat",
+    "commonName": "Olive-crowned Yellowthroat",
+    "scientificName": "Geothlypis semiflava",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "warblers",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      11.1,
+      13.5
+    ]
+  },
+  {
+    "id": "common-yellowthroat",
+    "commonName": "Common Yellowthroat",
+    "scientificName": "Common yellowthroat",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "warblers",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      11.0,
+      13.0
+    ]
+  },
+  {
+    "id": "magnolia-warbler",
+    "commonName": "Magnolia Warbler",
+    "scientificName": "Magnolia warbler",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "warblers",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      16.0,
+      20.0
+    ]
+  },
+  {
+    "id": "blackpoll-warbler",
+    "commonName": "Blackpoll Warbler",
+    "scientificName": "Blackpoll warbler",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "warblers",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      12.5,
+      15.0
+    ]
+  },
+  {
+    "id": "black-faced-grosbeak",
+    "commonName": "Black-faced Grosbeak",
+    "scientificName": "Caryothraustes poliogaster",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      14.0,
+      22.0
+    ]
+  },
+  {
+    "id": "blue-grosbeak",
+    "commonName": "Blue Grosbeak",
+    "scientificName": "Blue grosbeak",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      14.0,
+      19.0
+    ]
+  },
+  {
+    "id": "indigo-bunting",
+    "commonName": "Indigo Bunting",
+    "scientificName": "Passerina cyanea",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      11.5,
+      15.0
+    ]
+  },
+  {
+    "id": "painted-bunting",
+    "commonName": "Painted Bunting",
+    "scientificName": "Passerina ciris",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      21.0,
+      23.0
+    ]
+  },
+  {
+    "id": "black-billed-cuckoo",
+    "commonName": "Black-billed Cuckoo",
+    "scientificName": "Coccyzus erythropthalmus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      28.0,
+      32.0
+    ]
+  },
+  {
+    "id": "black-necked-stilt",
+    "commonName": "Black-necked Stilt",
+    "scientificName": "Himantopus mexicanus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      35.0,
+      39.0
+    ]
+  },
+  {
+    "id": "snowy-egret",
+    "commonName": "Snowy Egret",
+    "scientificName": "Egretta thula",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      56.0,
+      66.0
+    ]
+  },
+  {
+    "id": "white-tailed-kite",
+    "commonName": "White-tailed Kite",
+    "scientificName": "Elanus leucurus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "sky"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      35.0,
+      43.0
+    ]
+  },
+  {
+    "id": "white-fronted-nunbird",
+    "commonName": "White-fronted Nunbird",
+    "scientificName": "Monasa morphoeus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      21.0,
+      29.0
+    ]
+  },
+  {
+    "id": "western-kingbird",
+    "commonName": "Western Kingbird",
+    "scientificName": "Western kingbird",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "sky"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      20.5,
+      23.5
+    ]
+  },
+  {
+    "id": "violet-green-swallow",
+    "commonName": "Violet-green Swallow",
+    "scientificName": "Tachycineta thalassina",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "sky"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      12.0,
+      13.0
+    ]
+  },
+  {
+    "id": "grey-catbird",
+    "commonName": "Grey Catbird",
+    "scientificName": "Gray catbird",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      20.5,
+      24.0
+    ]
+  },
+  {
+    "id": "yellow-breasted-chat",
+    "commonName": "Yellow-breasted Chat",
+    "scientificName": "Icteria virens",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      17.0,
+      19.0
+    ]
+  },
+  {
+    "id": "orchard-oriole",
+    "commonName": "Orchard Oriole",
+    "scientificName": "Orchard oriole",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "canopy",
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      15.0,
+      18.0
+    ]
+  },
+  {
+    "id": "palm-warbler",
+    "commonName": "Palm Warbler",
+    "scientificName": "Palm warbler",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "warblers",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      12.0,
+      14.0
+    ]
+  },
+  {
+    "id": "hermit-warbler",
+    "commonName": "Hermit Warbler",
+    "scientificName": "Dendroica occidentalis",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "hummingbirds",
+    "strata": [
+      "canopy",
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      20.0
+    ]
+  },
+  {
+    "id": "western-tanager",
+    "commonName": "Western Tanager",
+    "scientificName": "Western tanager",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "tanagers",
+    "strata": [
+      "sky"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      16.0,
+      19.0
+    ]
+  },
+  {
+    "id": "blue-winged-teal",
+    "commonName": "Blue-winged Teal",
+    "scientificName": "Anas discors",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      40.0
+    ]
+  },
+  {
+    "id": "common-potoo",
+    "commonName": "Common Potoo",
+    "scientificName": "Nyctibius griseus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [
+      "dusk",
+      "night"
+    ],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      34.0,
+      38.0
+    ]
+  },
+  {
+    "id": "northern-jacana",
+    "commonName": "Northern Jacana",
+    "scientificName": "Northern jacana",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      21.5,
+      24.0
+    ]
+  },
+  {
+    "id": "boat-billed-heron",
+    "commonName": "Boat-billed Heron",
+    "scientificName": "Cochlearius cochlearius",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      54.0
+    ]
+  },
+  {
+    "id": "grey-headed-kite",
+    "commonName": "Grey-headed Kite",
+    "scientificName": "Leptodon cayanensis",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "sky"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      46.0,
+      53.0
+    ]
+  },
+  {
+    "id": "mississippi-kite",
+    "commonName": "Mississippi Kite",
+    "scientificName": "Ictinia mississippiensis",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "sky"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      30.0,
+      37.0
+    ]
+  },
+  {
+    "id": "plumbeous-kite",
+    "commonName": "Plumbeous Kite",
+    "scientificName": "Ictinia plumbea",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "sky"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      34.0,
+      37.5
+    ]
+  },
+  {
+    "id": "american-barn-owl",
+    "commonName": "American Barn Owl",
+    "scientificName": "Tyto furcata",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [
+      "dusk",
+      "night"
+    ],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      33.0,
+      39.0
+    ]
+  },
+  {
+    "id": "lessons-motmot",
+    "commonName": "Lesson's Motmot",
+    "scientificName": "Momotus lessonii",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      38.0,
+      43.0
+    ]
+  },
+  {
+    "id": "merlin",
+    "commonName": "Merlin",
+    "scientificName": "Timon and",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      24.0,
+      33.0
+    ]
+  },
+  {
+    "id": "red-capped-manakin",
+    "commonName": "Red-capped Manakin",
+    "scientificName": "Ceratopipra mentalis",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      10.0
+    ]
+  },
+  {
+    "id": "ruddy-tailed-flycatcher",
+    "commonName": "Ruddy-tailed Flycatcher",
+    "scientificName": "Terenotriccus erythrurus",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "flycatchers",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      9.0,
+      10.5
+    ]
+  },
+  {
+    "id": "willow-flycatcher",
+    "commonName": "Willow Flycatcher",
+    "scientificName": "Empidonax traillii",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "flycatchers",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      13.0,
+      15.0
+    ]
+  },
+  {
+    "id": "cedar-waxwing",
+    "commonName": "Cedar Waxwing",
+    "scientificName": "Bombycilla cedrorum",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      15.0,
+      18.0
+    ]
+  },
+  {
+    "id": "worm-eating-warbler",
+    "commonName": "Worm-eating Warbler",
+    "scientificName": "Helmitheros vermivorum",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "warblers",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      13.0
+    ]
+  },
+  {
+    "id": "prothonotary-warbler",
+    "commonName": "Prothonotary Warbler",
+    "scientificName": "Prothonotary warbler",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "warblers",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      13.0
+    ]
+  },
+  {
+    "id": "black-eared-wood-quail",
+    "commonName": "Black-eared Wood-Quail",
+    "scientificName": "Odontophorus melanotis",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      24.0,
+      26.0
+    ]
+  },
+  {
+    "id": "blue-ground-dove",
+    "commonName": "Blue Ground Dove",
+    "scientificName": "Columbina cyanopis",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      21.0,
+      23.0
+    ]
+  },
+  {
+    "id": "ruddy-quail-dove",
+    "commonName": "Ruddy Quail-Dove",
+    "scientificName": "Geotrygon montana",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      20.0,
+      23.0
+    ]
+  },
+  {
+    "id": "lesser-nighthawk",
+    "commonName": "Lesser Nighthawk",
+    "scientificName": "Chordeiles acutipennis",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "sky"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      19.0,
+      22.0
+    ]
+  },
+  {
+    "id": "russet-naped-wood-rail",
+    "commonName": "Russet-naped Wood-Rail",
+    "scientificName": "Aramides albiventris",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "ground",
+      "low"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      33.0,
+      40.0
+    ]
+  },
+  {
+    "id": "barred-parakeet",
+    "commonName": "Barred Parakeet",
+    "scientificName": "Bolborhynchus lineola",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      15.0,
+      17.0
+    ]
+  },
+  {
+    "id": "alder-flycatcher",
+    "commonName": "Alder Flycatcher",
+    "scientificName": "Empidonax alnorum",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "flycatchers",
+    "strata": [
+      "low",
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      13.5,
+      17.0
+    ]
+  },
+  {
+    "id": "costa-rican-warbler",
+    "commonName": "Costa Rican Warbler",
+    "scientificName": "Basileuterus melanotis",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "warblers",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      13.0
+    ]
+  },
+  {
+    "id": "dickcissel",
+    "commonName": "Dickcissel",
+    "scientificName": "Spiza americana",
+    "aliases": [],
+    "alsoCalled": [],
+    "alsoScientific": [],
+    "tags": [
+      "imported",
+      "ebird-supplemental",
+      "length-only"
+    ],
+    "dimorphic": false,
+    "origin": "native",
+    "status": "imported",
+    "group": "imported",
+    "strata": [
+      "mid"
+    ],
+    "activeTimes": [],
+    "summary": "",
+    "habitat": "",
+    "sexes": "Sexes not curated for this imported name yet.",
+    "stratumNote": "",
+    "photos": [],
+    "lengthCm": [
+      14.0,
+      16.0
+    ]
   }
 ]
