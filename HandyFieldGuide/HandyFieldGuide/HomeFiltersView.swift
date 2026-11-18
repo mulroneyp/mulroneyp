@@ -50,21 +50,15 @@ struct HomeFiltersView: View {
         return LocationResolver.normalize(title) != LocationResolver.normalize(place.displayName)
     }
 
+    /// Same reserved width on both rows for Map vs i+gear so the value pills match exactly.
+    /// Fits two 36pt icon buttons (i + gear) or the Map chip.
+    private let trailingActionsWidth: CGFloat = 80
+
     var body: some View {
         VStack(spacing: 0) {
-            // Grid keeps Location and Month value labels the same width;
-            // trailing column holds Map (row 1) and i/gear (row 2).
-            Grid(alignment: .leading, horizontalSpacing: 12, verticalSpacing: 10) {
-                GridRow(alignment: .center) {
-                    locationControl
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    locationAccessory
-                }
-                GridRow(alignment: .center) {
-                    monthControl
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    monthAccessory
-                }
+            VStack(alignment: .leading, spacing: 10) {
+                locationRow
+                monthRow
             }
             .padding(.horizontal, 16)
             .padding(.top, 8)
@@ -88,32 +82,50 @@ struct HomeFiltersView: View {
         }
     }
 
-    /// Map on the Location row; empty placeholder when no place so the value column still aligns.
-    @ViewBuilder
-    private var locationAccessory: some View {
-        if let place, let url = PlaceMaps.appleMapsURL(for: place) {
-            mapButton(place: place, url: url)
-                .gridCellAnchor(.trailing)
-        } else {
-            Color.clear
-                .frame(width: 0, height: 44)
-                .accessibilityHidden(true)
+    private var locationRow: some View {
+        HStack(alignment: .center, spacing: 12) {
+            locationControl
+                .frame(maxWidth: .infinity, alignment: .leading)
+            trailingActionsSlot {
+                if let place, let url = PlaceMaps.appleMapsURL(for: place) {
+                    mapButton(place: place, url: url)
+                }
+            }
         }
     }
 
-    /// Info + Settings on the Month row; trailing-aligned within the shared accessory column.
-    private var monthAccessory: some View {
-        HStack(spacing: 0) {
-            if place != nil {
-                infoButton
+    private var monthRow: some View {
+        HStack(alignment: .center, spacing: 12) {
+            monthControl
+                .frame(maxWidth: .infinity, alignment: .leading)
+            trailingActionsSlot {
+                HStack(spacing: 0) {
+                    if place != nil {
+                        infoButton
+                    }
+                    settingsButton
+                }
             }
-            settingsButton
         }
-        .gridCellAnchor(.trailing)
+    }
+
+    /// Fixed-width trailing column shared by both rows (Map on Location; i/gear on Month).
+    /// ZStack + clear base so an empty Location trailing slot still reserves width (EmptyView would not).
+    private func trailingActionsSlot<Content: View>(@ViewBuilder content: () -> Content) -> some View {
+        ZStack(alignment: .trailing) {
+            Color.clear
+            content()
+        }
+        .frame(width: trailingActionsWidth, height: 44, alignment: .trailing)
     }
 
     private var locationControl: some View {
-        Menu {
+        // Menu alone sizes to label ideal width; chrome fills the row so both pills match.
+        valueMenuChrome(
+            text: selectedLocationDisplayName,
+            accessibilityLabel: "Location",
+            accessibilityHint: "Choose an imported place, merge lists, manage saved imports, or add a location via eBird API or barchart"
+        ) {
             if !importedLocationOptions.isEmpty {
                 Picker("Location", selection: locationSelection) {
                     ForEach(importedLocationOptions) { option in
@@ -139,16 +151,15 @@ struct HomeFiltersView: View {
             } label: {
                 Label("Add location", systemImage: "plus")
             }
-        } label: {
-            valueLabel(selectedLocationDisplayName)
         }
-        .accessibilityLabel("Location")
-        .accessibilityValue(selectedLocationDisplayName)
-        .accessibilityHint("Choose an imported place, merge lists, manage saved imports, or add a location via eBird API or barchart")
     }
 
     private var monthControl: some View {
-        Menu {
+        valueMenuChrome(
+            text: model.selectedMonthName,
+            accessibilityLabel: "Month",
+            accessibilityHint: "Imported lists use this month’s eBird frequencies"
+        ) {
             Picker("Month", selection: Binding(
                 get: { model.selectedMonthIndex },
                 set: { model.setMonthIndex($0) }
@@ -163,12 +174,28 @@ struct HomeFiltersView: View {
                     model.resetMonthToDevice()
                 }
             }
-        } label: {
-            valueLabel(model.selectedMonthName)
         }
-        .accessibilityLabel("Month")
-        .accessibilityValue(model.selectedMonthName)
-        .accessibilityHint("Imported lists use this month’s eBird frequencies")
+    }
+
+    /// Value pill fills offered width; invisible Menu overlay supplies the picker (avoids Menu content-sizing the chrome).
+    private func valueMenuChrome<MenuContent: View>(
+        text: String,
+        accessibilityLabel: String,
+        accessibilityHint: String,
+        @ViewBuilder menuContent: () -> MenuContent
+    ) -> some View {
+        valueLabel(text)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .overlay {
+                Menu(content: menuContent) {
+                    Color.clear
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .contentShape(Rectangle())
+                }
+                .accessibilityLabel(accessibilityLabel)
+                .accessibilityValue(text)
+                .accessibilityHint(accessibilityHint)
+            }
     }
 
     /// Value-as-label control: shows the selected place/month, not a separate “Location”/“Month” chrome title.
@@ -201,9 +228,12 @@ struct HomeFiltersView: View {
         } label: {
             Label("Map", systemImage: "map")
                 .font(.subheadline.weight(.semibold))
-                .padding(.horizontal, 10)
+                .lineLimit(1)
+                .minimumScaleFactor(0.75)
+                .padding(.horizontal, 8)
                 .padding(.vertical, 8)
-                .frame(minHeight: 44)
+                // Fill the fixed trailing slot so Map cannot widen past i+gear’s reserved width.
+                .frame(maxWidth: .infinity, minHeight: 44)
                 .background(GuideColor.green.opacity(0.10))
                 .overlay {
                     RoundedRectangle(cornerRadius: 2)
