@@ -138,48 +138,60 @@ struct ZoomablePhotoViewer: View {
             }
 
             Text(title)
-                .font(.subheadline.weight(.semibold))
+                .font(.subheadline.weight(.bold))
                 .foregroundStyle(.white)
-                .shadow(color: .black.opacity(0.65), radius: 2, y: 1)
                 .lineLimit(1)
-                .padding(.horizontal, 108)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .background(FullscreenPhotoChrome.solidFill, in: Capsule())
+                .shadow(color: .black.opacity(0.55), radius: 4, y: 2)
+                .padding(.horizontal, 118)
                 .allowsHitTesting(false)
                 .accessibilityAddTraits(.isHeader)
         }
         .padding(.horizontal, 12)
-        .padding(.top, 8)
-        .padding(.bottom, 14)
+        .padding(.top, 10)
+        .padding(.bottom, 28)
         .frame(maxWidth: .infinity)
         .background {
+            // Tall near-opaque top band so white plumage / sky cannot wash out labels.
             LinearGradient(
-                colors: [
-                    Color.black.opacity(0.72),
-                    Color.black.opacity(0.38),
-                    Color.black.opacity(0)
+                stops: [
+                    .init(color: Color.black.opacity(0.92), location: 0),
+                    .init(color: Color.black.opacity(0.78), location: 0.45),
+                    .init(color: Color.black.opacity(0.35), location: 0.78),
+                    .init(color: Color.black.opacity(0), location: 1)
                 ],
                 startPoint: .top,
                 endPoint: .bottom
             )
+            .frame(maxHeight: 160)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .ignoresSafeArea(edges: .top)
         }
     }
 }
 
-/// Capsule control that stays legible on both bright and dark full-screen photos.
+private enum FullscreenPhotoChrome {
+    /// Solid dark fill — do not use ultraThinMaterial; it disappears on bright photos.
+    static let solidFill = Color.black.opacity(0.82)
+}
+
+/// Solid dark capsule with bold white text — readable on white birds and dark foliage.
 private struct FullscreenPhotoChromeButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(.subheadline.weight(.semibold))
+            .font(.subheadline.weight(.bold))
             .foregroundStyle(.white)
-            .padding(.horizontal, 12)
-            .padding(.vertical, 8)
-            .background(.ultraThinMaterial, in: Capsule())
+            .padding(.horizontal, 14)
+            .padding(.vertical, 10)
+            .background(FullscreenPhotoChrome.solidFill, in: Capsule())
             .overlay {
                 Capsule()
-                    .strokeBorder(Color.white.opacity(0.35), lineWidth: 0.5)
+                    .strokeBorder(Color.white.opacity(0.55), lineWidth: 1)
             }
-            .shadow(color: .black.opacity(0.45), radius: 3, y: 1)
-            .opacity(configuration.isPressed ? 0.72 : 1)
+            .shadow(color: .black.opacity(0.6), radius: 4, y: 2)
+            .opacity(configuration.isPressed ? 0.78 : 1)
     }
 }
 
