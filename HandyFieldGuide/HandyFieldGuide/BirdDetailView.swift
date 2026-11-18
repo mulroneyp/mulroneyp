@@ -8,6 +8,9 @@ struct BirdDetailView: View {
 
     @State private var attributionPhoto: Photo?
     @State private var choosePhotoRequest: ChooseSpeciesPhotoRequest?
+    /// Collapsed by default so photos stay near the top on a phone; length / zone peek under the header.
+    @State private var sizeExpanded = false
+    @State private var whereExpanded = false
 
     var body: some View {
         ScrollView {
@@ -18,6 +21,12 @@ struct BirdDetailView: View {
                     .foregroundStyle(species.origin == "introduced" ? GuideColor.rust : GuideColor.green)
                 Text(species.commonName)
                     .font(.system(size: 34, weight: .regular, design: .serif))
+                if SpeciesDescription.hasText(for: species) {
+                    Text(SpeciesDescription.text(for: species))
+                        .font(.body)
+                        .foregroundStyle(GuideColor.ink)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
                 Text(species.scientificName)
                     .font(.title3.italic())
                     .foregroundStyle(GuideColor.muted)
@@ -32,10 +41,15 @@ struct BirdDetailView: View {
                 }
 
                 if BirdSize.hasLength(species) {
-                    sectionLabel("Size")
-                    Text(BirdSize.line(for: species))
-                        .fixedSize(horizontal: false, vertical: true)
-                    BirdSizeScale(lengthCm: species.lengthCm)
+                    CollapsibleDetailSection(
+                        title: "Size",
+                        collapsedSummary: BirdSize.line(for: species),
+                        isExpanded: $sizeExpanded
+                    ) {
+                        Text(BirdSize.line(for: species))
+                            .fixedSize(horizontal: false, vertical: true)
+                        BirdSizeScale(lengthCm: species.lengthCm)
+                    }
                 }
 
                 let habitatText = place.habitat(for: species)
@@ -45,37 +59,45 @@ struct BirdDetailView: View {
                 let knownStrata = species.strata.compactMap { stratum($0) }
                 if !habitatText.isEmpty || !knownStrata.isEmpty || !stratumNote.isEmpty {
                     // One section for microhabitat notes and habitat-zone (stratum) labels.
-                    sectionLabel("Where you find it")
-                    if !habitatText.isEmpty {
-                        Text(habitatText)
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-                    if !knownStrata.isEmpty {
-                        VStack(spacing: 8) {
-                            ForEach(knownStrata, id: \.id) { info in
-                                HStack(spacing: 10) {
-                                    StratumIcon(id: info.id, size: 44)
-                                    VStack(alignment: .leading, spacing: 2) {
-                                        Text(info.label).font(.headline)
-                                        Text(info.hint)
-                                            .font(.subheadline)
-                                            .foregroundStyle(GuideColor.muted)
+                    CollapsibleDetailSection(
+                        title: "Where you find it",
+                        collapsedSummary: whereCollapsedSummary(
+                            habitatText: habitatText,
+                            knownStrata: knownStrata
+                        ),
+                        isExpanded: $whereExpanded
+                    ) {
+                        if !habitatText.isEmpty {
+                            Text(habitatText)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                        if !knownStrata.isEmpty {
+                            VStack(spacing: 8) {
+                                ForEach(knownStrata, id: \.id) { info in
+                                    HStack(spacing: 10) {
+                                        StratumIcon(id: info.id, size: 44)
+                                        VStack(alignment: .leading, spacing: 2) {
+                                            Text(info.label).font(.headline)
+                                            Text(info.hint)
+                                                .font(.subheadline)
+                                                .foregroundStyle(GuideColor.muted)
+                                        }
+                                        Spacer(minLength: 0)
                                     }
-                                    Spacer(minLength: 0)
+                                    .padding(8)
+                                    .background(GuideColor.card)
+                                    .overlay {
+                                        RoundedRectangle(cornerRadius: 2)
+                                            .stroke(GuideColor.line, lineWidth: 1)
+                                    }
+                                    .accessibilityElement(children: .combine)
                                 }
-                                .padding(8)
-                                .background(GuideColor.card)
-                                .overlay {
-                                    RoundedRectangle(cornerRadius: 2)
-                                        .stroke(GuideColor.line, lineWidth: 1)
-                                }
-                                .accessibilityElement(children: .combine)
                             }
                         }
-                    }
-                    if !stratumNote.isEmpty {
-                        Text(stratumNote)
-                            .fixedSize(horizontal: false, vertical: true)
+                        if !stratumNote.isEmpty {
+                            Text(stratumNote)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
                     }
                 }
 
@@ -330,6 +352,22 @@ struct BirdDetailView: View {
             .padding(.top, 8)
     }
 
+    /// When collapsed: habitat zones if known, otherwise a short habitat lead.
+    private func whereCollapsedSummary(habitatText: String, knownStrata: [StratumInfo]) -> String {
+        if !knownStrata.isEmpty {
+            let zones = knownStrata.map(\.label).joined(separator: " · ")
+            return "Habitat zones: \(zones)"
+        }
+        guard !habitatText.isEmpty else { return "" }
+        if let end = habitatText.firstIndex(where: { ".!?".contains($0) }) {
+            let sentence = String(habitatText[...end]).trimmingCharacters(in: .whitespacesAndNewlines)
+            if sentence.count <= 90 { return sentence }
+        }
+        if habitatText.count <= 90 { return habitatText }
+        let idx = habitatText.index(habitatText.startIndex, offsetBy: 87)
+        return String(habitatText[..<idx]).trimmingCharacters(in: .whitespacesAndNewlines) + "…"
+    }
+
     private var displayPhotos: [Photo] {
         let order = ["male": 0, "female": 1, "either": 2, "unsexed": 3, "illustration": 4]
         let sorted = species.photos.sorted {
@@ -367,6 +405,52 @@ struct BirdDetailView: View {
             return photoDisplayTitle(photo)
         }
         return photo.alt.isEmpty ? species.commonName : photo.alt
+    }
+}
+
+/// Tappable section header with chevron; collapsed state keeps a one-line summary readable.
+private struct CollapsibleDetailSection<Content: View>: View {
+    var title: String
+    var collapsedSummary: String
+    @Binding var isExpanded: Bool
+    @ViewBuilder var content: () -> Content
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Button {
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    isExpanded.toggle()
+                }
+            } label: {
+                HStack(alignment: .firstTextBaseline, spacing: 8) {
+                    Text(title.uppercased())
+                        .font(.caption.weight(.semibold))
+                        .tracking(1.2)
+                        .foregroundStyle(GuideColor.muted)
+                    Spacer(minLength: 0)
+                    Image(systemName: "chevron.down")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(GuideColor.muted)
+                        .rotationEffect(.degrees(isExpanded ? 0 : -90))
+                }
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(title)
+            .accessibilityValue(isExpanded ? "Expanded" : "Collapsed")
+            .accessibilityHint(isExpanded ? "Collapses this section" : "Expands this section")
+
+            if isExpanded {
+                content()
+            } else if !collapsedSummary.isEmpty {
+                Text(collapsedSummary)
+                    .font(.subheadline)
+                    .foregroundStyle(GuideColor.muted)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityHidden(false)
+            }
+        }
+        .padding(.top, 8)
     }
 }
 

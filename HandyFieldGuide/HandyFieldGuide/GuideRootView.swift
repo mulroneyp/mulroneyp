@@ -521,10 +521,12 @@ private struct BirdRow: View {
                         .font(.caption)
                         .foregroundStyle(GuideColor.muted)
                 }
-                Text(species.summary)
-                    .font(.subheadline)
-                    .foregroundStyle(GuideColor.ink)
-                    .lineLimit(2)
+                if SpeciesDescription.hasText(for: species) {
+                    Text(SpeciesDescription.text(for: species))
+                        .font(.subheadline)
+                        .foregroundStyle(GuideColor.ink)
+                        .lineLimit(2)
+                }
                 HStack(spacing: 8) {
                     Text(likelihood.uppercased())
                         .font(.caption2.weight(.semibold))

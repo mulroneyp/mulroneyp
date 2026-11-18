@@ -189,7 +189,8 @@ def make_stub(common: str, scientific: str, photos: list[dict]) -> dict:
         "group": guess_group(common),
         "strata": strata,
         "activeTimes": guess_active_times(common),
-        "summary": "High-frequency species on the imported eBird barchart.",
+        # Leave blank unless a curated field-guide line is known — never invent long prose.
+        "summary": "",
         "habitat": f"Typical habitat zone estimated as {', '.join(strata)}.",
         "sexes": (
             "Male and female photographs are shown when openly licensed images were found."
