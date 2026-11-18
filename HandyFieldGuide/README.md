@@ -4,15 +4,12 @@ An iPhone field guide. Open `HandyFieldGuide.xcodeproj` in Xcode, pick the Handy
 
 ## Home filters
 
-The app title **Handy Field Guide** sits at the top of the home screen (inline navigation title). Directly under it: a **Location** button with the chosen place name (or **Choose Location**), then a **Month** button with the month name. There is no bottom menu bar.
+The app title **Handy Field Guide** sits at the top of the home screen (inline navigation title). Directly under it, two rows of value labels (no bottom menu bar, and no secondary place / list-name line above the bird list):
 
-1. **Location** — button followed by the active place name, or **Choose Location** when none is selected. Menu of **imported** eBird areas only, plus **Manage locations** (rename / delete saved imports) and **Add location** (eBird API hotspot search or barchart `.txt`). Paste a free API key under **Settings → eBird API** (Keychain; never committed). There is no default / curated place list in the menu. With no imports, the home screen prompts you to add a location.
-2. **Month** — button followed by the month name. Picker defaults to the device’s calendar month (no “Current” / “This month” wording). Imported eBird lists use that month’s frequencies for “likely” birds.
-3. **Settings** — gear under the location-header **i** (info) button opens scarce / near-zero hide, flagged “sp.” / slash taxa toggles, and the eBird API key. On the empty home state (no place yet), Settings is offered as a button in the empty-state content.
+1. **Location** — tappable label showing the chosen place name (or **Choose Location**). Menu of **imported** eBird areas only, plus **Manage locations** (rename / delete saved imports) and **Add location** (eBird API hotspot search or barchart `.txt`). Paste a free API key under **Settings → eBird API** (Keychain; never committed). There is no default / curated place list in the menu. With no imports, the home screen prompts you to add a location. When a place is active, **Map** sits on the same row (opens Apple Maps using a renamed title or a known eBird hotspot name for sample L-codes).
+2. **Month** — tappable label showing the month name. Picker defaults to the device’s calendar month (no “Current” / “This month” wording). Imported eBird lists use that month’s frequencies for “likely” birds. On the same row: **i** (when a place is active; opens coverage prose) and the **Settings** gear (scarce / near-zero hide, flagged “sp.” / slash taxa, eBird API key).
 
 There is **no Zone control** on the home screen. Habitat zones (ground / low / mid / canopy / sky) still appear as labels on list rows and on bird detail; the home list is not filtered by zone.
-
-Above the bird list for an active import, the **location name** is shown with a **Map** control (opens Apple Maps using a renamed title or a known eBird hotspot name for sample L-codes), a small **i** that reveals the long coverage prose in a sheet, and the **Settings** gear stacked under that **i**.
 
 **Sky** is for birds typically seen overhead (flying, soaring, or hawking), separate from canopy perches.
 
