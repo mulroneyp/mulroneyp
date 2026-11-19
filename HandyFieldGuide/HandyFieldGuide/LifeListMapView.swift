@@ -90,6 +90,7 @@ struct LifeListMapView: View {
     private var statusBanner: some View {
         let total = pins.count
         let placed = placedPins.count
+        let failed = resolver.failedIDs.count
         if total == 0 {
             banner(text: "No recorded locations on this life list filter yet.")
         } else if resolver.isResolving {
@@ -97,7 +98,13 @@ struct LifeListMapView: View {
         } else if placed == 0 {
             banner(text: "Couldn’t place map pins for these locations. Check the place names in your import.")
         } else if placed < total {
-            banner(text: "Showing \(placed) of \(total) sighting locations.")
+            // Shortfall is only real lookup misses (private sites / geocode failures), not a volume cap.
+            banner(
+                text: "Showing \(placed) of \(total) sighting locations"
+                    + (failed > 0
+                        ? " · \(failed) could not be placed (unknown or private places)."
+                        : ".")
+            )
         } else {
             banner(text: "\(placed) sighting location\(placed == 1 ? "" : "s") for \(titleLabel).")
         }

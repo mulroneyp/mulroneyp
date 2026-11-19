@@ -7,6 +7,8 @@ struct LifeListMapPin: Identifiable, Hashable {
     /// Place name used for geocoding / matching; not shown as a map callout.
     var title: String
     var countryCode: String?
+    /// eBird S/P token when present (`US-TX`, `CR-P`) for region hotspot lookups.
+    var regionCode: String?
     var locId: String?
     /// Query used for CLGeocoder when coordinates are not already known.
     var geocodeQuery: String
@@ -49,6 +51,7 @@ enum LifeListMapPins {
                     id: acc.id,
                     title: acc.title,
                     countryCode: acc.countryCode,
+                    regionCode: acc.regionCode,
                     locId: acc.locId,
                     geocodeQuery: geocodeQuery(title: acc.title, countryCode: acc.countryCode),
                     speciesCount: acc.speciesIDs.count
@@ -98,6 +101,20 @@ enum LifeListMapPins {
         return trimmed
     }
 
+    /// eBird S/P token from a composed location (`Place · US-TX`), when present.
+    static func regionCode(from location: String?) -> String? {
+        guard let location = location?.trimmingCharacters(in: .whitespacesAndNewlines),
+              !location.isEmpty else { return nil }
+        let segments = location.components(separatedBy: " · ")
+        for segment in segments.reversed() {
+            let token = segment.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+            guard EBirdLifeListCSVParser.countryCode(fromStateProvince: token) != nil else { continue }
+            // Prefer full `US-TX` when present; bare `US` still works for country hotspots.
+            return token
+        }
+        return nil
+    }
+
     static func geocodeQuery(title: String, countryCode: String?) -> String {
         let place = placeName(from: title)
         if let code = countryCode?.trimmingCharacters(in: .whitespacesAndNewlines), !code.isEmpty {
@@ -115,6 +132,7 @@ enum LifeListMapPins {
         var id: String
         var title: String
         var countryCode: String?
+        var regionCode: String?
         var locId: String?
         var speciesIDs: Set<String>
     }
@@ -144,6 +162,8 @@ enum LifeListMapPins {
             id = "loc:\(trimmedLocId!.uppercased())"
         }
 
+        let region = regionCode(from: title)
+
         if var existing = buckets[id] {
             existing.speciesIDs.insert(speciesID)
             if existing.title.isEmpty, hasLocation {
@@ -156,12 +176,16 @@ enum LifeListMapPins {
                 existing.countryCode = countryCode
                     ?? EBirdLifeListCSVParser.countryCode(fromLocation: title)
             }
+            if existing.regionCode == nil {
+                existing.regionCode = region
+            }
             buckets[id] = existing
         } else {
             buckets[id] = Accumulator(
                 id: id,
                 title: title,
                 countryCode: countryCode ?? EBirdLifeListCSVParser.countryCode(fromLocation: title),
+                regionCode: region,
                 locId: trimmedLocId,
                 speciesIDs: [speciesID]
             )
@@ -169,7 +193,54 @@ enum LifeListMapPins {
     }
 }
 
-/// Serial geocoder with in-memory cache for life-list map pins.
+// MARK: - Coordinate cache
+
+/// Disk-backed lat/lng cache so large life lists do not re-resolve every open.
+struct LifeListMapCoordinateCache {
+    private struct Entry: Codable {
+        var latitude: Double
+        var longitude: Double
+    }
+
+    private var entries: [String: Entry]
+    private let fileURL: URL
+
+    init() {
+        let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
+            ?? FileManager.default.temporaryDirectory
+        let dir = base.appendingPathComponent("HandyFieldGuide", isDirectory: true)
+        try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        fileURL = dir.appendingPathComponent("life-list-map-coords.json")
+        if let data = try? Data(contentsOf: fileURL),
+           let decoded = try? JSONDecoder().decode([String: Entry].self, from: data) {
+            entries = decoded
+        } else {
+            entries = [:]
+        }
+    }
+
+    func coordinate(forKey key: String) -> CLLocationCoordinate2D? {
+        guard let entry = entries[key] else { return nil }
+        return CLLocationCoordinate2D(latitude: entry.latitude, longitude: entry.longitude)
+    }
+
+    mutating func store(_ coordinate: CLLocationCoordinate2D, forKey key: String) {
+        let trimmed = key.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return }
+        entries[trimmed] = Entry(latitude: coordinate.latitude, longitude: coordinate.longitude)
+    }
+
+    func save() {
+        guard let data = try? JSONEncoder().encode(entries) else { return }
+        try? data.write(to: fileURL, options: [.atomic])
+    }
+}
+
+// MARK: - Resolver
+
+/// Resolves life-list map pins: imports → disk/memory cache → eBird hotspots → geocode.
+/// Geocodes every remaining unique place (no artificial skip cap); only true lookup
+/// failures stay unpin-able, and those are reported in the map banner.
 @MainActor
 final class LifeListMapPinResolver: ObservableObject {
     @Published private(set) var coordinates: [String: CLLocationCoordinate2D] = [:]
@@ -177,9 +248,13 @@ final class LifeListMapPinResolver: ObservableObject {
     @Published private(set) var isResolving = false
     @Published private(set) var resolvedCount = 0
 
-    private var cache: [String: CLLocationCoordinate2D] = [:]
+    private var memoryCache: [String: CLLocationCoordinate2D] = [:]
     private var negativeCache: Set<String> = []
+    private var diskCache = LifeListMapCoordinateCache()
     private var generation = 0
+    /// Region hotspots fetched this session (avoid re-downloading the same S/P).
+    private var regionHotspotIndex: [String: [String: CLLocationCoordinate2D]] = [:]
+    private var regionNameIndex: [String: [String: CLLocationCoordinate2D]] = [:]
 
     func resetPublished() {
         coordinates = [:]
@@ -188,7 +263,7 @@ final class LifeListMapPinResolver: ObservableObject {
         isResolving = false
     }
 
-    /// Resolves pins: imported coords first, then serial geocode of the rest.
+    /// Resolves pins: imported coords, cache, eBird hotspot match, then geocode the rest.
     func resolve(pins: [LifeListMapPin], imports: [ImportedLocationRecord]) async {
         generation += 1
         let token = generation
@@ -196,18 +271,19 @@ final class LifeListMapPinResolver: ObservableObject {
 
         var next: [String: CLLocationCoordinate2D] = [:]
         var pending: [LifeListMapPin] = []
+        var dirtyCache = false
 
         for pin in pins {
             if let known = LifeListMapPins.knownCoordinate(for: pin, imports: imports) {
                 next[pin.id] = known
+                remember(known, for: pin, dirty: &dirtyCache)
                 continue
             }
-            let key = cacheKey(for: pin)
-            if let cached = cache[key] {
+            if let cached = cachedCoordinate(for: pin) {
                 next[pin.id] = cached
                 continue
             }
-            if negativeCache.contains(key) {
+            if isNegativelyCached(pin) {
                 failedIDs.insert(pin.id)
                 continue
             }
@@ -216,42 +292,256 @@ final class LifeListMapPinResolver: ObservableObject {
 
         coordinates = next
         resolvedCount = next.count
-        guard !pending.isEmpty else { return }
+
+        guard !pending.isEmpty else {
+            if dirtyCache { diskCache.save() }
+            return
+        }
 
         isResolving = true
         defer {
             if token == generation {
                 isResolving = false
             }
+            if dirtyCache { diskCache.save() }
         }
 
-        // Cap geocode volume so large Global lists stay responsive.
-        let toGeocode = Array(pending.prefix(60))
-        for pin in toGeocode {
+        // Prefer eBird hotspot coordinates (batch by region, then per-locId) when a key exists.
+        if let apiKey = EBirdAPIKeyStore.load() {
+            pending = await resolveViaHotspots(
+                pending: pending,
+                apiKey: apiKey,
+                token: token,
+                next: &next,
+                dirtyCache: &dirtyCache
+            )
             guard token == generation else { return }
-            let key = cacheKey(for: pin)
+        }
+
+        // Geocode every remaining unique place — no volume cap. CLGeocoder is serial.
+        for pin in pending {
+            guard token == generation else { return }
             if let coordinate = await geocode(pin.geocodeQuery) {
-                cache[key] = coordinate
+                remember(coordinate, for: pin, dirty: &dirtyCache)
                 var updated = coordinates
                 updated[pin.id] = coordinate
                 coordinates = updated
                 resolvedCount = updated.count
             } else {
-                negativeCache.insert(key)
-                failedIDs.insert(pin.id)
-            }
-        }
-
-        // Mark the remainder we skipped as failed for this session (still listed in legend).
-        if pending.count > toGeocode.count {
-            for pin in pending.dropFirst(toGeocode.count) {
+                markNegative(pin)
                 failedIDs.insert(pin.id)
             }
         }
     }
 
-    private func cacheKey(for pin: LifeListMapPin) -> String {
-        SpeciesCatalog.normalize(pin.geocodeQuery)
+    // MARK: - Hotspot matching
+
+    private func resolveViaHotspots(
+        pending: [LifeListMapPin],
+        apiKey: String,
+        token: Int,
+        next: inout [String: CLLocationCoordinate2D],
+        dirtyCache: inout Bool
+    ) async -> [LifeListMapPin] {
+        var remaining = pending
+
+        // Batch-download hotspots for subnational S/P codes (`US-TX`, `CR-P`) only.
+        // Bare country codes (especially `US`) can be huge; those pins use per-LocID info below.
+        let regionKeys = Set(remaining.compactMap { hotspotRegionKey(for: $0) })
+            .filter { $0.contains("-") }
+        for region in regionKeys.sorted() {
+            guard token == generation else { return remaining }
+            await ensureRegionHotspots(regionCode: region, apiKey: apiKey)
+        }
+
+        var stillPending: [LifeListMapPin] = []
+        for pin in remaining {
+            if let coordinate = hotspotCoordinate(for: pin) {
+                remember(coordinate, for: pin, dirty: &dirtyCache)
+                next[pin.id] = coordinate
+                var updated = coordinates
+                updated[pin.id] = coordinate
+                coordinates = updated
+                resolvedCount = updated.count
+            } else {
+                stillPending.append(pin)
+            }
+        }
+        remaining = stillPending
+
+        // Individual hotspot info for leftover L-codes (private sites 404 → geocode later).
+        // Deduplicate LocIDs and fetch a few at a time.
+        var locIdPins: [String: [LifeListMapPin]] = [:]
+        var withoutLocId: [LifeListMapPin] = []
+        for pin in remaining {
+            let locId = pin.locId?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            if !locId.isEmpty, PlaceMaps.isEBirdLocationCode(locId) {
+                locIdPins[locId.uppercased(), default: []].append(pin)
+            } else {
+                withoutLocId.append(pin)
+            }
+        }
+
+        stillPending = withoutLocId
+        let uniqueLocIds = locIdPins.keys.sorted()
+        var locIdCursor = uniqueLocIds.startIndex
+        while locIdCursor < uniqueLocIds.endIndex {
+            guard token == generation else { return remaining }
+            let end = uniqueLocIds.index(locIdCursor, offsetBy: 6, limitedBy: uniqueLocIds.endIndex)
+                ?? uniqueLocIds.endIndex
+            let batch = Array(uniqueLocIds[locIdCursor..<end])
+            locIdCursor = end
+
+            var batchCoords: [String: (CLLocationCoordinate2D, String)] = [:]
+            await withTaskGroup(of: (String, CLLocationCoordinate2D, String)?.self) { group in
+                for locId in batch {
+                    group.addTask {
+                        do {
+                            let info = try await EBirdAPIClient.shared.hotspotInfo(
+                                locId: locId,
+                                apiKey: apiKey
+                            )
+                            guard let lat = info.lat, let lng = info.lng else { return nil }
+                            return (
+                                locId,
+                                CLLocationCoordinate2D(latitude: lat, longitude: lng),
+                                info.locName
+                            )
+                        } catch {
+                            return nil
+                        }
+                    }
+                }
+                for await item in group {
+                    guard let item else { continue }
+                    batchCoords[item.0] = (item.1, item.2)
+                }
+            }
+
+            for locId in batch {
+                guard let pinsForLoc = locIdPins[locId] else { continue }
+                if let matched = batchCoords[locId] {
+                    let coordinate = matched.0
+                    let locName = matched.1
+                    for pin in pinsForLoc {
+                        remember(coordinate, for: pin, dirty: &dirtyCache)
+                        if let region = hotspotRegionKey(for: pin) {
+                            regionHotspotIndex[region, default: [:]][locId] = coordinate
+                            let nameKey = SpeciesCatalog.normalize(locName)
+                            if !nameKey.isEmpty {
+                                regionNameIndex[region, default: [:]][nameKey] = coordinate
+                            }
+                        }
+                        next[pin.id] = coordinate
+                        var updated = coordinates
+                        updated[pin.id] = coordinate
+                        coordinates = updated
+                        resolvedCount = updated.count
+                    }
+                } else {
+                    stillPending.append(contentsOf: pinsForLoc)
+                }
+            }
+        }
+        return stillPending
+    }
+
+    private func hotspotRegionKey(for pin: LifeListMapPin) -> String? {
+        if let region = pin.regionCode?.trimmingCharacters(in: .whitespacesAndNewlines), !region.isEmpty {
+            return region.uppercased()
+        }
+        if let country = pin.countryCode?.trimmingCharacters(in: .whitespacesAndNewlines), !country.isEmpty {
+            return country.uppercased()
+        }
+        return nil
+    }
+
+    private func ensureRegionHotspots(regionCode: String, apiKey: String) async {
+        let key = regionCode.uppercased()
+        if regionHotspotIndex[key] != nil { return }
+        do {
+            let hotspots = try await EBirdAPIClient.shared.hotspots(inRegion: key, apiKey: apiKey)
+            var byId: [String: CLLocationCoordinate2D] = [:]
+            var byName: [String: CLLocationCoordinate2D] = [:]
+            for hotspot in hotspots {
+                guard let lat = hotspot.lat, let lng = hotspot.lng else { continue }
+                let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+                let locId = hotspot.locId.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+                if !locId.isEmpty {
+                    byId[locId] = coordinate
+                }
+                let nameKey = SpeciesCatalog.normalize(hotspot.locName)
+                if !nameKey.isEmpty, byName[nameKey] == nil {
+                    byName[nameKey] = coordinate
+                }
+            }
+            regionHotspotIndex[key] = byId
+            regionNameIndex[key] = byName
+        } catch {
+            regionHotspotIndex[key] = [:]
+            regionNameIndex[key] = [:]
+        }
+    }
+
+    private func hotspotCoordinate(for pin: LifeListMapPin) -> CLLocationCoordinate2D? {
+        guard let region = hotspotRegionKey(for: pin) else { return nil }
+        if let locId = pin.locId?.trimmingCharacters(in: .whitespacesAndNewlines).uppercased(),
+           !locId.isEmpty,
+           let coordinate = regionHotspotIndex[region]?[locId] {
+            return coordinate
+        }
+        let nameKey = SpeciesCatalog.normalize(LifeListMapPins.placeName(from: pin.title))
+        if !nameKey.isEmpty, let coordinate = regionNameIndex[region]?[nameKey] {
+            return coordinate
+        }
+        return nil
+    }
+
+    // MARK: - Cache helpers
+
+    private func cacheKeys(for pin: LifeListMapPin) -> [String] {
+        var keys: [String] = []
+        if let locId = pin.locId?.trimmingCharacters(in: .whitespacesAndNewlines), !locId.isEmpty {
+            keys.append("loc:\(locId.uppercased())")
+        }
+        let geo = SpeciesCatalog.normalize(pin.geocodeQuery)
+        if !geo.isEmpty {
+            keys.append("geo:\(geo)")
+        }
+        return keys
+    }
+
+    private func cachedCoordinate(for pin: LifeListMapPin) -> CLLocationCoordinate2D? {
+        for key in cacheKeys(for: pin) {
+            if let memory = memoryCache[key] { return memory }
+            if let disk = diskCache.coordinate(forKey: key) {
+                memoryCache[key] = disk
+                return disk
+            }
+        }
+        return nil
+    }
+
+    private func isNegativelyCached(_ pin: LifeListMapPin) -> Bool {
+        cacheKeys(for: pin).contains { negativeCache.contains($0) }
+    }
+
+    private func markNegative(_ pin: LifeListMapPin) {
+        for key in cacheKeys(for: pin) {
+            negativeCache.insert(key)
+        }
+    }
+
+    private func remember(
+        _ coordinate: CLLocationCoordinate2D,
+        for pin: LifeListMapPin,
+        dirty: inout Bool
+    ) {
+        for key in cacheKeys(for: pin) {
+            memoryCache[key] = coordinate
+            diskCache.store(coordinate, forKey: key)
+            dirty = true
+        }
     }
 
     private func geocode(_ query: String) async -> CLLocationCoordinate2D? {

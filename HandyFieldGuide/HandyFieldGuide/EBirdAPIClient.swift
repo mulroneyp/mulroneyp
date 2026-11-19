@@ -278,7 +278,8 @@ actor EBirdAPIClient {
         return try await getJSON(url: components.url!, apiKey: apiKey)
     }
 
-    private func hotspots(inRegion regionCode: String, apiKey: String) async throws -> [EBirdHotspot] {
+    /// Hotspots in a country or subnational region (`CR`, `US-TX`, …) with lat/lng.
+    func hotspots(inRegion regionCode: String, apiKey: String) async throws -> [EBirdHotspot] {
         var components = URLComponents(
             url: apiBase
                 .appendingPathComponent("ref/hotspot")
