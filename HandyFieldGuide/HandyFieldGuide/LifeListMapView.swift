@@ -78,30 +78,12 @@ struct LifeListMapView: View {
     }
 
     private func pinMarker(for pin: LifeListMapPin) -> some View {
-        VStack(spacing: 2) {
-            Image(systemName: "mappin.circle.fill")
-                .font(.title)
-                .foregroundStyle(GuideColor.rust)
-                .shadow(color: .black.opacity(0.25), radius: 2, y: 1)
-            Text(pin.title)
-                .font(.caption2.weight(.semibold))
-                .foregroundStyle(GuideColor.ink)
-                .lineLimit(2)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 6)
-                .padding(.vertical, 3)
-                .background(GuideColor.paper.opacity(0.92))
-                .overlay {
-                    RoundedRectangle(cornerRadius: 2)
-                        .stroke(GuideColor.line, lineWidth: 1)
-                }
-            Text(pin.subtitle)
-                .font(.caption2)
-                .foregroundStyle(GuideColor.muted)
-        }
-        .frame(maxWidth: 140)
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(pin.title), \(pin.subtitle)")
+        // Pins only — no title/subtitle callouts on the map (prefs: Map shows pins, no labels).
+        Image(systemName: "mappin.circle.fill")
+            .font(.title)
+            .foregroundStyle(GuideColor.rust)
+            .shadow(color: .black.opacity(0.25), radius: 2, y: 1)
+            .accessibilityLabel("\(pin.title), \(pin.subtitle)")
     }
 
     @ViewBuilder

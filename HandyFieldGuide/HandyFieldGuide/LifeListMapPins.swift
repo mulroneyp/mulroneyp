@@ -4,7 +4,7 @@ import Foundation
 /// A unique life-list sighting place for Map pins (Country / Global filter).
 struct LifeListMapPin: Identifiable, Hashable {
     var id: String
-    /// Place title shown on the pin callout.
+    /// Place name used for geocoding / matching; not shown as a map callout.
     var title: String
     var countryCode: String?
     var locId: String?
