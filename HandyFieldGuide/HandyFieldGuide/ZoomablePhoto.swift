@@ -9,6 +9,8 @@ struct ZoomablePhoto: View {
     /// Bumps when the on-device photo cache changes so replacements reload.
     var cacheRevision: Int = 0
     var onChooseDifferentPhoto: (() -> Void)? = nil
+    /// Life List split detail (iPad / Mac) asks for a taller hero photo than Field Guide rows of male/female.
+    var prefersLargerRegularHeight: Bool = false
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var showingViewer = false
@@ -93,8 +95,10 @@ struct ZoomablePhoto: View {
         let aspect = image.size.height / max(image.size.width, 1)
         // Keep male/female photos usable in the scroll view without eating the whole screen.
         // On regular-width (iPad) columns, allow a bit more height so photos do not look cropped short.
-        let base: CGFloat = horizontalSizeClass == .regular ? 360 : 320
-        let ceiling: CGFloat = horizontalSizeClass == .regular ? 480 : 420
+        // Life List split detail can ask for a larger hero in the wide detail pane.
+        let regularLarge = prefersLargerRegularHeight && horizontalSizeClass == .regular
+        let base: CGFloat = regularLarge ? 440 : (horizontalSizeClass == .regular ? 360 : 320)
+        let ceiling: CGFloat = regularLarge ? 560 : (horizontalSizeClass == .regular ? 480 : 420)
         return min(max(220, base * aspect), ceiling)
     }
 }
