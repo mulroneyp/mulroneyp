@@ -13,7 +13,7 @@ There is **no Zone control** on the home screen. Habitat zones (ground / low / m
 
 ## Life List
 
-**Life List** is a full-screen peer to the Field Guide home (same overall list format — not a modal). Its header controls mirror the Field Guide chrome:
+**Life List** is a full-screen peer to the Field Guide home (same overall list format — not a modal). On **iPad and Mac** (regular width) it uses the same **NavigationSplitView** pattern as the Field Guide: the life-list sidebar on the left and a larger photo + recorded info for the selected bird on the right. On iPhone it keeps a push stack. Its header controls mirror the Field Guide chrome:
 
 1. **Country** — tappable filter (**Global** or a country from the import).
 2. **Map** — opens an in-app map with pins (no title/subtitle labels) for **every** unique life-list first/last sighting location under the current Country / Global filter. Coordinates prefer imported hotspot lat/lng, then eBird hotspot match by LocID / region list (when an API key is saved), then place-name geocoding; successes are cached on device. Only places that cannot be resolved (for example private sites with no usable name) stay unpinned — the banner reports that shortfall. There is no artificial pin-count cap.

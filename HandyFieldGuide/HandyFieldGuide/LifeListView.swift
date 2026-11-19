@@ -5,6 +5,8 @@ import UniformTypeIdentifiers
 
 /// Full-screen Life List peer to the Field Guide home: same overall list format,
 /// with Country / Map / Bird Count Total / Field Guide in the header chrome.
+/// On regular width (iPad / Mac), matches Field Guide’s NavigationSplitView —
+/// list on the left, larger photo and info for the selected bird on the right.
 struct LifeListView: View {
     /// `nil` = Global (all countries).
     private static let globalCountrySentinel = ""
@@ -19,12 +21,19 @@ struct LifeListView: View {
     @State private var showingImporter = false
     @State private var importError: String?
     @State private var importMessage: String?
+    /// iPhone push stack — unchanged compact UX.
     @State private var path = NavigationPath()
+    /// iPad / Mac split selection — drives the detail column.
+    @State private var selectedEntryID: String?
     /// Empty string means Global; otherwise an ISO country code.
     @State private var selectedCountryCode: String = Self.globalCountrySentinel
 
+    private var usesSplitNavigation: Bool {
+        horizontalSizeClass == .regular
+    }
+
     private var contentMaxWidth: CGFloat {
-        horizontalSizeClass == .regular ? 520 : 720
+        usesSplitNavigation ? 520 : 720
     }
 
     private var availableCountryCodes: [String] {
@@ -54,95 +63,178 @@ struct LifeListView: View {
     }
 
     var body: some View {
+        Group {
+            if usesSplitNavigation {
+                splitRoot
+            } else {
+                stackRoot
+            }
+        }
+        .fileImporter(
+            isPresented: $showingImporter,
+            allowedContentTypes: [.commaSeparatedText, .plainText, .text],
+            allowsMultipleSelection: false
+        ) { result in
+            handleImport(result)
+        }
+        .onChange(of: availableCountryCodes) { _, codes in
+            if !selectedCountryCode.isEmpty, !codes.contains(selectedCountryCode) {
+                selectedCountryCode = Self.globalCountrySentinel
+            }
+        }
+        .onChange(of: selectedCountryCode) { _, _ in
+            clearStaleSelection()
+            path = NavigationPath()
+        }
+        .onChange(of: searchDraft) { _, _ in
+            clearStaleSelection()
+        }
+        .onChange(of: model.lifeList.entries) { _, _ in
+            clearStaleSelection()
+        }
+        .onChange(of: horizontalSizeClass) { _, newValue in
+            // Moving between compact/regular (Stage Manager, slide-over) should not leave a stale selection.
+            if newValue != .regular {
+                selectedEntryID = nil
+            } else {
+                path = NavigationPath()
+            }
+        }
+    }
+
+    private var stackRoot: some View {
         NavigationStack(path: $path) {
-            ScrollView {
-                LazyVStack(alignment: .leading, spacing: 14) {
-                    headerActions
-
-                    if let importError {
-                        Text(importError)
-                            .font(.footnote)
-                            .foregroundStyle(GuideColor.rust)
-                    }
-                    if let importMessage {
-                        Text(importMessage)
-                            .font(.footnote)
-                            .foregroundStyle(GuideColor.green)
-                    }
-
-                    if model.lifeList.isEmpty {
-                        emptyState
+            listColumn
+                .navigationDestination(for: String.self) { entryID in
+                    if model.lifeList.entry(id: entryID) != nil {
+                        LifeListDetailView(entryID: entryID)
                     } else {
-                        searchField
-
-                        if filteredEntries.isEmpty {
-                            Text(
-                                searchDraft.isEmpty
-                                    ? "No life-list birds match that country."
-                                    : "No life-list birds match that search."
-                            )
-                            .font(.subheadline)
-                            .foregroundStyle(GuideColor.muted)
-                            .padding(.vertical, 8)
-                        } else {
-                            ForEach(filteredEntries) { entry in
-                                NavigationLink(value: entry.id) {
-                                    LifeListRow(
-                                        entry: entry,
-                                        guideSpecies: model.catalog?.species(forCommonName: entry.commonName),
-                                        photoRevision: model.lifeList.photoRevision
-                                    )
-                                }
-                                .buttonStyle(.plain)
-                            }
-                        }
-
-                        Text(
-                            "Import an eBird Life List CSV (Sightings Lists → Download) or My Data for first and last recorded dates. Attach a photo from your library on each bird. The list and photos sync via iCloud Birdlists when signed in."
-                        )
-                        .font(.footnote)
-                        .foregroundStyle(GuideColor.muted)
-                        .padding(.top, 8)
+                        Text("That bird is not on your life list.")
+                            .guideBackground()
                     }
                 }
-                .padding(16)
-                .frame(maxWidth: contentMaxWidth, alignment: .leading)
-                .frame(maxWidth: .infinity)
+        }
+    }
+
+    private var splitRoot: some View {
+        NavigationSplitView {
+            NavigationStack {
+                listColumn
             }
-            .scrollDismissesKeyboard(.interactively)
-            .guideBackground()
-            .navigationTitle("Life List")
-            .navigationBarTitleDisplayMode(.inline)
-            .safeAreaInset(edge: .top, spacing: 0) {
-                LifeListFiltersView(
-                    selectedCountryCode: $selectedCountryCode,
-                    availableCountryCodes: availableCountryCodes,
-                    birdCountTotal: countryFilteredEntries.count,
-                    lifeListTotal: model.lifeList.entries.count,
-                    filteredEntries: countryFilteredEntries,
-                    onFieldGuide: onFieldGuide
-                )
+            .navigationSplitViewColumnWidth(min: 320, ideal: 400, max: 520)
+        } detail: {
+            NavigationStack {
+                splitDetail
+                    .guideBackground()
             }
-            .navigationDestination(for: String.self) { entryID in
-                if let entry = model.lifeList.entry(id: entryID) {
-                    LifeListDetailView(entryID: entry.id)
+        }
+        .navigationSplitViewStyle(.balanced)
+    }
+
+    private var listColumn: some View {
+        ScrollView {
+            LazyVStack(alignment: .leading, spacing: 14) {
+                headerActions
+
+                if let importError {
+                    Text(importError)
+                        .font(.footnote)
+                        .foregroundStyle(GuideColor.rust)
+                }
+                if let importMessage {
+                    Text(importMessage)
+                        .font(.footnote)
+                        .foregroundStyle(GuideColor.green)
+                }
+
+                if model.lifeList.isEmpty {
+                    emptyState
                 } else {
-                    Text("That bird is not on your life list.")
-                        .guideBackground()
+                    searchField
+
+                    if filteredEntries.isEmpty {
+                        Text(
+                            searchDraft.isEmpty
+                                ? "No life-list birds match that country."
+                                : "No life-list birds match that search."
+                        )
+                        .font(.subheadline)
+                        .foregroundStyle(GuideColor.muted)
+                        .padding(.vertical, 8)
+                    } else {
+                        ForEach(filteredEntries) { entry in
+                            entryRowLink(entry: entry)
+                        }
+                    }
+
+                    Text(
+                        "Import an eBird Life List CSV (Sightings Lists → Download) or My Data for first and last recorded dates. Attach a photo from your library on each bird. The list and photos sync via iCloud Birdlists when signed in."
+                    )
+                    .font(.footnote)
+                    .foregroundStyle(GuideColor.muted)
+                    .padding(.top, 8)
                 }
             }
-            .fileImporter(
-                isPresented: $showingImporter,
-                allowedContentTypes: [.commaSeparatedText, .plainText, .text],
-                allowsMultipleSelection: false
-            ) { result in
-                handleImport(result)
+            .padding(16)
+            .frame(maxWidth: contentMaxWidth, alignment: .leading)
+            .frame(maxWidth: .infinity)
+        }
+        .scrollDismissesKeyboard(.interactively)
+        .guideBackground()
+        .navigationTitle("Life List")
+        .navigationBarTitleDisplayMode(.inline)
+        .safeAreaInset(edge: .top, spacing: 0) {
+            LifeListFiltersView(
+                selectedCountryCode: $selectedCountryCode,
+                availableCountryCodes: availableCountryCodes,
+                birdCountTotal: countryFilteredEntries.count,
+                lifeListTotal: model.lifeList.entries.count,
+                filteredEntries: countryFilteredEntries,
+                onFieldGuide: onFieldGuide
+            )
+        }
+    }
+
+    @ViewBuilder
+    private var splitDetail: some View {
+        if let entryID = selectedEntryID,
+           model.lifeList.entry(id: entryID) != nil {
+            LifeListDetailView(entryID: entryID)
+        } else if !model.lifeList.isEmpty {
+            ContentUnavailableView {
+                Label("Select a bird", systemImage: "bird")
+            } description: {
+                Text("Choose a species from the life list to see recorded dates, locations, and photos.")
             }
-            .onChange(of: availableCountryCodes) { _, codes in
-                if !selectedCountryCode.isEmpty, !codes.contains(selectedCountryCode) {
-                    selectedCountryCode = Self.globalCountrySentinel
-                }
+        } else {
+            ContentUnavailableView {
+                Label("Life List", systemImage: "list.bullet")
+            } description: {
+                Text("Import an eBird life list CSV, then pick a bird from the list.")
             }
+        }
+    }
+
+    @ViewBuilder
+    private func entryRowLink(entry: LifeListEntry) -> some View {
+        let row = LifeListRow(
+            entry: entry,
+            guideSpecies: model.catalog?.species(forCommonName: entry.commonName),
+            photoRevision: model.lifeList.photoRevision,
+            isSelected: usesSplitNavigation && selectedEntryID == entry.id
+        )
+        if usesSplitNavigation {
+            Button {
+                selectedEntryID = entry.id
+            } label: {
+                row
+            }
+            .buttonStyle(.plain)
+        } else {
+            NavigationLink(value: entry.id) {
+                row
+            }
+            .buttonStyle(.plain)
         }
     }
 
@@ -193,6 +285,14 @@ struct LifeListView: View {
         }
     }
 
+    /// Drop the split selection when the filtered list no longer contains it.
+    private func clearStaleSelection() {
+        guard let selectedEntryID else { return }
+        if !filteredEntries.contains(where: { $0.id == selectedEntryID }) {
+            self.selectedEntryID = nil
+        }
+    }
+
     private func handleImport(_ result: Result<[URL], Error>) {
         switch result {
         case .failure(let error):
@@ -220,6 +320,8 @@ struct LifeListView: View {
                 }
                 importError = nil
                 selectedCountryCode = Self.globalCountrySentinel
+                selectedEntryID = nil
+                path = NavigationPath()
             } catch {
                 importError = error.localizedDescription
                 importMessage = nil
@@ -234,6 +336,7 @@ private struct LifeListRow: View {
     var entry: LifeListEntry
     var guideSpecies: Species?
     var photoRevision: Int
+    var isSelected: Bool = false
 
     private static let listThumbMaxPixels: CGFloat = 270
 
@@ -281,11 +384,14 @@ private struct LifeListRow: View {
             }
             Spacer(minLength: 0)
         }
+        .padding(.horizontal, isSelected ? 8 : 0)
         .padding(.vertical, 10)
+        .background(isSelected ? GuideColor.green.opacity(0.08) : Color.clear)
         .overlay(alignment: .bottom) {
             Rectangle().fill(GuideColor.line).frame(height: 1)
         }
         .accessibilityElement(children: .combine)
+        .accessibilityAddTraits(isSelected ? [.isSelected] : [])
         .accessibilityHint("Opens life list details and photo")
     }
 
@@ -322,6 +428,7 @@ private struct LifeListRow: View {
 
 private struct LifeListDetailView: View {
     @EnvironmentObject private var model: GuideModel
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     var entryID: String
 
     @State private var pickerItem: PhotosPickerItem?
@@ -331,13 +438,23 @@ private struct LifeListDetailView: View {
         model.lifeList.entry(id: entryID)
     }
 
+    /// Match Field Guide bird detail: wider column on regular-width split.
+    private var detailMaxWidth: CGFloat {
+        horizontalSizeClass == .regular ? 900 : 720
+    }
+
+    /// Taller hero photo in the split detail column so iPad / Mac show a larger image.
+    private var emptyPhotoHeight: CGFloat {
+        horizontalSizeClass == .regular ? 280 : 160
+    }
+
     var body: some View {
         Group {
             if let entry {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 16) {
                         Text(entry.commonName)
-                            .font(.system(.title, design: .serif))
+                            .font(.system(size: horizontalSizeClass == .regular ? 34 : 28, weight: .regular, design: .serif))
                             .foregroundStyle(GuideColor.green)
                         Text(entry.displayScientificName)
                             .font(.title3.italic())
@@ -363,7 +480,7 @@ private struct LifeListDetailView: View {
                         }
                     }
                     .padding(20)
-                    .frame(maxWidth: 720, alignment: .leading)
+                    .frame(maxWidth: detailMaxWidth, alignment: .leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .guideBackground()
@@ -388,17 +505,33 @@ private struct LifeListDetailView: View {
                     path: path,
                     alt: entry.commonName,
                     label: entry.commonName,
-                    cacheRevision: model.lifeList.photoRevision
+                    cacheRevision: model.lifeList.photoRevision,
+                    prefersLargerRegularHeight: true
                 )
                 .id("\(path)-\(model.lifeList.photoRevision)")
 
                 Text("Pinch or double-tap to zoom; drag to pan. Long-press for a full-screen view.")
                     .font(.caption)
                     .foregroundStyle(GuideColor.muted)
+            } else if let fallback = guideFallbackPhotoPath(for: entry) {
+                // Prefer the user's attached photo; otherwise show the Field Guide
+                // species image so the split detail still has a large visual.
+                ZoomablePhoto(
+                    path: fallback,
+                    alt: entry.commonName,
+                    label: entry.commonName,
+                    cacheRevision: model.lifeList.photoRevision,
+                    prefersLargerRegularHeight: true
+                )
+                .id("guide-\(fallback)-\(model.lifeList.photoRevision)")
+
+                Text("Field Guide photo — attach your own from the library below. Pinch or double-tap to zoom; long-press for full screen.")
+                    .font(.caption)
+                    .foregroundStyle(GuideColor.muted)
             } else {
                 GuideColor.green.opacity(0.10)
                     .frame(maxWidth: .infinity)
-                    .frame(height: 160)
+                    .frame(height: emptyPhotoHeight)
                     .overlay {
                         Text("No photo yet")
                             .font(.subheadline)
@@ -428,6 +561,16 @@ private struct LifeListDetailView: View {
                 .buttonStyle(GuideChipStyle(selected: false))
             }
         }
+    }
+
+    private func guideFallbackPhotoPath(for entry: LifeListEntry) -> String? {
+        guard let species = model.catalog?.species(forCommonName: entry.commonName) else { return nil }
+        let order = ["male": 0, "female": 1, "either": 2, "unsexed": 3, "illustration": 4]
+        let sorted = species.photos.sorted {
+            (order[$0.role] ?? 9, $0.label) < (order[$1.role] ?? 9, $1.label)
+        }
+        guard let src = sorted.first?.src, BundleImages.url(for: src) != nil else { return nil }
+        return src
     }
 
     @ViewBuilder
