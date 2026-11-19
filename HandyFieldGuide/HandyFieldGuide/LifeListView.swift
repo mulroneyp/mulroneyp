@@ -484,9 +484,10 @@ private struct LifeListDetailView: View {
         model.lifeList.entry(id: entryID)
     }
 
-    /// Chrome below/above the hero photo (titles, badge, caption, record, actions, padding).
+    /// Chrome below/above the hero photo (title+record row, scientific, badge, caption, actions, padding).
     private var reservedChromeHeight: CGFloat {
-        horizontalSizeClass == .regular ? 250 : 280
+        // Latest Record sits on the title row and photo actions share one line — slightly less vertical chrome.
+        horizontalSizeClass == .regular ? 220 : 250
     }
 
     private var minimumPhotoHeight: CGFloat {
@@ -500,20 +501,14 @@ private struct LifeListDetailView: View {
                     let photoHeight = max(minimumPhotoHeight, geo.size.height - reservedChromeHeight)
                     ScrollView {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text(entry.commonName)
-                                .font(.system(size: horizontalSizeClass == .regular ? 34 : 28, weight: .regular, design: .serif))
-                                .foregroundStyle(GuideColor.green)
+                            // Name + Latest Record on one top line (no second name below / in nav title).
+                            detailTitleRow(for: entry)
+
                             Text(entry.displayScientificName)
                                 .font(.title3.italic())
                                 .foregroundStyle(GuideColor.muted)
 
                             photoBlock(for: entry, photoHeight: photoHeight)
-
-                            recordedSection(
-                                title: "Latest Record",
-                                date: entry.firstRecordedDate,
-                                location: entry.firstRecordedLocation
-                            )
 
                             if let photoError {
                                 Text(photoError)
@@ -527,7 +522,8 @@ private struct LifeListDetailView: View {
                     }
                 }
                 .guideBackground()
-                .navigationTitle(entry.commonName)
+                // Name lives in the content title row with Latest Record — avoid a duplicate nav title.
+                .navigationTitle("")
                 .navigationBarTitleDisplayMode(.inline)
             } else {
                 Text("That bird is not on your life list.")
@@ -588,28 +584,66 @@ private struct LifeListDetailView: View {
                     }
             }
 
-            PhotosPicker(
-                selection: $pickerItem,
-                matching: .images,
-                photoLibrary: .shared()
-            ) {
-                Label(
-                    entry.localPhotoPath == nil ? "Add photo from library" : "Replace photo from library",
-                    systemImage: "photo.on.rectangle"
-                )
-            }
-            .buttonStyle(GuideChipStyle(selected: true))
-
-            if entry.localPhotoPath != nil {
-                Button {
-                    model.lifeList.clearPhoto(for: entry.id)
-                    photoError = nil
-                } label: {
-                    Label("Remove photo", systemImage: "trash")
+            HStack(alignment: .center, spacing: 10) {
+                PhotosPicker(
+                    selection: $pickerItem,
+                    matching: .images,
+                    photoLibrary: .shared()
+                ) {
+                    Label(
+                        entry.localPhotoPath == nil ? "Add photo from library" : "Replace photo from library",
+                        systemImage: "photo.on.rectangle"
+                    )
                 }
-                .buttonStyle(GuideChipStyle(selected: false))
+                .buttonStyle(GuideChipStyle(selected: true))
+
+                if entry.localPhotoPath != nil {
+                    Button {
+                        model.lifeList.clearPhoto(for: entry.id)
+                        photoError = nil
+                    } label: {
+                        Label("Remove photo", systemImage: "trash")
+                    }
+                    .buttonStyle(GuideChipStyle(selected: false))
+                }
+
+                Spacer(minLength: 0)
             }
         }
+    }
+
+    /// Bird name and Latest Record share the top content line.
+    @ViewBuilder
+    private func detailTitleRow(for entry: LifeListEntry) -> some View {
+        let nameSize: CGFloat = horizontalSizeClass == .regular ? 34 : 28
+        let latest = entry.firstRecordedLine
+
+        HStack(alignment: .firstTextBaseline, spacing: 12) {
+            Text(entry.commonName)
+                .font(.system(size: nameSize, weight: .regular, design: .serif))
+                .foregroundStyle(GuideColor.green)
+                .layoutPriority(1)
+
+            Spacer(minLength: 8)
+
+            if let latest {
+                VStack(alignment: .trailing, spacing: 2) {
+                    Text("Latest Record".uppercased())
+                        .font(.caption.weight(.semibold))
+                        .tracking(1.0)
+                        .foregroundStyle(GuideColor.muted)
+                    Text(latest)
+                        .font(.subheadline)
+                        .foregroundStyle(GuideColor.ink)
+                        .multilineTextAlignment(.trailing)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .frame(maxWidth: horizontalSizeClass == .regular ? 320 : 200, alignment: .trailing)
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("Latest Record, \(latest)")
+            }
+        }
+        .accessibilityElement(children: .contain)
     }
 
     private func photoSourceHeader(source: LifeListPhotoSource) -> some View {
@@ -627,23 +661,6 @@ private struct LifeListDetailView: View {
         }
         guard let src = sorted.first?.src, BundleImages.url(for: src) != nil else { return nil }
         return src
-    }
-
-    @ViewBuilder
-    private func recordedSection(title: String, date: String?, location: String?) -> some View {
-        let line = LifeListEntry.recordedLine(date: date, location: location)
-        if let line {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(title.uppercased())
-                    .font(.caption.weight(.semibold))
-                    .tracking(1.0)
-                    .foregroundStyle(GuideColor.muted)
-                Text(line)
-                    .font(.body)
-                    .foregroundStyle(GuideColor.ink)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-        }
     }
 
     @MainActor
