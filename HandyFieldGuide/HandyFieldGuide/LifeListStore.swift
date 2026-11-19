@@ -113,8 +113,9 @@ struct LifeListDocument: Codable, Hashable {
 @MainActor
 final class LifeListStore: ObservableObject {
     static let storeFileName = "life-list.json"
-    static let photoDirectoryName = "life-list-photos"
-    static let photoPathPrefix = "life-list-photos/"
+    /// Pure path constants — safe from nonisolated image decode / cache paths.
+    nonisolated static let photoDirectoryName = "life-list-photos"
+    nonisolated static let photoPathPrefix = "life-list-photos/"
 
     @Published private(set) var document: LifeListDocument = LifeListDocument(
         version: 1,
@@ -206,7 +207,8 @@ final class LifeListStore: ObservableObject {
     }
 
     /// Resolves a relative `life-list-photos/…` path for display (iCloud → local → legacy).
-    static func resolvedPhotoFileURL(forRelativePath relativePath: String) -> URL? {
+    /// Pure FileManager path lookup — safe from nonisolated `BundleImages` decode paths.
+    nonisolated static func resolvedPhotoFileURL(forRelativePath relativePath: String) -> URL? {
         guard relativePath.hasPrefix(photoPathPrefix) else { return nil }
         let file = String(relativePath.dropFirst(photoPathPrefix.count))
         let fm = FileManager.default
@@ -242,7 +244,7 @@ final class LifeListStore: ObservableObject {
         return nil
     }
 
-    private static func ensureLocalUbiquitousCopyIfNeededStatic(at url: URL) {
+    nonisolated private static func ensureLocalUbiquitousCopyIfNeededStatic(at url: URL) {
         let fm = FileManager.default
         guard fm.fileExists(atPath: url.path) || fm.isUbiquitousItem(at: url) else { return }
         do {
