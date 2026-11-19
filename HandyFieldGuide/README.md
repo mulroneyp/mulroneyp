@@ -23,17 +23,16 @@ There is **no Zone control** on the home screen. Habitat zones (ground / low / m
 Rows use the same overall list formatting as the Field Guide list (thumbnail + serif common name + italic scientific name), and show:
 
 - **Bird name**
-- **Last recorded** date and location (when present)
-- **First recorded** date and location (when present)
+- **Latest Record** date and location (when present)
 
 Import an eBird **Life List CSV** from My eBird → Sightings Lists → Download, or a **My Data** export:
 
-- Classic life-list CSV (`Date`, `Location`, `Countable`, …): `Date` / `Location` fill **First recorded** (Sightings Lists default is first seen). Optional `Last Date` / `Last Location` columns fill **Last recorded** when present.
-- **My Data** (`Submission ID`, …): aggregates every observation per species so both first and last recorded dates/locations are derived in one import.
+- Classic life-list CSV (`Date`, `Location`, `Countable`, …): `Date` / `Location` fill **Latest Record**.
+- **My Data** (`Submission ID`, …): aggregates observations per species; the UI shows the imported date/location as **Latest Record**.
 
 **Sync:** The list JSON and attached photos use the same Birdlists ubiquity layout as imported locations — iCloud Drive → Handy Field Guide → Birdlists → `life-list.json` and `life-list-photos/`, with a local `Documents/Birdlists/` mirror for offline. Photos sync across iPhone, iPad, and Mac when the same iCloud account is signed in; large JPEGs may lag until ubiquity finishes downloading, and photos are unavailable on another device until that download completes (or if iCloud Drive is off for the app). Legacy `Documents/life-list-photos/` files are migrated into Birdlists on load.
 
-Detail photos use the same **ZoomablePhoto** chrome as the Field Guide (pinch / double-tap zoom, long-press full screen). Attach or replace from the Photos library (PhotosUI).
+Detail photos use the same **ZoomablePhoto** chrome as the Field Guide (pinch / double-tap zoom, long-press full screen) and expand to fill the available detail pane (especially the iPad / Mac split). Attach or replace from the Photos library (PhotosUI). Each photo shows a badge: **My photo** for library attaches, or **Stock** for Field Guide / open-licence Commons images. Library origin is stored as `photoSource` in `life-list.json` so it survives iCloud sync.
 
 ```bash
 python3 scripts/verify_ebird_life_list.py
