@@ -63,8 +63,9 @@ struct ImportedTaxonRecord: Codable, Hashable, Identifiable {
 /// (best effort; the legacy file is left in place if the destination write fails).
 @MainActor
 final class ImportedLocationStore: ObservableObject {
-    static let ubiquityContainerIdentifier = "iCloud.com.mulroneyp.handyfieldguide"
-    static let birdlistsFolderName = "Birdlists"
+    /// Pure path / container constants — safe from nonisolated life-list photo resolution.
+    nonisolated static let ubiquityContainerIdentifier = "iCloud.com.mulroneyp.handyfieldguide"
+    nonisolated static let birdlistsFolderName = "Birdlists"
     static let storeFileName = "imported-locations.json"
 
     @Published private(set) var locations: [ImportedLocationRecord] = []
