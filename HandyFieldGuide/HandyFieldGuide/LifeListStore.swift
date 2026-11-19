@@ -13,10 +13,13 @@ struct LifeListEntry: Codable, Identifiable, Hashable {
     var firstRecordedLocation: String?
     var firstLocId: String?
     var firstSubId: String?
+    /// ISO country code from eBird S/P / location (e.g. `US` from `US-TX`).
+    var firstRecordedCountryCode: String?
     var lastRecordedDate: String?
     var lastRecordedLocation: String?
     var lastLocId: String?
     var lastSubId: String?
+    var lastRecordedCountryCode: String?
     /// Relative path for a user photo from the Photos library (`life-list-photos/…`).
     var localPhotoPath: String?
 
@@ -31,6 +34,35 @@ struct LifeListEntry: Codable, Identifiable, Hashable {
 
     var hasLastRecorded: Bool {
         !(lastRecordedDate?.isEmpty ?? true) || !(lastRecordedLocation?.isEmpty ?? true)
+    }
+
+    /// Country codes from stored fields or derived from location labels (for older imports).
+    var countryCodes: Set<String> {
+        var codes = Set<String>()
+        if let code = resolvedCountryCode(
+            stored: firstRecordedCountryCode,
+            location: firstRecordedLocation
+        ) {
+            codes.insert(code)
+        }
+        if let code = resolvedCountryCode(
+            stored: lastRecordedCountryCode,
+            location: lastRecordedLocation
+        ) {
+            codes.insert(code)
+        }
+        return codes
+    }
+
+    func matchesCountryCode(_ code: String) -> Bool {
+        countryCodes.contains(code.uppercased())
+    }
+
+    private func resolvedCountryCode(stored: String?, location: String?) -> String? {
+        if let stored = stored?.trimmingCharacters(in: .whitespacesAndNewlines), !stored.isEmpty {
+            return stored.uppercased()
+        }
+        return EBirdLifeListCSVParser.countryCode(fromLocation: location)
     }
 
     /// "15 Jan 2020 · Monteverde · CR-P" style line; empty parts omitted.
@@ -52,6 +84,10 @@ struct LifeListEntry: Codable, Identifiable, Hashable {
     var lastRecordedLine: String? {
         Self.recordedLine(date: lastRecordedDate, location: lastRecordedLocation)
     }
+
+    static func countryDisplayName(code: String) -> String {
+        Locale.current.localizedString(forRegionCode: code) ?? code
+    }
 }
 
 struct LifeListDocument: Codable, Hashable {
@@ -68,8 +104,12 @@ struct LifeListDocument: Codable, Hashable {
 /// iCloud Drive → Handy Field Guide → Birdlists → `life-list.json`, with a local
 /// sandbox mirror under `Documents/Birdlists/`.
 ///
-/// **User photos** stay in the app sandbox (`Documents/life-list-photos/`) so they
-/// remain available offline without syncing large JPEGs through ubiquity Documents.
+/// **User photos** live beside that JSON under `Birdlists/life-list-photos/` in both
+/// the iCloud ubiquity Documents folder and the local Birdlists mirror, so attached
+/// JPEGs sync across iPhone / iPad / Mac when the same iCloud account is signed in.
+/// Large photos may take longer to appear on other devices until ubiquity finishes
+/// downloading; until then the list still opens from the local mirror. Legacy files
+/// under `Documents/life-list-photos/` are migrated into Birdlists on load.
 @MainActor
 final class LifeListStore: ObservableObject {
     static let storeFileName = "life-list.json"
@@ -138,8 +178,19 @@ final class LifeListStore: ObservableObject {
         documentsDirectory.appendingPathComponent(ImportedLocationStore.birdlistsFolderName, isDirectory: true)
     }
 
-    var photoDirectory: URL {
+    /// Local Birdlists photo folder (offline mirror).
+    var localPhotoDirectory: URL {
+        localBirdlistsDirectory.appendingPathComponent(Self.photoDirectoryName, isDirectory: true)
+    }
+
+    /// Legacy pre-Birdlists photo folder (`Documents/life-list-photos/`).
+    var legacyPhotoDirectory: URL {
         documentsDirectory.appendingPathComponent(Self.photoDirectoryName, isDirectory: true)
+    }
+
+    /// Active photo write target: iCloud Birdlists when available, else local mirror.
+    var photoDirectory: URL {
+        activePhotoDirectory
     }
 
     private var localStoreURL: URL {
@@ -148,6 +199,64 @@ final class LifeListStore: ObservableObject {
 
     var activeBirdlistsDirectory: URL {
         iCloudBirdlistsDirectory() ?? localBirdlistsDirectory
+    }
+
+    var activePhotoDirectory: URL {
+        activeBirdlistsDirectory.appendingPathComponent(Self.photoDirectoryName, isDirectory: true)
+    }
+
+    /// Resolves a relative `life-list-photos/…` path for display (iCloud → local → legacy).
+    static func resolvedPhotoFileURL(forRelativePath relativePath: String) -> URL? {
+        guard relativePath.hasPrefix(photoPathPrefix) else { return nil }
+        let file = String(relativePath.dropFirst(photoPathPrefix.count))
+        let fm = FileManager.default
+        let documents = fm.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let localBirdlists = documents
+            .appendingPathComponent(ImportedLocationStore.birdlistsFolderName, isDirectory: true)
+            .appendingPathComponent(photoDirectoryName, isDirectory: true)
+            .appendingPathComponent(file)
+        let legacy = documents
+            .appendingPathComponent(photoDirectoryName, isDirectory: true)
+            .appendingPathComponent(file)
+
+        var candidates: [URL] = []
+        if let iCloudRoot = fm.url(
+            forUbiquityContainerIdentifier: ImportedLocationStore.ubiquityContainerIdentifier
+        ) {
+            let iCloudPhoto = iCloudRoot
+                .appendingPathComponent("Documents", isDirectory: true)
+                .appendingPathComponent(ImportedLocationStore.birdlistsFolderName, isDirectory: true)
+                .appendingPathComponent(photoDirectoryName, isDirectory: true)
+                .appendingPathComponent(file)
+            candidates.append(iCloudPhoto)
+        }
+        candidates.append(localBirdlists)
+        candidates.append(legacy)
+
+        for url in candidates {
+            ensureLocalUbiquitousCopyIfNeededStatic(at: url)
+            if fm.fileExists(atPath: url.path) {
+                return url
+            }
+        }
+        return nil
+    }
+
+    private static func ensureLocalUbiquitousCopyIfNeededStatic(at url: URL) {
+        let fm = FileManager.default
+        guard fm.fileExists(atPath: url.path) || fm.isUbiquitousItem(at: url) else { return }
+        do {
+            let values = try url.resourceValues(forKeys: [
+                .isUbiquitousItemKey,
+                .ubiquitousItemDownloadingStatusKey,
+            ])
+            guard values.isUbiquitousItem == true else { return }
+            if values.ubiquitousItemDownloadingStatus != .current {
+                try? fm.startDownloadingUbiquitousItem(at: url)
+            }
+        } catch {
+            // Fall through to existence check.
+        }
     }
 
     /// Replaces the life list from a parsed eBird CSV. Keeps user photos when the
@@ -175,6 +284,7 @@ final class LifeListStore: ObservableObject {
             var lastLocation = row.lastRecordedLocation
             var lastLocId = row.lastLocId
             var lastSubId = row.lastSubId
+            var lastCountry = row.lastRecordedCountryCode
             // Classic life-list CSV only has first-seen Date/Location. Keep a prior
             // last-recorded pair from an earlier My Data (or Last*) import.
             if lastDate == nil && lastLocation == nil, let previous {
@@ -182,6 +292,8 @@ final class LifeListStore: ObservableObject {
                 lastLocation = previous.lastRecordedLocation
                 lastLocId = previous.lastLocId
                 lastSubId = previous.lastSubId
+                lastCountry = previous.lastRecordedCountryCode
+                    ?? EBirdLifeListCSVParser.countryCode(fromLocation: previous.lastRecordedLocation)
             }
 
             return LifeListEntry(
@@ -197,10 +309,14 @@ final class LifeListStore: ObservableObject {
                 firstRecordedLocation: row.firstRecordedLocation,
                 firstLocId: row.firstLocId,
                 firstSubId: row.firstSubId,
+                firstRecordedCountryCode: row.firstRecordedCountryCode
+                    ?? EBirdLifeListCSVParser.countryCode(fromLocation: row.firstRecordedLocation),
                 lastRecordedDate: lastDate,
                 lastRecordedLocation: lastLocation,
                 lastLocId: lastLocId,
                 lastSubId: lastSubId,
+                lastRecordedCountryCode: lastCountry
+                    ?? EBirdLifeListCSVParser.countryCode(fromLocation: lastLocation),
                 localPhotoPath: previous?.localPhotoPath
             )
         }
@@ -216,66 +332,18 @@ final class LifeListStore: ObservableObject {
         return document
     }
 
-    /// Updates last-recorded fields from a CSV without replacing the whole list.
-    /// Useful after downloading Sightings Lists in “most recent” mode.
-    @discardableResult
-    func mergeLastRecorded(from parsed: ParsedLifeList) -> Int {
-        var updated = 0
-        let byKey = Dictionary(
-            uniqueKeysWithValues: document.entries.enumerated().map {
-                (matchKey(common: $0.element.commonName, scientific: $0.element.scientificName), $0.offset)
-            }
-        )
-        for row in parsed.entries {
-            let key = matchKey(common: row.commonName, scientific: row.scientificName)
-            // Prefer explicit last fields; fall back to first/date columns from a
-            // “most recent” life-list download (same Date/Location columns).
-            let date = row.lastRecordedDate ?? row.firstRecordedDate
-            let location = row.lastRecordedLocation ?? row.firstRecordedLocation
-            let locId = row.lastLocId ?? row.firstLocId
-            let subId = row.lastSubId ?? row.firstSubId
-            guard date != nil || location != nil else { continue }
-            guard let index = byKey[key] else { continue }
-            document.entries[index].lastRecordedDate = date
-            document.entries[index].lastRecordedLocation = location
-            document.entries[index].lastLocId = locId
-            document.entries[index].lastSubId = subId
-            updated += 1
-        }
-        if updated > 0 {
-            persist()
-        }
-        return updated
-    }
-
-    func clear() {
-        let oldPaths = document.entries.compactMap(\.localPhotoPath)
-        document = LifeListDocument(
-            version: 1,
-            sourceFileName: nil,
-            importedAt: nil,
-            aggregatedFromMyData: nil,
-            entries: []
-        )
-        persist()
-        for path in oldPaths {
-            removePhotoFile(atRelativePath: path)
-        }
-        photoRevision += 1
-    }
-
     /// Saves a JPEG from the Photos library against a life-list entry.
+    /// Writes into Birdlists/life-list-photos (iCloud when available + local mirror).
     @discardableResult
     func setPhoto(jpegData: Data, for entryID: String) throws -> LifeListEntry {
         guard let index = document.entries.firstIndex(where: { $0.id == entryID }) else {
             throw CocoaError(.fileNoSuchFile)
         }
-        ensurePhotoDirectory()
+        ensurePhotoDirectories()
         let previous = document.entries[index].localPhotoPath
         let token = String(UUID().uuidString.prefix(8)).lowercased()
         let filename = "\(entryID)-\(token).jpg"
-        let url = photoDirectory.appendingPathComponent(filename)
-        try jpegData.write(to: url, options: [.atomic])
+        try writePhotoData(jpegData, filename: filename)
         let relative = Self.photoPathPrefix + filename
         document.entries[index].localPhotoPath = relative
         persist()
@@ -339,18 +407,86 @@ final class LifeListStore: ObservableObject {
         if let iCloud = iCloudBirdlistsDirectory() {
             try? fm.createDirectory(at: iCloud, withIntermediateDirectories: true)
         }
-        ensurePhotoDirectory()
+        ensurePhotoDirectories()
     }
 
-    private func ensurePhotoDirectory() {
-        try? FileManager.default.createDirectory(at: photoDirectory, withIntermediateDirectories: true)
+    private func ensurePhotoDirectories() {
+        let fm = FileManager.default
+        try? fm.createDirectory(at: localPhotoDirectory, withIntermediateDirectories: true)
+        if let iCloud = iCloudBirdlistsDirectory() {
+            let iCloudPhotos = iCloud.appendingPathComponent(Self.photoDirectoryName, isDirectory: true)
+            try? fm.createDirectory(at: iCloudPhotos, withIntermediateDirectories: true)
+        }
     }
 
     private func load() -> LifeListDocument? {
         ensureDirectories()
+        migrateLegacyPhotosIfNeeded()
         promoteLocalMirrorToICloudIfNeeded()
+        promoteLocalPhotosToICloudIfNeeded()
         usesICloudDocuments = iCloudBirdlistsDirectory() != nil
         return readStore(preferringICloud: true)
+    }
+
+    private func writePhotoData(_ data: Data, filename: String) throws {
+        let localURL = localPhotoDirectory.appendingPathComponent(filename)
+        try writeCoordinated(data: data, to: localURL)
+        if let iCloud = iCloudBirdlistsDirectory() {
+            let iCloudURL = iCloud
+                .appendingPathComponent(Self.photoDirectoryName, isDirectory: true)
+                .appendingPathComponent(filename)
+            try writeCoordinated(data: data, to: iCloudURL)
+        }
+    }
+
+    /// Copies legacy `Documents/life-list-photos/` files into Birdlists (local + iCloud).
+    private func migrateLegacyPhotosIfNeeded() {
+        let fm = FileManager.default
+        guard fm.fileExists(atPath: legacyPhotoDirectory.path) else { return }
+        ensurePhotoDirectories()
+        guard let files = try? fm.contentsOfDirectory(
+            at: legacyPhotoDirectory,
+            includingPropertiesForKeys: nil
+        ) else { return }
+
+        for fileURL in files where fileURL.pathExtension.lowercased() == "jpg"
+            || fileURL.pathExtension.lowercased() == "jpeg"
+        {
+            let name = fileURL.lastPathComponent
+            let localDest = localPhotoDirectory.appendingPathComponent(name)
+            if !fm.fileExists(atPath: localDest.path) {
+                try? fm.copyItem(at: fileURL, to: localDest)
+            }
+            if let iCloud = iCloudBirdlistsDirectory() {
+                let cloudDest = iCloud
+                    .appendingPathComponent(Self.photoDirectoryName, isDirectory: true)
+                    .appendingPathComponent(name)
+                if !fm.fileExists(atPath: cloudDest.path), let data = try? Data(contentsOf: fileURL) {
+                    try? writeCoordinated(data: data, to: cloudDest)
+                }
+            }
+        }
+    }
+
+    /// When iCloud becomes available, push local Birdlists photos that are missing in the cloud.
+    private func promoteLocalPhotosToICloudIfNeeded() {
+        guard let iCloud = iCloudBirdlistsDirectory() else { return }
+        let fm = FileManager.default
+        let cloudPhotos = iCloud.appendingPathComponent(Self.photoDirectoryName, isDirectory: true)
+        try? fm.createDirectory(at: cloudPhotos, withIntermediateDirectories: true)
+        guard fm.fileExists(atPath: localPhotoDirectory.path),
+              let files = try? fm.contentsOfDirectory(
+                at: localPhotoDirectory,
+                includingPropertiesForKeys: nil
+              ) else { return }
+
+        for fileURL in files where !fileURL.lastPathComponent.hasPrefix(".") {
+            let dest = cloudPhotos.appendingPathComponent(fileURL.lastPathComponent)
+            guard !fm.fileExists(atPath: dest.path) else { continue }
+            if let data = try? Data(contentsOf: fileURL) {
+                try? writeCoordinated(data: data, to: dest)
+            }
+        }
     }
 
     private func persist() {
@@ -371,11 +507,14 @@ final class LifeListStore: ObservableObject {
 
     private func handleUbiquityIdentityChange() {
         ensureDirectories()
+        migrateLegacyPhotosIfNeeded()
         promoteLocalMirrorToICloudIfNeeded()
+        promoteLocalPhotosToICloudIfNeeded()
         usesICloudDocuments = iCloudBirdlistsDirectory() != nil
         if let loaded = readStore(preferringICloud: true) {
             document = loaded
         }
+        photoRevision += 1
     }
 
     private func promoteLocalMirrorToICloudIfNeeded() {
@@ -484,8 +623,17 @@ final class LifeListStore: ObservableObject {
     private func removePhotoFile(atRelativePath path: String) {
         guard path.hasPrefix(Self.photoPathPrefix) else { return }
         let file = String(path.dropFirst(Self.photoPathPrefix.count))
-        let url = photoDirectory.appendingPathComponent(file)
-        try? FileManager.default.removeItem(at: url)
+        let fm = FileManager.default
+        let candidates = [
+            localPhotoDirectory.appendingPathComponent(file),
+            legacyPhotoDirectory.appendingPathComponent(file),
+            iCloudBirdlistsDirectory()?
+                .appendingPathComponent(Self.photoDirectoryName, isDirectory: true)
+                .appendingPathComponent(file),
+        ].compactMap { $0 }
+        for url in candidates where fm.fileExists(atPath: url.path) {
+            try? fm.removeItem(at: url)
+        }
         BundleImages.invalidate(path: path)
     }
 }

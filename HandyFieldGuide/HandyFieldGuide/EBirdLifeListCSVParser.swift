@@ -15,11 +15,14 @@ struct ParsedLifeListEntry: Hashable {
     var firstRecordedLocation: String?
     var firstLocId: String?
     var firstSubId: String?
+    /// ISO-ish country code from eBird S/P (e.g. `US` from `US-TX`), when present.
+    var firstRecordedCountryCode: String?
     /// Most recent recorded sighting date string (when present).
     var lastRecordedDate: String?
     var lastRecordedLocation: String?
     var lastLocId: String?
     var lastSubId: String?
+    var lastRecordedCountryCode: String?
 }
 
 struct ParsedLifeList: Hashable {
@@ -111,6 +114,7 @@ enum EBirdLifeListCSVParser {
 
             let taxonOrder = intField(cols, index.taxonOrder)
             let state = field(cols, index.stateProvince)
+            let country = countryCode(fromStateProvince: state)
             let date = field(cols, index.date)
             let location = field(cols, index.location)
             let locId = field(cols, index.locId)
@@ -132,6 +136,9 @@ enum EBirdLifeListCSVParser {
             }
             // If only Last* were filled and Date was empty, leave first blank.
 
+            let resolvedFirstLocation = emptyToNil(firstLocation)
+            let resolvedLastLocation = emptyToNil(lastLocation)
+
             entries.append(
                 ParsedLifeListEntry(
                     commonName: common,
@@ -142,13 +149,19 @@ enum EBirdLifeListCSVParser {
                     exotic: field(cols, index.exotic),
                     countable: true,
                     firstRecordedDate: emptyToNil(firstDate),
-                    firstRecordedLocation: emptyToNil(firstLocation),
+                    firstRecordedLocation: resolvedFirstLocation,
                     firstLocId: locId,
                     firstSubId: subId,
+                    firstRecordedCountryCode: resolvedFirstLocation != nil
+                        ? (country ?? countryCode(fromLocation: resolvedFirstLocation))
+                        : nil,
                     lastRecordedDate: emptyToNil(lastDate),
-                    lastRecordedLocation: emptyToNil(lastLocation),
+                    lastRecordedLocation: resolvedLastLocation,
                     lastLocId: field(cols, index.lastLocId) ?? (lastDate != nil ? locId : nil),
-                    lastSubId: field(cols, index.lastSubId)
+                    lastSubId: field(cols, index.lastSubId),
+                    lastRecordedCountryCode: resolvedLastLocation != nil
+                        ? (country ?? countryCode(fromLocation: resolvedLastLocation))
+                        : nil
                 )
             )
         }
@@ -186,6 +199,7 @@ enum EBirdLifeListCSVParser {
             var location: String?
             var locId: String?
             var subId: String?
+            var countryCode: String?
         }
 
         var byKey: [String: Acc] = [:]
@@ -213,7 +227,8 @@ enum EBirdLifeListCSVParser {
                 sortKey: sortKey,
                 location: place,
                 locId: field(cols, index.locId) ?? field(cols, index.locationId),
-                subId: field(cols, index.subId) ?? field(cols, index.submissionID)
+                subId: field(cols, index.subId) ?? field(cols, index.submissionID),
+                countryCode: countryCode(fromStateProvince: state) ?? countryCode(fromLocation: place)
             )
 
             var acc = byKey[key] ?? Acc(
@@ -256,10 +271,12 @@ enum EBirdLifeListCSVParser {
                 firstRecordedLocation: emptyToNil(acc.first?.location),
                 firstLocId: acc.first?.locId,
                 firstSubId: acc.first?.subId,
+                firstRecordedCountryCode: emptyToNil(acc.first?.countryCode),
                 lastRecordedDate: emptyToNil(acc.last?.dateRaw),
                 lastRecordedLocation: emptyToNil(acc.last?.location),
                 lastLocId: acc.last?.locId,
-                lastSubId: acc.last?.subId
+                lastSubId: acc.last?.subId,
+                lastRecordedCountryCode: emptyToNil(acc.last?.countryCode)
             )
         }
         sortEntries(&entries)
@@ -368,6 +385,31 @@ enum EBirdLifeListCSVParser {
         case (nil, nil):
             return nil
         }
+    }
+
+    /// eBird S/P values are `US-TX`, `CR-P`, or occasionally a bare country code.
+    static func countryCode(fromStateProvince state: String?) -> String? {
+        guard let state = emptyToNil(state) else { return nil }
+        let head = state.split(separator: "-", maxSplits: 1, omittingEmptySubsequences: true)
+            .first
+            .map(String.init) ?? state
+        let code = head.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        guard code.count == 2, code.unicodeScalars.allSatisfy({ CharacterSet.letters.contains($0) }) else {
+            return nil
+        }
+        return code
+    }
+
+    /// Pulls a country code from a composed location (`Place · US-TX`) or a bare S/P token.
+    static func countryCode(fromLocation location: String?) -> String? {
+        guard let location = emptyToNil(location) else { return nil }
+        let segments = location.components(separatedBy: " · ")
+        for segment in segments.reversed() {
+            if let code = countryCode(fromStateProvince: segment) {
+                return code
+            }
+        }
+        return countryCode(fromStateProvince: location)
     }
 
     private static func field(_ cols: [String], _ idx: Int?) -> String? {

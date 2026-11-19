@@ -90,14 +90,9 @@ enum BundleImages {
         return FileManager.default.fileExists(atPath: url.path) ? url : nil
     }
 
-    /// Documents/life-list-photos/<file> for Photos-library attachments on the life list.
+    /// Birdlists/life-list-photos/<file> (iCloud + local mirror; legacy Documents/ fallback).
     static func lifeListPhotoFileURL(for relativePath: String) -> URL? {
-        guard relativePath.hasPrefix(lifeListPhotoPathPrefix) else { return nil }
-        let file = String(relativePath.dropFirst(lifeListPhotoPathPrefix.count))
-        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            .appendingPathComponent(LifeListStore.photoDirectoryName, isDirectory: true)
-            .appendingPathComponent(file)
-        return FileManager.default.fileExists(atPath: url.path) ? url : nil
+        LifeListStore.resolvedPhotoFileURL(forRelativePath: relativePath)
     }
 }
 
