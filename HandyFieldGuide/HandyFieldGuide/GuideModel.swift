@@ -24,9 +24,11 @@ final class GuideModel: ObservableObject {
     @Published var photoFetch: ImportPhotoFetcher?
 
     let imports = ImportedLocationStore()
+    let lifeList = LifeListStore()
     let photoCache = PhotoCacheStore()
     private(set) var catalog: SpeciesCatalog?
     private var importsCancellable: AnyCancellable?
+    private var lifeListCancellable: AnyCancellable?
     private var photoCacheCancellable: AnyCancellable?
 
     /// Cached resolved place so list / filter / navigation do not rebuild coverage every body pass.
@@ -49,6 +51,9 @@ final class GuideModel: ObservableObject {
         }
         importsCancellable = imports.objectWillChange.sink { [weak self] _ in
             self?.invalidatePlaceCache()
+            self?.objectWillChange.send()
+        }
+        lifeListCancellable = lifeList.objectWillChange.sink { [weak self] _ in
             self?.objectWillChange.send()
         }
         photoCacheCancellable = photoCache.$revision.sink { [weak self] _ in

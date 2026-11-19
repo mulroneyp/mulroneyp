@@ -4,12 +4,32 @@ An iPhone field guide. Open `HandyFieldGuide.xcodeproj` in Xcode, pick the Handy
 
 ## Home filters
 
-The app title **Handy Field Guide** sits at the top of the home screen (inline navigation title). Directly under it, two rows of value labels (no bottom menu bar, and no secondary place / list-name line above the bird list). The Location and Month value boxes are the **same width** (a fixed trailing column reserves space for **Map** on the Location row and **i** + gear on the Month row):
+The app title **Handy Field Guide** sits at the top of the home screen (inline navigation title), with **i** (when a place is active; coverage prose) and the **Settings** gear **right-aligned on that title row**. Directly under it, two rows of value labels (no bottom menu bar, and no secondary place / list-name line above the bird list). The Location and Month value boxes are the **same width** (a fixed trailing column reserves space for **Map** on the Location row and **Life List** under Map on the Month row):
 
 1. **Location** — tappable label showing the chosen place name (or **Choose Location**). Menu of **imported** eBird areas only, plus **Manage locations** (rename / delete saved imports) and **Add location** (eBird API hotspot search or barchart `.txt`). Paste a free API key under **Settings → eBird API** (Keychain; never committed). There is no default / curated place list in the menu. With no imports, the home screen prompts you to add a location. When a place is active, **Map** sits on the same row, always shows the word **Map** (not icon-only), and stays **top-aligned** with the Location value pill when the name wraps to two lines; it opens Apple Maps using a renamed title or a known eBird hotspot name for sample L-codes.
-2. **Month** — tappable label showing the month name. Picker defaults to the device’s calendar month (no “Current” / “This month” wording). Imported eBird lists use that month’s frequencies for “likely” birds. On the same row: **i** (when a place is active; opens coverage prose) and the **Settings** gear (scarce / near-zero hide, flagged “sp.” / slash taxa, eBird API key).
+2. **Month** — tappable label showing the month name. Picker defaults to the device’s calendar month (no “Current” / “This month” wording). Imported eBird lists use that month’s frequencies for “likely” birds. On the same trailing column under Map: **Life List** opens your imported eBird life list (separate page).
 
 There is **no Zone control** on the home screen. Habitat zones (ground / low / mid / canopy / sky) still appear as labels on list rows and on bird detail; the home list is not filtered by zone.
+
+## Life List
+
+**Life List** is a separate page (not the Field Guide home list). Rows use the same overall list formatting as the Field Guide list (thumbnail + serif common name + italic scientific name), and show:
+
+- **Bird name**
+- **Last recorded** date and location (when present)
+- **First recorded** date and location (when present)
+
+Import an eBird **Life List CSV** from My eBird → Sightings Lists → Download, or a **My Data** export:
+
+- Classic life-list CSV (`Date`, `Location`, `Countable`, …): `Date` / `Location` fill **First recorded** (Sightings Lists default is first seen). Optional `Last Date` / `Last Location` columns fill **Last recorded** when present.
+- **Update last recorded from CSV** merges a Sightings Lists download taken in “most recent” mode into the existing list without replacing first-recorded fields.
+- **My Data** (`Submission ID`, …): aggregates every observation per species so both first and last recorded dates/locations are derived in one import.
+
+The list persists under Birdlists (`life-list.json`, iCloud + local mirror, same pattern as imported location lists). You can attach or replace a photo for each entry from the Photos library (PhotosUI); JPEGs stay in `Documents/life-list-photos/` on device.
+
+```bash
+python3 scripts/verify_ebird_life_list.py
+```
 
 **Sky** is for birds typically seen overhead (flying, soaring, or hawking), separate from canopy perches.
 
