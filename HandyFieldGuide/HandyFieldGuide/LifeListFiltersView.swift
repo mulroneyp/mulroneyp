@@ -4,16 +4,18 @@ import SwiftUI
 /// `HomeFiltersView`, with Country + Map on the first row and Bird Count Total
 /// (display only) + Field Guide on the second.
 struct LifeListFiltersView: View {
+    @EnvironmentObject private var model: GuideModel
+
     /// Empty string means Global; otherwise an ISO country code.
     @Binding var selectedCountryCode: String
     var availableCountryCodes: [String]
     var birdCountTotal: Int
     var lifeListTotal: Int
-    /// Active Field Guide place, when one is open — used for Map when Global.
-    var place: ResolvedPlace?
+    /// Country-filtered life-list entries (all entries when Global) for Map pins.
+    var filteredEntries: [LifeListEntry]
     var onFieldGuide: () -> Void
 
-    @Environment(\.openURL) private var openURL
+    @State private var showingMap = false
 
     /// Slightly wider than home’s Map / Life List column so “Field Guide” fits.
     private let trailingActionsWidth: CGFloat = 118
@@ -42,6 +44,13 @@ struct LifeListFiltersView: View {
         }
         .fixedSize(horizontal: false, vertical: true)
         .background(GuideColor.paper)
+        .sheet(isPresented: $showingMap) {
+            LifeListMapView(
+                entries: filteredEntries,
+                countryCode: selectedCountryCode
+            )
+            .environmentObject(model)
+        }
     }
 
     private var countryRow: some View {
@@ -150,32 +159,33 @@ struct LifeListFiltersView: View {
         .contentShape(Rectangle())
     }
 
-    @ViewBuilder
     private var mapButton: some View {
-        if let url = mapURL {
-            Button {
-                openURL(url)
-            } label: {
-                HStack(spacing: 4) {
-                    Image(systemName: "map")
-                    Text("Map")
-                        .lineLimit(1)
-                        .fixedSize(horizontal: true, vertical: false)
-                }
-                .font(.subheadline.weight(.semibold))
-                .padding(.horizontal, 8)
-                .padding(.vertical, 8)
-                .frame(maxWidth: .infinity, minHeight: 44)
-                .background(GuideColor.green.opacity(0.10))
-                .overlay {
-                    RoundedRectangle(cornerRadius: 2)
-                        .stroke(GuideColor.green.opacity(0.35), lineWidth: 1)
-                }
+        Button {
+            showingMap = true
+        } label: {
+            HStack(spacing: 4) {
+                Image(systemName: "map")
+                Text("Map")
+                    .lineLimit(1)
+                    .fixedSize(horizontal: true, vertical: false)
             }
-            .foregroundStyle(GuideColor.green)
-            .accessibilityLabel(mapAccessibilityLabel)
-            .accessibilityHint(mapAccessibilityHint)
+            .font(.subheadline.weight(.semibold))
+            .padding(.horizontal, 8)
+            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity, minHeight: 44)
+            .background(GuideColor.green.opacity(0.10))
+            .overlay {
+                RoundedRectangle(cornerRadius: 2)
+                    .stroke(GuideColor.green.opacity(0.35), lineWidth: 1)
+            }
         }
+        .foregroundStyle(GuideColor.green)
+        .accessibilityLabel("Map")
+        .accessibilityHint(
+            selectedCountryCode.isEmpty
+                ? "Shows a map of life-list sighting locations worldwide"
+                : "Shows a map of life-list sighting locations in \(selectedCountryLabel)"
+        )
     }
 
     private var fieldGuideButton: some View {
@@ -199,45 +209,5 @@ struct LifeListFiltersView: View {
         .foregroundStyle(GuideColor.green)
         .accessibilityLabel("Field Guide")
         .accessibilityHint("Returns to the Field Guide home")
-    }
-
-    private var mapURL: URL? {
-        if !selectedCountryCode.isEmpty {
-            return appleMapsSearchURL(query: LifeListEntry.countryDisplayName(code: selectedCountryCode))
-        }
-        if let place {
-            return PlaceMaps.appleMapsURL(for: place)
-        }
-        return nil
-    }
-
-    private var mapAccessibilityLabel: String {
-        if !selectedCountryCode.isEmpty {
-            return "Open \(selectedCountryLabel) in Maps"
-        }
-        if let place {
-            return "Open \(place.displayName) in Maps"
-        }
-        return "Map"
-    }
-
-    private var mapAccessibilityHint: String {
-        if !selectedCountryCode.isEmpty {
-            return "Searches Maps for \(selectedCountryLabel)"
-        }
-        if let place, let query = PlaceMaps.searchQuery(for: place) {
-            return "Searches Maps for \(query)"
-        }
-        return ""
-    }
-
-    private func appleMapsSearchURL(query: String) -> URL? {
-        let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else { return nil }
-        var components = URLComponents()
-        components.scheme = "https"
-        components.host = "maps.apple.com"
-        components.queryItems = [URLQueryItem(name: "q", value: trimmed)]
-        return components.url
     }
 }
