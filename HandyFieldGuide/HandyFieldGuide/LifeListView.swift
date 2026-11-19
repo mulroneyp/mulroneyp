@@ -3,14 +3,17 @@ import SwiftUI
 import UIKit
 import UniformTypeIdentifiers
 
-/// Separate Life List page: eBird CSV import, Field Guide–style rows with
-/// bird name + last/first recorded, country filter, and Photos-library attachment.
+/// Full-screen Life List peer to the Field Guide home: same overall list format,
+/// with Country / Map / Bird Count Total / Field Guide in the header chrome.
 struct LifeListView: View {
     /// `nil` = Global (all countries).
     private static let globalCountrySentinel = ""
 
     @EnvironmentObject private var model: GuideModel
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+
+    /// Returns to the Field Guide home (peer navigation, not a sheet dismiss).
+    var onFieldGuide: () -> Void
 
     @State private var searchDraft = ""
     @State private var showingImporter = false
@@ -50,11 +53,6 @@ struct LifeListView: View {
         }
     }
 
-    private var selectedCountryLabel: String {
-        if selectedCountryCode.isEmpty { return "Global" }
-        return LifeListEntry.countryDisplayName(code: selectedCountryCode)
-    }
-
     var body: some View {
         NavigationStack(path: $path) {
             ScrollView {
@@ -75,8 +73,6 @@ struct LifeListView: View {
                     if model.lifeList.isEmpty {
                         emptyState
                     } else {
-                        countryFilterControl
-                        birdCountTotal
                         searchField
 
                         if filteredEntries.isEmpty {
@@ -117,6 +113,16 @@ struct LifeListView: View {
             .guideBackground()
             .navigationTitle("Life List")
             .navigationBarTitleDisplayMode(.inline)
+            .safeAreaInset(edge: .top, spacing: 0) {
+                LifeListFiltersView(
+                    selectedCountryCode: $selectedCountryCode,
+                    availableCountryCodes: availableCountryCodes,
+                    birdCountTotal: countryFilteredEntries.count,
+                    lifeListTotal: model.lifeList.entries.count,
+                    place: model.place,
+                    onFieldGuide: onFieldGuide
+                )
+            }
             .navigationDestination(for: String.self) { entryID in
                 if let entry = model.lifeList.entry(id: entryID) {
                     LifeListDetailView(entryID: entry.id)
@@ -151,71 +157,6 @@ struct LifeListView: View {
             )
         }
         .buttonStyle(GuideChipStyle(selected: true))
-    }
-
-    private var countryFilterControl: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text("COUNTRY")
-                .font(.caption2.weight(.semibold))
-                .tracking(0.6)
-                .foregroundStyle(GuideColor.green)
-
-            HStack(spacing: 6) {
-                Text(selectedCountryLabel)
-                    .font(.subheadline.weight(.semibold))
-                    .lineLimit(2)
-                    .minimumScaleFactor(0.75)
-                    .multilineTextAlignment(.leading)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Image(systemName: "chevron.up.chevron.down")
-                    .font(.caption2.weight(.semibold))
-            }
-            .foregroundStyle(GuideColor.green)
-            .padding(.horizontal, 12)
-            .padding(.vertical, 10)
-            .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
-            .background(GuideColor.green.opacity(0.10))
-            .overlay {
-                RoundedRectangle(cornerRadius: 2)
-                    .stroke(GuideColor.green.opacity(0.35), lineWidth: 1)
-            }
-            .overlay {
-                Menu {
-                    Picker("Country", selection: $selectedCountryCode) {
-                        Text("Global").tag(Self.globalCountrySentinel)
-                        ForEach(availableCountryCodes, id: \.self) { code in
-                            Text(LifeListEntry.countryDisplayName(code: code)).tag(code)
-                        }
-                    }
-                } label: {
-                    Color.clear
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .contentShape(Rectangle())
-                }
-                .accessibilityLabel("Country")
-                .accessibilityValue(selectedCountryLabel)
-                .accessibilityHint("Filter the life list by country, or show Global")
-            }
-        }
-    }
-
-    private var birdCountTotal: some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text("BIRD COUNT TOTAL")
-                .font(.caption2.weight(.semibold))
-                .tracking(0.6)
-                .foregroundStyle(GuideColor.green)
-            Text("\(filteredEntries.count)")
-                .font(.system(.title, design: .serif))
-                .foregroundStyle(GuideColor.ink)
-            if filteredEntries.count != model.lifeList.entries.count {
-                Text("of \(model.lifeList.entries.count) on life list")
-                    .font(.caption)
-                    .foregroundStyle(GuideColor.muted)
-            }
-        }
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel("Bird count total \(filteredEntries.count)")
     }
 
     private var emptyState: some View {

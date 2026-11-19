@@ -7,19 +7,24 @@ An iPhone field guide. Open `HandyFieldGuide.xcodeproj` in Xcode, pick the Handy
 The app title **Handy Field Guide** sits at the top of the home screen (inline navigation title), with **i** (when a place is active; coverage prose) and the **Settings** gear **right-aligned on that title row**. Directly under it, two rows of value labels (no bottom menu bar, and no secondary place / list-name line above the bird list). The Location and Month value boxes are the **same width** (a fixed trailing column reserves space for **Map** on the Location row and **Life List** under Map on the Month row):
 
 1. **Location** — tappable label showing the chosen place name (or **Choose Location**). Menu of **imported** eBird areas only, plus **Manage locations** (rename / delete saved imports) and **Add location** (eBird API hotspot search or barchart `.txt`). Paste a free API key under **Settings → eBird API** (Keychain; never committed). There is no default / curated place list in the menu. With no imports, the home screen prompts you to add a location. When a place is active, **Map** sits on the same row, always shows the word **Map** (not icon-only), and stays **top-aligned** with the Location value pill when the name wraps to two lines; it opens Apple Maps using a renamed title or a known eBird hotspot name for sample L-codes.
-2. **Month** — tappable label showing the month name. Picker defaults to the device’s calendar month (no “Current” / “This month” wording). Imported eBird lists use that month’s frequencies for “likely” birds. On the same trailing column under Map: **Life List** opens your imported eBird life list (separate page).
+2. **Month** — tappable label showing the month name. Picker defaults to the device’s calendar month (no “Current” / “This month” wording). Imported eBird lists use that month’s frequencies for “likely” birds. On the same trailing column under Map: **Life List** opens your imported eBird life list as a **full-screen peer** to the Field Guide (not a popup or sheet).
 
 There is **no Zone control** on the home screen. Habitat zones (ground / low / mid / canopy / sky) still appear as labels on list rows and on bird detail; the home list is not filtered by zone.
 
 ## Life List
 
-**Life List** is a separate page (not the Field Guide home list). Rows use the same overall list formatting as the Field Guide list (thumbnail + serif common name + italic scientific name), and show:
+**Life List** is a full-screen peer to the Field Guide home (same overall list format — not a modal). Its header controls mirror the Field Guide chrome:
+
+1. **Country** — tappable filter (**Global** or a country from the import).
+2. **Map** — opens Apple Maps for the selected country, or for the active Field Guide place when Global.
+3. **Bird Count Total** — display-only count for the current country filter (not a button).
+4. **Field Guide** — returns to the Field Guide home.
+
+Rows use the same overall list formatting as the Field Guide list (thumbnail + serif common name + italic scientific name), and show:
 
 - **Bird name**
 - **Last recorded** date and location (when present)
 - **First recorded** date and location (when present)
-
-The page shows a **Bird Count Total** for the current filter, and a **Country** control with **Global** (all countries) plus one option per country derived from eBird location / S/P fields (for example `US-TX` → United States).
 
 Import an eBird **Life List CSV** from My eBird → Sightings Lists → Download, or a **My Data** export:
 
