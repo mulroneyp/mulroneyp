@@ -439,7 +439,7 @@ private struct LifeListRow: View {
 }
 
 /// Compact badge for Life List photo origin (library vs Field Guide open-licence stock).
-/// **My photo** uses a filled green background (same language as selected chips);
+/// **My photo** uses a brighter green fill so the badge reads clearly against paper/card;
 /// **Stock** keeps the outline-on-card treatment.
 private struct LifeListPhotoSourceBadge: View {
     var source: LifeListPhotoSource
@@ -456,13 +456,13 @@ private struct LifeListPhotoSourceBadge: View {
             .padding(.vertical, compact ? 3 : 5)
             .background(
                 isLibrary
-                    ? GuideColor.green
+                    ? GuideColor.myPhotoBadge
                     : GuideColor.card.opacity(compact ? 0.92 : 1)
             )
             .overlay {
                 RoundedRectangle(cornerRadius: 2)
                     .stroke(
-                        isLibrary ? GuideColor.green : GuideColor.green.opacity(0.35),
+                        isLibrary ? GuideColor.myPhotoBadge : GuideColor.green.opacity(0.35),
                         lineWidth: 1
                     )
             }
