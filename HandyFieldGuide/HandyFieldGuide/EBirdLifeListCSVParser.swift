@@ -123,8 +123,8 @@ enum EBirdLifeListCSVParser {
             // Explicit first/last columns when a spreadsheet includes them.
             var firstDate = field(cols, index.firstDate)
             var firstLocation = composedLocation(place: field(cols, index.firstLocation) ?? location, state: state)
-            var lastDate = field(cols, index.lastDate)
-            var lastLocation = composedLocation(place: field(cols, index.lastLocation), state: state)
+            let lastDate = field(cols, index.lastDate)
+            let lastLocation = composedLocation(place: field(cols, index.lastLocation), state: state)
 
             // Classic eBird life-list export: single Date + Location = first recorded
             // (Sightings Lists default). Last stays empty unless Last* columns exist.
