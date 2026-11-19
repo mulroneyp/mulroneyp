@@ -4,31 +4,43 @@ import UIKit
 import UniformTypeIdentifiers
 
 /// Separate Life List page: eBird CSV import, Field Guide–style rows with
-/// bird name + last/first recorded, and Photos-library attachment per entry.
+/// bird name + last/first recorded, country filter, and Photos-library attachment.
 struct LifeListView: View {
-    private enum ImportMode {
-        case replace
-        case mergeLast
-    }
+    /// `nil` = Global (all countries).
+    private static let globalCountrySentinel = ""
 
     @EnvironmentObject private var model: GuideModel
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     @State private var searchDraft = ""
     @State private var showingImporter = false
-    @State private var pendingImportMode: ImportMode = .replace
     @State private var importError: String?
     @State private var importMessage: String?
     @State private var path = NavigationPath()
-    @State private var confirmClear = false
+    /// Empty string means Global; otherwise an ISO country code.
+    @State private var selectedCountryCode: String = Self.globalCountrySentinel
 
     private var contentMaxWidth: CGFloat {
         horizontalSizeClass == .regular ? 520 : 720
     }
 
+    private var availableCountryCodes: [String] {
+        let codes = Set(model.lifeList.entries.flatMap(\.countryCodes))
+        return codes.sorted {
+            LifeListEntry.countryDisplayName(code: $0)
+                .localizedCaseInsensitiveCompare(LifeListEntry.countryDisplayName(code: $1)) == .orderedAscending
+        }
+    }
+
+    private var countryFilteredEntries: [LifeListEntry] {
+        let entries = model.lifeList.entries
+        guard !selectedCountryCode.isEmpty else { return entries }
+        return entries.filter { $0.matchesCountryCode(selectedCountryCode) }
+    }
+
     private var filteredEntries: [LifeListEntry] {
         let needle = SpeciesCatalog.normalize(searchDraft)
-        let entries = model.lifeList.entries
+        let entries = countryFilteredEntries
         guard !needle.isEmpty else { return entries }
         return entries.filter { entry in
             SpeciesCatalog.normalize(entry.commonName).contains(needle)
@@ -36,6 +48,11 @@ struct LifeListView: View {
                 || SpeciesCatalog.normalize(entry.firstRecordedLocation ?? "").contains(needle)
                 || SpeciesCatalog.normalize(entry.lastRecordedLocation ?? "").contains(needle)
         }
+    }
+
+    private var selectedCountryLabel: String {
+        if selectedCountryCode.isEmpty { return "Global" }
+        return LifeListEntry.countryDisplayName(code: selectedCountryCode)
     }
 
     var body: some View {
@@ -58,16 +75,19 @@ struct LifeListView: View {
                     if model.lifeList.isEmpty {
                         emptyState
                     } else {
+                        countryFilterControl
+                        birdCountTotal
                         searchField
-                        Text("Showing \(filteredEntries.count) of \(model.lifeList.entries.count)")
-                            .font(.subheadline)
-                            .foregroundStyle(GuideColor.muted)
 
                         if filteredEntries.isEmpty {
-                            Text("No life-list birds match that search.")
-                                .font(.subheadline)
-                                .foregroundStyle(GuideColor.muted)
-                                .padding(.vertical, 8)
+                            Text(
+                                searchDraft.isEmpty
+                                    ? "No life-list birds match that country."
+                                    : "No life-list birds match that search."
+                            )
+                            .font(.subheadline)
+                            .foregroundStyle(GuideColor.muted)
+                            .padding(.vertical, 8)
                         } else {
                             ForEach(filteredEntries) { entry in
                                 NavigationLink(value: entry.id) {
@@ -82,7 +102,7 @@ struct LifeListView: View {
                         }
 
                         Text(
-                            "Import an eBird Life List CSV (Sightings Lists → Download) or My Data for first and last recorded dates. Attach a photo from your library on each bird. The list is saved in Birdlists and survives relaunches."
+                            "Import an eBird Life List CSV (Sightings Lists → Download) or My Data for first and last recorded dates. Attach a photo from your library on each bird. The list and photos sync via iCloud Birdlists when signed in."
                         )
                         .font(.footnote)
                         .foregroundStyle(GuideColor.muted)
@@ -110,54 +130,92 @@ struct LifeListView: View {
                 allowedContentTypes: [.commaSeparatedText, .plainText, .text],
                 allowsMultipleSelection: false
             ) { result in
-                handleImport(result, mode: pendingImportMode)
+                handleImport(result)
             }
-            .alert("Clear life list?", isPresented: $confirmClear) {
-                Button("Clear", role: .destructive) {
-                    model.lifeList.clear()
-                    importMessage = "Life list cleared."
-                    importError = nil
-                    path = NavigationPath()
+            .onChange(of: availableCountryCodes) { _, codes in
+                if !selectedCountryCode.isEmpty, !codes.contains(selectedCountryCode) {
+                    selectedCountryCode = Self.globalCountrySentinel
                 }
-                Button("Cancel", role: .cancel) {}
-            } message: {
-                Text("Remove the imported life list and any photos attached on this device?")
             }
         }
     }
 
     private var headerActions: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Button {
-                importError = nil
-                pendingImportMode = .replace
-                showingImporter = true
-            } label: {
-                Label(
-                    model.lifeList.isEmpty ? "Import eBird life list CSV" : "Replace from eBird CSV",
-                    systemImage: "square.and.arrow.down"
-                )
+        Button {
+            importError = nil
+            showingImporter = true
+        } label: {
+            Label(
+                model.lifeList.isEmpty ? "Import eBird life list CSV" : "Replace from eBird CSV",
+                systemImage: "square.and.arrow.down"
+            )
+        }
+        .buttonStyle(GuideChipStyle(selected: true))
+    }
+
+    private var countryFilterControl: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("COUNTRY")
+                .font(.caption2.weight(.semibold))
+                .tracking(0.6)
+                .foregroundStyle(GuideColor.green)
+
+            HStack(spacing: 6) {
+                Text(selectedCountryLabel)
+                    .font(.subheadline.weight(.semibold))
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.75)
+                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Image(systemName: "chevron.up.chevron.down")
+                    .font(.caption2.weight(.semibold))
             }
-            .buttonStyle(GuideChipStyle(selected: true))
-
-            if !model.lifeList.isEmpty {
-                Button {
-                    importError = nil
-                    pendingImportMode = .mergeLast
-                    showingImporter = true
+            .foregroundStyle(GuideColor.green)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 10)
+            .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+            .background(GuideColor.green.opacity(0.10))
+            .overlay {
+                RoundedRectangle(cornerRadius: 2)
+                    .stroke(GuideColor.green.opacity(0.35), lineWidth: 1)
+            }
+            .overlay {
+                Menu {
+                    Picker("Country", selection: $selectedCountryCode) {
+                        Text("Global").tag(Self.globalCountrySentinel)
+                        ForEach(availableCountryCodes, id: \.self) { code in
+                            Text(LifeListEntry.countryDisplayName(code: code)).tag(code)
+                        }
+                    }
                 } label: {
-                    Label("Update last recorded from CSV", systemImage: "clock.arrow.circlepath")
+                    Color.clear
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .contentShape(Rectangle())
                 }
-                .buttonStyle(GuideChipStyle(selected: false))
-
-                Button {
-                    confirmClear = true
-                } label: {
-                    Label("Clear life list", systemImage: "trash")
-                }
-                .buttonStyle(GuideChipStyle(selected: false))
+                .accessibilityLabel("Country")
+                .accessibilityValue(selectedCountryLabel)
+                .accessibilityHint("Filter the life list by country, or show Global")
             }
         }
+    }
+
+    private var birdCountTotal: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text("BIRD COUNT TOTAL")
+                .font(.caption2.weight(.semibold))
+                .tracking(0.6)
+                .foregroundStyle(GuideColor.green)
+            Text("\(filteredEntries.count)")
+                .font(.system(.title, design: .serif))
+                .foregroundStyle(GuideColor.ink)
+            if filteredEntries.count != model.lifeList.entries.count {
+                Text("of \(model.lifeList.entries.count) on life list")
+                    .font(.caption)
+                    .foregroundStyle(GuideColor.muted)
+            }
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Bird count total \(filteredEntries.count)")
     }
 
     private var emptyState: some View {
@@ -166,7 +224,7 @@ struct LifeListView: View {
                 .font(.system(.title2, design: .serif))
                 .foregroundStyle(GuideColor.green)
             Text(
-                "Download your life list from eBird (My eBird → Sightings Lists → Download) and import the CSV. Use My Data if you want both first and last recorded dates in one file. Classic life-list exports fill First Recorded; import a most-recent Sightings List to fill Last Recorded."
+                "Download your life list from eBird (My eBird → Sightings Lists → Download) and import the CSV. Use My Data if you want both first and last recorded dates in one file. Classic life-list exports fill First Recorded; My Data (or Last Date / Last Location columns) fills Last Recorded."
             )
             .font(.body)
             .foregroundStyle(GuideColor.ink)
@@ -194,7 +252,7 @@ struct LifeListView: View {
         }
     }
 
-    private func handleImport(_ result: Result<[URL], Error>, mode: ImportMode) {
+    private func handleImport(_ result: Result<[URL], Error>) {
         switch result {
         case .failure(let error):
             importError = error.localizedDescription
@@ -211,21 +269,16 @@ struct LifeListView: View {
                     data: data,
                     sourceFileName: url.lastPathComponent
                 )
-                switch mode {
-                case .replace:
-                    let doc = model.lifeList.replace(from: parsed)
-                    let withLast = doc.entries.filter(\.hasLastRecorded).count
-                    let withFirst = doc.entries.filter(\.hasFirstRecorded).count
-                    if parsed.aggregatedFromMyData {
-                        importMessage = "Imported \(doc.entries.count) species from My Data (\(withFirst) with first recorded, \(withLast) with last recorded)."
-                    } else {
-                        importMessage = "Imported \(doc.entries.count) countable species from \(parsed.sourceFileName) (\(withFirst) first recorded; \(withLast) last recorded). Use “Update last recorded” if you downloaded Sightings Lists in most-recent mode."
-                    }
-                case .mergeLast:
-                    let updated = model.lifeList.mergeLastRecorded(from: parsed)
-                    importMessage = "Updated last recorded on \(updated) species."
+                let doc = model.lifeList.replace(from: parsed)
+                let withLast = doc.entries.filter(\.hasLastRecorded).count
+                let withFirst = doc.entries.filter(\.hasFirstRecorded).count
+                if parsed.aggregatedFromMyData {
+                    importMessage = "Imported \(doc.entries.count) species from My Data (\(withFirst) with first recorded, \(withLast) with last recorded)."
+                } else {
+                    importMessage = "Imported \(doc.entries.count) countable species from \(parsed.sourceFileName) (\(withFirst) first recorded; \(withLast) last recorded)."
                 }
                 importError = nil
+                selectedCountryCode = Self.globalCountrySentinel
             } catch {
                 importError = error.localizedDescription
                 importMessage = nil
@@ -390,11 +443,17 @@ private struct LifeListDetailView: View {
     private func photoBlock(for entry: LifeListEntry) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             if let path = entry.localPhotoPath, BundleImages.url(for: path) != nil {
-                BundlePhoto(path: path, alt: entry.commonName, fills: false)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 220)
-                    .clipped()
-                    .id("\(path)-\(model.lifeList.photoRevision)")
+                ZoomablePhoto(
+                    path: path,
+                    alt: entry.commonName,
+                    label: entry.commonName,
+                    cacheRevision: model.lifeList.photoRevision
+                )
+                .id("\(path)-\(model.lifeList.photoRevision)")
+
+                Text("Pinch or double-tap to zoom; drag to pan. Long-press for a full-screen view.")
+                    .font(.caption)
+                    .foregroundStyle(GuideColor.muted)
             } else {
                 GuideColor.green.opacity(0.10)
                     .frame(maxWidth: .infinity)

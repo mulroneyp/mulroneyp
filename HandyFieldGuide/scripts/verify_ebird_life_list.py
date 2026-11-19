@@ -35,9 +35,11 @@ def main() -> None:
     assert first["Common Name"], first
     assert first.get("Date"), "classic life-list Date should map to First Recorded"
     assert first.get("Location"), "classic life-list Location should map to First Recorded"
+    sp = (first.get("S/P") or "").strip()
+    assert sp.startswith("US"), f"sample S/P should yield country US, got {sp!r}"
     # Explicit last columns in the sample when present
     with_last = [r for r in rows if (r.get("Last Date") or "").strip()]
-    print(f"ok: {len(rows)} countable rows; {len(with_last)} with Last Date")
+    print(f"ok: {len(rows)} countable rows; {len(with_last)} with Last Date; S/P country={sp.split('-', 1)[0]}")
     return 0
 
 
