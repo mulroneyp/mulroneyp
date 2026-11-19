@@ -167,9 +167,9 @@ struct LifeListView: View {
                         }
                     }
 
-                    Text(
-                        "Import an eBird Life List CSV (Sightings Lists → Download) or My Data for first and last recorded dates. Attach a photo from your library on each bird. The list and photos sync via iCloud Birdlists when signed in."
-                    )
+                        Text(
+                            "Import an eBird Life List CSV (Sightings Lists → Download) or My Data for the latest record date and place. Attach a photo from your library on each bird. Photos are badged My photo or Stock. The list and photos sync via iCloud Birdlists when signed in."
+                        )
                     .font(.footnote)
                     .foregroundStyle(GuideColor.muted)
                     .padding(.top, 8)
@@ -257,7 +257,7 @@ struct LifeListView: View {
                 .font(.system(.title2, design: .serif))
                 .foregroundStyle(GuideColor.green)
             Text(
-                "Download your life list from eBird (My eBird → Sightings Lists → Download) and import the CSV. Use My Data if you want both first and last recorded dates in one file. Classic life-list exports fill First Recorded; My Data (or Last Date / Last Location columns) fills Last Recorded."
+                "Download your life list from eBird (My eBird → Sightings Lists → Download) and import the CSV. Each species shows a Latest Record date and place from the import. Attach your own photos from the library; those are badged My photo, while Field Guide images show as Stock."
             )
             .font(.body)
             .foregroundStyle(GuideColor.ink)
@@ -311,12 +311,11 @@ struct LifeListView: View {
                     sourceFileName: url.lastPathComponent
                 )
                 let doc = model.lifeList.replace(from: parsed)
-                let withLast = doc.entries.filter(\.hasLastRecorded).count
-                let withFirst = doc.entries.filter(\.hasFirstRecorded).count
+                let withLatest = doc.entries.filter(\.hasFirstRecorded).count
                 if parsed.aggregatedFromMyData {
-                    importMessage = "Imported \(doc.entries.count) species from My Data (\(withFirst) with first recorded, \(withLast) with last recorded)."
+                    importMessage = "Imported \(doc.entries.count) species from My Data (\(withLatest) with a Latest Record)."
                 } else {
-                    importMessage = "Imported \(doc.entries.count) countable species from \(parsed.sourceFileName) (\(withFirst) first recorded; \(withLast) last recorded)."
+                    importMessage = "Imported \(doc.entries.count) countable species from \(parsed.sourceFileName) (\(withLatest) with a Latest Record)."
                 }
                 importError = nil
                 selectedCountryCode = Self.globalCountrySentinel
@@ -342,17 +341,25 @@ private struct LifeListRow: View {
 
     var body: some View {
         let photoPath = rowPhotoPath
+        let source = rowPhotoSource
         return HStack(alignment: .center, spacing: 12) {
             Group {
                 if let photoPath {
-                    BundlePhoto(
-                        path: photoPath,
-                        alt: "",
-                        fills: true,
-                        maxPixelSize: Self.listThumbMaxPixels
-                    )
-                    .frame(width: 88, height: 64)
-                    .clipped()
+                    ZStack(alignment: .bottomLeading) {
+                        BundlePhoto(
+                            path: photoPath,
+                            alt: "",
+                            fills: true,
+                            maxPixelSize: Self.listThumbMaxPixels
+                        )
+                        .frame(width: 88, height: 64)
+                        .clipped()
+
+                        if let source {
+                            LifeListPhotoSourceBadge(source: source, compact: true)
+                                .padding(4)
+                        }
+                    }
                 } else {
                     GuideColor.green.opacity(0.12)
                         .frame(width: 88, height: 64)
@@ -360,7 +367,7 @@ private struct LifeListRow: View {
             }
             .frame(width: 92, height: 64, alignment: .leading)
             .accessibilityHidden(true)
-            .id("\(entry.id)-\(photoRevision)-\(photoPath ?? "")")
+            .id("\(entry.id)-\(photoRevision)-\(photoPath ?? "")-\(source?.rawValue ?? "none")")
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(entry.commonName)
@@ -370,13 +377,9 @@ private struct LifeListRow: View {
                     .font(.subheadline.italic())
                     .foregroundStyle(GuideColor.muted)
 
-                if let last = entry.lastRecordedLine {
-                    recordedLabel(title: "Last recorded", value: last)
-                }
-                if let first = entry.firstRecordedLine {
-                    recordedLabel(title: "First recorded", value: first)
-                }
-                if !entry.hasFirstRecorded && !entry.hasLastRecorded {
+                if let latest = entry.firstRecordedLine {
+                    recordedLabel(title: "Latest Record", value: latest)
+                } else {
                     Text("No recorded date or location in the import")
                         .font(.caption)
                         .foregroundStyle(GuideColor.muted)
@@ -393,6 +396,7 @@ private struct LifeListRow: View {
         .accessibilityElement(children: .combine)
         .accessibilityAddTraits(isSelected ? [.isSelected] : [])
         .accessibilityHint("Opens life list details and photo")
+        .accessibilityValue(source?.accessibilityLabel ?? "")
     }
 
     private func recordedLabel(title: String, value: String) -> some View {
@@ -422,6 +426,37 @@ private struct LifeListRow: View {
         }
         return nil
     }
+
+    private var rowPhotoSource: LifeListPhotoSource? {
+        if let path = entry.localPhotoPath, BundleImages.url(for: path) != nil {
+            return entry.resolvedLibraryPhotoSource ?? .library
+        }
+        if rowPhotoPath != nil {
+            return .stock
+        }
+        return nil
+    }
+}
+
+/// Compact badge for Life List photo origin (library vs Field Guide open-licence stock).
+private struct LifeListPhotoSourceBadge: View {
+    var source: LifeListPhotoSource
+    var compact: Bool = false
+
+    var body: some View {
+        Text(source.badgeTitle)
+            .font(compact ? .system(size: 9, weight: .semibold) : .caption2.weight(.semibold))
+            .tracking(compact ? 0.2 : 0.5)
+            .foregroundStyle(GuideColor.green)
+            .padding(.horizontal, compact ? 5 : 8)
+            .padding(.vertical, compact ? 3 : 5)
+            .background(GuideColor.card.opacity(compact ? 0.92 : 1))
+            .overlay {
+                RoundedRectangle(cornerRadius: 2)
+                    .stroke(GuideColor.green.opacity(0.35), lineWidth: 1)
+            }
+            .accessibilityLabel(source.accessibilityLabel)
+    }
 }
 
 // MARK: - Detail + Photos library
@@ -438,50 +473,47 @@ private struct LifeListDetailView: View {
         model.lifeList.entry(id: entryID)
     }
 
-    /// Match Field Guide bird detail: wider column on regular-width split.
-    private var detailMaxWidth: CGFloat {
-        horizontalSizeClass == .regular ? 900 : 720
+    /// Chrome below/above the hero photo (titles, badge, caption, record, actions, padding).
+    private var reservedChromeHeight: CGFloat {
+        horizontalSizeClass == .regular ? 250 : 280
     }
 
-    /// Taller hero photo in the split detail column so iPad / Mac show a larger image.
-    private var emptyPhotoHeight: CGFloat {
-        horizontalSizeClass == .regular ? 280 : 160
+    private var minimumPhotoHeight: CGFloat {
+        horizontalSizeClass == .regular ? 360 : 260
     }
 
     var body: some View {
         Group {
             if let entry {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 16) {
-                        Text(entry.commonName)
-                            .font(.system(size: horizontalSizeClass == .regular ? 34 : 28, weight: .regular, design: .serif))
-                            .foregroundStyle(GuideColor.green)
-                        Text(entry.displayScientificName)
-                            .font(.title3.italic())
-                            .foregroundStyle(GuideColor.muted)
+                GeometryReader { geo in
+                    let photoHeight = max(minimumPhotoHeight, geo.size.height - reservedChromeHeight)
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text(entry.commonName)
+                                .font(.system(size: horizontalSizeClass == .regular ? 34 : 28, weight: .regular, design: .serif))
+                                .foregroundStyle(GuideColor.green)
+                            Text(entry.displayScientificName)
+                                .font(.title3.italic())
+                                .foregroundStyle(GuideColor.muted)
 
-                        photoBlock(for: entry)
+                            photoBlock(for: entry, photoHeight: photoHeight)
 
-                        recordedSection(
-                            title: "Last recorded",
-                            date: entry.lastRecordedDate,
-                            location: entry.lastRecordedLocation
-                        )
-                        recordedSection(
-                            title: "First recorded",
-                            date: entry.firstRecordedDate,
-                            location: entry.firstRecordedLocation
-                        )
+                            recordedSection(
+                                title: "Latest Record",
+                                date: entry.firstRecordedDate,
+                                location: entry.firstRecordedLocation
+                            )
 
-                        if let photoError {
-                            Text(photoError)
-                                .font(.footnote)
-                                .foregroundStyle(GuideColor.rust)
+                            if let photoError {
+                                Text(photoError)
+                                    .font(.footnote)
+                                    .foregroundStyle(GuideColor.rust)
+                            }
                         }
+                        .padding(16)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .frame(minHeight: geo.size.height, alignment: .topLeading)
                     }
-                    .padding(20)
-                    .frame(maxWidth: detailMaxWidth, alignment: .leading)
-                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .guideBackground()
                 .navigationTitle(entry.commonName)
@@ -498,17 +530,20 @@ private struct LifeListDetailView: View {
     }
 
     @ViewBuilder
-    private func photoBlock(for entry: LifeListEntry) -> some View {
+    private func photoBlock(for entry: LifeListEntry, photoHeight: CGFloat) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             if let path = entry.localPhotoPath, BundleImages.url(for: path) != nil {
+                photoSourceHeader(source: entry.resolvedLibraryPhotoSource ?? .library)
+
                 ZoomablePhoto(
                     path: path,
                     alt: entry.commonName,
                     label: entry.commonName,
                     cacheRevision: model.lifeList.photoRevision,
-                    prefersLargerRegularHeight: true
+                    prefersLargerRegularHeight: true,
+                    preferredHeight: photoHeight
                 )
-                .id("\(path)-\(model.lifeList.photoRevision)")
+                .id("\(path)-\(model.lifeList.photoRevision)-\(Int(photoHeight))")
 
                 Text("Pinch or double-tap to zoom; drag to pan. Long-press for a full-screen view.")
                     .font(.caption)
@@ -516,22 +551,25 @@ private struct LifeListDetailView: View {
             } else if let fallback = guideFallbackPhotoPath(for: entry) {
                 // Prefer the user's attached photo; otherwise show the Field Guide
                 // species image so the split detail still has a large visual.
+                photoSourceHeader(source: .stock)
+
                 ZoomablePhoto(
                     path: fallback,
                     alt: entry.commonName,
                     label: entry.commonName,
                     cacheRevision: model.lifeList.photoRevision,
-                    prefersLargerRegularHeight: true
+                    prefersLargerRegularHeight: true,
+                    preferredHeight: photoHeight
                 )
-                .id("guide-\(fallback)-\(model.lifeList.photoRevision)")
+                .id("guide-\(fallback)-\(model.lifeList.photoRevision)-\(Int(photoHeight))")
 
-                Text("Field Guide photo — attach your own from the library below. Pinch or double-tap to zoom; long-press for full screen.")
+                Text("Field Guide open-licence photo — attach your own from the library below. Pinch or double-tap to zoom; long-press for full screen.")
                     .font(.caption)
                     .foregroundStyle(GuideColor.muted)
             } else {
                 GuideColor.green.opacity(0.10)
                     .frame(maxWidth: .infinity)
-                    .frame(height: emptyPhotoHeight)
+                    .frame(height: photoHeight)
                     .overlay {
                         Text("No photo yet")
                             .font(.subheadline)
@@ -560,6 +598,13 @@ private struct LifeListDetailView: View {
                 }
                 .buttonStyle(GuideChipStyle(selected: false))
             }
+        }
+    }
+
+    private func photoSourceHeader(source: LifeListPhotoSource) -> some View {
+        HStack {
+            Spacer(minLength: 0)
+            LifeListPhotoSourceBadge(source: source)
         }
     }
 

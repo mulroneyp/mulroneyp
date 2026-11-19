@@ -1,5 +1,27 @@
 import Foundation
 
+/// Where the Life List photo currently shown for an entry comes from.
+/// `library` is persisted on the entry (and therefore in iCloud `life-list.json`);
+/// `stock` is the Field Guide / open-licence catalog fallback and is not stored.
+enum LifeListPhotoSource: String, Codable, Hashable {
+    case library
+    case stock
+
+    var badgeTitle: String {
+        switch self {
+        case .library: return "My photo"
+        case .stock: return "Stock"
+        }
+    }
+
+    var accessibilityLabel: String {
+        switch self {
+        case .library: return "My photo, from your library"
+        case .stock: return "Stock open-licence photo"
+        }
+    }
+}
+
 struct LifeListEntry: Codable, Identifiable, Hashable {
     var id: String
     var commonName: String
@@ -22,6 +44,9 @@ struct LifeListEntry: Codable, Identifiable, Hashable {
     var lastRecordedCountryCode: String?
     /// Relative path for a user photo from the Photos library (`life-list-photos/…`).
     var localPhotoPath: String?
+    /// Persisted photo origin for library attaches. Survives iCloud sync with `life-list.json`.
+    /// Older documents without this field are treated as `.library` when `localPhotoPath` is set.
+    var photoSource: LifeListPhotoSource?
 
     var displayScientificName: String {
         let trimmed = scientificName.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -85,6 +110,12 @@ struct LifeListEntry: Codable, Identifiable, Hashable {
         Self.recordedLine(date: lastRecordedDate, location: lastRecordedLocation)
     }
 
+    /// Effective source for a library-attached photo (including pre-badge imports).
+    var resolvedLibraryPhotoSource: LifeListPhotoSource? {
+        guard localPhotoPath != nil else { return nil }
+        return photoSource ?? .library
+    }
+
     static func countryDisplayName(code: String) -> String {
         Locale.current.localizedString(forRegionCode: code) ?? code
     }
@@ -143,13 +174,17 @@ final class LifeListStore: ObservableObject {
     private var ubiquityObserver: NSObjectProtocol?
 
     init() {
-        document = load() ?? LifeListDocument(
-            version: 1,
-            sourceFileName: nil,
-            importedAt: nil,
-            aggregatedFromMyData: nil,
-            entries: []
-        )
+        if let loaded = loadFromDisk() {
+            applyLoadedDocument(loaded)
+        } else {
+            document = LifeListDocument(
+                version: 1,
+                sourceFileName: nil,
+                importedAt: nil,
+                aggregatedFromMyData: nil,
+                entries: []
+            )
+        }
         usesICloudDocuments = iCloudBirdlistsDirectory() != nil
         ubiquityObserver = NotificationCenter.default.addObserver(
             forName: NSNotification.Name.NSUbiquityIdentityDidChange,
@@ -319,7 +354,8 @@ final class LifeListStore: ObservableObject {
                 lastSubId: lastSubId,
                 lastRecordedCountryCode: lastCountry
                     ?? EBirdLifeListCSVParser.countryCode(fromLocation: lastLocation),
-                localPhotoPath: previous?.localPhotoPath
+                localPhotoPath: previous?.localPhotoPath,
+                photoSource: previous?.resolvedLibraryPhotoSource
             )
         }
 
@@ -348,6 +384,7 @@ final class LifeListStore: ObservableObject {
         try writePhotoData(jpegData, filename: filename)
         let relative = Self.photoPathPrefix + filename
         document.entries[index].localPhotoPath = relative
+        document.entries[index].photoSource = .library
         persist()
         if let previous, previous != relative {
             removePhotoFile(atRelativePath: previous)
@@ -361,6 +398,7 @@ final class LifeListStore: ObservableObject {
         guard let index = document.entries.firstIndex(where: { $0.id == entryID }) else { return }
         let previous = document.entries[index].localPhotoPath
         document.entries[index].localPhotoPath = nil
+        document.entries[index].photoSource = nil
         persist()
         if let previous {
             removePhotoFile(atRelativePath: previous)
@@ -421,13 +459,37 @@ final class LifeListStore: ObservableObject {
         }
     }
 
-    private func load() -> LifeListDocument? {
+    private func loadFromDisk() -> LifeListDocument? {
         ensureDirectories()
         migrateLegacyPhotosIfNeeded()
         promoteLocalMirrorToICloudIfNeeded()
         promoteLocalPhotosToICloudIfNeeded()
         usesICloudDocuments = iCloudBirdlistsDirectory() != nil
         return readStore(preferringICloud: true)
+    }
+
+    /// Assigns a loaded document, backfilling `photoSource` for older library attaches and
+    /// rewriting Birdlists JSON so the source survives subsequent iCloud sync.
+    private func applyLoadedDocument(_ loaded: LifeListDocument) {
+        var doc = loaded
+        let changed = migratePhotoSourcesIfNeeded(&doc)
+        document = doc
+        if changed {
+            persist()
+        }
+    }
+
+    /// Backfill `photoSource = .library` for older iCloud/local docs that only had `localPhotoPath`.
+    @discardableResult
+    private func migratePhotoSourcesIfNeeded(_ doc: inout LifeListDocument) -> Bool {
+        var changed = false
+        for index in doc.entries.indices {
+            guard doc.entries[index].localPhotoPath != nil,
+                  doc.entries[index].photoSource == nil else { continue }
+            doc.entries[index].photoSource = .library
+            changed = true
+        }
+        return changed
     }
 
     private func writePhotoData(_ data: Data, filename: String) throws {
@@ -514,7 +576,7 @@ final class LifeListStore: ObservableObject {
         promoteLocalPhotosToICloudIfNeeded()
         usesICloudDocuments = iCloudBirdlistsDirectory() != nil
         if let loaded = readStore(preferringICloud: true) {
-            document = loaded
+            applyLoadedDocument(loaded)
         }
         photoRevision += 1
     }

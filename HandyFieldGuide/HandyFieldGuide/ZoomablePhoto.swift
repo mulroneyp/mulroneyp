@@ -11,13 +11,15 @@ struct ZoomablePhoto: View {
     var onChooseDifferentPhoto: (() -> Void)? = nil
     /// Life List split detail (iPad / Mac) asks for a taller hero photo than Field Guide rows of male/female.
     var prefersLargerRegularHeight: Bool = false
+    /// When set (Life List detail), the photo frame uses this height so it can fill the pane.
+    var preferredHeight: CGFloat? = nil
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var showingViewer = false
     @State private var image: UIImage?
     @State private var loadFailed = false
 
-    private var loadToken: String { "\(path)#\(cacheRevision)" }
+    private var loadToken: String { "\(path)#\(cacheRevision)#\(preferredHeight.map(String.init(describing:)) ?? "auto")" }
 
     var body: some View {
         Group {
@@ -45,7 +47,8 @@ struct ZoomablePhoto: View {
                 }
             } else if loadFailed {
                 GuideColor.green.opacity(0.12)
-                    .frame(height: 160)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: preferredHeight ?? 160)
                     .overlay {
                         Text("Photo missing")
                             .font(.caption)
@@ -53,7 +56,8 @@ struct ZoomablePhoto: View {
                     }
             } else {
                 GuideColor.green.opacity(0.12)
-                    .frame(height: 220)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: preferredHeight ?? 220)
                     .overlay { ProgressView() }
             }
         }
@@ -92,6 +96,9 @@ struct ZoomablePhoto: View {
     }
 
     private func viewerHeight(for image: UIImage) -> CGFloat {
+        if let preferredHeight {
+            return max(220, preferredHeight)
+        }
         let aspect = image.size.height / max(image.size.width, 1)
         // Keep male/female photos usable in the scroll view without eating the whole screen.
         // On regular-width (iPad) columns, allow a bit more height so photos do not look cropped short.
