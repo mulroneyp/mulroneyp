@@ -1,6 +1,8 @@
 import Foundation
 
-/// Builds Apple Maps search URLs for the active place.
+/// Builds Apple Maps search URLs for the active Field Guide place.
+/// Life List Map uses in-app MapKit pins (`LifeListMapView` / `LifeListMapPins`)
+/// instead of these URLs, while reusing the same Map button chrome.
 enum PlaceMaps {
     /// Known eBird hotspot ids → a Maps-friendly place query.
     /// L-codes alone are not useful in Maps; prefer a real placename.

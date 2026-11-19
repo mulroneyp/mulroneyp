@@ -119,7 +119,7 @@ struct LifeListView: View {
                     availableCountryCodes: availableCountryCodes,
                     birdCountTotal: countryFilteredEntries.count,
                     lifeListTotal: model.lifeList.entries.count,
-                    place: model.place,
+                    filteredEntries: countryFilteredEntries,
                     onFieldGuide: onFieldGuide
                 )
             }
