@@ -2,6 +2,7 @@ import SwiftUI
 
 /// Top home controls under the app title: value labels for Location and Month
 /// (tappable pickers), with Map on the Location row and Life List under Map.
+/// Life List opens as a full-screen peer (not a sheet); see LifeListFiltersView.
 /// Info (i) and Settings gear live on the navigation title row (see GuideRootView).
 struct HomeFiltersView: View {
     @EnvironmentObject private var model: GuideModel
@@ -245,7 +246,7 @@ struct HomeFiltersView: View {
         }
         .foregroundStyle(GuideColor.green)
         .accessibilityLabel("Life List")
-        .accessibilityHint("Opens your imported eBird life list")
+        .accessibilityHint("Opens your life list full screen, same format as the Field Guide")
     }
 
     private var locationSelection: Binding<String> {

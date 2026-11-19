@@ -24,6 +24,7 @@ struct GuideRootView: View {
     }
 
     /// Location / Month value labels under the nav title (Map on Location row; Life List under Map).
+    /// Life List swaps this root to a full-screen peer view (not a sheet).
     private func homeTopFilters(place: ResolvedPlace?) -> some View {
         HomeFiltersView(
             place: place,
@@ -37,7 +38,13 @@ struct GuideRootView: View {
 
     var body: some View {
         Group {
-            if usesSplitNavigation {
+            if showingLifeList {
+                // Full-screen peer to Field Guide — not a sheet/popup.
+                LifeListView(onFieldGuide: {
+                    showingLifeList = false
+                })
+                .environmentObject(model)
+            } else if usesSplitNavigation {
                 splitRoot
             } else {
                 stackRoot
@@ -51,10 +58,6 @@ struct GuideRootView: View {
         }
         .sheet(isPresented: $showingMergeLists) {
             MergeListsSheet()
-        }
-        .sheet(isPresented: $showingLifeList) {
-            LifeListView()
-                .environmentObject(model)
         }
         .sheet(isPresented: $showingInfo) {
             placeInfoSheet
