@@ -194,7 +194,7 @@ struct LifeListView: View {
         }
     }
 
-    private func handleImport(_ result: Result<[URL], Error], mode: ImportMode) {
+    private func handleImport(_ result: Result<[URL], Error>, mode: ImportMode) {
         switch result {
         case .failure(let error):
             importError = error.localizedDescription
