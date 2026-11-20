@@ -604,13 +604,17 @@ def stratum_note(species: dict) -> str:
 
 
 def short_summary(species: dict) -> str:
-    prefix = "Children's Eternal Rainforest, on the San Gerardo list for mid-late November. "
-    text = species["habitat"]
-    rest = text[len(prefix):] if text.startswith(prefix) else text
-    sentence = rest.split(". ")[0].strip().rstrip(".")
-    if len(sentence) > 140:
-        sentence = sentence[:137].rsplit(" ", 1)[0]
-    return sentence
+    """Appearance/ID line for bird detail — never derive from habitat.
+
+    Habitat first sentences used to be copied here; that put where-to-find-it
+    prose under the common name. Curated appearance text lives in
+    curate_appearance_summaries.MONTEVERDE.
+    """
+    try:
+        from curate_appearance_summaries import MONTEVERDE
+    except ImportError:
+        return ""
+    return (MONTEVERDE.get(species["common"]) or "").strip()
 
 
 def reuse_photos(old: dict) -> dict[str, list[dict]]:
