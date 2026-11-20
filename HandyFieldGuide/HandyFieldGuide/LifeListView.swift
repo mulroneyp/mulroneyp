@@ -484,14 +484,18 @@ private struct LifeListDetailView: View {
         model.lifeList.entry(id: entryID)
     }
 
-    /// Chrome below/above the hero photo (title+record row, scientific, badge, caption, actions, padding).
+    /// Chrome below/above the hero photo (header, scientific, latest record on phone, badge, caption, actions, padding).
     private var reservedChromeHeight: CGFloat {
-        // Latest Record sits on the title row and photo actions share one line — slightly less vertical chrome.
-        horizontalSizeClass == .regular ? 220 : 250
+        // iPad/Mac: name + Latest Record share one line. iPhone: Latest Record stacks under scientific name.
+        horizontalSizeClass == .regular ? 220 : 280
     }
 
     private var minimumPhotoHeight: CGFloat {
         horizontalSizeClass == .regular ? 360 : 260
+    }
+
+    private var isRegularWidth: Bool {
+        horizontalSizeClass == .regular
     }
 
     var body: some View {
@@ -501,12 +505,7 @@ private struct LifeListDetailView: View {
                     let photoHeight = max(minimumPhotoHeight, geo.size.height - reservedChromeHeight)
                     ScrollView {
                         VStack(alignment: .leading, spacing: 12) {
-                            // Name + Latest Record on one top line (no second name below / in nav title).
-                            detailTitleRow(for: entry)
-
-                            Text(entry.displayScientificName)
-                                .font(.title3.italic())
-                                .foregroundStyle(GuideColor.muted)
+                            detailHeader(for: entry)
 
                             photoBlock(for: entry, photoHeight: photoHeight)
 
@@ -522,7 +521,7 @@ private struct LifeListDetailView: View {
                     }
                 }
                 .guideBackground()
-                // Name lives in the content title row with Latest Record — avoid a duplicate nav title.
+                // Content owns the name (and Latest Record placement); keep nav title empty.
                 .navigationTitle("")
                 .navigationBarTitleDisplayMode(.inline)
             } else {
@@ -533,6 +532,28 @@ private struct LifeListDetailView: View {
         .onChange(of: pickerItem) { _, newItem in
             guard let newItem else { return }
             Task { await importPhoto(from: newItem) }
+        }
+    }
+
+    /// iPad/Mac: name + Latest Record on one top line, scientific below.
+    /// iPhone: common name, scientific name, then Latest Record under the scientific name.
+    @ViewBuilder
+    private func detailHeader(for entry: LifeListEntry) -> some View {
+        if isRegularWidth {
+            detailTitleRow(for: entry)
+            Text(entry.displayScientificName)
+                .font(.title3.italic())
+                .foregroundStyle(GuideColor.muted)
+        } else {
+            Text(entry.commonName)
+                .font(.system(size: 28, weight: .regular, design: .serif))
+                .foregroundStyle(GuideColor.green)
+
+            Text(entry.displayScientificName)
+                .font(.title3.italic())
+                .foregroundStyle(GuideColor.muted)
+
+            latestRecordBlock(for: entry, alignment: .leading)
         }
     }
 
@@ -612,38 +633,43 @@ private struct LifeListDetailView: View {
         }
     }
 
-    /// Bird name and Latest Record share the top content line.
+    /// Regular-width only: bird name and Latest Record share the top content line.
     @ViewBuilder
     private func detailTitleRow(for entry: LifeListEntry) -> some View {
-        let nameSize: CGFloat = horizontalSizeClass == .regular ? 34 : 28
-        let latest = entry.firstRecordedLine
-
         HStack(alignment: .firstTextBaseline, spacing: 12) {
             Text(entry.commonName)
-                .font(.system(size: nameSize, weight: .regular, design: .serif))
+                .font(.system(size: 34, weight: .regular, design: .serif))
                 .foregroundStyle(GuideColor.green)
                 .layoutPriority(1)
 
             Spacer(minLength: 8)
 
-            if let latest {
-                VStack(alignment: .trailing, spacing: 2) {
-                    Text("Latest Record".uppercased())
-                        .font(.caption.weight(.semibold))
-                        .tracking(1.0)
-                        .foregroundStyle(GuideColor.muted)
-                    Text(latest)
-                        .font(.subheadline)
-                        .foregroundStyle(GuideColor.ink)
-                        .multilineTextAlignment(.trailing)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-                .frame(maxWidth: horizontalSizeClass == .regular ? 320 : 200, alignment: .trailing)
-                .accessibilityElement(children: .combine)
-                .accessibilityLabel("Latest Record, \(latest)")
-            }
+            latestRecordBlock(for: entry, alignment: .trailing)
+                .frame(maxWidth: 320, alignment: .trailing)
         }
         .accessibilityElement(children: .contain)
+    }
+
+    @ViewBuilder
+    private func latestRecordBlock(
+        for entry: LifeListEntry,
+        alignment: HorizontalAlignment
+    ) -> some View {
+        if let latest = entry.firstRecordedLine {
+            VStack(alignment: alignment, spacing: 2) {
+                Text("Latest Record".uppercased())
+                    .font(.caption.weight(.semibold))
+                    .tracking(1.0)
+                    .foregroundStyle(GuideColor.muted)
+                Text(latest)
+                    .font(.subheadline)
+                    .foregroundStyle(GuideColor.ink)
+                    .multilineTextAlignment(alignment == .trailing ? .trailing : .leading)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel("Latest Record, \(latest)")
+        }
     }
 
     private func photoSourceHeader(source: LifeListPhotoSource) -> some View {
