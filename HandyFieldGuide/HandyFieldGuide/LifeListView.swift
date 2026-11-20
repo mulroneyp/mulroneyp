@@ -168,9 +168,7 @@ struct LifeListView: View {
                         }
                     }
 
-                        Text(
-                            "Import an eBird Life List CSV (Sightings Lists → Download) or My Data for the latest record date and place. Attach multiple photos from your library on each bird, or drag and drop them onto the detail. Photos are badged My photo or Stock. The list and photos sync via iCloud Birdlists when signed in."
-                        )
+                        Text(listFooterHelp)
                     .font(.footnote)
                     .foregroundStyle(GuideColor.muted)
                     .padding(.top, 8)
@@ -260,15 +258,27 @@ struct LifeListView: View {
             Text("No life list yet")
                 .font(.system(.title2, design: .serif))
                 .foregroundStyle(GuideColor.green)
-            Text(
-                "Download your life list from eBird (My eBird → Sightings Lists → Download) and import the CSV. Each species shows a Latest Record date and place from the import. Attach multiple photos from your library or drag and drop them onto the detail; those are badged My photo, while Field Guide images show as Stock."
-            )
+            Text(emptyStateHelp)
             .font(.body)
             .foregroundStyle(GuideColor.ink)
             .fixedSize(horizontal: false, vertical: true)
         }
         .padding(.top, 8)
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private var listFooterHelp: String {
+        let attach = UserPhotoImport.supportsPaste
+            ? "Attach multiple photos from your library on each bird, or paste images copied from Photos (resized before saving)."
+            : "Attach multiple photos from your library on each bird, or drag and drop them onto the detail."
+        return "Import an eBird Life List CSV (Sightings Lists → Download) or My Data for the latest record date and place. \(attach) Photos are badged My photo or Stock. The list and photos sync via iCloud Birdlists when signed in."
+    }
+
+    private var emptyStateHelp: String {
+        let attach = UserPhotoImport.supportsPaste
+            ? "Attach multiple photos from your library or paste images copied from Photos (resized before saving)"
+            : "Attach multiple photos from your library or drag and drop them onto the detail"
+        return "Download your life list from eBird (My eBird → Sightings Lists → Download) and import the CSV. Each species shows a Latest Record date and place from the import. \(attach); those are badged My photo, while Field Guide images show as Stock."
     }
 
     private var searchField: some View {
@@ -515,7 +525,11 @@ private struct LifeListDetailView: View {
                         .userPhotoDrop(isTargeted: $isPhotoDropTargeted) { jpegs in
                             importDroppedJPEGs(jpegs)
                         }
-                        .accessibilityHint("Drop photos here to add them to this life list bird")
+                        .accessibilityHint(
+                            UserPhotoImport.supportsPaste
+                                ? "Paste photos copied from Photos to add them to this life list bird"
+                                : "Drop photos here to add them to this life list bird"
+                        )
                     }
                 }
                 .guideBackground()
@@ -579,7 +593,7 @@ private struct LifeListDetailView: View {
                             Text(isPhotoDropTargeted ? "Drop to add your photo" : "No photo yet")
                                 .font(.subheadline)
                                 .foregroundStyle(GuideColor.muted)
-                            Text("Add from your library or drag and drop photos here.")
+                            Text(emptyPhotoHint)
                                 .font(.caption)
                                 .foregroundStyle(GuideColor.muted)
                                 .multilineTextAlignment(.center)
@@ -656,11 +670,7 @@ private struct LifeListDetailView: View {
                 }
             }
 
-            Text(
-                photo.isLibrary
-                    ? "Pinch or double-tap to zoom; drag to pan. Long-press for a full-screen view. Drop more photos onto this page to add them."
-                    : "Field Guide open-licence photo — add your own from the library below, or drag and drop photos onto this page. Pinch or double-tap to zoom; long-press for full screen."
-            )
+            Text(photoHelpCaption(isLibrary: photo.isLibrary))
             .font(.caption)
             .foregroundStyle(GuideColor.muted)
         }
@@ -668,31 +678,63 @@ private struct LifeListDetailView: View {
         .accessibilityAddTraits(isSelectedLibrary ? [.isSelected] : [])
     }
 
+    private var emptyPhotoHint: String {
+        if UserPhotoImport.supportsPaste {
+            return "Add from your library or paste a photo copied from Photos. Pasted images are resized before saving."
+        }
+        return "Add from your library or drag and drop photos here."
+    }
+
+    private func photoHelpCaption(isLibrary: Bool) -> String {
+        if UserPhotoImport.supportsPaste {
+            return isLibrary
+                ? "Pinch or double-tap to zoom; drag to pan. Long-press for a full-screen view. Paste more photos from Photos to add them — images are resized before saving."
+                : "Field Guide open-licence photo — add your own from the library below, or paste a photo copied from Photos. Pinch or double-tap to zoom; long-press for full screen."
+        }
+        return isLibrary
+            ? "Pinch or double-tap to zoom; drag to pan. Long-press for a full-screen view. Drop more photos onto this page to add them."
+            : "Field Guide open-licence photo — add your own from the library below, or drag and drop photos onto this page. Pinch or double-tap to zoom; long-press for full screen."
+    }
+
     @ViewBuilder
     private func photoActionsRow(for entry: LifeListEntry) -> some View {
         let libraryPhotos = entry.resolvedLibraryPhotos.filter { BundleImages.url(for: $0.path) != nil }
-        HStack(alignment: .center, spacing: 10) {
-            PhotosPicker(
-                selection: $pickerItems,
-                maxSelectionCount: 12,
-                matching: .images,
-                photoLibrary: .shared()
-            ) {
-                Label("Add photo from library", systemImage: "photo.on.rectangle")
-            }
-            .buttonStyle(GuideChipStyle(selected: true))
-            .accessibilityHint("Also accepts drag and drop onto the photo area")
-
-            if !libraryPhotos.isEmpty {
-                Button {
-                    removeSelectedLibraryPhoto(from: entry)
-                } label: {
-                    Label("Remove photo", systemImage: "trash")
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(alignment: .center, spacing: 10) {
+                PhotosPicker(
+                    selection: $pickerItems,
+                    maxSelectionCount: 12,
+                    matching: .images,
+                    photoLibrary: .shared()
+                ) {
+                    Label("Add photo from library", systemImage: "photo.on.rectangle")
                 }
-                .buttonStyle(GuideChipStyle(selected: false))
+                .buttonStyle(GuideChipStyle(selected: true))
+                .accessibilityHint(
+                    UserPhotoImport.supportsPaste
+                        ? "Also paste a photo copied from Photos"
+                        : "Also accepts drag and drop onto the photo area"
+                )
+
+                if !libraryPhotos.isEmpty {
+                    Button {
+                        removeSelectedLibraryPhoto(from: entry)
+                    } label: {
+                        Label("Remove photo", systemImage: "trash")
+                    }
+                    .buttonStyle(GuideChipStyle(selected: false))
+                }
+
+                Spacer(minLength: 0)
             }
 
-            Spacer(minLength: 0)
+            if UserPhotoImport.supportsPaste {
+                UserPhotoPasteChip(expanding: false) { jpegs in
+                    importPastedJPEGs(jpegs)
+                } onEmpty: {
+                    photoError = "Copy a photo in Photos first, then paste it here."
+                }
+            }
         }
     }
 
@@ -837,9 +879,26 @@ private struct LifeListDetailView: View {
 
     @MainActor
     private func importDroppedJPEGs(_ jpegs: [Data]) {
+        importEncodedJPEGs(
+            jpegs,
+            emptyMessage: "That drop could not be read. Try a JPEG or PNG, or use Add photo from library."
+        )
+    }
+
+    @MainActor
+    private func importPastedJPEGs(_ jpegs: [Data]) {
+        importEncodedJPEGs(
+            jpegs,
+            emptyMessage: "Copy a photo in Photos first, then paste it here."
+        )
+    }
+
+    /// Drop / paste pipelines already downscale and encode JPEG.
+    @MainActor
+    private func importEncodedJPEGs(_ jpegs: [Data], emptyMessage: String) {
         photoError = nil
         guard !jpegs.isEmpty else {
-            photoError = "That drop could not be read. Try a JPEG or PNG, or use Add photo from library."
+            photoError = emptyMessage
             return
         }
         var failures = 0
@@ -861,8 +920,11 @@ private struct LifeListDetailView: View {
             selectedLibraryPhotoID = lastAddedID
         }
         if failures > 0 && photoError == nil {
+            let allFailedFallback = UserPhotoImport.supportsPaste
+                ? "Those photos could not be read. Try other images from your library, or paste a photo copied from Photos."
+                : "Those photos could not be read. Try other images from your library, or drop a JPEG or PNG."
             photoError = failures == attempted
-                ? "Those photos could not be read. Try other images from your library, or drop a JPEG or PNG."
+                ? allFailedFallback
                 : "Some photos could not be read. The rest were added."
         }
     }

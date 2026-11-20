@@ -179,7 +179,7 @@ final class PhotoCacheStore: ObservableObject {
         BundleImages.invalidate(path: path)
     }
 
-    /// Writes a user photo (Photos library or drag-and-drop) into the on-device cache for one role.
+    /// Writes a user photo (Photos library, drag-and-drop, or paste) into the on-device cache for one role.
     /// Replaces any previous cached image for that role and marks `origin` as library (“My photo”).
     @discardableResult
     func saveLibraryPhoto(

@@ -211,7 +211,7 @@ struct BirdDetailView: View {
                 VStack(spacing: 8) {
                     Text(isGalleryDropTargeted ? "Drop to add your photo" : "No photo yet")
                         .font(.system(.title3, design: .serif))
-                    Text("Add from your library, drag and drop a photo here, or search Wikimedia Commons.")
+                    Text(emptyPhotoHint)
                         .font(.caption)
                         .foregroundStyle(GuideColor.muted)
                         .multilineTextAlignment(.center)
@@ -226,7 +226,21 @@ struct BirdDetailView: View {
                     )
             }
             .accessibilityElement(children: .combine)
-            .accessibilityHint("Drop a photo here to attach your own image")
+            .accessibilityHint(emptyPhotoAccessibilityHint)
+    }
+
+    private var emptyPhotoHint: String {
+        if UserPhotoImport.supportsPaste {
+            return "Add from your library, paste a photo copied from Photos, or search Wikimedia Commons. Pasted images are resized before saving."
+        }
+        return "Add from your library, drag and drop a photo here, or search Wikimedia Commons."
+    }
+
+    private var emptyPhotoAccessibilityHint: String {
+        if UserPhotoImport.supportsPaste {
+            return "Paste a photo copied from Photos, or add one from your library"
+        }
+        return "Drop a photo here to attach your own image"
     }
 
     @ViewBuilder
@@ -254,7 +268,15 @@ struct BirdDetailView: View {
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(GuideChipStyle(selected: true))
-                .accessibilityHint("Adds your photo from the library, or drop a photo onto the photo area")
+                .accessibilityHint(ownPhotoAccessibilityHint(replacing: false))
+
+                if UserPhotoImport.supportsPaste {
+                    UserPhotoPasteChip(title: pastePhotoButtonTitle(for: role, replacing: false)) { jpegs in
+                        applyPastedJPEGs(jpegs, role: role)
+                    } onEmpty: {
+                        photoError = "Copy a photo in Photos first, then paste it here."
+                    }
+                }
             }
             if canOfferFindPhoto {
                 Button {
@@ -312,11 +334,7 @@ struct BirdDetailView: View {
                     Text(photoDisplayTitle(photo))
                         .font(.system(.title3, design: .serif))
                 }
-                Text(
-                    photo.isLibraryPhoto
-                        ? "Your photo. Pinch or double-tap to zoom; drag to pan. Long-press for full screen. Drop another photo here to replace it."
-                        : "Pinch or double-tap to zoom; drag to pan. Long-press for a full-screen view. Drop your own photo here, or use the buttons below."
-                )
+                Text(photoHelpCaption(isLibrary: photo.isLibraryPhoto))
                 .font(.caption)
                 .foregroundStyle(GuideColor.muted)
 
@@ -337,7 +355,15 @@ struct BirdDetailView: View {
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(GuideChipStyle(selected: true))
-                    .accessibilityHint("Replaces this photo with one from your library, or drop an image onto the photo")
+                    .accessibilityHint(ownPhotoAccessibilityHint(replacing: true))
+
+                    if UserPhotoImport.supportsPaste {
+                        UserPhotoPasteChip(title: pastePhotoButtonTitle(for: photo.role, replacing: true)) { jpegs in
+                            applyPastedJPEGs(jpegs, role: photo.role)
+                        } onEmpty: {
+                            photoError = "Copy a photo in Photos first, then paste it here."
+                        }
+                    }
                 }
 
                 if photo.isLibraryPhoto {
@@ -415,6 +441,37 @@ struct BirdDetailView: View {
         }
     }
 
+    private func pastePhotoButtonTitle(for role: String, replacing: Bool) -> String {
+        let verb = replacing ? "Paste to replace" : "Paste"
+        switch role {
+        case "male": return "\(verb) male photo"
+        case "female": return "\(verb) female photo"
+        default: return "\(verb) photo"
+        }
+    }
+
+    private func ownPhotoAccessibilityHint(replacing: Bool) -> String {
+        if UserPhotoImport.supportsPaste {
+            return replacing
+                ? "Replaces this photo with one from your library, or paste a photo copied from Photos"
+                : "Adds your photo from the library, or paste a photo copied from Photos"
+        }
+        return replacing
+            ? "Replaces this photo with one from your library, or drop an image onto the photo"
+            : "Adds your photo from the library, or drop a photo onto the photo area"
+    }
+
+    private func photoHelpCaption(isLibrary: Bool) -> String {
+        if UserPhotoImport.supportsPaste {
+            return isLibrary
+                ? "Your photo. Pinch or double-tap to zoom; drag to pan. Long-press for full screen. Paste another photo from Photos to replace it — images are resized before saving."
+                : "Pinch or double-tap to zoom; drag to pan. Long-press for a full-screen view. Paste your own photo from Photos, or use the buttons below."
+        }
+        return isLibrary
+            ? "Your photo. Pinch or double-tap to zoom; drag to pan. Long-press for full screen. Drop another photo here to replace it."
+            : "Pinch or double-tap to zoom; drag to pan. Long-press for a full-screen view. Drop your own photo here, or use the buttons below."
+    }
+
     @MainActor
     private func importLibraryPhotos(from items: [PhotosPickerItem], role: String) async {
         photoError = nil
@@ -441,18 +498,36 @@ struct BirdDetailView: View {
 
     @MainActor
     private func applyDroppedJPEGs(_ jpegs: [Data], role: String) {
+        applyEncodedJPEGs(
+            jpegs,
+            role: role,
+            emptyMessage: "That drop could not be read. Try a JPEG or PNG, or use Add my photo."
+        )
+    }
+
+    @MainActor
+    private func applyPastedJPEGs(_ jpegs: [Data], role: String) {
+        applyEncodedJPEGs(
+            jpegs,
+            role: role,
+            emptyMessage: "Copy a photo in Photos first, then paste it here."
+        )
+    }
+
+    /// Drop / paste pipelines already downscale and encode JPEG; read pixel size without re-compressing.
+    @MainActor
+    private func applyEncodedJPEGs(_ jpegs: [Data], role: String, emptyMessage: String) {
         photoError = nil
         guard let first = jpegs.first else {
-            photoError = "That drop could not be read. Try a JPEG or PNG, or use Add my photo."
+            photoError = emptyMessage
             return
         }
-        // Drop pipeline already encodes JPEG; read pixel size without re-compressing.
         guard let image = UIImage(data: first) else {
-            photoError = "That drop could not be read. Try a JPEG or PNG, or use Add my photo."
+            photoError = emptyMessage
             return
         }
-        let width = max(1, Int(image.size.width.rounded()))
-        let height = max(1, Int(image.size.height.rounded()))
+        let width = max(1, Int((image.size.width * image.scale).rounded()))
+        let height = max(1, Int((image.size.height * image.scale).rounded()))
         do {
             try saveLibraryJPEG(first, width: width, height: height, role: role)
         } catch {
