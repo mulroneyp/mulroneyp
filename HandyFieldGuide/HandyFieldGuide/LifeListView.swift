@@ -161,6 +161,7 @@ struct LifeListView: View {
                         .font(.subheadline)
                         .foregroundStyle(GuideColor.muted)
                         .padding(.vertical, 8)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     } else {
                         ForEach(filteredEntries) { entry in
                             entryRowLink(entry: entry)
@@ -173,11 +174,14 @@ struct LifeListView: View {
                     .font(.footnote)
                     .foregroundStyle(GuideColor.muted)
                     .padding(.top, 8)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
             .padding(16)
             .frame(maxWidth: contentMaxWidth, alignment: .leading)
-            .frame(maxWidth: .infinity)
+            // Match Field Guide: pin the readable column to the leading edge on wide Mac sidebars
+            // (default center alignment was centering the Life List).
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
         .scrollDismissesKeyboard(.interactively)
         .guideBackground()
@@ -264,6 +268,7 @@ struct LifeListView: View {
             .fixedSize(horizontal: false, vertical: true)
         }
         .padding(.top, 8)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private var searchField: some View {
