@@ -179,6 +179,111 @@ final class PhotoCacheStore: ObservableObject {
         BundleImages.invalidate(path: path)
     }
 
+    /// Writes a user photo (Photos library or drag-and-drop) into the on-device cache for one role.
+    /// Replaces any previous cached image for that role and marks `origin` as library (“My photo”).
+    @discardableResult
+    func saveLibraryPhoto(
+        jpegData: Data,
+        width: Int,
+        height: Int,
+        speciesId: String,
+        commonName: String,
+        scientificName: String?,
+        dimorphic: Bool,
+        role: String
+    ) throws -> Photo {
+        let normalizedRole = Self.normalizedRole(role)
+        let token = String(UUID().uuidString.prefix(8)).lowercased()
+        let previousEntry = entry(forSpeciesId: speciesId)
+        let previous = previousEntry?.photos.first(where: { $0.role == normalizedRole })
+            ?? previousEntry?.photos.first(where: { $0.role == role })
+        let path = try writeImageData(
+            jpegData,
+            speciesId: speciesId,
+            role: normalizedRole,
+            token: token
+        )
+        let photo = Self.makeLibraryPhoto(
+            commonName: commonName,
+            role: normalizedRole,
+            relativePath: path,
+            width: width,
+            height: height
+        )
+        savePhotos(
+            speciesId: speciesId,
+            commonName: commonName,
+            scientificName: scientificName,
+            dimorphic: dimorphic,
+            photos: [photo]
+        )
+        if let previous, previous.src != path {
+            removeImageFile(atRelativePath: previous.src)
+        }
+        BundleImages.invalidate(path: path)
+        return photo
+    }
+
+    /// Drops a cached role so a bundled stock photo (if any) can show again.
+    func clearCachedPhoto(speciesId: String, role: String) {
+        let normalizedRole = Self.normalizedRole(role)
+        guard var entry = bySpeciesId[speciesId] else { return }
+        guard let index = entry.photos.firstIndex(where: { $0.role == normalizedRole })
+            ?? entry.photos.firstIndex(where: { $0.role == role }) else { return }
+        let removed = entry.photos.remove(at: index)
+        entry.updatedAt = Date()
+        if entry.photos.isEmpty {
+            bySpeciesId.removeValue(forKey: speciesId)
+            byNormalizedName = byNormalizedName.filter { $0.value != speciesId }
+        } else {
+            bySpeciesId[speciesId] = entry
+        }
+        persist()
+        removeImageFile(atRelativePath: removed.src)
+        revision += 1
+    }
+
+    /// Historical illustrations are replaced with a normal species photo slot.
+    private static func normalizedRole(_ role: String) -> String {
+        role == "illustration" ? "either" : role
+    }
+
+    private static func makeLibraryPhoto(
+        commonName: String,
+        role: String,
+        relativePath: String,
+        width: Int,
+        height: Int
+    ) -> Photo {
+        let label: String
+        let alt: String
+        switch role {
+        case "male":
+            label = "Male"
+            alt = "My photo of male \(commonName)"
+        case "female":
+            label = "Female"
+            alt = "My photo of female \(commonName)"
+        default:
+            label = "My photo"
+            alt = "My photo of \(commonName)"
+        }
+        return Photo(
+            role: role,
+            label: label,
+            src: relativePath,
+            alt: alt,
+            width: width,
+            height: height,
+            author: "You",
+            license: "My photo",
+            licenseUrl: "",
+            sourceUrl: "",
+            file: "",
+            origin: "library"
+        )
+    }
+
     func relativePathExists(_ path: String) -> Bool {
         fileURL(forRelativePath: path) != nil
     }

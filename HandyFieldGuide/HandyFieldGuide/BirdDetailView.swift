@@ -1,4 +1,6 @@
+import PhotosUI
 import SwiftUI
+import UIKit
 
 struct BirdDetailView: View {
     @EnvironmentObject private var model: GuideModel
@@ -11,6 +13,12 @@ struct BirdDetailView: View {
     /// Collapsed by default so photos stay near the top on a phone; length / zone peek under the header.
     @State private var sizeExpanded = false
     @State private var whereExpanded = false
+    /// PhotosPicker selection for attaching a user photo to a specific role (or the default empty slot).
+    @State private var libraryPickerRole: String?
+    @State private var libraryPickerItems: [PhotosPickerItem] = []
+    @State private var photoError: String?
+    @State private var isGalleryDropTargeted = false
+    @State private var dropTargetedRole: String?
 
     var body: some View {
         ScrollView {
@@ -107,36 +115,29 @@ struct BirdDetailView: View {
                         .fixedSize(horizontal: false, vertical: true)
                 }
 
-                if !displayPhotos.isEmpty || canOfferFindPhoto {
+                if !displayPhotos.isEmpty || canOfferOwnPhoto || canOfferFindPhoto {
                     sectionLabel("Photos")
                 }
 
                 photoGallery
 
-                if displayPhotos.isEmpty, canOfferFindPhoto {
-                    Button {
-                        choosePhotoRequest = makeChooseRequest(role: defaultFindRole, currentFileTitle: "")
-                    } label: {
-                        Text("Find a photo")
-                            .frame(maxWidth: .infinity)
-                    }
-                    .buttonStyle(GuideChipStyle(selected: false))
-                    .accessibilityHint("Searches Wikimedia Commons for an open-licence photo")
+                if displayPhotos.isEmpty, !species.dimorphic {
+                    emptyPhotoActions
+                }
+
+                if let photoError {
+                    Text(photoError)
+                        .font(.footnote)
+                        .foregroundStyle(GuideColor.rust)
                 }
 
                 if species.dimorphic && !hasMaleAndFemalePhotos {
-                    Text("An openly licensed male or female photograph is still missing for this species. The app shows what is available and does not invent a second image.")
+                    Text("An openly licensed male or female photograph is still missing for this species. The app shows what is available and does not invent a second image. You can still add your own photo.")
                         .font(.footnote)
                         .foregroundStyle(GuideColor.rust)
-                    if canOfferFindPhoto {
+                    if canOfferFindPhoto || canOfferOwnPhoto {
                         ForEach(missingDimorphicRoles, id: \.self) { role in
-                            Button {
-                                choosePhotoRequest = makeChooseRequest(role: role, currentFileTitle: "")
-                            } label: {
-                                Text(role == "male" ? "Find male photo" : "Find female photo")
-                                    .frame(maxWidth: .infinity)
-                            }
-                            .buttonStyle(GuideChipStyle(selected: false))
+                            ownAndFindPhotoButtons(role: role, currentFileTitle: "")
                         }
                     }
                 }
@@ -156,6 +157,10 @@ struct BirdDetailView: View {
             ChooseSpeciesPhotoSheet(request: request)
                 .environmentObject(model)
         }
+        .onChange(of: libraryPickerItems) { _, newItems in
+            guard !newItems.isEmpty, let role = libraryPickerRole else { return }
+            Task { await importLibraryPhotos(from: newItems, role: role) }
+        }
     }
 
     /// On iPad, keep readable line length without stretching body copy edge-to-edge.
@@ -170,20 +175,96 @@ struct BirdDetailView: View {
 
     @ViewBuilder
     private var photoGallery: some View {
-        if usesSideBySidePhotos {
-            LazyVGrid(
-                columns: [GridItem(.flexible(), spacing: 14), GridItem(.flexible(), spacing: 14)],
-                spacing: 14
-            ) {
-                ForEach(displayPhotos) { photo in
-                    photoCard(photo)
+        Group {
+            if usesSideBySidePhotos {
+                LazyVGrid(
+                    columns: [GridItem(.flexible(), spacing: 14), GridItem(.flexible(), spacing: 14)],
+                    spacing: 14
+                ) {
+                    ForEach(displayPhotos) { photo in
+                        photoCard(photo)
+                    }
+                }
+            } else if !displayPhotos.isEmpty {
+                VStack(spacing: 14) {
+                    ForEach(displayPhotos) { photo in
+                        photoCard(photo)
+                    }
+                }
+            } else {
+                emptyPhotoDropZone
+            }
+        }
+        .userPhotoDrop(
+            isTargeted: $isGalleryDropTargeted,
+            enabled: canOfferOwnPhoto && displayPhotos.isEmpty
+        ) { jpegs in
+            applyDroppedJPEGs(jpegs, role: defaultFindRole)
+        }
+    }
+
+    private var emptyPhotoDropZone: some View {
+        GuideColor.green.opacity(isGalleryDropTargeted ? 0.18 : 0.10)
+            .frame(maxWidth: .infinity)
+            .frame(height: 180)
+            .overlay {
+                VStack(spacing: 8) {
+                    Text(isGalleryDropTargeted ? "Drop to add your photo" : "No photo yet")
+                        .font(.system(.title3, design: .serif))
+                    Text("Add from your library, drag and drop a photo here, or search Wikimedia Commons.")
+                        .font(.caption)
+                        .foregroundStyle(GuideColor.muted)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 12)
                 }
             }
-        } else {
-            VStack(spacing: 14) {
-                ForEach(displayPhotos) { photo in
-                    photoCard(photo)
+            .overlay {
+                RoundedRectangle(cornerRadius: 2)
+                    .stroke(
+                        isGalleryDropTargeted ? GuideColor.green : GuideColor.line,
+                        lineWidth: isGalleryDropTargeted ? 3 : 1
+                    )
+            }
+            .accessibilityElement(children: .combine)
+            .accessibilityHint("Drop a photo here to attach your own image")
+    }
+
+    @ViewBuilder
+    private var emptyPhotoActions: some View {
+        ownAndFindPhotoButtons(role: defaultFindRole, currentFileTitle: "")
+    }
+
+    @ViewBuilder
+    private func ownAndFindPhotoButtons(role: String, currentFileTitle: String) -> some View {
+        VStack(spacing: 8) {
+            if canOfferOwnPhoto {
+                PhotosPicker(
+                    selection: Binding(
+                        get: { libraryPickerRole == role ? libraryPickerItems : [] },
+                        set: { newValue in
+                            libraryPickerRole = role
+                            libraryPickerItems = newValue
+                        }
+                    ),
+                    maxSelectionCount: 1,
+                    matching: .images,
+                    photoLibrary: .shared()
+                ) {
+                    Text(ownPhotoButtonTitle(for: role, replacing: false))
+                        .frame(maxWidth: .infinity)
                 }
+                .buttonStyle(GuideChipStyle(selected: true))
+                .accessibilityHint("Adds your photo from the library, or drop a photo onto the photo area")
+            }
+            if canOfferFindPhoto {
+                Button {
+                    choosePhotoRequest = makeChooseRequest(role: role, currentFileTitle: currentFileTitle)
+                } label: {
+                    Text(role == "male" ? "Find male photo" : role == "female" ? "Find female photo" : "Find a photo")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(GuideChipStyle(selected: false))
+                .accessibilityHint("Searches Wikimedia Commons for an open-licence photo")
             }
         }
     }
@@ -198,7 +279,11 @@ struct BirdDetailView: View {
                         .foregroundStyle(GuideColor.green)
                 }
                 Spacer(minLength: 0)
-                photoAttrBadge(for: photo)
+                if photo.isLibraryPhoto {
+                    PhotoSourceBadge(source: .library)
+                } else {
+                    photoAttrBadge(for: photo)
+                }
             }
             .padding(.horizontal, 10)
             .padding(.top, 10)
@@ -212,15 +297,60 @@ struct BirdDetailView: View {
                     choosePhotoRequest = makeChooseRequest(role: photo.role, currentFileTitle: photo.file)
                 } : nil
             )
+            .userPhotoDrop(
+                isTargeted: Binding(
+                    get: { dropTargetedRole == photo.role },
+                    set: { dropTargetedRole = $0 ? photo.role : nil }
+                ),
+                enabled: canOfferOwnPhoto
+            ) { jpegs in
+                applyDroppedJPEGs(jpegs, role: photo.role)
+            }
 
             VStack(alignment: .leading, spacing: 8) {
                 if showsPhotoRoleLabel(photo) {
                     Text(photoDisplayTitle(photo))
                         .font(.system(.title3, design: .serif))
                 }
-                Text("Pinch or double-tap to zoom; drag to pan. Long-press for a full-screen view.")
-                    .font(.caption)
-                    .foregroundStyle(GuideColor.muted)
+                Text(
+                    photo.isLibraryPhoto
+                        ? "Your photo. Pinch or double-tap to zoom; drag to pan. Long-press for full screen. Drop another photo here to replace it."
+                        : "Pinch or double-tap to zoom; drag to pan. Long-press for a full-screen view. Drop your own photo here, or use the buttons below."
+                )
+                .font(.caption)
+                .foregroundStyle(GuideColor.muted)
+
+                if canOfferOwnPhoto {
+                    PhotosPicker(
+                        selection: Binding(
+                            get: { libraryPickerRole == photo.role ? libraryPickerItems : [] },
+                            set: { newValue in
+                                libraryPickerRole = photo.role
+                                libraryPickerItems = newValue
+                            }
+                        ),
+                        maxSelectionCount: 1,
+                        matching: .images,
+                        photoLibrary: .shared()
+                    ) {
+                        Text(ownPhotoButtonTitle(for: photo.role, replacing: true))
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(GuideChipStyle(selected: true))
+                    .accessibilityHint("Replaces this photo with one from your library, or drop an image onto the photo")
+                }
+
+                if photo.isLibraryPhoto {
+                    Button {
+                        clearLibraryPhoto(role: photo.role)
+                    } label: {
+                        Text("Remove my photo")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(GuideChipStyle(selected: false))
+                    .accessibilityHint("Removes your photo so a Field Guide stock image can show again when available")
+                }
+
                 if canOfferFindPhoto {
                     // Chip matches empty-state “Find a photo” so the replace action is obvious on detail.
                     Button {
@@ -238,8 +368,16 @@ struct BirdDetailView: View {
         .background(GuideColor.card)
         .overlay {
             RoundedRectangle(cornerRadius: 2)
-                .stroke(GuideColor.line, lineWidth: 1)
+                .stroke(
+                    dropTargetedRole == photo.role ? GuideColor.green : GuideColor.line,
+                    lineWidth: dropTargetedRole == photo.role ? 3 : 1
+                )
         }
+    }
+
+    /// Own photos are allowed for any real species account (not slash / provisional taxa).
+    private var canOfferOwnPhoto: Bool {
+        !species.tags.contains("flagged-taxon")
     }
 
     private var canOfferFindPhoto: Bool {
@@ -266,6 +404,78 @@ struct BirdDetailView: View {
         case "female": return "Find another female photo"
         default: return "Find another photo"
         }
+    }
+
+    private func ownPhotoButtonTitle(for role: String, replacing: Bool) -> String {
+        let verb = replacing ? "Replace with my" : "Add my"
+        switch role {
+        case "male": return "\(verb) male photo"
+        case "female": return "\(verb) female photo"
+        default: return "\(verb) photo"
+        }
+    }
+
+    @MainActor
+    private func importLibraryPhotos(from items: [PhotosPickerItem], role: String) async {
+        photoError = nil
+        var failures = 0
+        for item in items {
+            do {
+                guard let data = try await item.loadTransferable(type: Data.self),
+                      let jpeg = UserPhotoImport.jpeg(from: data) else {
+                    failures += 1
+                    continue
+                }
+                try saveLibraryJPEG(jpeg.data, width: jpeg.width, height: jpeg.height, role: role)
+            } catch {
+                failures += 1
+                photoError = error.localizedDescription
+            }
+        }
+        if failures > 0 && photoError == nil {
+            photoError = "That photo could not be read. Try another image from your library."
+        }
+        libraryPickerItems = []
+        libraryPickerRole = nil
+    }
+
+    @MainActor
+    private func applyDroppedJPEGs(_ jpegs: [Data], role: String) {
+        photoError = nil
+        guard let first = jpegs.first else {
+            photoError = "That drop could not be read. Try a JPEG or PNG, or use Add my photo."
+            return
+        }
+        // Drop pipeline already encodes JPEG; read pixel size without re-compressing.
+        guard let image = UIImage(data: first) else {
+            photoError = "That drop could not be read. Try a JPEG or PNG, or use Add my photo."
+            return
+        }
+        let width = max(1, Int(image.size.width.rounded()))
+        let height = max(1, Int(image.size.height.rounded()))
+        do {
+            try saveLibraryJPEG(first, width: width, height: height, role: role)
+        } catch {
+            photoError = error.localizedDescription
+        }
+    }
+
+    private func saveLibraryJPEG(_ data: Data, width: Int, height: Int, role: String) throws {
+        try model.photoCache.saveLibraryPhoto(
+            jpegData: data,
+            width: width,
+            height: height,
+            speciesId: species.id,
+            commonName: species.commonName,
+            scientificName: species.scientificName == "—" ? nil : species.scientificName,
+            dimorphic: species.dimorphic,
+            role: role
+        )
+    }
+
+    private func clearLibraryPhoto(role: String) {
+        model.photoCache.clearCachedPhoto(speciesId: species.id, role: role)
+        photoError = nil
     }
 
     private func makeChooseRequest(role: String, currentFileTitle: String) -> ChooseSpeciesPhotoRequest {
