@@ -156,8 +156,13 @@ struct Photo: Codable, Identifiable, Hashable {
     var licenseUrl: String
     var sourceUrl: String
     var file: String
+    /// `"library"` when the user attached their own photo; absent for bundled / Commons.
+    var origin: String? = nil
 
     var id: String { src }
+
+    /// True when this slot shows a user-attached photo (Photos library or drag-and-drop).
+    var isLibraryPhoto: Bool { origin == "library" }
 }
 
 struct ResolvedPlace {

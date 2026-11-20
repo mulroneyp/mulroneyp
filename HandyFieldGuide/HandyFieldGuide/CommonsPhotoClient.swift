@@ -606,7 +606,8 @@ actor CommonsPhotoClient {
             license: candidate.license,
             licenseUrl: candidate.licenseURL,
             sourceUrl: Self.filePageURL(title: candidate.title),
-            file: candidate.title
+            file: candidate.title,
+            origin: nil
         )
     }
 }

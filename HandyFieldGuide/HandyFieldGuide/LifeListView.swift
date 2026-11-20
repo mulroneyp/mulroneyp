@@ -169,7 +169,7 @@ struct LifeListView: View {
                     }
 
                         Text(
-                            "Import an eBird Life List CSV (Sightings Lists → Download) or My Data for the latest record date and place. Attach multiple photos from your library on each bird. Photos are badged My photo or Stock. The list and photos sync via iCloud Birdlists when signed in."
+                            "Import an eBird Life List CSV (Sightings Lists → Download) or My Data for the latest record date and place. Attach multiple photos from your library on each bird, or drag and drop them onto the detail. Photos are badged My photo or Stock. The list and photos sync via iCloud Birdlists when signed in."
                         )
                     .font(.footnote)
                     .foregroundStyle(GuideColor.muted)
@@ -261,7 +261,7 @@ struct LifeListView: View {
                 .font(.system(.title2, design: .serif))
                 .foregroundStyle(GuideColor.green)
             Text(
-                "Download your life list from eBird (My eBird → Sightings Lists → Download) and import the CSV. Each species shows a Latest Record date and place from the import. Attach multiple photos from your library; those are badged My photo, while Field Guide images show as Stock."
+                "Download your life list from eBird (My eBird → Sightings Lists → Download) and import the CSV. Each species shows a Latest Record date and place from the import. Attach multiple photos from your library or drag and drop them onto the detail; those are badged My photo, while Field Guide images show as Stock."
             )
             .font(.body)
             .foregroundStyle(GuideColor.ink)
@@ -361,7 +361,7 @@ private struct LifeListRow: View {
                         .clipped()
 
                         if let source {
-                            LifeListPhotoSourceBadge(source: source, compact: true)
+                            PhotoSourceBadge(source: source, compact: true)
                                 .padding(4)
                         }
                     }
@@ -443,38 +443,6 @@ private struct LifeListRow: View {
     }
 }
 
-/// Compact badge for Life List photo origin (library vs Field Guide open-licence stock).
-/// **My photo** uses a brighter green fill so the badge reads clearly against paper/card;
-/// **Stock** keeps the outline-on-card treatment.
-private struct LifeListPhotoSourceBadge: View {
-    var source: LifeListPhotoSource
-    var compact: Bool = false
-
-    private var isLibrary: Bool { source == .library }
-
-    var body: some View {
-        Text(source.badgeTitle)
-            .font(compact ? .system(size: 9, weight: .semibold) : .caption2.weight(.semibold))
-            .tracking(compact ? 0.2 : 0.5)
-            .foregroundStyle(isLibrary ? GuideColor.paper : GuideColor.green)
-            .padding(.horizontal, compact ? 5 : 8)
-            .padding(.vertical, compact ? 3 : 5)
-            .background(
-                isLibrary
-                    ? GuideColor.myPhotoBadge
-                    : GuideColor.card.opacity(compact ? 0.92 : 1)
-            )
-            .overlay {
-                RoundedRectangle(cornerRadius: 2)
-                    .stroke(
-                        isLibrary ? GuideColor.myPhotoBadge : GuideColor.green.opacity(0.35),
-                        lineWidth: 1
-                    )
-            }
-            .accessibilityLabel(source.accessibilityLabel)
-    }
-}
-
 // MARK: - Display photo (library attach or Field Guide stock)
 
 private struct LifeListDisplayPhoto: Identifiable, Hashable {
@@ -500,6 +468,7 @@ private struct LifeListDetailView: View {
     @State private var photoError: String?
     /// Library photo focused for the shared Remove action (prefs: Remove on same row as Add).
     @State private var selectedLibraryPhotoID: String?
+    @State private var isPhotoDropTargeted = false
 
     private var entry: LifeListEntry? {
         model.lifeList.entry(id: entryID)
@@ -543,6 +512,10 @@ private struct LifeListDetailView: View {
                         .padding(16)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .frame(minHeight: geo.size.height, alignment: .topLeading)
+                        .userPhotoDrop(isTargeted: $isPhotoDropTargeted) { jpegs in
+                            importDroppedJPEGs(jpegs)
+                        }
+                        .accessibilityHint("Drop photos here to add them to this life list bird")
                     }
                 }
                 .guideBackground()
@@ -598,13 +571,26 @@ private struct LifeListDetailView: View {
     ) -> some View {
         VStack(alignment: .leading, spacing: 14) {
             if displayPhotos.isEmpty {
-                GuideColor.green.opacity(0.10)
+                GuideColor.green.opacity(isPhotoDropTargeted ? 0.18 : 0.10)
                     .frame(maxWidth: .infinity)
                     .frame(height: photoHeight)
                     .overlay {
-                        Text("No photo yet")
-                            .font(.subheadline)
-                            .foregroundStyle(GuideColor.muted)
+                        VStack(spacing: 6) {
+                            Text(isPhotoDropTargeted ? "Drop to add your photo" : "No photo yet")
+                                .font(.subheadline)
+                                .foregroundStyle(GuideColor.muted)
+                            Text("Add from your library or drag and drop photos here.")
+                                .font(.caption)
+                                .foregroundStyle(GuideColor.muted)
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal, 12)
+                        }
+                    }
+                    .overlay {
+                        if isPhotoDropTargeted {
+                            RoundedRectangle(cornerRadius: 2)
+                                .stroke(GuideColor.green, lineWidth: 3)
+                        }
                     }
             } else if isRegularWidth && displayPhotos.count >= 2 {
                 LazyVGrid(
@@ -643,7 +629,7 @@ private struct LifeListDetailView: View {
                         .foregroundStyle(GuideColor.green)
                 }
                 Spacer(minLength: 0)
-                LifeListPhotoSourceBadge(source: photo.source)
+                PhotoSourceBadge(source: photo.source)
             }
             .contentShape(Rectangle())
             .onTapGesture {
@@ -672,8 +658,8 @@ private struct LifeListDetailView: View {
 
             Text(
                 photo.isLibrary
-                    ? "Pinch or double-tap to zoom; drag to pan. Long-press for a full-screen view."
-                    : "Field Guide open-licence photo — add your own from the library below. Pinch or double-tap to zoom; long-press for full screen."
+                    ? "Pinch or double-tap to zoom; drag to pan. Long-press for a full-screen view. Drop more photos onto this page to add them."
+                    : "Field Guide open-licence photo — add your own from the library below, or drag and drop photos onto this page. Pinch or double-tap to zoom; long-press for full screen."
             )
             .font(.caption)
             .foregroundStyle(GuideColor.muted)
@@ -695,6 +681,7 @@ private struct LifeListDetailView: View {
                 Label("Add photo from library", systemImage: "photo.on.rectangle")
             }
             .buttonStyle(GuideChipStyle(selected: true))
+            .accessibilityHint("Also accepts drag and drop onto the photo area")
 
             if !libraryPhotos.isEmpty {
                 Button {
@@ -833,8 +820,7 @@ private struct LifeListDetailView: View {
         for item in items {
             do {
                 guard let data = try await item.loadTransferable(type: Data.self),
-                      let image = UIImage(data: data),
-                      let jpeg = image.jpegData(compressionQuality: 0.88) else {
+                      let jpeg = UserPhotoImport.jpeg(from: data)?.data else {
                     failures += 1
                     continue
                 }
@@ -845,14 +831,39 @@ private struct LifeListDetailView: View {
                 photoError = error.localizedDescription
             }
         }
+        finishImport(lastAddedID: lastAddedID, failures: failures, attempted: items.count)
+        pickerItems = []
+    }
+
+    @MainActor
+    private func importDroppedJPEGs(_ jpegs: [Data]) {
+        photoError = nil
+        guard !jpegs.isEmpty else {
+            photoError = "That drop could not be read. Try a JPEG or PNG, or use Add photo from library."
+            return
+        }
+        var failures = 0
+        var lastAddedID: String?
+        for jpeg in jpegs {
+            do {
+                let attached = try model.lifeList.addPhoto(jpegData: jpeg, for: entryID)
+                lastAddedID = attached.id
+            } catch {
+                failures += 1
+                photoError = error.localizedDescription
+            }
+        }
+        finishImport(lastAddedID: lastAddedID, failures: failures, attempted: jpegs.count)
+    }
+
+    private func finishImport(lastAddedID: String?, failures: Int, attempted: Int) {
         if let lastAddedID {
             selectedLibraryPhotoID = lastAddedID
         }
         if failures > 0 && photoError == nil {
-            photoError = failures == items.count
-                ? "Those photos could not be read. Try other images from your library."
+            photoError = failures == attempted
+                ? "Those photos could not be read. Try other images from your library, or drop a JPEG or PNG."
                 : "Some photos could not be read. The rest were added."
         }
-        pickerItems = []
     }
 }
