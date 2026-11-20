@@ -1,8 +1,8 @@
 import Foundation
 
-/// Where the Life List photo currently shown for an entry comes from.
-/// `library` is persisted on the entry (and therefore in iCloud `life-list.json`);
-/// `stock` is the Field Guide / open-licence catalog fallback and is not stored.
+/// Where a Life List photo comes from.
+/// `library` is persisted on each attached photo in iCloud `life-list.json`;
+/// `stock` is the Field Guide / open-licence catalog image and is display-only (not stored).
 enum LifeListPhotoSource: String, Codable, Hashable {
     case library
     case stock
@@ -19,6 +19,23 @@ enum LifeListPhotoSource: String, Codable, Hashable {
         case .library: return "My photo, from your library"
         case .stock: return "Stock open-licence photo"
         }
+    }
+}
+
+/// One user-attached Photos-library image on a life-list species.
+/// Paths and metadata sync via Birdlists `life-list.json` + JPEG files under `life-list-photos/`.
+struct LifeListAttachedPhoto: Codable, Identifiable, Hashable {
+    var id: String
+    /// Relative path (`life-list-photos/…`).
+    var path: String
+    /// Persisted origin; library attaches are always `.library`.
+    var source: LifeListPhotoSource
+
+    init(id: String = UUID().uuidString, path: String, source: LifeListPhotoSource = .library) {
+        self.id = id
+        self.path = path
+        // Attached files are always library-sourced; stock badges are display-only.
+        self.source = (source == .stock) ? .library : source
     }
 }
 
@@ -42,10 +59,11 @@ struct LifeListEntry: Codable, Identifiable, Hashable {
     var lastLocId: String?
     var lastSubId: String?
     var lastRecordedCountryCode: String?
-    /// Relative path for a user photo from the Photos library (`life-list-photos/…`).
+    /// User-attached Photos-library images (ordered). Synced in iCloud `life-list.json`.
+    var photos: [LifeListAttachedPhoto]?
+    /// Legacy single-photo path — migrated into `photos` on load.
     var localPhotoPath: String?
-    /// Persisted photo origin for library attaches. Survives iCloud sync with `life-list.json`.
-    /// Older documents without this field are treated as `.library` when `localPhotoPath` is set.
+    /// Legacy single-photo origin — migrated into `photos` on load.
     var photoSource: LifeListPhotoSource?
 
     var displayScientificName: String {
@@ -110,10 +128,38 @@ struct LifeListEntry: Codable, Identifiable, Hashable {
         Self.recordedLine(date: lastRecordedDate, location: lastRecordedLocation)
     }
 
-    /// Effective source for a library-attached photo (including pre-badge imports).
+    /// Library attaches from `photos`, or a single legacy `localPhotoPath` when not yet migrated.
+    var resolvedLibraryPhotos: [LifeListAttachedPhoto] {
+        if let photos, !photos.isEmpty {
+            return photos.map { photo in
+                var copy = photo
+                if copy.source != .library {
+                    copy.source = .library
+                }
+                return copy
+            }
+        }
+        if let path = localPhotoPath {
+            return [
+                LifeListAttachedPhoto(
+                    id: "legacy-\(id)",
+                    path: path,
+                    source: photoSource ?? .library
+                ),
+            ]
+        }
+        return []
+    }
+
+    /// First library photo path (list thumbnails / import preservation).
+    var primaryLibraryPhotoPath: String? {
+        resolvedLibraryPhotos.first?.path
+    }
+
+    /// Effective source for the primary library photo (including pre-badge imports).
     var resolvedLibraryPhotoSource: LifeListPhotoSource? {
-        guard localPhotoPath != nil else { return nil }
-        return photoSource ?? .library
+        guard primaryLibraryPhotoPath != nil else { return nil }
+        return resolvedLibraryPhotos.first?.source ?? photoSource ?? .library
     }
 
     static func countryDisplayName(code: String) -> String {
@@ -333,6 +379,7 @@ final class LifeListStore: ObservableObject {
                     ?? EBirdLifeListCSVParser.countryCode(fromLocation: previous.lastRecordedLocation)
             }
 
+            let priorPhotos = previous?.resolvedLibraryPhotos
             return LifeListEntry(
                 id: id,
                 commonName: row.commonName,
@@ -354,8 +401,9 @@ final class LifeListStore: ObservableObject {
                 lastSubId: lastSubId,
                 lastRecordedCountryCode: lastCountry
                     ?? EBirdLifeListCSVParser.countryCode(fromLocation: lastLocation),
-                localPhotoPath: previous?.localPhotoPath,
-                photoSource: previous?.resolvedLibraryPhotoSource
+                photos: priorPhotos?.isEmpty == false ? priorPhotos : nil,
+                localPhotoPath: nil,
+                photoSource: nil
             )
         }
 
@@ -370,40 +418,95 @@ final class LifeListStore: ObservableObject {
         return document
     }
 
-    /// Saves a JPEG from the Photos library against a life-list entry.
+    /// Appends a JPEG from the Photos library to a life-list entry (multiple photos allowed).
     /// Writes into Birdlists/life-list-photos (iCloud when available + local mirror).
     @discardableResult
-    func setPhoto(jpegData: Data, for entryID: String) throws -> LifeListEntry {
+    func addPhoto(jpegData: Data, for entryID: String) throws -> LifeListAttachedPhoto {
         guard let index = document.entries.firstIndex(where: { $0.id == entryID }) else {
             throw CocoaError(.fileNoSuchFile)
         }
         ensurePhotoDirectories()
-        let previous = document.entries[index].localPhotoPath
+        normalizePhotosArray(at: index)
         let token = String(UUID().uuidString.prefix(8)).lowercased()
         let filename = "\(entryID)-\(token).jpg"
         try writePhotoData(jpegData, filename: filename)
         let relative = Self.photoPathPrefix + filename
-        document.entries[index].localPhotoPath = relative
-        document.entries[index].photoSource = .library
-        persist()
-        if let previous, previous != relative {
-            removePhotoFile(atRelativePath: previous)
-        }
-        BundleImages.invalidate(path: relative)
-        photoRevision += 1
-        return document.entries[index]
-    }
-
-    func clearPhoto(for entryID: String) {
-        guard let index = document.entries.firstIndex(where: { $0.id == entryID }) else { return }
-        let previous = document.entries[index].localPhotoPath
+        let attached = LifeListAttachedPhoto(path: relative, source: .library)
+        var photos = document.entries[index].photos ?? []
+        photos.append(attached)
+        document.entries[index].photos = photos
         document.entries[index].localPhotoPath = nil
         document.entries[index].photoSource = nil
         persist()
-        if let previous {
-            removePhotoFile(atRelativePath: previous)
+        BundleImages.invalidate(path: relative)
+        photoRevision += 1
+        return attached
+    }
+
+    /// Backward-compatible single-photo replace (clears existing library photos, then adds one).
+    @discardableResult
+    func setPhoto(jpegData: Data, for entryID: String) throws -> LifeListEntry {
+        clearPhotos(for: entryID)
+        _ = try addPhoto(jpegData: jpegData, for: entryID)
+        guard let entry = entry(id: entryID) else {
+            throw CocoaError(.fileNoSuchFile)
+        }
+        return entry
+    }
+
+    /// Removes one library-attached photo by id.
+    func removePhoto(id photoID: String, from entryID: String) {
+        guard let index = document.entries.firstIndex(where: { $0.id == entryID }) else { return }
+        normalizePhotosArray(at: index)
+        guard var photos = document.entries[index].photos,
+              let photoIndex = photos.firstIndex(where: { $0.id == photoID }) else { return }
+        let removed = photos.remove(at: photoIndex)
+        document.entries[index].photos = photos
+        document.entries[index].localPhotoPath = nil
+        document.entries[index].photoSource = nil
+        persist()
+        removePhotoFile(atRelativePath: removed.path)
+        photoRevision += 1
+    }
+
+    /// Removes every library-attached photo for an entry.
+    func clearPhotos(for entryID: String) {
+        guard let index = document.entries.firstIndex(where: { $0.id == entryID }) else { return }
+        normalizePhotosArray(at: index)
+        let previous = document.entries[index].photos ?? []
+        document.entries[index].photos = []
+        document.entries[index].localPhotoPath = nil
+        document.entries[index].photoSource = nil
+        persist()
+        for photo in previous {
+            removePhotoFile(atRelativePath: photo.path)
         }
         photoRevision += 1
+    }
+
+    /// Compatibility alias for the former single-photo clear.
+    func clearPhoto(for entryID: String) {
+        clearPhotos(for: entryID)
+    }
+
+    /// Ensures `photos` holds any legacy single-path attach before mutating.
+    private func normalizePhotosArray(at index: Int) {
+        var entry = document.entries[index]
+        if entry.photos == nil || entry.photos?.isEmpty == true, let path = entry.localPhotoPath {
+            entry.photos = [
+                LifeListAttachedPhoto(
+                    id: "legacy-\(entry.id)",
+                    path: path,
+                    source: entry.photoSource ?? .library
+                ),
+            ]
+            entry.localPhotoPath = nil
+            entry.photoSource = nil
+            document.entries[index] = entry
+        } else if entry.photos == nil {
+            entry.photos = []
+            document.entries[index] = entry
+        }
     }
 
     func entry(id: String) -> LifeListEntry? {
@@ -468,26 +571,62 @@ final class LifeListStore: ObservableObject {
         return readStore(preferringICloud: true)
     }
 
-    /// Assigns a loaded document, backfilling `photoSource` for older library attaches and
-    /// rewriting Birdlists JSON so the source survives subsequent iCloud sync.
+    /// Assigns a loaded document, migrating legacy single-photo fields into `photos`
+    /// and rewriting Birdlists JSON so multi-photo library attaches survive iCloud sync.
     private func applyLoadedDocument(_ loaded: LifeListDocument) {
         var doc = loaded
-        let changed = migratePhotoSourcesIfNeeded(&doc)
+        let changed = migratePhotosIfNeeded(&doc)
         document = doc
         if changed {
             persist()
         }
     }
 
-    /// Backfill `photoSource = .library` for older iCloud/local docs that only had `localPhotoPath`.
+    /// Promote legacy `localPhotoPath` / `photoSource` into `photos[]`, and ensure each
+    /// attached photo has a stable id + `.library` source for iCloud round-trips.
     @discardableResult
-    private func migratePhotoSourcesIfNeeded(_ doc: inout LifeListDocument) -> Bool {
+    private func migratePhotosIfNeeded(_ doc: inout LifeListDocument) -> Bool {
         var changed = false
         for index in doc.entries.indices {
-            guard doc.entries[index].localPhotoPath != nil,
-                  doc.entries[index].photoSource == nil else { continue }
-            doc.entries[index].photoSource = .library
-            changed = true
+            var entry = doc.entries[index]
+            var photos = entry.photos ?? []
+
+            if let path = entry.localPhotoPath,
+               !photos.contains(where: { $0.path == path }) {
+                photos.insert(
+                    LifeListAttachedPhoto(
+                        id: "legacy-\(entry.id)",
+                        path: path,
+                        source: entry.photoSource ?? .library
+                    ),
+                    at: 0
+                )
+                changed = true
+            }
+
+            for photoIndex in photos.indices {
+                if photos[photoIndex].id.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    photos[photoIndex].id = UUID().uuidString
+                    changed = true
+                }
+                if photos[photoIndex].source != .library {
+                    photos[photoIndex].source = .library
+                    changed = true
+                }
+            }
+
+            if entry.localPhotoPath != nil || entry.photoSource != nil {
+                entry.localPhotoPath = nil
+                entry.photoSource = nil
+                changed = true
+            }
+
+            if entry.photos != photos {
+                entry.photos = photos
+                changed = true
+            }
+
+            doc.entries[index] = entry
         }
         return changed
     }

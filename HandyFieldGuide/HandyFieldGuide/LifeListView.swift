@@ -161,6 +161,7 @@ struct LifeListView: View {
                         .font(.subheadline)
                         .foregroundStyle(GuideColor.muted)
                         .padding(.vertical, 8)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     } else {
                         ForEach(filteredEntries) { entry in
                             entryRowLink(entry: entry)
@@ -168,16 +169,19 @@ struct LifeListView: View {
                     }
 
                         Text(
-                            "Import an eBird Life List CSV (Sightings Lists → Download) or My Data for the latest record date and place. Attach a photo from your library on each bird. Photos are badged My photo or Stock. The list and photos sync via iCloud Birdlists when signed in."
+                            "Import an eBird Life List CSV (Sightings Lists → Download) or My Data for the latest record date and place. Attach multiple photos from your library on each bird. Photos are badged My photo or Stock. The list and photos sync via iCloud Birdlists when signed in."
                         )
                     .font(.footnote)
                     .foregroundStyle(GuideColor.muted)
                     .padding(.top, 8)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
             .padding(16)
             .frame(maxWidth: contentMaxWidth, alignment: .leading)
-            .frame(maxWidth: .infinity)
+            // Match Field Guide: pin the readable column to the leading edge on wide Mac sidebars
+            // (default center alignment was centering the Life List).
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
         .scrollDismissesKeyboard(.interactively)
         .guideBackground()
@@ -257,13 +261,14 @@ struct LifeListView: View {
                 .font(.system(.title2, design: .serif))
                 .foregroundStyle(GuideColor.green)
             Text(
-                "Download your life list from eBird (My eBird → Sightings Lists → Download) and import the CSV. Each species shows a Latest Record date and place from the import. Attach your own photos from the library; those are badged My photo, while Field Guide images show as Stock."
+                "Download your life list from eBird (My eBird → Sightings Lists → Download) and import the CSV. Each species shows a Latest Record date and place from the import. Attach multiple photos from your library; those are badged My photo, while Field Guide images show as Stock."
             )
             .font(.body)
             .foregroundStyle(GuideColor.ink)
             .fixedSize(horizontal: false, vertical: true)
         }
         .padding(.top, 8)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private var searchField: some View {
@@ -395,7 +400,7 @@ private struct LifeListRow: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityAddTraits(isSelected ? [.isSelected] : [])
-        .accessibilityHint("Opens life list details and photo")
+        .accessibilityHint("Opens life list details and photos")
         .accessibilityValue(source?.accessibilityLabel ?? "")
     }
 
@@ -414,7 +419,7 @@ private struct LifeListRow: View {
     }
 
     private var rowPhotoPath: String? {
-        if let path = entry.localPhotoPath, BundleImages.url(for: path) != nil {
+        if let path = entry.resolvedLibraryPhotos.first(where: { BundleImages.url(for: $0.path) != nil })?.path {
             return path
         }
         if let species = guideSpecies {
@@ -428,7 +433,7 @@ private struct LifeListRow: View {
     }
 
     private var rowPhotoSource: LifeListPhotoSource? {
-        if let path = entry.localPhotoPath, BundleImages.url(for: path) != nil {
+        if entry.resolvedLibraryPhotos.contains(where: { BundleImages.url(for: $0.path) != nil }) {
             return entry.resolvedLibraryPhotoSource ?? .library
         }
         if rowPhotoPath != nil {
@@ -470,6 +475,19 @@ private struct LifeListPhotoSourceBadge: View {
     }
 }
 
+// MARK: - Display photo (library attach or Field Guide stock)
+
+private struct LifeListDisplayPhoto: Identifiable, Hashable {
+    var id: String
+    var path: String
+    var source: LifeListPhotoSource
+    /// Non-nil only for removable library attaches.
+    var libraryPhotoID: String?
+    var caption: String?
+
+    var isLibrary: Bool { source == .library }
+}
+
 // MARK: - Detail + Photos library
 
 private struct LifeListDetailView: View {
@@ -477,8 +495,11 @@ private struct LifeListDetailView: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     var entryID: String
 
-    @State private var pickerItem: PhotosPickerItem?
+    /// Multi-select from Photos; each pick is appended to the species gallery.
+    @State private var pickerItems: [PhotosPickerItem] = []
     @State private var photoError: String?
+    /// Library photo focused for the shared Remove action (prefs: Remove on same row as Add).
+    @State private var selectedLibraryPhotoID: String?
 
     private var entry: LifeListEntry? {
         model.lifeList.entry(id: entryID)
@@ -502,12 +523,16 @@ private struct LifeListDetailView: View {
         Group {
             if let entry {
                 GeometryReader { geo in
-                    let photoHeight = max(minimumPhotoHeight, geo.size.height - reservedChromeHeight)
+                    let displayPhotos = displayPhotos(for: entry)
+                    let photoHeight = photoHeight(
+                        for: geo.size.height,
+                        photoCount: max(displayPhotos.count, 1)
+                    )
                     ScrollView {
                         VStack(alignment: .leading, spacing: 12) {
                             detailHeader(for: entry)
 
-                            photoBlock(for: entry, photoHeight: photoHeight)
+                            photoGallery(for: entry, displayPhotos: displayPhotos, photoHeight: photoHeight)
 
                             if let photoError {
                                 Text(photoError)
@@ -524,14 +549,22 @@ private struct LifeListDetailView: View {
                 // Content owns the name (and Latest Record placement); keep nav title empty.
                 .navigationTitle("")
                 .navigationBarTitleDisplayMode(.inline)
+                .onAppear {
+                    syncSelectedLibraryPhoto(for: entry)
+                }
+                .onChange(of: model.lifeList.photoRevision) { _, _ in
+                    if let current = model.lifeList.entry(id: entryID) {
+                        syncSelectedLibraryPhoto(for: current)
+                    }
+                }
             } else {
                 Text("That bird is not on your life list.")
                     .guideBackground()
             }
         }
-        .onChange(of: pickerItem) { _, newItem in
-            guard let newItem else { return }
-            Task { await importPhoto(from: newItem) }
+        .onChange(of: pickerItems) { _, newItems in
+            guard !newItems.isEmpty else { return }
+            Task { await importPhotos(from: newItems) }
         }
     }
 
@@ -558,43 +591,13 @@ private struct LifeListDetailView: View {
     }
 
     @ViewBuilder
-    private func photoBlock(for entry: LifeListEntry, photoHeight: CGFloat) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            if let path = entry.localPhotoPath, BundleImages.url(for: path) != nil {
-                photoSourceHeader(source: entry.resolvedLibraryPhotoSource ?? .library)
-
-                ZoomablePhoto(
-                    path: path,
-                    alt: entry.commonName,
-                    label: entry.commonName,
-                    cacheRevision: model.lifeList.photoRevision,
-                    prefersLargerRegularHeight: true,
-                    preferredHeight: photoHeight
-                )
-                .id("\(path)-\(model.lifeList.photoRevision)-\(Int(photoHeight))")
-
-                Text("Pinch or double-tap to zoom; drag to pan. Long-press for a full-screen view.")
-                    .font(.caption)
-                    .foregroundStyle(GuideColor.muted)
-            } else if let fallback = guideFallbackPhotoPath(for: entry) {
-                // Prefer the user's attached photo; otherwise show the Field Guide
-                // species image so the split detail still has a large visual.
-                photoSourceHeader(source: .stock)
-
-                ZoomablePhoto(
-                    path: fallback,
-                    alt: entry.commonName,
-                    label: entry.commonName,
-                    cacheRevision: model.lifeList.photoRevision,
-                    prefersLargerRegularHeight: true,
-                    preferredHeight: photoHeight
-                )
-                .id("guide-\(fallback)-\(model.lifeList.photoRevision)-\(Int(photoHeight))")
-
-                Text("Field Guide open-licence photo — attach your own from the library below. Pinch or double-tap to zoom; long-press for full screen.")
-                    .font(.caption)
-                    .foregroundStyle(GuideColor.muted)
-            } else {
+    private func photoGallery(
+        for entry: LifeListEntry,
+        displayPhotos: [LifeListDisplayPhoto],
+        photoHeight: CGFloat
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 14) {
+            if displayPhotos.isEmpty {
                 GuideColor.green.opacity(0.10)
                     .frame(maxWidth: .infinity)
                     .frame(height: photoHeight)
@@ -603,33 +606,106 @@ private struct LifeListDetailView: View {
                             .font(.subheadline)
                             .foregroundStyle(GuideColor.muted)
                     }
-            }
-
-            HStack(alignment: .center, spacing: 10) {
-                PhotosPicker(
-                    selection: $pickerItem,
-                    matching: .images,
-                    photoLibrary: .shared()
+            } else if isRegularWidth && displayPhotos.count >= 2 {
+                LazyVGrid(
+                    columns: [GridItem(.flexible(), spacing: 14), GridItem(.flexible(), spacing: 14)],
+                    spacing: 14
                 ) {
-                    Label(
-                        entry.localPhotoPath == nil ? "Add photo from library" : "Replace photo from library",
-                        systemImage: "photo.on.rectangle"
-                    )
-                }
-                .buttonStyle(GuideChipStyle(selected: true))
-
-                if entry.localPhotoPath != nil {
-                    Button {
-                        model.lifeList.clearPhoto(for: entry.id)
-                        photoError = nil
-                    } label: {
-                        Label("Remove photo", systemImage: "trash")
+                    ForEach(displayPhotos) { photo in
+                        photoCard(photo, entry: entry, photoHeight: photoHeight)
                     }
-                    .buttonStyle(GuideChipStyle(selected: false))
                 }
-
-                Spacer(minLength: 0)
+            } else {
+                ForEach(displayPhotos) { photo in
+                    photoCard(photo, entry: entry, photoHeight: photoHeight)
+                }
             }
+
+            photoActionsRow(for: entry)
+        }
+    }
+
+    @ViewBuilder
+    private func photoCard(
+        _ photo: LifeListDisplayPhoto,
+        entry: LifeListEntry,
+        photoHeight: CGFloat
+    ) -> some View {
+        let isSelectedLibrary = photo.libraryPhotoID != nil
+            && photo.libraryPhotoID == selectedLibraryPhotoID
+
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                if let caption = photo.caption {
+                    Text(caption)
+                        .font(.caption.weight(.semibold))
+                        .tracking(0.8)
+                        .foregroundStyle(GuideColor.green)
+                }
+                Spacer(minLength: 0)
+                LifeListPhotoSourceBadge(source: photo.source)
+            }
+            .contentShape(Rectangle())
+            .onTapGesture {
+                if let libraryID = photo.libraryPhotoID {
+                    selectedLibraryPhotoID = libraryID
+                }
+            }
+            .accessibilityAddTraits(photo.isLibrary ? .isButton : [])
+            .accessibilityHint(photo.isLibrary ? "Selects this library photo for Remove" : "")
+
+            ZoomablePhoto(
+                path: photo.path,
+                alt: entry.commonName,
+                label: entry.commonName,
+                cacheRevision: model.lifeList.photoRevision,
+                prefersLargerRegularHeight: true,
+                preferredHeight: photoHeight
+            )
+            .id("\(photo.id)-\(model.lifeList.photoRevision)-\(Int(photoHeight))")
+            .overlay {
+                if isSelectedLibrary {
+                    RoundedRectangle(cornerRadius: 2)
+                        .stroke(GuideColor.green.opacity(0.55), lineWidth: 2)
+                }
+            }
+
+            Text(
+                photo.isLibrary
+                    ? "Pinch or double-tap to zoom; drag to pan. Long-press for a full-screen view."
+                    : "Field Guide open-licence photo — add your own from the library below. Pinch or double-tap to zoom; long-press for full screen."
+            )
+            .font(.caption)
+            .foregroundStyle(GuideColor.muted)
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityAddTraits(isSelectedLibrary ? [.isSelected] : [])
+    }
+
+    @ViewBuilder
+    private func photoActionsRow(for entry: LifeListEntry) -> some View {
+        let libraryPhotos = entry.resolvedLibraryPhotos.filter { BundleImages.url(for: $0.path) != nil }
+        HStack(alignment: .center, spacing: 10) {
+            PhotosPicker(
+                selection: $pickerItems,
+                maxSelectionCount: 12,
+                matching: .images,
+                photoLibrary: .shared()
+            ) {
+                Label("Add photo from library", systemImage: "photo.on.rectangle")
+            }
+            .buttonStyle(GuideChipStyle(selected: true))
+
+            if !libraryPhotos.isEmpty {
+                Button {
+                    removeSelectedLibraryPhoto(from: entry)
+                } label: {
+                    Label("Remove photo", systemImage: "trash")
+                }
+                .buttonStyle(GuideChipStyle(selected: false))
+            }
+
+            Spacer(minLength: 0)
         }
     }
 
@@ -672,39 +748,111 @@ private struct LifeListDetailView: View {
         }
     }
 
-    private func photoSourceHeader(source: LifeListPhotoSource) -> some View {
-        HStack {
-            Spacer(minLength: 0)
-            LifeListPhotoSourceBadge(source: source)
+    /// Library attaches first, then Field Guide stock photos (male / female / etc.).
+    private func displayPhotos(for entry: LifeListEntry) -> [LifeListDisplayPhoto] {
+        var items: [LifeListDisplayPhoto] = []
+        for photo in entry.resolvedLibraryPhotos {
+            guard BundleImages.url(for: photo.path) != nil else { continue }
+            items.append(
+                LifeListDisplayPhoto(
+                    id: "library-\(photo.id)",
+                    path: photo.path,
+                    source: .library,
+                    libraryPhotoID: photo.id,
+                    caption: nil
+                )
+            )
         }
+        for stock in guideStockPhotos(for: entry) {
+            items.append(stock)
+        }
+        return items
     }
 
-    private func guideFallbackPhotoPath(for entry: LifeListEntry) -> String? {
-        guard let species = model.catalog?.species(forCommonName: entry.commonName) else { return nil }
+    private func guideStockPhotos(for entry: LifeListEntry) -> [LifeListDisplayPhoto] {
+        guard let species = model.catalog?.species(forCommonName: entry.commonName) else { return [] }
         let order = ["male": 0, "female": 1, "either": 2, "unsexed": 3, "illustration": 4]
         let sorted = species.photos.sorted {
             (order[$0.role] ?? 9, $0.label) < (order[$1.role] ?? 9, $1.label)
         }
-        guard let src = sorted.first?.src, BundleImages.url(for: src) != nil else { return nil }
-        return src
+        return sorted.compactMap { photo -> LifeListDisplayPhoto? in
+            guard BundleImages.url(for: photo.src) != nil else { return nil }
+            let caption: String?
+            switch photo.role {
+            case "male": caption = "Male"
+            case "female": caption = "Female"
+            case "illustration": caption = "Illustration"
+            default: caption = nil
+            }
+            return LifeListDisplayPhoto(
+                id: "stock-\(species.id)-\(photo.src)",
+                path: photo.src,
+                source: .stock,
+                libraryPhotoID: nil,
+                caption: caption
+            )
+        }
+    }
+
+    private func photoHeight(for availableHeight: CGFloat, photoCount: Int) -> CGFloat {
+        let full = max(minimumPhotoHeight, availableHeight - reservedChromeHeight)
+        guard photoCount > 1 else { return full }
+        // Keep multi-photo cards readable without stacking several full-pane heroes.
+        let shared = full * (isRegularWidth ? 0.72 : 0.85)
+        return max(minimumPhotoHeight * 0.85, shared)
+    }
+
+    private func syncSelectedLibraryPhoto(for entry: LifeListEntry) {
+        let ids = entry.resolvedLibraryPhotos
+            .filter { BundleImages.url(for: $0.path) != nil }
+            .map(\.id)
+        if let selectedLibraryPhotoID, ids.contains(selectedLibraryPhotoID) {
+            return
+        }
+        selectedLibraryPhotoID = ids.first
+    }
+
+    private func removeSelectedLibraryPhoto(from entry: LifeListEntry) {
+        let library = entry.resolvedLibraryPhotos.filter { BundleImages.url(for: $0.path) != nil }
+        let targetID = selectedLibraryPhotoID ?? library.first?.id
+        guard let targetID else { return }
+        model.lifeList.removePhoto(id: targetID, from: entry.id)
+        photoError = nil
+        if let next = model.lifeList.entry(id: entry.id) {
+            syncSelectedLibraryPhoto(for: next)
+        } else {
+            selectedLibraryPhotoID = nil
+        }
     }
 
     @MainActor
-    private func importPhoto(from item: PhotosPickerItem) async {
+    private func importPhotos(from items: [PhotosPickerItem]) async {
         photoError = nil
-        do {
-            guard let data = try await item.loadTransferable(type: Data.self),
-                  let image = UIImage(data: data),
-                  let jpeg = image.jpegData(compressionQuality: 0.88) else {
-                photoError = "That photo could not be read. Try another image from your library."
-                pickerItem = nil
-                return
+        var failures = 0
+        var lastAddedID: String?
+        for item in items {
+            do {
+                guard let data = try await item.loadTransferable(type: Data.self),
+                      let image = UIImage(data: data),
+                      let jpeg = image.jpegData(compressionQuality: 0.88) else {
+                    failures += 1
+                    continue
+                }
+                let attached = try model.lifeList.addPhoto(jpegData: jpeg, for: entryID)
+                lastAddedID = attached.id
+            } catch {
+                failures += 1
+                photoError = error.localizedDescription
             }
-            _ = try model.lifeList.setPhoto(jpegData: jpeg, for: entryID)
-            pickerItem = nil
-        } catch {
-            photoError = error.localizedDescription
-            pickerItem = nil
         }
+        if let lastAddedID {
+            selectedLibraryPhotoID = lastAddedID
+        }
+        if failures > 0 && photoError == nil {
+            photoError = failures == items.count
+                ? "Those photos could not be read. Try other images from your library."
+                : "Some photos could not be read. The rest were added."
+        }
+        pickerItems = []
     }
 }
