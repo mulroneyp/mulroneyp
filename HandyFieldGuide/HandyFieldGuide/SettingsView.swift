@@ -12,6 +12,14 @@ struct SettingsView: View {
     @State private var showingClearConfirm = false
     @State private var isValidatingKey = false
 
+    private var blankFieldCount: Int {
+        model.blankFieldDataCount()
+    }
+
+    private var hasActiveLocation: Bool {
+        model.place?.imported != nil
+    }
+
     var body: some View {
         NavigationStack {
             List {
@@ -27,6 +35,34 @@ struct SettingsView: View {
                 } footer: {
                     Text(
                         "Near-zero rows are below \(Int(EBirdBarchartParser.nearZeroThreshold * 1000) / 10)% mean frequency for the selected month. Flagged “sp.” and slash taxa stay off the main list unless you turn them on."
+                    )
+                }
+
+                Section {
+                    if hasActiveLocation {
+                        Button {
+                            // Dismiss Settings so the progress sheet can present from the root.
+                            dismiss()
+                            model.startFieldDataUpdate()
+                        } label: {
+                            if blankFieldCount == 0 {
+                                Text("Descriptions & sizes up to date")
+                            } else {
+                                Text(
+                                    "Fill blank descriptions & sizes (\(blankFieldCount))"
+                                )
+                            }
+                        }
+                        .disabled(blankFieldCount == 0 || model.fieldDataFetch?.isActive == true)
+                    } else {
+                        Text("Choose a location to fill blanks")
+                            .foregroundStyle(GuideColor.muted)
+                    }
+                } header: {
+                    Text("Bird list details")
+                } footer: {
+                    Text(
+                        "Looks up a short appearance/ID line and published length for species on the current birdlist that still show blank description or size. Already filled text is left alone. Results are cached on this device."
                     )
                 }
 
