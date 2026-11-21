@@ -22,14 +22,18 @@ final class GuideModel: ObservableObject {
     @Published var importMessage: String?
     /// Active on-import Commons photo download (progress UI). Nil when idle.
     @Published var photoFetch: ImportPhotoFetcher?
+    /// Active fill of blank descriptions / sizes (progress UI). Nil when idle.
+    @Published var fieldDataFetch: ImportFieldDataFetcher?
 
     let imports = ImportedLocationStore()
     let lifeList = LifeListStore()
     let photoCache = PhotoCacheStore()
+    let fieldCache = SpeciesFieldCacheStore()
     private(set) var catalog: SpeciesCatalog?
     private var importsCancellable: AnyCancellable?
     private var lifeListCancellable: AnyCancellable?
     private var photoCacheCancellable: AnyCancellable?
+    private var fieldCacheCancellable: AnyCancellable?
 
     /// Cached resolved place so list / filter / navigation do not rebuild coverage every body pass.
     private var placeCache: PlaceCache? = nil
@@ -60,6 +64,10 @@ final class GuideModel: ObservableObject {
             self?.invalidatePlaceCache()
             self?.objectWillChange.send()
         }
+        fieldCacheCancellable = fieldCache.$revision.sink { [weak self] _ in
+            self?.invalidatePlaceCache()
+            self?.objectWillChange.send()
+        }
         Task { await self.loadGuideAndCatalog() }
     }
 
@@ -67,7 +75,12 @@ final class GuideModel: ObservableObject {
         do {
             let loaded = try await Self.decodeBundledGuide()
             guide = loaded.guide
-            catalog = SpeciesCatalog(guide: loaded.guide, supplemental: loaded.supplemental, photoCache: photoCache)
+            catalog = SpeciesCatalog(
+                guide: loaded.guide,
+                supplemental: loaded.supplemental,
+                photoCache: photoCache,
+                fieldCache: fieldCache
+            )
             invalidatePlaceCache()
             // Drop saved queries that no longer match an import (old curated presets).
             // didSet does not run during init, so write UserDefaults explicitly.
@@ -343,6 +356,54 @@ final class GuideModel: ObservableObject {
         }
     }
 
+    /// How many species on the active birdlist still lack a usable description and/or size.
+    func blankFieldDataCount(for record: ImportedLocationRecord? = nil) -> Int {
+        guard let catalog else { return 0 }
+        let target = record ?? imports.location(matchingQuery: locationQuery)
+        guard let target else { return 0 }
+        return ImportFieldDataFetcher.workItems(
+            for: target,
+            catalog: catalog,
+            fieldCache: fieldCache,
+            monthIndex: selectedMonthIndex
+        ).count
+    }
+
+    /// Fills blank appearance/ID lines and published lengths for the active (or given) birdlist.
+    func startFieldDataUpdate(
+        for record: ImportedLocationRecord? = nil,
+        sheetSettleNanoseconds: UInt64 = 350_000_000
+    ) {
+        guard let catalog else { return }
+        let target = record ?? imports.location(matchingQuery: locationQuery)
+        guard let target else { return }
+
+        fieldDataFetch?.cancel()
+        fieldDataFetch = nil
+        let items = ImportFieldDataFetcher.workItems(
+            for: target,
+            catalog: catalog,
+            fieldCache: fieldCache,
+            monthIndex: selectedMonthIndex
+        )
+        let fetcher = ImportFieldDataFetcher(fieldCache: fieldCache)
+        Task { @MainActor [weak self] in
+            try? await Task.sleep(nanoseconds: sheetSettleNanoseconds)
+            guard let self else { return }
+            self.fieldDataFetch = fetcher
+            fetcher.start(items: items)
+        }
+    }
+
+    func clearFieldDataFetchIfIdle() {
+        guard let fieldDataFetch else { return }
+        if fieldDataFetch.phase == .finished
+            || fieldDataFetch.phase == .cancelled
+            || fieldDataFetch.phase == .idle {
+            self.fieldDataFetch = nil
+        }
+    }
+
     /// Renames a saved/imported location and keeps the active query in sync.
     func renameImportedLocation(_ id: String, to newName: String) {
         guard let previous = imports.locations.first(where: { $0.id == id }) else { return }
@@ -382,6 +443,8 @@ final class GuideModel: ObservableObject {
         var query: String
         /// Ensures a rebuilt coverage after the user replaces a cached photo.
         var photoRevision: Int
+        /// Ensures a rebuilt coverage after blank descriptions / sizes are filled.
+        var fieldRevision: Int
     }
 
     private struct PlaceCache {
@@ -404,7 +467,8 @@ final class GuideModel: ObservableObject {
             monthIndex: selectedMonthIndex,
             includeFlagged: showFlaggedTaxa,
             query: locationQuery,
-            photoRevision: photoCache.revision
+            photoRevision: photoCache.revision,
+            fieldRevision: fieldCache.revision
         )
     }
 

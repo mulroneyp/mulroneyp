@@ -15,8 +15,14 @@ struct SpeciesCatalog {
 
     private var byNormalizedName: [String: Entry]
     private let photoCache: PhotoCacheStore?
+    private let fieldCache: SpeciesFieldCacheStore?
 
-    init(guide: GuideFile, supplemental: [Species] = [], photoCache: PhotoCacheStore? = nil) {
+    init(
+        guide: GuideFile,
+        supplemental: [Species] = [],
+        photoCache: PhotoCacheStore? = nil,
+        fieldCache: SpeciesFieldCacheStore? = nil
+    ) {
         var map: [String: Entry] = [:]
         for coverage in guide.coverages {
             let labels = [coverage.label, coverage.placeTitle].filter { !$0.isEmpty }
@@ -29,6 +35,7 @@ struct SpeciesCatalog {
         }
         byNormalizedName = map
         self.photoCache = photoCache
+        self.fieldCache = fieldCache
     }
 
     /// Pure bundle I/O — safe off the main actor (guide decode path).
@@ -71,6 +78,7 @@ struct SpeciesCatalog {
                 copy.status = taxon.kind == .slash ? "slash taxon" : "sp. taxon"
             }
             photoCache?.applyCachedPhotos(to: &copy)
+            fieldCache?.applyCachedFields(to: &copy)
             return copy
         }
 
@@ -113,6 +121,7 @@ struct SpeciesCatalog {
             photos: []
         )
         photoCache?.applyCachedPhotos(to: &stub)
+        fieldCache?.applyCachedFields(to: &stub)
         return stub
     }
 

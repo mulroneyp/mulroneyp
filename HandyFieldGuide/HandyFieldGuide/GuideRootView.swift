@@ -71,6 +71,11 @@ struct GuideRootView: View {
         }) { fetcher in
             PhotoFetchProgressSheet(fetcher: fetcher)
         }
+        .sheet(item: $model.fieldDataFetch, onDismiss: {
+            model.clearFieldDataFetchIfIdle()
+        }) { fetcher in
+            FieldDataProgressSheet(fetcher: fetcher)
+        }
         .onChange(of: model.locationQuery) { _, _ in
             dismissSearchKeyboard()
             path = NavigationPath()
