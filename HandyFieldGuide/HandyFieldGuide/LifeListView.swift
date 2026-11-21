@@ -479,6 +479,8 @@ private struct LifeListDetailView: View {
     /// Library photo focused for the shared Remove action (prefs: Remove on same row as Add).
     @State private var selectedLibraryPhotoID: String?
     @State private var isPhotoDropTargeted = false
+    /// Presented when the user chooses among multiple library photos to remove.
+    @State private var removeLibraryRequest: RemoveLibraryPhotoRequest?
 
     private var entry: LifeListEntry? {
         model.lifeList.entry(id: entryID)
@@ -542,6 +544,23 @@ private struct LifeListDetailView: View {
                 .onChange(of: model.lifeList.photoRevision) { _, _ in
                     if let current = model.lifeList.entry(id: entryID) {
                         syncSelectedLibraryPhoto(for: current)
+                    }
+                }
+                .sheet(item: $removeLibraryRequest) { request in
+                    RemoveLibraryPhotoSheet(
+                        photos: request.photos,
+                        initiallySelectedID: request.initiallySelectedID
+                    ) { selectedID in
+                        model.lifeList.removePhoto(id: selectedID, from: entryID)
+                        photoError = nil
+                        removeLibraryRequest = nil
+                        if let next = model.lifeList.entry(id: entryID) {
+                            syncSelectedLibraryPhoto(for: next)
+                        } else {
+                            selectedLibraryPhotoID = nil
+                        }
+                    } onCancel: {
+                        removeLibraryRequest = nil
                     }
                 }
             } else {
@@ -631,6 +650,9 @@ private struct LifeListDetailView: View {
         entry: LifeListEntry,
         photoHeight: CGFloat
     ) -> some View {
+        let libraryCount = entry.resolvedLibraryPhotos
+            .filter { BundleImages.url(for: $0.path) != nil }
+            .count
         let isSelectedLibrary = photo.libraryPhotoID != nil
             && photo.libraryPhotoID == selectedLibraryPhotoID
 
@@ -638,6 +660,11 @@ private struct LifeListDetailView: View {
             HStack {
                 if let caption = photo.caption {
                     Text(caption)
+                        .font(.caption.weight(.semibold))
+                        .tracking(0.8)
+                        .foregroundStyle(GuideColor.green)
+                } else if isSelectedLibrary, libraryCount > 1 {
+                    Text("Selected to remove")
                         .font(.caption.weight(.semibold))
                         .tracking(0.8)
                         .foregroundStyle(GuideColor.green)
@@ -652,7 +679,13 @@ private struct LifeListDetailView: View {
                 }
             }
             .accessibilityAddTraits(photo.isLibrary ? .isButton : [])
-            .accessibilityHint(photo.isLibrary ? "Selects this library photo for Remove" : "")
+            .accessibilityHint(
+                photo.isLibrary
+                    ? (libraryCount > 1
+                        ? "Selects this library photo; use Remove a photo to choose which to delete"
+                        : "Selects this library photo for Remove")
+                    : ""
+            )
 
             ZoomablePhoto(
                 path: photo.path,
@@ -670,7 +703,7 @@ private struct LifeListDetailView: View {
                 }
             }
 
-            Text(photoHelpCaption(isLibrary: photo.isLibrary))
+            Text(photoHelpCaption(isLibrary: photo.isLibrary, multiLibrary: libraryCount > 1))
             .font(.caption)
             .foregroundStyle(GuideColor.muted)
         }
@@ -685,14 +718,17 @@ private struct LifeListDetailView: View {
         return "Add from your library or drag and drop photos here."
     }
 
-    private func photoHelpCaption(isLibrary: Bool) -> String {
+    private func photoHelpCaption(isLibrary: Bool, multiLibrary: Bool) -> String {
+        let selectHint = multiLibrary && isLibrary
+            ? " Tap the My photo badge to preselect; Remove a photo lets you choose which to delete."
+            : ""
         if UserPhotoImport.supportsPaste {
             return isLibrary
-                ? "Pinch or double-tap to zoom; drag to pan. Long-press for a full-screen view. Paste more photos from Photos to add them — images are resized before saving."
+                ? "Pinch or double-tap to zoom; drag to pan. Long-press for a full-screen view. Paste more photos from Photos to add them — images are resized before saving.\(selectHint)"
                 : "Field Guide open-licence photo — add your own from the library below, or paste a photo copied from Photos. Pinch or double-tap to zoom; long-press for full screen."
         }
         return isLibrary
-            ? "Pinch or double-tap to zoom; drag to pan. Long-press for a full-screen view. Drop more photos onto this page to add them."
+            ? "Pinch or double-tap to zoom; drag to pan. Long-press for a full-screen view. Drop more photos onto this page to add them.\(selectHint)"
             : "Field Guide open-licence photo — add your own from the library below, or drag and drop photos onto this page. Pinch or double-tap to zoom; long-press for full screen."
     }
 
@@ -718,11 +754,19 @@ private struct LifeListDetailView: View {
 
                 if !libraryPhotos.isEmpty {
                     Button {
-                        removeSelectedLibraryPhoto(from: entry)
+                        presentRemoveLibraryPhoto(from: entry)
                     } label: {
-                        Label("Remove photo", systemImage: "trash")
+                        Label(
+                            libraryPhotos.count > 1 ? "Remove a photo…" : "Remove photo",
+                            systemImage: "trash"
+                        )
                     }
                     .buttonStyle(GuideChipStyle(selected: false))
+                    .accessibilityHint(
+                        libraryPhotos.count > 1
+                            ? "Choose which library photo to remove. Tap a My photo badge to preselect."
+                            : "Removes your library photo"
+                    )
                 }
 
                 Spacer(minLength: 0)
@@ -841,17 +885,28 @@ private struct LifeListDetailView: View {
         selectedLibraryPhotoID = ids.first
     }
 
-    private func removeSelectedLibraryPhoto(from entry: LifeListEntry) {
+    private func presentRemoveLibraryPhoto(from entry: LifeListEntry) {
         let library = entry.resolvedLibraryPhotos.filter { BundleImages.url(for: $0.path) != nil }
-        let targetID = selectedLibraryPhotoID ?? library.first?.id
-        guard let targetID else { return }
-        model.lifeList.removePhoto(id: targetID, from: entry.id)
-        photoError = nil
-        if let next = model.lifeList.entry(id: entry.id) {
-            syncSelectedLibraryPhoto(for: next)
-        } else {
+        guard !library.isEmpty else { return }
+        if library.count == 1, let only = library.first {
+            model.lifeList.removePhoto(id: only.id, from: entry.id)
+            photoError = nil
             selectedLibraryPhotoID = nil
+            return
         }
+        let candidates: [RemovableLibraryPhoto] = library.enumerated().map { index, photo in
+            RemovableLibraryPhoto(
+                id: photo.id,
+                path: photo.path,
+                title: "My photo \(index + 1)"
+            )
+        }
+        let initial = selectedLibraryPhotoID
+            ?? candidates.first?.id
+        removeLibraryRequest = RemoveLibraryPhotoRequest(
+            photos: candidates,
+            initiallySelectedID: initial
+        )
     }
 
     @MainActor
