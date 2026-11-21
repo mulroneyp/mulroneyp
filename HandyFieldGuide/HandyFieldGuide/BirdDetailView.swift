@@ -19,6 +19,8 @@ struct BirdDetailView: View {
     @State private var photoError: String?
     @State private var isGalleryDropTargeted = false
     @State private var dropTargetedRole: String?
+    /// Presented when the user chooses among multiple own photos to remove.
+    @State private var removeLibraryRequest: RemoveLibraryPhotoRequest?
 
     var body: some View {
         ScrollView {
@@ -156,6 +158,17 @@ struct BirdDetailView: View {
         .sheet(item: $choosePhotoRequest) { request in
             ChooseSpeciesPhotoSheet(request: request)
                 .environmentObject(model)
+        }
+        .sheet(item: $removeLibraryRequest) { request in
+            RemoveLibraryPhotoSheet(
+                photos: request.photos,
+                initiallySelectedID: request.initiallySelectedID
+            ) { selectedID in
+                clearLibraryPhoto(role: selectedID)
+                removeLibraryRequest = nil
+            } onCancel: {
+                removeLibraryRequest = nil
+            }
         }
         .onChange(of: libraryPickerItems) { _, newItems in
             guard !newItems.isEmpty, let role = libraryPickerRole else { return }
@@ -368,13 +381,17 @@ struct BirdDetailView: View {
 
                 if photo.isLibraryPhoto {
                     Button {
-                        clearLibraryPhoto(role: photo.role)
+                        presentRemoveLibraryPhoto(preferringRole: photo.role)
                     } label: {
-                        Text("Remove my photo")
+                        Text(libraryPhotosForRemoval.count > 1 ? "Remove a photo…" : "Remove my photo")
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(GuideChipStyle(selected: false))
-                    .accessibilityHint("Removes your photo so a Field Guide stock image can show again when available")
+                    .accessibilityHint(
+                        libraryPhotosForRemoval.count > 1
+                            ? "Choose which of your photos to remove so a Field Guide stock image can show again when available"
+                            : "Removes your photo so a Field Guide stock image can show again when available"
+                    )
                 }
 
                 if canOfferFindPhoto {
@@ -551,6 +568,41 @@ struct BirdDetailView: View {
     private func clearLibraryPhoto(role: String) {
         model.photoCache.clearCachedPhoto(speciesId: species.id, role: role)
         photoError = nil
+    }
+
+    /// Library attaches currently shown (one per role when present on disk).
+    private var libraryPhotosForRemoval: [RemovableLibraryPhoto] {
+        displayPhotos.compactMap { photo in
+            guard photo.isLibraryPhoto, BundleImages.url(for: photo.src) != nil else { return nil }
+            return RemovableLibraryPhoto(
+                id: photo.role,
+                path: photo.src,
+                title: removalTitle(for: photo)
+            )
+        }
+    }
+
+    private func removalTitle(for photo: Photo) -> String {
+        switch photo.role {
+        case "male": return "Male — my photo"
+        case "female": return "Female — my photo"
+        default: return "My photo"
+        }
+    }
+
+    /// One library attach: remove it. Several (e.g. male + female): open the chooser.
+    private func presentRemoveLibraryPhoto(preferringRole role: String) {
+        let candidates = libraryPhotosForRemoval
+        guard !candidates.isEmpty else { return }
+        if candidates.count == 1, let only = candidates.first {
+            clearLibraryPhoto(role: only.id)
+            return
+        }
+        let initial = candidates.contains(where: { $0.id == role }) ? role : candidates.first?.id
+        removeLibraryRequest = RemoveLibraryPhotoRequest(
+            photos: candidates,
+            initiallySelectedID: initial
+        )
     }
 
     private func makeChooseRequest(role: String, currentFileTitle: String) -> ChooseSpeciesPhotoRequest {
